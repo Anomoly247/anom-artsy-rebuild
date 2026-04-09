@@ -429,3 +429,41 @@ main {
     flex-direction: column;
   }
 }
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: #d8dbe6;
+}
+
+p,
+li,
+.section-text,
+.hero-text,
+.about-text,
+.contact-text,
+.info-card p,
+.feature-card p,
+.merch-card p {
+  color: #cfd3df;
+}
+
+h1,
+h2,
+h3,
+.brand a,
+.site-nav a,
+.btn {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.site-nav a {
+  color: #d8dbe6;
+}
+
+.site-nav a:hover {
+  color: #22D3EE;
+}
+
+.btn-outline {
+  color: #d8dbe6;
+  border-color: rgba(216, 219, 230, 0.35);
+}

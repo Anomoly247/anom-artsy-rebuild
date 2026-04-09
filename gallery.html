@@ -3,15 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gallery • Anom Artsy</title>
+  <title>Gallery • Anom Originals</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .gallery-page h1,
+    .gallery-page h2,
+    .gallery-page h3 {
+      color: #d8dbe6;
+    }
+
+    .gallery-page p,
+    .gallery-page li,
+    .gallery-page .section-text,
+    .gallery-page .hero-text,
+    .gallery-page .contact-text {
+      color: #c9cede;
+    }
+
+    .gallery-page .eyebrow {
+      color: #22d3ee;
+      letter-spacing: 0.14em;
+    }
+
+    .gallery-page .hero {
+      display: block !important;
+      min-height: auto !important;
+      padding: 2.25rem 0 1.5rem 0 !important;
+      margin: 0 !important;
+    }
+
+    .gallery-page .hero-copy {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .gallery-page .page-title {
+      margin: 0 0 0.75rem 0;
+      font-size: clamp(2.8rem, 7vw, 5.4rem);
+      line-height: 0.95;
+      color: #dfe4f2;
+      text-shadow: 0 0 24px rgba(230, 87, 181, 0.15);
+    }
+
+    .gallery-page .brand-line {
+      font-size: 1.1rem;
+      margin: 0 auto 1rem auto;
+      max-width: 820px;
+      color: #bfc7da;
+    }
+
+    .gallery-page .hero-text {
+      max-width: 860px;
+      margin: 0 auto 1.35rem auto;
+    }
+
+    .gallery-page .hero-actions {
+      justify-content: center;
+    }
+
+    .gallery-page .section-heading {
+      margin-bottom: 1.25rem;
+    }
+
+    .gallery-page #gallery-lanes {
+      padding-top: 1.25rem !important;
+    }
+
+    .gallery-page a.card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
 </head>
-<body>
+<body class="gallery-page">
   <header class="site-header">
-    <div class="brand"><a href="index.html">ANOM</a></div>
+    <div class="brand">
+      <a href="index.html">
+        <img src="ao-logo-neon-square.png" alt="Anom Originals logo" style="display:block;height:52px;width:auto;" />
+      </a>
+    </div>
     <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="gallery.html">Collections</a>
+      <a href="#featured-work">Work</a>
+      <a href="#gallery-lanes">Collections</a>
       <a href="custom.html">Custom</a>
       <a href="merch.html">Merch</a>
       <a href="index.html#about">About</a>
@@ -20,68 +95,154 @@
   </header>
 
   <main>
-    <section class="section">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Anom Originals</p>
+        <h1 class="page-title">GALLERY</h1>
+        <p class="brand-line">Where digital art meets identity.</p>
+
+        <p class="hero-text">
+          Explore backgrounds, profile art, mood pieces, fantasy lanes, browser-inspired visuals,
+          icon art, and identity-led creative work built to feel personal, polished, and branded.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#featured-work">Featured Work</a>
+          <a class="btn btn-secondary" href="custom.html#top">Request Custom</a>
+          <a class="btn btn-outline" href="index.html">Back Home</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery-lanes">
       <div class="section-heading">
-        <p class="eyebrow">Gallery</p>
-        <h1>Art first. Mood first. Identity first.</h1>
+        <p class="eyebrow">Gallery Lanes</p>
+        <h2>Curated collections with an Anom Originals point of view.</h2>
         <p class="section-text">
-          A cleaner AO gallery for backgrounds, profile art, mood pieces, and visual identity work.
+          These lanes keep the gallery organized without losing the mood-driven feel of the brand.
         </p>
       </div>
 
       <div class="card-grid two-up">
-        <article class="feature-card">
-          <h3>Neon Backgrounds</h3>
-          <p>Dark glowing visuals for pages, headers, and digital spaces.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="feature-card">
+            <h3>Late-Night Lounge Lights</h3>
+            <p>Dark base, vivid neon, colorful glow, and rich digital atmosphere.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>Profile Pictures</h3>
-          <p>Identity-driven graphics with personality, glow, and edge.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="feature-card">
+            <h3>Fantasy & Dreamworlds</h3>
+            <p>Enchanted scenes, dark fantasy, romantic glow, and expressive visual storytelling.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>AO Mood Pieces</h3>
-          <p>Expressive artwork with humor, feeling, and attitude.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="feature-card">
+            <h3>Browser & Y2K Frames</h3>
+            <p>Retro-web visuals, interface-inspired pieces, and identity-forward nostalgia.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>Custom Identity Work</h3>
-          <p>Visuals that make your online presence feel personal and original.</p>
-        </article>
+        <a class="card-link" href="merch.html#shop-lanes">
+          <article class="feature-card">
+            <h3>Icon Art & Quote Cards</h3>
+            <p>Cleaner branded art built for sharing, posting, merch, and mini visual statements.</p>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="featured-work">
+      <div class="section-heading">
+        <p class="eyebrow">Featured Work</p>
+        <h2>Anom Originals styles built to wear, display, and live in.</h2>
+      </div>
+
+      <div class="card-grid three-up">
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Background Collection</h3>
+            <p>Neon, fantasy, and mood-rich backgrounds for public pages, headers, and wallpapers.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Identity Graphics</h3>
+            <p>Profile visuals, signature looks, icons, and brand-style pieces with personality.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Mood Art</h3>
+            <p>Relatable, expressive visuals built around humor, feeling, attitude, and shareable energy.</p>
+          </article>
+        </a>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Featured Work</p>
-        <h2>Curated, not crowded.</h2>
+        <p class="eyebrow">What You’ll Find Here</p>
+        <h2>A gallery built like a creative world, not a cluttered dump.</h2>
       </div>
 
-      <div class="card-grid three-up">
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>Background Collection</h3>
-          <p>AO-style neon background work for public pages and headers.</p>
-        </article>
+      <div class="card-grid four-up">
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="info-card">
+            <h3>Backgrounds</h3>
+            <p>Desktop, phone, profile, and page-ready visuals with mood and glow.</p>
+          </article>
+        </a>
 
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>Identity Graphics</h3>
-          <p>Profile visuals and signature looks built around mood and personality.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="info-card">
+            <h3>Profile Art</h3>
+            <p>Identity-led graphics that help your online presence feel like you.</p>
+          </article>
+        </a>
 
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>AO Mood Art</h3>
-          <p>Relatable, expressive visuals made to feel bold and personal.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="info-card">
+            <h3>Mood Pieces</h3>
+            <p>Art built for emotion, humor, and strong visual personality.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="merch.html#shop-lanes">
+          <article class="info-card">
+            <h3>Visual Themes</h3>
+            <p>Design directions that can stretch across digital products, merch, and custom work.</p>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <section class="section contact-section">
+      <div class="section-heading">
+        <p class="eyebrow">Need Something Custom?</p>
+        <h2>Love the vibe but want it built around you?</h2>
+      </div>
+
+      <p class="contact-text">
+        Anom Originals also creates custom pieces for people, pages, shops, and small brands.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="custom.html">Custom Work</a>
+        <a class="btn btn-outline" href="index.html">Back Home</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© Anom Artsy • Gallery rebuild in progress</p>
+    <p>© Anom Originals • Gallery rebuild in progress</p>
   </footer>
 </body>
 </html>

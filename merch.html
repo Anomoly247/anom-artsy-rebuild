@@ -3,15 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Merch • Anom Artsy</title>
+  <title>Merch • Anom Originals</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .merch-page h1,
+    .merch-page h2,
+    .merch-page h3 {
+      color: #d8dbe6;
+    }
+
+    .merch-page p,
+    .merch-page li,
+    .merch-page .section-text,
+    .merch-page .hero-text,
+    .merch-page .contact-text {
+      color: #c9cede;
+    }
+
+    .merch-page .eyebrow {
+      color: #22d3ee;
+      letter-spacing: 0.14em;
+    }
+
+    .merch-page .hero {
+      display: block !important;
+      min-height: auto !important;
+      padding: 2.25rem 0 1.5rem 0 !important;
+      margin: 0 !important;
+    }
+
+    .merch-page .hero-copy {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .merch-page .page-title {
+      margin: 0 0 0.75rem 0;
+      font-size: clamp(2.7rem, 7vw, 5.1rem);
+      line-height: 0.95;
+      color: #dfe4f2;
+      text-shadow: 0 0 24px rgba(230, 87, 181, 0.15);
+    }
+
+    .merch-page .brand-line {
+      font-size: 1.1rem;
+      margin: 0 auto 1rem auto;
+      max-width: 820px;
+      color: #bfc7da;
+    }
+
+    .merch-page .hero-text {
+      max-width: 860px;
+      margin: 0 auto 1.35rem auto;
+    }
+
+    .merch-page .hero-actions {
+      justify-content: center;
+    }
+
+    .merch-page .section-heading {
+      margin-bottom: 1.25rem;
+    }
+
+    .merch-page #featured-drops {
+      padding-top: 1.25rem !important;
+    }
+
+    .merch-page a.card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
 </head>
-<body>
+<body class="merch-page">
   <header class="site-header">
-    <div class="brand"><a href="index.html">ANOM</a></div>
+    <div class="brand">
+      <a href="index.html">
+        <img src="ao-logo-neon-square.png" alt="Anom Originals logo" style="display:block;height:52px;width:auto;" />
+      </a>
+    </div>
     <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="gallery.html">Collections</a>
+      <a href="gallery.html#featured-work">Work</a>
+      <a href="gallery.html#gallery-lanes">Collections</a>
       <a href="custom.html">Custom</a>
       <a href="merch.html">Merch</a>
       <a href="index.html#about">About</a>
@@ -20,85 +95,155 @@
   </header>
 
   <main>
-    <section class="section">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Anom Originals</p>
+        <h1 class="page-title">MERCH</h1>
+        <p class="brand-line">Curated pieces with personality, polish, and point of view.</p>
+
+        <p class="hero-text">
+          Anom Originals merch is built to feel like a collection, not a cluttered product wall —
+          bold visuals, cleaner presentation, and wearable or usable pieces that still feel branded.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#featured-drops">Featured Drops</a>
+          <a class="btn btn-secondary" href="#shop-lanes">Shop by Lane</a>
+          <a class="btn btn-outline" href="custom.html#top">Custom Work</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="featured-drops">
       <div class="section-heading">
-        <p class="eyebrow">Merch</p>
-        <h1>Curated pieces with AO attitude.</h1>
+        <p class="eyebrow">Featured Drops</p>
+        <h2>Art you can wear, display, and use.</h2>
         <p class="section-text">
-          Bold visuals, cleaner presentation, and a boutique feel first.
-          This lane is for featured drops, not giant product-wall chaos.
+          This lane is for stronger featured pieces, cleaner product styling, and curated drops that feel intentional.
         </p>
       </div>
 
       <div class="card-grid three-up">
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>Featured Tees</h3>
-          <p>Wearable AO graphics with stronger visual impact and cleaner styling.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Featured Tees</h3>
+            <p>Wearable Anom Originals graphics with stronger visual impact and cleaner styling.</p>
+          </article>
+        </a>
 
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>Featured Hoodies</h3>
-          <p>Comfort, glow, and personality without the cluttered catalog feel.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Featured Hoodies</h3>
+            <p>Comfort, glow, and personality without the cluttered catalog feel.</p>
+          </article>
+        </a>
 
-        <article class="merch-card">
-          <div class="mock-image"></div>
-          <h3>Featured Drinkware</h3>
-          <p>Curated pieces that feel like a drop instead of a giant merch dump.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="merch-card">
+            <div class="mock-image"></div>
+            <h3>Featured Drinkware</h3>
+            <p>Curated pieces that feel like a drop instead of a giant merch dump.</p>
+          </article>
+        </a>
       </div>
     </section>
 
-    <section class="section spotlight">
+    <section class="section spotlight" id="shop-lanes">
       <div class="section-heading">
         <p class="eyebrow">Shop by Lane</p>
         <h2>Keep it clean. Keep it intentional.</h2>
       </div>
 
       <div class="card-grid two-up">
-        <article class="feature-card">
-          <h3>Statement Apparel</h3>
-          <p>AO-style graphics built for bold everyday wear.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="feature-card">
+            <h3>Statement Apparel</h3>
+            <p>Branded visuals built for bold everyday wear with a stronger Anom Originals feel.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>Drinkware &amp; Daily Pieces</h3>
-          <p>Functional merch with visual personality and cleaner presentation.</p>
-        </article>
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="feature-card">
+            <h3>Drinkware & Daily Pieces</h3>
+            <p>Functional merch with visual personality, giftable energy, and cleaner presentation.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>Limited Mood Drops</h3>
-          <p>Smaller featured runs that feel more like a collection and less like inventory.</p>
-        </article>
+        <a class="card-link" href="gallery.html#featured-work">
+          <article class="feature-card">
+            <h3>Limited Mood Drops</h3>
+            <p>Smaller featured runs that feel more like a collection and less like inventory.</p>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <h3>Future Native Store</h3>
-          <p>A cleaner on-site merch experience can plug in here later once everything is ready.</p>
-        </article>
+        <a class="card-link" href="index.html#contact">
+          <article class="feature-card">
+            <h3>Future Store Lanes</h3>
+            <p>Collections that can later expand into a cleaner native shop experience when ready.</p>
+          </article>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">What Makes It Work</p>
+        <h2>Merch should still feel like part of the creative world.</h2>
+      </div>
+
+      <div class="card-grid four-up">
+        <a class="card-link" href="index.html#about">
+          <article class="info-card">
+            <h3>Branded</h3>
+            <p>The art should still feel unmistakably Anom Originals, not generic product filler.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="custom.html#custom-offers">
+          <article class="info-card">
+            <h3>Wearable</h3>
+            <p>Graphics should hold up on real products without losing mood, clarity, or impact.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="gallery.html#gallery-lanes">
+          <article class="info-card">
+            <h3>Curated</h3>
+            <p>Smaller, stronger selections feel better than a giant wall of disconnected items.</p>
+          </article>
+        </a>
+
+        <a class="card-link" href="custom.html#custom-lanes">
+          <article class="info-card">
+            <h3>Expandable</h3>
+            <p>One strong design can stretch across apparel, drinkware, stickers, and other daily pieces.</p>
+          </article>
+        </a>
       </div>
     </section>
 
     <section class="section contact-section">
       <div class="section-heading">
         <p class="eyebrow">Need Something More Personal?</p>
-        <h2>Want merch-ready art built around your own vibe?</h2>
+        <h2>Want merch-ready art built around your own style?</h2>
       </div>
 
       <p class="contact-text">
-        Custom visuals can be built for identity, mood, promo, or merch-ready use.
+        Custom visuals can be created for identity, mood, promo, or merch-ready use.
       </p>
 
       <div class="hero-actions">
         <a class="btn btn-primary" href="custom.html">Request Custom Work</a>
-        <a class="btn btn-outline" href="gallery.html">View Gallery</a>
+        <a class="btn btn-secondary" href="gallery.html">View Gallery</a>
+        <a class="btn btn-outline" href="index.html">Back Home</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© Anom Artsy • Merch rebuild in progress</p>
+    <p>© Anom Originals • Merch rebuild in progress</p>
   </footer>
 </body>
 </html>
