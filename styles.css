@@ -9,6 +9,27 @@
   <meta name="keywords" content="Digital Art, Graphic Design, Custom Backgrounds, Neon Aesthetics, Identity Art, Anom Originals, Creative Direction">
   
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Specific fix for merch image centering to ensure a "polished" look [cite: 33] */
+    .merch-img-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 220px;
+      background: rgba(8, 12, 24, 0.82);
+      border-radius: 18px;
+      margin-bottom: 1.1rem;
+      overflow: hidden;
+      padding: 15px; /* Creates a clean "frame" around the art */
+    }
+    .merch-img-wrapper img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -38,7 +59,7 @@
 
         <p class="hero-text" style="max-width:900px;margin:0 auto 1.5rem auto;">
           Anom Originals creates expressive visuals built from mood, style, and personality —
-          turning identity into art people can wear, display, use, and live in.
+          turning identity into art people can wear, display, use, and live in. [cite: 17]
         </p>
 
         <div class="hero-actions" style="justify-content:center;">
@@ -52,7 +73,7 @@
     <section class="section" id="work">
       <div class="section-heading">
         <p class="eyebrow">What AO Creates</p>
-        <h2>Creative work built as one coherent world.</h2>
+        <h2>Creative work built as one coherent world. [cite: 16]</h2>
       </div>
 
       <div class="card-grid four-up">
@@ -96,21 +117,21 @@
         <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
           <article class="feature-card">
             <h3>Late-Night Lounge Lights</h3>
-            <p>Dark base, vivid neon, colorful glow, and strong digital atmosphere.</p>
+            <p>Dark base, vivid neon, colorful glow, and strong digital atmosphere. [cite: 31]</p>
           </article>
         </a>
 
         <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
           <article class="feature-card">
             <h3>Fantasy & Dreamworlds</h3>
-            <p>Enchanted scenes, rich mood, dark fantasy, and expressive visual storytelling.</p>
+            <p>Enchanted scenes, rich mood, dark fantasy, and expressive visual storytelling. [cite: 48]</p>
           </article>
         </a>
 
         <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
           <article class="feature-card">
             <h3>Browser & Y2K Frames</h3>
-            <p>Retro-web energy, browser-inspired visuals, and identity-forward nostalgia.</p>
+            <p>Retro-web energy, browser-inspired visuals, and identity-forward nostalgia. [cite: 48]</p>
           </article>
         </a>
 
@@ -162,11 +183,9 @@
       <div class="card-grid three-up">
         <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
           <article class="merch-card">
-            <img
-              src="Streaming mode activated with gaming setup.png"
-              alt="Featured Tee example"
-              style="display:block;width:100%;height:220px;object-fit:contain;object-position:center;background:rgba(8,12,24,0.82);padding:12px;border-radius:18px;margin-bottom:1.1rem;"
-            />
+            <div class="merch-img-wrapper">
+              <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee example" />
+            </div>
             <h3>Featured Tee</h3>
             <p>Bold visual design with personality, polish, and a strong identity feel.</p>
           </article>
@@ -174,11 +193,9 @@
 
         <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
           <article class="merch-card">
-            <img
-              src="ao-card-boundaries-enforced-v2.png"
-              alt="Featured Hoodie example"
-              style="display:block;width:100%;height:220px;object-fit:contain;object-position:center;background:rgba(8,12,24,0.82);padding:12px;border-radius:18px;margin-bottom:1.1rem;"
-            />
+            <div class="merch-img-wrapper">
+              <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie example" />
+            </div>
             <h3>Featured Hoodie</h3>
             <p>Comfort-driven merch with mood, glow, and a cleaner branded presentation.</p>
           </article>
@@ -186,11 +203,9 @@
 
         <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
           <article class="merch-card">
-            <img
-              src="ao-emote-coffee-power-clean.png"
-              alt="Featured Drinkware example"
-              style="display:block;width:100%;height:220px;object-fit:contain;object-position:center;background:rgba(8,12,24,0.82);padding:12px;border-radius:18px;margin-bottom:1.1rem;"
-            />
+            <div class="merch-img-wrapper">
+              <img src="ao-emote-coffee-power-clean.png" alt="Featured Drinkware example" />
+            </div>
             <h3>Featured Drinkware</h3>
             <p>Curated pieces designed to feel collectible, expressive, and easy to love.</p>
           </article>
@@ -206,8 +221,7 @@
 
       <p class="about-text">
         Anom Originals is a creative world built around digital identity, expressive design,
-        and polished visuals with mood, character, and point of view. Every piece should feel
-        personal, intentional, and part of something bigger.
+        and polished visuals with mood, character, and point of view. [cite: 17, 19, 21]
       </p>
     </section>
 
@@ -227,7 +241,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Where digital art meets identity.</p>
+    <p>© 2026 Anom Originals • Where digital art meets identity. [cite: 13, 14]</p>
   </footer>
 </body>
 </html>
