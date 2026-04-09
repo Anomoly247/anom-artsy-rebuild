@@ -1,102 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anom Originals • Where digital art meets identity.</title>
-  
-  <meta name="description" content="Anom Originals creates expressive visuals built from mood, style, and personality—turning identity into art people can wear, display, use, and live in.">
-  <meta name="keywords" content="Digital Art, Graphic Design, Custom Backgrounds, Neon Aesthetics, Identity Art, Anom Originals">
-  
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="Anom Originals logo" style="display:block;height:52px;width:auto;" />
-      </a>
-    </div>
-    <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="gallery.html#gallery-lanes">Collections</a>
-      <a href="custom.html">Custom</a>
-      <a href="merch.html">Merch</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+/* ANOM ORIGINALS - BRAND FOUNDATION MASTER STYLES */
 
-  <main>
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals banner" class="hero-banner" style="mix-blend-mode: screen;" />
-        <p class="hero-text">
-          Anom Originals creates expressive visuals built from mood, style, and personality —
-          turning identity into art people can wear, display, use, and live in.
-        </p>
-        <div class="hero-actions" style="justify-content: center;">
-          <a class="btn btn-primary" href="gallery.html">Explore the Work</a>
-          <a class="btn btn-secondary" href="custom.html">Custom Work</a>
-          <a class="btn btn-outline" href="merch.html">Shop Merch</a>
-        </div>
-      </div>
-    </section>
+:root {
+  --bg: #0a0a10;           /* Deep Black contrast anchor [cite: 36] */
+  --text: #f4f7ff;
+  --muted: #a9b2c7;
+  --cyan: #22d3ee;        /* AO Cyan Digital Energy [cite: 36] */
+  --magenta: #e657b5;     /* AO Magenta Highlight [cite: 36] */
+  --violet: #8b5cf6;      /* Soft Violet Fantasy Glow [cite: 36] */
+  --border: rgba(34, 211, 238, 0.15);
+}
 
-    <section class="section" id="merch">
-      <div class="section-heading">
-        <p class="eyebrow">Merch Preview</p>
-        <h2>Art you can wear, display, and use.</h2>
-      </div>
-      <div class="card-grid three-up">
-        <article class="merch-card">
-          <div class="merch-img-wrapper">
-            <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee" />
-          </div>
-          <h3>Featured Tee</h3>
-          <p>Bold visual design with personality and a strong identity feel.</p>
-        </article>
-        <article class="merch-card">
-          <div class="merch-img-wrapper">
-            <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie" />
-          </div>
-          <h3>Featured Hoodie</h3>
-          <p>Comfort-driven merch with mood and a cleaner branded presentation.</p>
-        </article>
-        <article class="merch-card">
-          <div class="merch-img-wrapper">
-            <img src="ao-emote-coffee-power-clean.png" alt="Featured Drinkware" />
-          </div>
-          <h3>Featured Drinkware</h3>
-          <p>Curated pieces designed to feel collectible and expressive.</p>
-        </article>
-      </div>
-    </section>
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--text);
+  /* Visual DNA: Dark base with vivid accents [cite: 31] */
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(34, 211, 238, 0.05), transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(230, 87, 181, 0.08), transparent 35%),
+    var(--bg);
+  line-height: 1.6;
+}
 
-    <section class="section" id="about">
-      <div class="section-heading">
-        <p class="eyebrow">About AO</p>
-        <h2>One creative world, not random pieces.</h2>
-      </div>
-      <p class="about-text">
-        Anom Originals is a creative world built around digital identity, expressive design,
-        and polished visuals with mood, character, and point of view.
-      </p>
-    </section>
+/* --- Navigation & Header --- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5vw;
+  background: rgba(10, 10, 16, 0.95);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
 
-    <section class="section contact-section" id="contact">
-      <div class="section-heading">
-        <p class="eyebrow">Contact</p>
-        <h2>Let’s build something that feels like you.</h2>
-      </div>
-      <div class="hero-actions" style="justify-content: center;">
-        <a class="btn btn-primary" href="mailto:hello@anomartsy.xyz">Email AO</a>
-      </div>
-    </section>
-  </main>
+.site-nav a {
+  margin-left: 25px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: 0.3s;
+}
 
-  <footer class="site-footer">
-    <p>© 2026 Anom Originals • Where digital art meets identity.</p>
-  </footer>
-</body>
-</html>
+.site-nav a:hover { color: var(--cyan); }
+
+/* --- Layout Structure --- */
+main { width: min(1200px, 92%); margin: 0 auto; }
+
+.section { padding: 80px 0; }
+
+.hero { text-align: center; padding: 40px 0 80px; }
+.hero-banner { 
+  width: 100%; 
+  max-width: 900px; 
+  height: auto; 
+  margin-bottom: 30px; 
+  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.15));
+}
+
+.eyebrow { 
+  color: var(--cyan); 
+  text-transform: uppercase; 
+  font-weight: 800; 
+  font-size: 0.75rem; 
+  letter-spacing: 0.2em; 
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* --- The Grid System (Fixes the vertical stacking) --- */
+.card-grid {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.four-up { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.three-up { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* --- Card Styles  --- */
+.info-card, .merch-card {
+  background: rgba(18, 18, 26, 0.6);
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.info-card:hover, .merch-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--cyan);
+  background: rgba(18, 18, 26, 0.9);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+}
+
+/* --- THE CENTERING FIX (Fixes the Merch containers) --- */
+.merch-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 260px;
+  background: #050508;
+  border-radius: 18px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.merch-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: 0.5s ease;
+}
+
+.merch-card:hover img { transform: scale(1.05); }
+
+/* --- Buttons --- */
+.btn { 
+  padding: 14px 32px; 
+  border-radius: 50px; 
+  text-decoration: none; 
+  font-weight: 800; 
+  display: inline-block; 
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.btn-primary { 
+  background: var(--cyan); 
+  color: #0a0a10; 
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); 
+}
+
+.btn-primary:hover { transform: scale(1.03); filter: brightness(1.1); }
+
+.btn-secondary { border: 1px solid var(--magenta); color: var(--magenta); margin: 0 10px; }
+.btn-outline { border: 1px solid var(--muted); color: var(--muted); }
+
+.site-footer { 
+  padding: 80px 40px; 
+  text-align: center; 
+  border-top: 1px solid var(--border); 
+  color: var(--muted); 
+  font-size: 0.8rem;
+}
