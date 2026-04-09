@@ -1,247 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anom Originals • Where digital art meets identity.</title>
-  
-  <meta name="description" content="Anom Originals creates expressive visuals built from mood, style, and personality—turning identity into art people can wear, display, use, and live in.">
-  <meta name="keywords" content="Digital Art, Graphic Design, Custom Backgrounds, Neon Aesthetics, Identity Art, Anom Originals, Creative Direction">
-  
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    /* Specific fix for merch image centering to ensure a "polished" look [cite: 33] */
-    .merch-img-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 220px;
-      background: rgba(8, 12, 24, 0.82);
-      border-radius: 18px;
-      margin-bottom: 1.1rem;
-      overflow: hidden;
-      padding: 15px; /* Creates a clean "frame" around the art */
-    }
-    .merch-img-wrapper img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="Anom Originals logo" style="display:block;height:52px;width:auto;" />
-      </a>
-    </div>
-    <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="gallery.html#gallery-lanes">Collections</a>
-      <a href="custom.html">Custom</a>
-      <a href="merch.html">Merch</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+:root {
+  --bg: #0a0a10;           /* Official Deep Black anchor */
+  --text: #f4f7ff;
+  --muted: #a9b2c7;
+  --cyan: #22d3ee;        /* AO Cyan Digital Energy */
+  --magenta: #e657b5;     /* AO Magenta Highlight */
+  --border: rgba(34, 211, 238, 0.18);
+  --shadow-cyan: 0 0 24px rgba(34, 211, 238, 0.22);
+}
 
-  <main>
-    <section class="hero" id="top" style="display:block;">
-      <div class="hero-copy" style="max-width:980px;margin:0 auto;text-align:center;">
-        <img
-          src="Neon Glow design for Anom Originals.png"
-          alt="Anom Originals banner"
-          style="display:block;width:min(100%,980px);height:auto;margin:0 auto 1.5rem auto;background:transparent;mix-blend-mode:screen;"
-        />
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
 
-        <p class="hero-text" style="max-width:900px;margin:0 auto 1.5rem auto;">
-          Anom Originals creates expressive visuals built from mood, style, and personality —
-          turning identity into art people can wear, display, use, and live in. [cite: 17]
-        </p>
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 5vw;
+  background: rgba(10, 10, 16, 0.9);
+  border-bottom: 1px solid var(--border);
+}
 
-        <div class="hero-actions" style="justify-content:center;">
-          <a class="btn btn-primary" href="gallery.html">Explore the Work</a>
-          <a class="btn btn-secondary" href="custom.html">Custom Work</a>
-          <a class="btn btn-outline" href="merch.html">Shop Merch</a>
-        </div>
-      </div>
-    </section>
+.site-nav a {
+  margin-left: 20px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    <section class="section" id="work">
-      <div class="section-heading">
-        <p class="eyebrow">What AO Creates</p>
-        <h2>Creative work built as one coherent world. [cite: 16]</h2>
-      </div>
+.site-nav a:hover { color: var(--cyan); }
 
-      <div class="card-grid four-up">
-        <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
-          <article class="info-card">
-            <h3>Backgrounds & Themes</h3>
-            <p>Digital backgrounds, wallpapers, browser themes, and headers with mood, glow, and identity.</p>
-          </article>
-        </a>
+main { width: min(1200px, 90%); margin: 0 auto; }
 
-        <a href="custom.html#custom-offers" style="text-decoration:none;color:inherit;display:block;">
-          <article class="info-card">
-            <h3>Profile & Identity Art</h3>
-            <p>Profile visuals, icons, and identity-led graphics that feel personal, polished, and recognizable.</p>
-          </article>
-        </a>
+.hero { padding: 60px 0; text-align: center; }
+.hero-banner { width: 100%; max-width: 900px; height: auto; margin-bottom: 20px; }
 
-        <a href="gallery.html#featured-work" style="text-decoration:none;color:inherit;display:block;">
-          <article class="info-card">
-            <h3>Mood Pieces & Quote Cards</h3>
-            <p>Expressive AO art built for attitude, humor, feeling, and highly shareable visual energy.</p>
-          </article>
-        </a>
+.eyebrow { color: var(--cyan); text-transform: uppercase; font-weight: bold; font-size: 0.8rem; }
 
-        <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
-          <article class="info-card">
-            <h3>Merch-Ready Design</h3>
-            <p>Bold art and graphics designed to work across merch, promos, and product-ready pieces.</p>
-          </article>
-        </a>
-      </div>
-    </section>
+.card-grid { display: grid; gap: 20px; margin-top: 30px; }
+.four-up { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.three-up { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 
-    <section class="section" id="collections">
-      <div class="section-heading">
-        <p class="eyebrow">Featured Lanes</p>
-        <h2>Curated collections with a clear point of view.</h2>
-      </div>
+.info-card, .merch-card {
+  background: #12121a;
+  padding: 25px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
 
-      <div class="card-grid two-up">
-        <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
-          <article class="feature-card">
-            <h3>Late-Night Lounge Lights</h3>
-            <p>Dark base, vivid neon, colorful glow, and strong digital atmosphere. [cite: 31]</p>
-          </article>
-        </a>
+/* --- THE COFFEE CUP FIX --- */
+.merch-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 250px;           /* Fixed height box */
+  background: #050508;     /* Darker inner box for contrast */
+  border-radius: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
 
-        <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
-          <article class="feature-card">
-            <h3>Fantasy & Dreamworlds</h3>
-            <p>Enchanted scenes, rich mood, dark fantasy, and expressive visual storytelling. [cite: 48]</p>
-          </article>
-        </a>
+.merch-img-wrapper img {
+  width: 100%;             /* Force image to fill width */
+  height: 100%;            /* Force image to fill height */
+  object-fit: contain;     /* Keeps the shape perfect without stretching */
+}
 
-        <a href="gallery.html#gallery-lanes" style="text-decoration:none;color:inherit;display:block;">
-          <article class="feature-card">
-            <h3>Browser & Y2K Frames</h3>
-            <p>Retro-web energy, browser-inspired visuals, and identity-forward nostalgia. [cite: 48]</p>
-          </article>
-        </a>
+.btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
+.btn-primary { background: var(--cyan); color: #0a0a10; box-shadow: var(--shadow-cyan); }
+.btn-secondary { border: 1px solid var(--magenta); color: var(--magenta); margin-left: 10px; }
+.btn-outline { border: 1px solid var(--muted); color: var(--muted); margin-left: 10px; }
 
-        <a href="merch.html#shop-lanes" style="text-decoration:none;color:inherit;display:block;">
-          <article class="feature-card">
-            <h3>Merch-Friendly Icon Art</h3>
-            <p>Cleaner branded art built for quote cards, accessories, stickers, and curated drops.</p>
-          </article>
-        </a>
-      </div>
-    </section>
-
-    <section class="section spotlight" id="custom">
-      <div class="section-heading">
-        <p class="eyebrow">Custom Work</p>
-        <h2>Custom pieces built around your identity and mood.</h2>
-      </div>
-
-      <div class="split-layout">
-        <div>
-          <p>
-            AO creates custom work around your mood, style, and point of view —
-            whether you need profile art, themed visuals, branded shop graphics,
-            or merch-ready design that actually feels like you.
-          </p>
-        </div>
-
-        <ul class="request-list">
-          <li>Profile pictures</li>
-          <li>Backgrounds and headers</li>
-          <li>Browser themes and wallpapers</li>
-          <li>Mood graphics and quote cards</li>
-          <li>Shop visuals and product graphics</li>
-          <li>Merch-ready designs</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="merch">
-      <div class="section-heading">
-        <p class="eyebrow">Merch Preview</p>
-        <h2>Art you can wear, display, and use.</h2>
-        <p class="section-text">
-          AO merch is designed to feel curated, expressive, and branded —
-          more like a drop than a product dump.
-        </p>
-      </div>
-
-      <div class="card-grid three-up">
-        <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
-          <article class="merch-card">
-            <div class="merch-img-wrapper">
-              <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee example" />
-            </div>
-            <h3>Featured Tee</h3>
-            <p>Bold visual design with personality, polish, and a strong identity feel.</p>
-          </article>
-        </a>
-
-        <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
-          <article class="merch-card">
-            <div class="merch-img-wrapper">
-              <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie example" />
-            </div>
-            <h3>Featured Hoodie</h3>
-            <p>Comfort-driven merch with mood, glow, and a cleaner branded presentation.</p>
-          </article>
-        </a>
-
-        <a href="merch.html#featured-drops" style="text-decoration:none;color:inherit;display:block;">
-          <article class="merch-card">
-            <div class="merch-img-wrapper">
-              <img src="ao-emote-coffee-power-clean.png" alt="Featured Drinkware example" />
-            </div>
-            <h3>Featured Drinkware</h3>
-            <p>Curated pieces designed to feel collectible, expressive, and easy to love.</p>
-          </article>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="section-heading">
-        <p class="eyebrow">About AO</p>
-        <h2>One creative world, not random pieces.</h2>
-      </div>
-
-      <p class="about-text">
-        Anom Originals is a creative world built around digital identity, expressive design,
-        and polished visuals with mood, character, and point of view. [cite: 17, 19, 21]
-      </p>
-    </section>
-
-    <section class="section contact-section" id="contact">
-      <div class="section-heading">
-        <p class="eyebrow">Contact</p>
-        <h2>Want something built around your identity, mood, or brand?</h2>
-      </div>
-
-      <p class="contact-text">Let’s build something that feels like you.</p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="mailto:hello@anomartsy.xyz">Email AO</a>
-        <a class="btn btn-outline" href="#top">Back to Top</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>© 2026 Anom Originals • Where digital art meets identity. [cite: 13, 14]</p>
-  </footer>
-</body>
-</html>
+.site-footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); color: var(--muted); }
