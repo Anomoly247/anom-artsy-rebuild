@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anom Originals • Where digital art meets identity.</title>
   
-  <meta name="description" content="Turning identity into art people can wear, display, use, and live in.">
+  <meta name="description" content="Anom Originals creates expressive visuals built from mood, style, and personality—turning identity into art people can wear, display, use, and live in.">
   
   <style>
     /* --- ANOM ORIGINALS MASTER STYLES --- */
@@ -13,7 +13,7 @@
     
     body {
       margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       color: #f4f7ff;
       background-color: #0a0a10; /* Official Deep Black Anchor */
       background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
@@ -26,7 +26,7 @@
       align-items: center;
       padding: 15px 5%;
       background: rgba(10, 10, 16, 0.95);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.15); /* AO Cyan Energy */
+      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -37,21 +37,20 @@
       color: #a9b2c7;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .site-nav a:hover { color: #22d3ee; }
 
-    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 80px; }
+    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
 
     .hero { padding: 40px 0; text-align: center; }
     .hero-banner { width: 100%; max-width: 900px; height: auto; margin-bottom: 20px; mix-blend-mode: screen; }
 
     .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
 
-    /* --- THE GRID FIX (Restores the Coherent World) --- */
     .card-grid {
       display: grid;
       gap: 25px;
@@ -61,7 +60,7 @@
 
     .info-card, .merch-card {
       background: #12121a;
-      padding: 30px;
+      padding: 25px;
       border-radius: 20px;
       border: 1px solid rgba(34, 211, 238, 0.1);
       transition: 0.3s;
@@ -69,25 +68,23 @@
 
     .info-card:hover, .merch-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
 
-    /* --- THE COFFEE CUP CENTERING FIX --- */
     .merch-img-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 280px; /* Fixed height for visual consistency */
+      height: 250px;
       background: #050508;
       border-radius: 15px;
       margin-bottom: 20px;
-      padding: 30px; /* Gives the art room to breathe */
+      padding: 20px;
       overflow: hidden;
     }
 
     .merch-img-wrapper img {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain; /* Keeps the art from stretching */
-      display: block;
+      object-fit: contain;
     }
 
     .btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
@@ -116,7 +113,7 @@
   <main>
     <section class="hero">
       <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals" class="hero-banner" />
-      <div class="hero-actions">
+      <div class="hero-actions" style="justify-content: center;">
         <a class="btn btn-primary" href="gallery.html">Explore Work</a>
         <a class="btn btn-secondary" href="custom.html">Custom Art</a>
       </div>
@@ -125,16 +122,16 @@
     <section class="section">
       <div class="section-heading">
         <span class="eyebrow">What AO Creates</span>
-        <h2>Turning identity into art.</h2>
+        <h2>Creative work built as one coherent world.</h2>
       </div>
       <div class="card-grid">
         <article class="info-card">
           <h3>Digital Identity</h3>
-          <p>Profile visuals built around your personality.</p>
+          <p>Profile visuals and identity-led graphics built around your personality.</p>
         </article>
         <article class="info-card">
           <h3>Mood Backgrounds</h3>
-          <p>Digital environments designed to turn mood into art.</p>
+          <p>Themed visuals and digital environments designed to turn mood into art.</p>
         </article>
         <article class="info-card">
           <h3>Merch-Ready Art</h3>
@@ -143,25 +140,25 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="merch">
       <div class="section-heading">
         <span class="eyebrow">Merch Preview</span>
-        <h2>Curated pieces with personality.</h2>
+        <h2>Art you can wear, display, and use.</h2>
       </div>
       <div class="card-grid">
         <article class="merch-card">
           <div class="merch-img-wrapper">
-            <img src="Streaming mode activated with gaming setup.png" alt="Tee" />
+            <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee" />
           </div>
           <h3>Featured Tee</h3>
-          <p>Expressive design with a clear point of view.</p>
+          <p>Bold visual design with personality and a strong identity feel.</p>
         </article>
         <article class="merch-card">
           <div class="merch-img-wrapper">
-            <img src="ao-emote-coffee-power-clean.png" alt="Drinkware" />
+            <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie" />
           </div>
-          <h3>Featured Drinkware</h3>
-          <p>Polished visuals built for identity.</p>
+          <h3>Featured Hoodie</h3>
+          <p>Comfort-driven merch with mood and a cleaner branded presentation.</p>
         </article>
       </div>
     </section>
