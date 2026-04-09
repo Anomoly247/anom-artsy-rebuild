@@ -6,7 +6,7 @@
   <title>Gallery • Anom Originals</title>
   
   <style>
-    /* --- AO GALLERY STYLES --- */
+    /* --- ANOM ORIGINALS GALLERY STYLES --- */
     * { box-sizing: border-box; }
     
     body {
@@ -37,6 +37,7 @@
       font-weight: bold;
       font-size: 0.85rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .site-nav a:hover { color: #22d3ee; }
@@ -44,14 +45,15 @@
     main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
 
     .hero { padding: 60px 0; text-align: center; }
-    .page-title { font-size: 3rem; margin: 0; color: #dfe4f2; }
+    .page-title { font-size: 3rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
     .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
+
+    .section-heading { margin: 60px 0 30px; }
 
     .card-grid {
       display: grid;
       gap: 25px;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      margin-top: 30px;
     }
 
     .gallery-card {
@@ -59,19 +61,22 @@
       padding: 20px;
       border-radius: 20px;
       border: 1px solid rgba(34, 211, 238, 0.1);
+      transition: 0.3s;
     }
+
+    .gallery-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
 
     .img-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 300px;
+      height: 350px; /* Made slightly taller to show off your art */
       background: #050508;
       border-radius: 15px;
       margin-bottom: 20px;
-      padding: 20px;
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .img-wrapper img {
@@ -94,44 +99,46 @@
       <a href="index.html">Home</a>
       <a href="custom.html">Custom</a>
       <a href="merch.html">Merch</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero" id="top">
+    <section class="hero">
       <span class="eyebrow">Anom Originals</span>
       <h1 class="page-title">THE GALLERY</h1>
-      <p style="color: #a9b2c7;">Where digital art meets identity[cite: 4, 11].</p>
+      <p style="color: #a9b2c7;">Where digital art meets identity.</p>
     </section>
 
-    <section class="section" id="featured-work">
+    <section class="section">
       <div class="section-heading">
         <span class="eyebrow">Lane 01</span>
         <h2>Late-Night Lounge Lights</h2>
-        <p style="color: #a9b2c7;">Dark base, vivid neon, and colorful digital atmosphere[cite: 31, 48].</p>
+        <p style="color: #a9b2c7;">Dark base, vivid neon, and colorful digital atmosphere.</p>
       </div>
       <div class="card-grid">
         <article class="gallery-card">
           <div class="img-wrapper">
-            <img src="Sarcasm%20loading%20in%20progress.jpg" alt="Sarcasm Loading" />
+            <img src="sarcasm.jpg" alt="Sarcasm Loading" />
           </div>
           <h3>Mood & Attitude</h3>
-          <p>Expressive visuals built for humor and shareable energy[cite: 19, 21].</p>
+          <p>Expressive visuals built for humor and shareable energy.</p>
         </article>
 
         <article class="gallery-card">
           <div class="img-wrapper">
-            <img src="Rainbow%20ghost%20with%20glowing%20smartphone.jpg" alt="Rainbow Ghost" />
+            <img src="ghost.jpg" alt="Rainbow Ghost" />
           </div>
           <h3>Fantasy & Dreamworlds</h3>
-          <p>Enchanted scenes and expressive visual storytelling[cite: 34, 48].</p>
+          <p>Enchanted scenes and expressive visual storytelling.</p>
         </article>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Gallery Rebuild </p>
+    <p>© 2026 Anom Originals • Gallery Rebuild</p>
   </footer>
 </body>
 </html>
