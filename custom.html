@@ -12,7 +12,7 @@
       margin: 0;
       font-family: 'Inter', Arial, sans-serif;
       color: #f4f7ff;
-      background-color: #0a0a10; 
+      background-color: #0a0a10;
       background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
       line-height: 1.6;
     }
@@ -42,19 +42,48 @@
 
     .site-nav a:hover { color: #22d3ee; }
 
-    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
+    main {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
 
-    .hero { padding: 80px 0 40px; text-align: center; }
-    .page-title { font-size: 3.5rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); letter-spacing: -1px; }
-    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
+    .hero {
+      padding: 80px 0 40px;
+      text-align: center;
+    }
 
-    .section { padding: 40px 0 60px; }
+    .page-title {
+      font-size: 3.5rem;
+      margin: 0;
+      color: #dfe4f2;
+      text-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+      letter-spacing: -1px;
+    }
+
+    .eyebrow {
+      color: #22d3ee;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .section {
+      padding: 40px 0 60px;
+    }
 
     .card-grid {
       display: grid;
       gap: 25px;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       margin-top: 30px;
+    }
+
+    .service-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
     .service-card,
@@ -67,7 +96,7 @@
       transition: 0.3s ease;
     }
 
-    .service-card:hover,
+    .service-link:hover .service-card,
     .price-card:hover {
       border-color: #22d3ee;
       transform: translateY(-5px);
@@ -78,6 +107,34 @@
       color: #22d3ee;
       margin-top: 0;
       font-size: 1.5rem;
+    }
+
+    .service-img-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 240px;
+      background: #050508;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .service-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .service-price {
+      display: inline-block;
+      margin-top: 14px;
+      font-weight: bold;
+      font-size: 1.05rem;
+      color: #f4f7ff;
     }
 
     .b2b-card {
@@ -236,6 +293,10 @@
       .page-title {
         font-size: 2.5rem;
       }
+
+      .service-img-wrapper {
+        height: 210px;
+      }
     }
   </style>
 </head>
@@ -267,15 +328,29 @@
         <span class="eyebrow">For Individuals</span>
         <h2>Personal Identity Art</h2>
       </div>
+
       <div class="card-grid">
-        <article class="service-card">
-          <h3>Profile Visuals</h3>
-          <p>Recognition-led icons and avatars built to make your digital presence unmistakable.</p>
-        </article>
-        <article class="service-card">
-          <h3>Themed Backgrounds</h3>
-          <p>Custom 4K wallpapers and social headers designed around your specific mood and vibe.</p>
-        </article>
+        <a href="gallery.html#identity" class="service-link">
+          <article class="service-card">
+            <div class="service-img-wrapper">
+              <img src="ao-card-diamond-certified.png" alt="Profile Visuals" />
+            </div>
+            <h3>Profile Visuals</h3>
+            <p>Recognition-led icons and avatars built to make your digital presence unmistakable.</p>
+            <span class="service-price">Starting at $55</span>
+          </article>
+        </a>
+
+        <a href="gallery.html#mood" class="service-link">
+          <article class="service-card">
+            <div class="service-img-wrapper">
+              <img src="ao-background-neon-love-lounge-13.png" alt="Themed Backgrounds" />
+            </div>
+            <h3>Themed Backgrounds</h3>
+            <p>Custom 4K wallpapers and social headers designed around your specific mood and vibe.</p>
+            <span class="service-price">Starting at $75</span>
+          </article>
+        </a>
       </div>
     </section>
 
@@ -355,6 +430,7 @@
           <h3>Etsy Shop Rebuild</h3>
           <p>Complete visual overhaul: custom shop banners, polished product images, and compelling descriptions that convert visitors into buyers.</p>
         </article>
+
         <article class="service-card b2b-card">
           <h3>Social Media Overhaul</h3>
           <p>Strategy-led graphics for Instagram, TikTok, and Facebook. I rebuild your pages to align with your brand’s true identity.</p>
