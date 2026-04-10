@@ -6,7 +6,6 @@
   <title>Gallery • Anom Originals</title>
   
   <style>
-    /* --- ANOM ORIGINALS GALLERY MASTER STYLES --- */
     * { box-sizing: border-box; }
     
     body {
@@ -43,17 +42,47 @@
 
     .site-nav a:hover { color: #22d3ee; }
 
-    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
+    main {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
 
-    .hero { padding: 80px 0 40px; text-align: center; }
-    .page-title { font-size: 3.5rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); letter-spacing: -1px; }
-    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
+    .hero {
+      padding: 80px 0 40px;
+      text-align: center;
+    }
 
-    .section { padding: 40px 0 80px; scroll-margin-top: 100px; } /* scroll-margin makes anchors land perfectly below the header */
-    .section-heading { margin-bottom: 30px; }
-    .section-heading h2 { font-size: 2rem; margin: 10px 0; }
+    .page-title {
+      font-size: 3.5rem;
+      margin: 0;
+      color: #dfe4f2;
+      text-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+      letter-spacing: -1px;
+    }
 
-    /* --- THE GALLERY GRID --- */
+    .eyebrow {
+      color: #22d3ee;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .section {
+      padding: 40px 0 80px;
+      scroll-margin-top: 100px;
+    }
+
+    .section-heading {
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: 2rem;
+      margin: 10px 0;
+    }
+
     .card-grid {
       display: grid;
       gap: 25px;
@@ -68,14 +97,18 @@
       transition: 0.3s ease;
     }
 
-    .gallery-card:hover { border-color: #22d3ee; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1); }
+    .gallery-card:hover {
+      border-color: #22d3ee;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+    }
 
     .img-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 380px; 
+      height: 380px;
       background: #050508;
       border-radius: 18px;
       margin-bottom: 20px;
@@ -87,15 +120,44 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: block;
     }
 
-    /* B2B Accent Style */
-    .b2b-section { border-top: 1px solid rgba(230, 87, 181, 0.2); padding-top: 80px; }
-    .b2b-eyebrow { color: #e657b5; }
-    .b2b-card { border-color: rgba(230, 87, 181, 0.2); }
-    .b2b-card:hover { border-color: #e657b5; box-shadow: 0 10px 30px rgba(230, 87, 181, 0.1); }
+    .gallery-card h3 {
+      margin-top: 0;
+      color: #22d3ee;
+      font-size: 1.35rem;
+    }
 
-    .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
+    .gallery-card p {
+      margin: 0;
+      color: #b8c1d6;
+    }
+
+    .b2b-section {
+      border-top: 1px solid rgba(230, 87, 181, 0.2);
+      padding-top: 80px;
+    }
+
+    .b2b-eyebrow {
+      color: #e657b5;
+    }
+
+    .b2b-card {
+      border-color: rgba(230, 87, 181, 0.2);
+    }
+
+    .b2b-card:hover {
+      border-color: #e657b5;
+      box-shadow: 0 10px 30px rgba(230, 87, 181, 0.1);
+    }
+
+    .site-footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(34, 211, 238, 0.1);
+      color: #a9b2c7;
+    }
   </style>
 </head>
 <body>
@@ -116,22 +178,31 @@
     <section class="hero">
       <span class="eyebrow">Visual Archive</span>
       <h1 class="page-title">THE GALLERY</h1>
-      <p style="color: #a9b2c7;">Exploring the lanes of digital identity.</p>
+      <p style="color: #a9b2c7;">Exploring the lanes of digital identity, custom build backgrounds, and merch-ready art.</p>
     </section>
 
     <section class="section" id="identity">
       <div class="section-heading">
         <span class="eyebrow">Lane 01</span>
-        <h2>Digital Identity</h2>
-        <p style="color: #a9b2c7;">Recognition-led graphics and profile visuals built for presence.</p>
+        <h2>Identity &amp; Profile Art</h2>
+        <p style="color: #a9b2c7;">Profile visuals, themed identity pieces, and custom art built to make your presence feel unmistakably yours.</p>
       </div>
+
       <div class="card-grid">
         <article class="gallery-card">
           <div class="img-wrapper">
-            <img src="ghost.jpg" alt="Rainbow Ghost Identity Piece" />
+            <img src="ao-card-diamond-certified.png" alt="Diamond Certified identity piece" />
+          </div>
+          <h3>Diamond Certified</h3>
+          <p>Bold profile-led art with a polished, branded identity feel.</p>
+        </article>
+
+        <article class="gallery-card">
+          <div class="img-wrapper">
+            <img src="ghost.jpg" alt="Rainbow Ghost identity piece" />
           </div>
           <h3>Rainbow Ghost</h3>
-          <p>Expressive character work designed for unique digital presence.</p>
+          <p>Expressive digital identity artwork designed for unique online presence.</p>
         </article>
       </div>
     </section>
@@ -139,16 +210,25 @@
     <section class="section" id="mood">
       <div class="section-heading">
         <span class="eyebrow">Lane 02</span>
-        <h2>Mood Backgrounds</h2>
-        <p style="color: #a9b2c7;">Themed visuals and digital environments designed to turn atmosphere into art.</p>
+        <h2>Custom Build Backgrounds</h2>
+        <p style="color: #a9b2c7;">Backgrounds that can stand alone or be turned into a themed package for a profile picture, header, or full social media page look.</p>
       </div>
+
       <div class="card-grid">
         <article class="gallery-card">
           <div class="img-wrapper">
-            <img src="sarcasm.jpg" alt="Sarcasm Loading Mood Piece" />
+            <img src="ao-background-neon-love-lounge-13.png" alt="Neon Love Lounge background" />
           </div>
-          <h3>Sarcasm Loading</h3>
-          <p>Digital mood piece with vivid neon glow and shareable energy.</p>
+          <h3>Neon Love Lounge</h3>
+          <p>Rich neon atmosphere built for page style, headers, and themed visual packages.</p>
+        </article>
+
+        <article class="gallery-card">
+          <div class="img-wrapper">
+            <img src="ao-background-cyber-creator-desk-02.pn.png" alt="Cyber Creator Desk background" />
+          </div>
+          <h3>Cyber Creator Desk</h3>
+          <p>Custom build background art designed to anchor a full branded vibe.</p>
         </article>
       </div>
     </section>
@@ -157,15 +237,24 @@
       <div class="section-heading">
         <span class="eyebrow">Lane 03</span>
         <h2>Merch-Ready Art</h2>
-        <p style="color: #a9b2c7;">High-impact designs built for physical products and statement gear.</p>
+        <p style="color: #a9b2c7;">High-impact designs built to move from digital art into products, apparel, and statement pieces.</p>
       </div>
+
       <div class="card-grid">
         <article class="gallery-card">
           <div class="img-wrapper">
-            <img src="Streaming mode activated with gaming setup.png" alt="Streaming Mode Tee Design" />
+            <img src="Streaming mode activated with gaming setup.png" alt="Streaming Mode merch-ready design" />
           </div>
           <h3>Streaming Mode</h3>
           <p>Apparel-focused design optimized for print and high-visibility wear.</p>
+        </article>
+
+        <article class="gallery-card">
+          <div class="img-wrapper">
+            <img src="ao-card-risen-and-shining-v2.png" alt="Risen and Shining merch-ready design" />
+          </div>
+          <h3>Risen and Shining</h3>
+          <p>Bright, expressive artwork with product-ready energy for merch and small-format goods.</p>
         </article>
       </div>
     </section>
@@ -173,20 +262,20 @@
     <section class="section b2b-section" id="business">
       <div class="section-heading">
         <span class="b2b-eyebrow eyebrow">Business Solutions</span>
-        <h2>Etsy & Social Media Rebuilds</h2>
+        <h2>Etsy &amp; Social Media Rebuilds</h2>
         <p style="color: #a9b2c7;">Visual storytelling and shop optimization for professional creators.</p>
       </div>
+
       <div class="card-grid">
         <article class="gallery-card b2b-card">
           <div class="img-wrapper">
-             <div style="color:#e657b5; font-weight:bold;">Project Showcase Coming Soon</div>
+            <div style="color:#e657b5; font-weight:bold;">Project Showcase Coming Soon</div>
           </div>
           <h3>Shop Identity Overhaul</h3>
           <p>Custom product imagery and shop banners for Etsy sellers.</p>
         </article>
       </div>
     </section>
-
   </main>
 
   <footer class="site-footer">
