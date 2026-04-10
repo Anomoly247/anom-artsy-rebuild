@@ -6,7 +6,6 @@
   <title>Custom Services • Anom Originals</title>
   
   <style>
-    /* --- ANOM ORIGINALS CUSTOM & AGENCY STYLES --- */
     * { box-sizing: border-box; }
     
     body {
@@ -51,7 +50,6 @@
 
     .section { padding: 40px 0 60px; }
 
-    /* --- THE SERVICE GRID --- */
     .card-grid {
       display: grid;
       gap: 25px;
@@ -59,7 +57,9 @@
       margin-top: 30px;
     }
 
-    .service-card {
+    .service-card,
+    .price-card,
+    .note-box {
       background: rgba(18, 18, 26, 0.8);
       padding: 40px;
       border-radius: 24px;
@@ -67,16 +67,130 @@
       transition: 0.3s ease;
     }
 
-    .service-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
+    .service-card:hover,
+    .price-card:hover {
+      border-color: #22d3ee;
+      transform: translateY(-5px);
+    }
 
-    .service-card h3 { color: #22d3ee; margin-top: 0; font-size: 1.5rem; }
+    .service-card h3,
+    .price-card h3 {
+      color: #22d3ee;
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
 
-    /* B2B Style (For the Etsy Lady & Shop Owners) */
-    .b2b-card { border-color: rgba(230, 87, 181, 0.3); }
-    .b2b-card:hover { border-color: #e657b5; box-shadow: 0 10px 30px rgba(230, 87, 181, 0.15); }
-    .b2b-card h3 { color: #e657b5; }
+    .b2b-card {
+      border-color: rgba(230, 87, 181, 0.3);
+    }
 
-    /* --- CTA BLOCK --- */
+    .b2b-card:hover {
+      border-color: #e657b5;
+      box-shadow: 0 10px 30px rgba(230, 87, 181, 0.15);
+    }
+
+    .b2b-card h3,
+    .price-card h3 {
+      color: #e657b5;
+    }
+
+    .price-intro {
+      background: rgba(230, 87, 181, 0.08);
+      border: 1px solid rgba(230, 87, 181, 0.22);
+      border-radius: 24px;
+      padding: 28px;
+      margin: 24px 0 30px;
+    }
+
+    .price-intro h3 {
+      margin: 0 0 8px;
+      color: #f4f7ff;
+      font-size: 1.5rem;
+    }
+
+    .price-intro p {
+      margin: 0;
+      color: #c2cade;
+    }
+
+    .price-grid,
+    .addon-grid {
+      display: grid;
+      gap: 25px;
+      margin-top: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .price-card {
+      padding: 30px;
+    }
+
+    .price-card.featured {
+      border-color: rgba(230, 87, 181, 0.45);
+      box-shadow: 0 0 30px rgba(230, 87, 181, 0.08);
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #f4f7ff;
+      margin: 8px 0 14px;
+    }
+
+    .price-card p {
+      margin: 0;
+      color: #b8c1d6;
+    }
+
+    .price-card small {
+      display: block;
+      margin-top: 12px;
+      color: #8fa0bf;
+      font-size: 0.82rem;
+    }
+
+    .addon-title {
+      margin: 38px 0 12px;
+      color: #f4f7ff;
+      font-size: 1.6rem;
+    }
+
+    .addon-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(34, 211, 238, 0.1);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .addon-card h4 {
+      margin: 0 0 8px;
+      color: #22d3ee;
+      font-size: 1.05rem;
+    }
+
+    .addon-card p {
+      margin: 0;
+      color: #b8c1d6;
+    }
+
+    .addon-price {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #f4f7ff;
+    }
+
+    .note-box {
+      margin-top: 35px;
+      padding: 30px;
+      border-color: rgba(230, 87, 181, 0.2);
+    }
+
+    .note-box h3 {
+      margin-top: 0;
+      color: #f4f7ff;
+    }
+
     .cta-box {
       background: #12121a;
       padding: 50px;
@@ -86,11 +200,43 @@
       margin-top: 40px;
     }
 
-    .btn { padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; font-size: 1rem; }
-    .btn-primary { background: #22d3ee; color: #0a0a10; box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+    .btn {
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: #22d3ee;
+      color: #0a0a10;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+    }
+
     .btn-primary:hover { transform: scale(1.05); }
 
-    .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
+    .site-footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(34, 211, 238, 0.1);
+      color: #a9b2c7;
+    }
+
+    @media (max-width: 700px) {
+      .service-card,
+      .price-card,
+      .note-box,
+      .cta-box {
+        padding: 26px;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -111,7 +257,9 @@
     <section class="hero">
       <span class="eyebrow">The Identity Lab</span>
       <h1 class="page-title">CUSTOM SERVICES</h1>
-      <p style="color: #a9b2c7; max-width: 600px; margin: 15px auto;">From personal profile art to professional marketplace overhauls.</p>
+      <p style="color: #a9b2c7; max-width: 700px; margin: 15px auto;">
+        From personal profile art to professional marketplace overhauls.
+      </p>
     </section>
 
     <section class="section">
@@ -134,9 +282,74 @@
     <section class="section" id="business">
       <div class="section-heading">
         <span class="eyebrow" style="color: #e657b5;">For Businesses</span>
-        <h2>Marketplace & Brand Solutions</h2>
+        <h2>Marketplace &amp; Brand Solutions</h2>
         <p style="color: #a9b2c7;">Helping Etsy sellers and creators dominate their space.</p>
       </div>
+
+      <div class="price-intro">
+        <h3>Transparent Pricing. No guessing.</h3>
+        <p>
+          I want this lane to feel clear and easy to understand. These are my starting Etsy service prices, with custom quotes available for bigger or more layered projects.
+        </p>
+      </div>
+
+      <div class="price-grid">
+        <article class="price-card b2b-card">
+          <h3>Shop Audit</h3>
+          <div class="price-tag">$35</div>
+          <p>Quick written review with honest feedback on visuals, branding, listings, and what needs the most attention first.</p>
+          <small>Best for sellers who want direction before committing to a full rebuild.</small>
+        </article>
+
+        <article class="price-card b2b-card">
+          <h3>Shop Refresh</h3>
+          <div class="price-tag">$125</div>
+          <p>Banner update, profile/shop image polish, and a cleaner visual presentation for an existing Etsy space.</p>
+          <small>Best for shops that need a glow-up, not a complete start-over.</small>
+        </article>
+
+        <article class="price-card b2b-card featured">
+          <h3>Etsy Rebuild</h3>
+          <div class="price-tag">$275</div>
+          <p>Custom banner, polished product imagery, visual cleanup, and listing presentation guidance built to help the shop look intentional and ready to convert.</p>
+          <small>Best for a stronger full-lane Etsy makeover.</small>
+        </article>
+
+        <article class="price-card b2b-card">
+          <h3>Etsy + Social Starter</h3>
+          <div class="price-tag">$395</div>
+          <p>Etsy rebuild plus matching social graphics for platforms like Instagram or Facebook so the brand feels connected everywhere.</p>
+          <small>Best for creators who want Etsy and social to look like one real brand.</small>
+        </article>
+      </div>
+
+      <h3 class="addon-title">Add-Ons</h3>
+      <div class="addon-grid">
+        <article class="addon-card">
+          <h4>5 Listing Image Polish Set</h4>
+          <p>Cleanup and visual polish for a focused group of listings.</p>
+          <span class="addon-price">$45</span>
+        </article>
+
+        <article class="addon-card">
+          <h4>Listing Description Cleanup</h4>
+          <p>Sharper wording and cleaner presentation for product copy.</p>
+          <span class="addon-price">$40</span>
+        </article>
+
+        <article class="addon-card">
+          <h4>Matching Social Post Set</h4>
+          <p>Simple branded graphics to support launches or shop visibility.</p>
+          <span class="addon-price">$65</span>
+        </article>
+
+        <article class="addon-card">
+          <h4>Custom Promo Graphic</h4>
+          <p>One branded promotional image for a sale, launch, or feature.</p>
+          <span class="addon-price">$35</span>
+        </article>
+      </div>
+
       <div class="card-grid">
         <article class="service-card b2b-card">
           <h3>Etsy Shop Rebuild</h3>
@@ -144,21 +357,30 @@
         </article>
         <article class="service-card b2b-card">
           <h3>Social Media Overhaul</h3>
-          <p>Strategy-led graphics for Instagram, TikTok, and Facebook. We rebuild your pages to align with your brand's true identity.</p>
+          <p>Strategy-led graphics for Instagram, TikTok, and Facebook. I rebuild your pages to align with your brand’s true identity.</p>
         </article>
+      </div>
+
+      <div class="note-box">
+        <h3>Need something more custom?</h3>
+        <p>
+          If your project does not fit neatly into one of these options, I can still quote it. Multi-product shops, custom product imagery, seasonal launches, and paired Etsy + social work can all be priced as custom packages.
+        </p>
       </div>
     </section>
 
     <section class="cta-box">
       <span class="eyebrow">Ready to begin?</span>
       <h2>Get a Custom Quote</h2>
-      <p style="color: #a9b2c7; margin-bottom: 30px;">Whether it's one piece of art or a full shop rebuild, let's build something intentional.</p>
+      <p style="color: #a9b2c7; margin-bottom: 30px;">
+        Whether it's one piece of art or a full shop rebuild, let’s build something intentional.
+      </p>
       <a href="mailto:hello@anomartsy.xyz?subject=Project%20Quote%20Request" class="btn btn-primary">Request Your Quote</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Digital Art & Agency Services</p>
+    <p>© 2026 Anom Originals • Digital Art &amp; Agency Services</p>
   </footer>
 </body>
 </html>
