@@ -13,7 +13,7 @@
     
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       color: #f4f7ff;
       background-color: #0a0a10; /* Official Deep Black Anchor */
       background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
@@ -30,6 +30,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
     .site-nav a {
@@ -40,6 +41,7 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+      transition: 0.3s;
     }
 
     .site-nav a:hover { color: #22d3ee; }
@@ -49,8 +51,11 @@
     .hero { padding: 40px 0; text-align: center; }
     .hero-banner { width: 100%; max-width: 900px; height: auto; margin-bottom: 20px; mix-blend-mode: screen; }
 
-    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
+    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
 
+    .section { padding: 60px 0; }
+
+    /* --- THE GRID SYSTEM --- */
     .card-grid {
       display: grid;
       gap: 25px;
@@ -58,16 +63,28 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
+    /* Info Cards as Links */
+    .card-link { text-decoration: none; color: inherit; display: block; }
+
     .info-card, .merch-card {
-      background: #12121a;
-      padding: 25px;
-      border-radius: 20px;
+      background: rgba(18, 18, 26, 0.8);
+      padding: 30px;
+      border-radius: 24px;
       border: 1px solid rgba(34, 211, 238, 0.1);
-      transition: 0.3s;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      height: 100%;
     }
 
-    .info-card:hover, .merch-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
+    .card-link:hover .info-card, .merch-card:hover {
+      border-color: #22d3ee;
+      transform: translateY(-8px);
+      background: rgba(18, 18, 26, 0.95);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
+    }
 
+    .info-card h3 { color: #22d3ee; margin-top: 0; }
+
+    /* --- MERCH IMAGE WRAPPER --- */
     .merch-img-wrapper {
       display: flex;
       align-items: center;
@@ -79,6 +96,7 @@
       margin-bottom: 20px;
       padding: 20px;
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
 
     .merch-img-wrapper img {
@@ -87,11 +105,11 @@
       object-fit: contain;
     }
 
-    .btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
+    .btn { padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; font-size: 0.9rem; }
     .btn-primary { background: #22d3ee; color: #0a0a10; }
     .btn-secondary { border: 1px solid #e657b5; color: #e657b5; margin-left: 10px; }
 
-    .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
+    .site-footer { padding: 80px 40px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; font-size: 0.85rem; }
   </style>
 </head>
 <body>
@@ -105,7 +123,6 @@
       <a href="gallery.html">Work</a>
       <a href="custom.html">Custom</a>
       <a href="merch.html">Merch</a>
-      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -113,34 +130,44 @@
   <main>
     <section class="hero">
       <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals" class="hero-banner" />
-      <div class="hero-actions" style="justify-content: center;">
-        <a class="btn btn-primary" href="gallery.html">Explore Work</a>
-        <a class="btn btn-secondary" href="custom.html">Custom Art</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="gallery.html">Explore the Work</a>
+        <a class="btn btn-secondary" href="custom.html">Get a Quote</a>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
         <span class="eyebrow">What AO Creates</span>
-        <h2>Creative work built as one coherent world.</h2>
+        <h2>Turning identity into art.</h2>
       </div>
       <div class="card-grid">
-        <article class="info-card">
-          <h3>Digital Identity</h3>
-          <p>Profile visuals and identity-led graphics built around your personality.</p>
-        </article>
-        <article class="info-card">
-          <h3>Mood Backgrounds</h3>
-          <p>Themed visuals and digital environments designed to turn mood into art.</p>
-        </article>
-        <article class="info-card">
-          <h3>Merch-Ready Art</h3>
-          <p>Bold designs built to live on products you can wear and use.</p>
-        </article>
+        
+        <a href="gallery.html#identity" class="card-link">
+          <article class="info-card">
+            <h3>Digital Identity</h3>
+            <p>Profile visuals and recognition-led graphics built around your unique personality.</p>
+          </article>
+        </a>
+
+        <a href="gallery.html#mood" class="card-link">
+          <article class="info-card">
+            <h3>Mood Backgrounds</h3>
+            <p>Digital environments and themed visuals designed to turn atmosphere into art.</p>
+          </article>
+        </a>
+
+        <a href="gallery.html#merch-art" class="card-link">
+          <article class="info-card">
+            <h3>Merch-Ready Art</h3>
+            <p>Bold designs built to live on products you can wear, display, and use every day.</p>
+          </article>
+        </a>
+
       </div>
     </section>
 
-    <section class="section" id="merch">
+    <section class="section">
       <div class="section-heading">
         <span class="eyebrow">Merch Preview</span>
         <h2>Art you can wear, display, and use.</h2>
@@ -151,21 +178,23 @@
             <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee" />
           </div>
           <h3>Featured Tee</h3>
-          <p>Bold visual design with personality and a strong identity feel.</p>
+          <p>Expressive design with character and a clear point of view.</p>
         </article>
+
         <article class="merch-card">
           <div class="merch-img-wrapper">
             <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie" />
           </div>
           <h3>Featured Hoodie</h3>
-          <p>Comfort-driven merch with mood and a cleaner branded presentation.</p>
+          <p>Comfort-driven merch with a clean branded presentation.</p>
         </article>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="contact">
     <p>© 2026 Anom Originals • Where digital art meets identity.</p>
+    <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.6;">Digital Art • Graphic Design • Creative Direction</p>
   </footer>
 </body>
 </html>
