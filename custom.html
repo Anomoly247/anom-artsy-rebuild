@@ -3,276 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Work • Anom Originals</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Custom Art • Anom Originals</title>
+  
   <style>
-    .custom-page h1,
-    .custom-page h2,
-    .custom-page h3 {
-      color: #d8dbe6;
+    /* --- ANOM ORIGINALS CUSTOM PAGE STYLES --- */
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #f4f7ff;
+      background-color: #0a0a10; 
+      background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
+      line-height: 1.6;
     }
 
-    .custom-page p,
-    .custom-page li,
-    .custom-page .section-text,
-    .custom-page .hero-text,
-    .custom-page .contact-text {
-      color: #c9cede;
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(10, 10, 16, 0.95);
+      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
     }
 
-    .custom-page .eyebrow {
-      color: #22d3ee;
-      letter-spacing: 0.14em;
-    }
-
-    .custom-page .hero {
-      display: block !important;
-      min-height: auto !important;
-      padding: 2.25rem 0 1.5rem 0 !important;
-      margin: 0 !important;
-    }
-
-    .custom-page .hero-copy {
-      max-width: 980px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .custom-page .page-title {
-      margin: 0 0 0.75rem 0;
-      font-size: clamp(2.7rem, 7vw, 5.1rem);
-      line-height: 0.95;
-      color: #dfe4f2;
-      text-shadow: 0 0 24px rgba(230, 87, 181, 0.15);
-    }
-
-    .custom-page .brand-line {
-      font-size: 1.1rem;
-      margin: 0 auto 1rem auto;
-      max-width: 820px;
-      color: #bfc7da;
-    }
-
-    .custom-page .hero-text {
-      max-width: 860px;
-      margin: 0 auto 1.35rem auto;
-    }
-
-    .custom-page .hero-actions {
-      justify-content: center;
-    }
-
-    .custom-page .section-heading {
-      margin-bottom: 1.25rem;
-    }
-
-    .custom-page #custom-offers {
-      padding-top: 1.25rem !important;
-    }
-
-    .custom-page a.card-link {
+    .site-nav a {
+      margin-left: 20px;
+      color: #a9b2c7;
       text-decoration: none;
-      color: inherit;
-      display: block;
+      font-weight: bold;
+      font-size: 0.85rem;
+      text-transform: uppercase;
     }
 
-    .custom-page .card-image {
-      display: block;
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      border-radius: 18px;
-      margin-bottom: 1.1rem;
+    .site-nav a:hover { color: #22d3ee; }
+
+    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
+
+    .hero { padding: 60px 0; text-align: center; }
+    .page-title { font-size: 3rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
+    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
+
+    .section-heading { margin: 60px 0 30px; }
+
+    /* --- CUSTOM OFFER GRID --- */
+    .card-grid {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
-    .custom-page .card-image.logo-fit {
-      object-fit: contain;
-      background: rgba(8, 12, 24, 0.75);
-      padding: 12px;
+    .offer-card {
+      background: rgba(18, 18, 26, 0.8);
+      padding: 35px;
+      border-radius: 24px;
+      border: 1px solid rgba(34, 211, 238, 0.1);
+      transition: 0.3s ease;
     }
+
+    .offer-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
+
+    .offer-card h3 { color: #22d3ee; margin-top: 0; }
+    
+    .price-tag {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 5px 15px;
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid #22d3ee;
+      border-radius: 10px;
+      font-weight: bold;
+      color: #22d3ee;
+    }
+
+    /* --- THE PROCESS SECTION --- */
+    .process-box {
+      background: #12121a;
+      padding: 40px;
+      border-radius: 24px;
+      border-left: 4px solid #e657b5; /* Magenta Highlight */
+      margin-top: 40px;
+    }
+
+    .btn { padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; margin-top: 20px; }
+    .btn-primary { background: #22d3ee; color: #0a0a10; }
+    .btn-secondary { border: 1px solid #e657b5; color: #e657b5; }
+
+    .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
   </style>
 </head>
-<body class="custom-page">
+<body>
   <header class="site-header">
     <div class="brand">
       <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="Anom Originals logo" style="display:block;height:52px;width:auto;" />
+        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
       </a>
     </div>
     <nav class="site-nav">
-      <a href="gallery.html#featured-work">Work</a>
-      <a href="gallery.html#gallery-lanes">Collections</a>
-      <a href="custom.html">Custom</a>
+      <a href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
       <a href="merch.html">Merch</a>
-      <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero" id="top">
-      <div class="hero-copy">
-        <p class="eyebrow">Anom Originals</p>
-        <h1 class="page-title">CUSTOM WORK</h1>
-        <p class="brand-line">Built around your style, mood, and identity.</p>
-
-        <p class="hero-text">
-          Anom Originals creates custom visuals for people, pages, shops, and small brands —
-          designed to feel personal, polished, and fully aligned with your mood, aesthetic, and use.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#let-create">Request Custom Work</a>
-          <a class="btn btn-secondary" href="#custom-offers">What I Create</a>
-          <a class="btn btn-outline" href="gallery.html">View Gallery</a>
-        </div>
-      </div>
+    <section class="hero">
+      <span class="eyebrow">The Identity Lab</span>
+      <h1 class="page-title">CUSTOM WORK</h1>
+      <p style="color: #a9b2c7; max-width: 700px; margin: 10px auto;">Turning your mood, style, and point of view into polished digital art.</p>
     </section>
 
-    <section class="section" id="custom-offers">
-      <div class="section-heading">
-        <p class="eyebrow">Custom Offers</p>
-        <h2>Creative work built to feel like you, not like a template.</h2>
-        <p class="section-text">
-          Whether you want a digital identity piece, a mood-rich background, or branded visuals for your shop,
-          the goal is always the same: make it look intentional, expressive, and unmistakably yours.
-        </p>
-      </div>
+    <section class="section">
+      <div class="card-grid">
+        <article class="offer-card">
+          <h3>Profile & Identity</h3>
+          <p>Custom icons, profile visuals, and identity-led graphics that feel personal and polished.</p>
+          <div class="price-tag">Starting at $XX</div>
+        </article>
 
-      <div class="split-layout">
-        <a class="card-link" href="#custom-lanes">
-          <div class="feature-card">
-            <h3>What I Create</h3>
-            <ul class="request-list">
-              <li>Profile pictures</li>
-              <li>Backgrounds and headers</li>
-              <li>Browser themes and wallpapers</li>
-              <li>Mood pieces and quote cards</li>
-              <li>Custom icons and emotes</li>
-              <li>Merch-ready visuals</li>
-              <li>Identity graphics</li>
-              <li>Shop and product graphics</li>
-            </ul>
-          </div>
-        </a>
+        <article class="offer-card">
+          <h3>Themed Backgrounds</h3>
+          <p>Digital environments, wallpapers, and headers built around your specific aesthetic.</p>
+          <div class="price-tag">Starting at $XX</div>
+        </article>
 
-        <a class="card-link" href="#let-create">
-          <div class="feature-card">
-            <h3>Why It Feels Personal</h3>
-            <p>
-              Anom Originals custom work is designed around your mood, color direction, aesthetic,
-              and use case — not pulled from a generic pack and not flattened into something forgettable.
-            </p>
-            <p>
-              The result should feel expressive, polished, and specific to you.
-            </p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="custom-lanes">
-      <div class="section-heading">
-        <p class="eyebrow">Custom Lanes</p>
-        <h2>Clear paths for the kind of work you want.</h2>
-      </div>
-
-      <div class="card-grid three-up">
-        <a class="card-link" href="#let-create">
-          <article class="merch-card">
-            <img
-              src="ao-background-cyber-creator-desk-02.pn.png"
-              alt="Profile Art example"
-              class="card-image"
-            />
-            <h3>Profile Art</h3>
-            <p>Identity-led visuals with mood, glow, polish, and a recognizable personal style.</p>
-          </article>
-        </a>
-
-        <a class="card-link" href="#let-create">
-          <article class="merch-card">
-            <img
-              src="ao-background-dual-neon-butterfly-glow-18.png"
-              alt="Background Design example"
-              class="card-image"
-            />
-            <h3>Background Design</h3>
-            <p>Headers, page visuals, wallpapers, and themed backgrounds that make your space feel finished.</p>
-          </article>
-        </a>
-
-        <a class="card-link" href="#let-create">
-          <article class="merch-card">
-            <img
-              src="anom-originals-logo-lockup-wide.png"
-              alt="Merch Graphics example"
-              class="card-image logo-fit"
-            />
-            <h3>Merch Graphics</h3>
-            <p>Design work built to carry across products without losing clarity, mood, or impact.</p>
-          </article>
-        </a>
+        <article class="offer-card">
+          <h3>Merch-Ready Art</h3>
+          <p>Bold designs built to work across hoodies, tees, and digital products for your own brand.</p>
+          <div class="price-tag">Inquire for Pricing</div>
+        </article>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-heading">
-        <p class="eyebrow">How to Request</p>
-        <h2>The more direction you give, the stronger the build.</h2>
-      </div>
-
-      <div class="card-grid four-up">
-        <a class="card-link" href="#let-create">
-          <article class="info-card">
-            <h3>Tell Me the Mood</h3>
-            <p>Neon, fantasy, dark romance, dreamy, Y2K, polished, playful, or something else.</p>
-          </article>
-        </a>
-
-        <a class="card-link" href="#let-create">
-          <article class="info-card">
-            <h3>Tell Me the Use</h3>
-            <p>Profile image, banner, wallpaper, shop graphic, merch art, quote card, or themed set.</p>
-          </article>
-        </a>
-
-        <a class="card-link" href="#let-create">
-          <article class="info-card">
-            <h3>Share References</h3>
-            <p>Colors, symbols, vibe notes, old pieces you liked, or examples of what feels right.</p>
-          </article>
-        </a>
-
-        <a class="card-link" href="#let-create">
-          <article class="info-card">
-            <h3>Say Where It Lives</h3>
-            <p>Let me know if it is for web, social, merch, digital download, or a personal page.</p>
-          </article>
-        </a>
-      </div>
-    </section>
-
-    <section class="section contact-section" id="let-create">
-      <div class="section-heading">
-        <p class="eyebrow">Let’s Create</p>
-        <h2>Want something made just for you?</h2>
-      </div>
-
-      <p class="contact-text">
-        Tell me what you want to build, the mood you want it to have, and where you want to use it.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="mailto:hello@anomartsy.xyz?subject=Custom%20Work%20Request">Request Custom Work</a>
-        <a class="btn btn-secondary" href="gallery.html">View Gallery</a>
-        <a class="btn btn-outline" href="index.html">Back Home</a>
+      <div class="process-box">
+        <span class="eyebrow" style="color: #e657b5;">How it Works</span>
+        <h2>The AO Creative Process</h2>
+        <p>1. **Discovery:** We discuss your mood, style, and where the piece will live.</p>
+        <p>2. **Drafting:** I build the core digital world for your feedback.</p>
+        <p>3. **Polish:** Final refinements to ensure the digital energy is perfect.</p>
+        
+        <a href="mailto:hello@anomartsy.xyz" class="btn btn-primary">Start Your Request</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© Anom Originals • Custom work rebuild in progress</p>
+    <p>© 2026 Anom Originals • Built for Identity</p>
   </footer>
 </body>
 </html>
