@@ -191,7 +191,9 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .card-link {
+    .card-link,
+    .feature-link,
+    .merch-link {
       text-decoration: none;
       color: inherit;
       display: block;
@@ -217,8 +219,8 @@
     }
 
     .card-link:hover .info-card,
-    .feature-card:hover,
-    .merch-card:hover {
+    .feature-link:hover .feature-card,
+    .merch-link:hover .merch-card {
       transform: translateY(-6px);
       border-color: #22d3ee;
       box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
@@ -492,45 +494,53 @@
       </div>
 
       <div class="card-grid two-up">
-        <article class="feature-card">
-          <div class="feature-img-wrapper">
-            <img src="ao-background-cyber-creator-desk-02.pn.png" alt="Neon Backgrounds Collection" />
-          </div>
-          <div class="feature-copy">
-            <h3>Neon Backgrounds</h3>
-            <p>Dark, colorful, glowing visual pieces for pages, headers, and digital spaces.</p>
-          </div>
-        </article>
+        <a href="gallery.html#mood" class="feature-link">
+          <article class="feature-card">
+            <div class="feature-img-wrapper">
+              <img src="ao-background-cyber-creator-desk-02.pn.png" alt="Neon Backgrounds Collection" />
+            </div>
+            <div class="feature-copy">
+              <h3>Neon Backgrounds</h3>
+              <p>Dark, colorful, glowing visual pieces for pages, headers, and digital spaces.</p>
+            </div>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <div class="feature-img-wrapper">
-            <img src="ao-card-diamond-certified.png" alt="Identity and Profile Art Collection" />
-          </div>
-          <div class="feature-copy">
-            <h3>Identity &amp; Profile Art</h3>
-            <p>Custom graphics that make your online presence feel like you.</p>
-          </div>
-        </article>
+        <a href="gallery.html#identity" class="feature-link">
+          <article class="feature-card">
+            <div class="feature-img-wrapper">
+              <img src="ao-card-diamond-certified.png" alt="Identity and Profile Art Collection" />
+            </div>
+            <div class="feature-copy">
+              <h3>Identity &amp; Profile Art</h3>
+              <p>Custom graphics that make your online presence feel like you.</p>
+            </div>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <div class="feature-img-wrapper">
-            <img src="ao-background-neon-love-lounge-13.png" alt="Mood Pieces Collection" />
-          </div>
-          <div class="feature-copy">
-            <h3>Mood Pieces</h3>
-            <p>Relatable, expressive, and full of personality.</p>
-          </div>
-        </article>
+        <a href="gallery.html#mood-pieces" class="feature-link">
+          <article class="feature-card">
+            <div class="feature-img-wrapper">
+              <img src="ao-background-neon-love-lounge-13.png" alt="Mood Pieces Collection" />
+            </div>
+            <div class="feature-copy">
+              <h3>Mood Pieces</h3>
+              <p>Relatable, expressive, and full of personality.</p>
+            </div>
+          </article>
+        </a>
 
-        <article class="feature-card">
-          <div class="feature-img-wrapper">
-            <img src="ao-card-risen-and-shining-v2.png" alt="Curated Merch Collection" />
-          </div>
-          <div class="feature-copy">
-            <h3>Curated Merch</h3>
-            <p>A cleaner, smaller merch lane focused on the strongest pieces first.</p>
-          </div>
-        </article>
+        <a href="gallery.html#merch-art" class="feature-link">
+          <article class="feature-card">
+            <div class="feature-img-wrapper">
+              <img src="ao-card-risen-and-shining-v2.png" alt="Curated Merch Collection" />
+            </div>
+            <div class="feature-copy">
+              <h3>Curated Merch</h3>
+              <p>A cleaner, smaller merch lane focused on the strongest pieces first.</p>
+            </div>
+          </article>
+        </a>
       </div>
     </section>
 
@@ -570,7 +580,7 @@
       </div>
 
       <div class="card-grid two-up">
-        <a href="merch.html" class="card-link">
+        <a href="merch.html" class="merch-link">
           <article class="merch-card">
             <div class="merch-img-wrapper">
               <img src="Streaming mode activated with gaming setup.png" alt="Featured Tee" />
@@ -580,7 +590,7 @@
           </article>
         </a>
 
-        <a href="merch.html" class="card-link">
+        <a href="merch.html" class="merch-link">
           <article class="merch-card">
             <div class="merch-img-wrapper">
               <img src="ao-card-boundaries-enforced-v2.png" alt="Featured Hoodie" />
