@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Art • Anom Originals</title>
+  <title>Custom Services • Anom Originals</title>
   
   <style>
-    /* --- ANOM ORIGINALS CUSTOM PAGE STYLES --- */
+    /* --- ANOM ORIGINALS CUSTOM & AGENCY STYLES --- */
     * { box-sizing: border-box; }
     
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
       color: #f4f7ff;
       background-color: #0a0a10; 
       background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
@@ -38,60 +38,57 @@
       font-weight: bold;
       font-size: 0.85rem;
       text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .site-nav a:hover { color: #22d3ee; }
 
     main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
 
-    .hero { padding: 60px 0; text-align: center; }
-    .page-title { font-size: 3rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 20px rgba(34, 211, 238, 0.2); }
+    .hero { padding: 80px 0 40px; text-align: center; }
+    .page-title { font-size: 3.5rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); letter-spacing: -1px; }
     .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
 
-    .section-heading { margin: 60px 0 30px; }
+    .section { padding: 40px 0 60px; }
 
-    /* --- CUSTOM OFFER GRID --- */
+    /* --- THE SERVICE GRID --- */
     .card-grid {
       display: grid;
       gap: 25px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      margin-top: 30px;
     }
 
-    .offer-card {
+    .service-card {
       background: rgba(18, 18, 26, 0.8);
-      padding: 35px;
+      padding: 40px;
       border-radius: 24px;
       border: 1px solid rgba(34, 211, 238, 0.1);
       transition: 0.3s ease;
     }
 
-    .offer-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
+    .service-card:hover { border-color: #22d3ee; transform: translateY(-5px); }
 
-    .offer-card h3 { color: #22d3ee; margin-top: 0; }
-    
-    .price-tag {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 5px 15px;
-      background: rgba(34, 211, 238, 0.1);
-      border: 1px solid #22d3ee;
-      border-radius: 10px;
-      font-weight: bold;
-      color: #22d3ee;
-    }
+    .service-card h3 { color: #22d3ee; margin-top: 0; font-size: 1.5rem; }
 
-    /* --- THE PROCESS SECTION --- */
-    .process-box {
+    /* B2B Style (For the Etsy Lady & Shop Owners) */
+    .b2b-card { border-color: rgba(230, 87, 181, 0.3); }
+    .b2b-card:hover { border-color: #e657b5; box-shadow: 0 10px 30px rgba(230, 87, 181, 0.15); }
+    .b2b-card h3 { color: #e657b5; }
+
+    /* --- CTA BLOCK --- */
+    .cta-box {
       background: #12121a;
-      padding: 40px;
+      padding: 50px;
       border-radius: 24px;
-      border-left: 4px solid #e657b5; /* Magenta Highlight */
+      border: 1px solid rgba(34, 211, 238, 0.1);
+      text-align: center;
       margin-top: 40px;
     }
 
-    .btn { padding: 14px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; margin-top: 20px; }
-    .btn-primary { background: #22d3ee; color: #0a0a10; }
-    .btn-secondary { border: 1px solid #e657b5; color: #e657b5; }
+    .btn { padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; font-size: 1rem; }
+    .btn-primary { background: #22d3ee; color: #0a0a10; box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+    .btn-primary:hover { transform: scale(1.05); }
 
     .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
   </style>
@@ -105,56 +102,63 @@
     </div>
     <nav class="site-nav">
       <a href="index.html">Home</a>
-      <a href="gallery.html">Gallery</a>
+      <a href="gallery.html">Work</a>
       <a href="merch.html">Merch</a>
-      <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
       <span class="eyebrow">The Identity Lab</span>
-      <h1 class="page-title">CUSTOM WORK</h1>
-      <p style="color: #a9b2c7; max-width: 700px; margin: 10px auto;">Turning your mood, style, and point of view into polished digital art.</p>
+      <h1 class="page-title">CUSTOM SERVICES</h1>
+      <p style="color: #a9b2c7; max-width: 600px; margin: 15px auto;">From personal profile art to professional marketplace overhauls.</p>
     </section>
 
     <section class="section">
+      <div class="section-heading">
+        <span class="eyebrow">For Individuals</span>
+        <h2>Personal Identity Art</h2>
+      </div>
       <div class="card-grid">
-        <article class="offer-card">
-          <h3>Profile & Identity</h3>
-          <p>Custom icons, profile visuals, and identity-led graphics that feel personal and polished.</p>
-          <div class="price-tag">Starting at $XX</div>
+        <article class="service-card">
+          <h3>Profile Visuals</h3>
+          <p>Recognition-led icons and avatars built to make your digital presence unmistakable.</p>
         </article>
-
-        <article class="offer-card">
+        <article class="service-card">
           <h3>Themed Backgrounds</h3>
-          <p>Digital environments, wallpapers, and headers built around your specific aesthetic.</p>
-          <div class="price-tag">Starting at $XX</div>
-        </article>
-
-        <article class="offer-card">
-          <h3>Merch-Ready Art</h3>
-          <p>Bold designs built to work across hoodies, tees, and digital products for your own brand.</p>
-          <div class="price-tag">Inquire for Pricing</div>
+          <p>Custom 4K wallpapers and social headers designed around your specific mood and vibe.</p>
         </article>
       </div>
     </section>
 
-    <section class="section">
-      <div class="process-box">
-        <span class="eyebrow" style="color: #e657b5;">How it Works</span>
-        <h2>The AO Creative Process</h2>
-        <p>1. **Discovery:** We discuss your mood, style, and where the piece will live.</p>
-        <p>2. **Drafting:** I build the core digital world for your feedback.</p>
-        <p>3. **Polish:** Final refinements to ensure the digital energy is perfect.</p>
-        
-        <a href="mailto:hello@anomartsy.xyz" class="btn btn-primary">Start Your Request</a>
+    <section class="section" id="business">
+      <div class="section-heading">
+        <span class="eyebrow" style="color: #e657b5;">For Businesses</span>
+        <h2>Marketplace & Brand Solutions</h2>
+        <p style="color: #a9b2c7;">Helping Etsy sellers and creators dominate their space.</p>
       </div>
+      <div class="card-grid">
+        <article class="service-card b2b-card">
+          <h3>Etsy Shop Rebuild</h3>
+          <p>Complete visual overhaul: custom shop banners, polished product images, and compelling descriptions that convert visitors into buyers.</p>
+        </article>
+        <article class="service-card b2b-card">
+          <h3>Social Media Overhaul</h3>
+          <p>Strategy-led graphics for Instagram, TikTok, and Facebook. We rebuild your pages to align with your brand's true identity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-box">
+      <span class="eyebrow">Ready to begin?</span>
+      <h2>Get a Custom Quote</h2>
+      <p style="color: #a9b2c7; margin-bottom: 30px;">Whether it's one piece of art or a full shop rebuild, let's build something intentional.</p>
+      <a href="mailto:hello@anomartsy.xyz?subject=Project%20Quote%20Request" class="btn btn-primary">Request Your Quote</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Built for Identity</p>
+    <p>© 2026 Anom Originals • Digital Art & Agency Services</p>
   </footer>
 </body>
 </html>
