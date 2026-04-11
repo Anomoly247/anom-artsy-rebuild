@@ -1,40 +1,69 @@
+/* --- ANOM ORIGINALS CORE STYLES --- */
 :root {
   --bg-dark: #0a0a10;
   --cyan-neon: #22d3ee;
   --pink-neon: #e657b5;
   --text-main: #f4f7ff;
-  --ice-blue: #d1dbff; /* The readable subtext color */
+  --text-dim: #a9b2c7;
+  --ice-blue: #d1dbff; /* The new readable baby blue */
   --glass-bg: rgba(18, 18, 26, 0.85);
 }
 
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-dark);
+  font-family: 'Inter', Arial, sans-serif;
   color: var(--text-main);
+  background-color: var(--bg-dark);
   background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), var(--bg-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.section { width: min(1200px, 92%); margin: 0 auto; padding: 60px 0; }
+/* --- HEADER & NAV --- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: rgba(10, 10, 16, 0.95);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
 
-/* THE GRID FIX */
+.site-nav a {
+  margin-left: 20px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+/* --- THE 6-BLOCK GRID FIX --- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 Columns */
-  gap: 20px;
+  gap: 25px;
+  grid-template-columns: repeat(3, 1fr); /* FORCES 3 COLUMNS */
+  margin-top: 30px;
 }
 
 @media (max-width: 900px) {
-  .card-grid { grid-template-columns: 1fr; } /* 1 Column on phone */
+  .card-grid { grid-template-columns: 1fr; } /* Stacks on phone */
 }
 
-/* THE CARD STYLE */
+/* --- INFO CARDS --- */
 .info-card {
   background: var(--glass-bg);
   padding: 30px;
   border-radius: 20px;
   border: 1px solid rgba(34, 211, 238, 0.15);
   backdrop-filter: blur(10px);
+  height: 100%;
   transition: 0.3s ease;
 }
 
@@ -44,26 +73,38 @@ body {
   box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
 }
 
-.info-card h3 { color: var(--cyan-neon); margin: 0 0 10px 0; }
-.info-card p { color: var(--ice-blue); margin: 0; font-size: 0.95rem; }
+.info-card h3 {
+  color: var(--cyan-neon);
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
+}
 
-/* ABOUT/CONTACT GRID */
+.info-card p {
+  color: var(--ice-blue) !important; /* THE READABLE COLOR */
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.card-link { text-decoration: none; }
+
+/* --- ABOUT/CONTACT SECTION --- */
 .about-contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
+  margin-top: 40px;
 }
 
 @media (max-width: 768px) {
   .about-contact-grid { grid-template-columns: 1fr; }
 }
 
-/* HEADER & BUTTONS */
-.site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid rgba(34, 211, 238, 0.15); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
-.site-nav a { margin-left: 20px; color: var(--text-dim); text-decoration: none; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
-.btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
+/* --- HERO & BUTTONS --- */
+.hero { padding: 80px 0 40px; text-align: center; }
+.hero-banner { max-width: 100%; height: auto; margin-bottom: 20px; }
+.section { width: min(1200px, 92%); margin: 0 auto; padding: 60px 0; }
+.btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
 .btn-primary { background: var(--cyan-neon); color: #0a0a10; }
 .btn-secondary { background: var(--pink-neon); color: #fff; }
-.btn-outline { border: 1px solid var(--cyan-neon); color: var(--cyan-neon); }
-.hero-banner { max-width: 100%; height: auto; }
-.site-footer { padding: 40px; text-align: center; opacity: 0.6; }
+.btn-outline { border: 1px solid var(--cyan-neon); color: var(--cyan-neon); background: transparent; }
+.site-footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: var(--text-dim); }
