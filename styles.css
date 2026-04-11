@@ -8,7 +8,9 @@
   --glass-bg: rgba(18, 18, 26, 0.65);
 }
 
-* { box-sizing: border-box; }
+* { 
+  box-sizing: border-box; 
+}
 
 body {
   margin: 0;
@@ -17,6 +19,7 @@ body {
   background-color: var(--bg-dark);
   background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), var(--bg-dark);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* --- HEADER & NAV --- */
@@ -41,9 +44,13 @@ body {
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: 0.3s ease;
 }
 
-.site-nav a:hover { color: var(--cyan-neon); text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
+.site-nav a:hover { 
+  color: var(--cyan-neon); 
+  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); 
+}
 
 /* --- HERO SECTION --- */
 .hero {
@@ -57,6 +64,14 @@ body {
   color: #dfe4f2;
   text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
   letter-spacing: -1px;
+}
+
+.eyebrow {
+  color: var(--cyan-neon);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
 }
 
 .hero-banner {
@@ -76,6 +91,7 @@ body {
   font-size: 1rem;
   cursor: pointer;
   border: none;
+  text-align: center;
 }
 
 .btn-primary {
@@ -98,17 +114,18 @@ body {
 
 .btn:hover {
   transform: scale(1.05);
-  filter: brightness(1.2);
+  filter: brightness(1.15);
 }
 
 /* --- PREMIUM CARDS & GLASSMORPHISM --- */
-.service-card, .price-card, .info-card, .feature-card, .note-box {
+.service-card, .price-card, .info-card, .feature-card, .note-box, .cta-box {
   background: var(--glass-bg);
   padding: 40px;
   border-radius: 24px;
   border: 1px solid rgba(34, 211, 238, 0.08);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  height: 100%;
 }
 
 .card-grid {
@@ -118,8 +135,8 @@ body {
   margin-top: 30px;
 }
 
-/* Hover effect for standard cards */
-.service-card:hover, .info-card:hover {
+/* Standard Hover Effect */
+.service-card:hover, .info-card:hover, .price-card:hover {
   border-color: var(--cyan-neon);
   transform: translateY(-5px);
   box-shadow: 0 15px 40px -10px rgba(34, 211, 238, 0.2);
@@ -131,10 +148,14 @@ body {
   overflow: hidden;
   border-radius: 18px;
   background: #050508;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* The Ghost Layer - prevents right click/save */
-.service-img-wrapper::after, .img-wrapper::after {
+/* The Ghost Layer - prevents right click/long press */
+.service-img-wrapper::after, .img-wrapper::after, .feature-img-wrapper::after {
   content: "";
   position: absolute;
   top: 0; left: 0;
@@ -145,15 +166,35 @@ body {
 
 img {
   max-width: 100%;
-  pointer-events: none; /* No drag */
-  user-select: none;    /* No select */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 /* --- BUSINESS SECTION (PINK THEME) --- */
-#business .eyebrow { color: var(--pink-neon); }
+#business .eyebrow { 
+  color: var(--pink-neon) !important; 
+}
+
 #business .service-card:hover, #business .price-card:hover {
   border-color: var(--pink-neon);
   box-shadow: 0 15px 40px -10px rgba(230, 87, 181, 0.25);
+}
+
+#business .service-button {
+  background: linear-gradient(90deg, var(--cyan-neon), #38bdf8);
+  color: #031019;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+#business .service-button:hover {
+  background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(230, 87, 181, 0.4);
 }
 
 .price-tag {
@@ -161,6 +202,30 @@ img {
   font-weight: bold;
   margin: 10px 0;
   color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* --- FEATURED PULSE ANIMATION --- */
+.featured {
+  border-color: var(--cyan-neon);
+  animation: pulseCyan 3s infinite ease-in-out;
+}
+
+#business .featured {
+  border-color: var(--pink-neon);
+  animation: pulsePink 3s infinite ease-in-out;
+}
+
+@keyframes pulseCyan {
+  0% { box-shadow: 0 0 10px rgba(34, 211, 238, 0.1); }
+  50% { box-shadow: 0 0 25px rgba(34, 211, 238, 0.3); }
+  100% { box-shadow: 0 0 10px rgba(34, 211, 238, 0.1); }
+}
+
+@keyframes pulsePink {
+  0% { box-shadow: 0 0 10px rgba(230, 87, 181, 0.1); }
+  50% { box-shadow: 0 0 25px rgba(230, 87, 181, 0.3); }
+  100% { box-shadow: 0 0 10px rgba(230, 87, 181, 0.1); }
 }
 
 /* --- FOOTER --- */
@@ -169,4 +234,12 @@ img {
   text-align: center;
   border-top: 1px solid rgba(34, 211, 238, 0.1);
   color: var(--text-dim);
+  background: rgba(10, 10, 16, 0.5);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+  .hero { padding: 60px 0 20px; }
+  .service-card, .price-card { padding: 25px; }
+  .site-header { padding: 10px 5%; }
 }
