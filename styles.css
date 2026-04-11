@@ -1,9 +1,10 @@
-/* --- ANOM ORIGINALS: MASTER STYLES 2026 --- */
+/* --- ANOM ORIGINALS: ELITE MASTER STYLES --- */
 :root {
   --bg-dark: #0a0a10;
   --cyan-neon: #22d3ee;
   --pink-neon: #e657b5;
   --text-main: #f4f7ff;
+  --text-dim: #a9b2c7;
   --ice-blue: #d1dbff;
   --glass-bg: rgba(18, 18, 26, 0.85);
 }
@@ -14,19 +15,25 @@
   padding: 0; 
 }
 
+/* GLOBAL RESET FOR LINKS */
+a, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+
 body {
   font-family: 'Inter', Arial, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-dark);
-  background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 30%), var(--bg-dark);
+  background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.1), transparent 35%), var(--bg-dark);
   line-height: 1.6;
   overflow-x: hidden;
 }
 
-/* --- HEADER --- */
+/* --- TIGHT HEADER --- */
 .site-header {
   padding: 15px 5%;
-  background: rgba(10, 10, 16, 0.9);
+  background: rgba(10, 10, 16, 0.85);
   backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
@@ -43,25 +50,27 @@ body {
   font-size: 0.8rem;
   text-transform: uppercase;
   font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .site-nav a:hover { color: var(--cyan-neon) !important; }
 
-/* --- THE HERO (Clean & Wide) --- */
+/* --- THE HERO: EDGE BLENDING --- */
 .hero {
-  padding: 40px 5%;
+  padding: 30px 5% 10px;
   text-align: center;
 }
 
 .hero-banner {
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   height: auto;
-  border-radius: 24px;
-  filter: drop-shadow(0 0 30px rgba(34, 211, 238, 0.15));
-  margin-bottom: 20px;
+  border-radius: 40px; /* Rounds the black box edges */
+  /* This creates a soft fade around the logo box */
+  mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  filter: drop-shadow(0 0 30px rgba(34, 211, 238, 0.2));
+  margin-bottom: 10px;
 }
 
 .hero-actions {
@@ -71,11 +80,11 @@ body {
   margin-top: 30px;
 }
 
-/* --- THE 6-BLOCK GRID (Perfect Alignment) --- */
+/* --- THE GRID: ROCK SOLID --- */
 .section {
   width: min(1200px, 94%);
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 50px 0;
 }
 
 .card-grid {
@@ -88,35 +97,36 @@ body {
   background: var(--glass-bg);
   padding: 40px 30px;
   border-radius: 24px;
-  border: 1px solid rgba(34, 211, 238, 0.15);
+  border: 1px solid rgba(34, 211, 238, 0.12);
   backdrop-filter: blur(15px);
-  transition: 0.4s ease;
+  transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
 .info-card:hover {
   border-color: var(--cyan-neon);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 40px rgba(34, 211, 238, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(34, 211, 238, 0.15);
 }
 
 .info-card h3 {
   color: var(--cyan-neon) !important;
   font-size: 1.4rem;
   margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .info-card p {
   color: var(--ice-blue) !important;
   font-size: 0.95rem;
-  flex-grow: 1; /* This forces the box to stay uniform */
+  flex-grow: 1; /* Keeps all boxes same height */
 }
 
 /* --- BUTTONS --- */
 .btn {
-  padding: 14px 32px;
+  padding: 14px 35px;
   border-radius: 100px;
   font-weight: bold;
   text-decoration: none;
@@ -124,27 +134,43 @@ body {
   border: none;
   cursor: pointer;
   display: inline-block;
+  font-size: 0.95rem;
 }
 
-.btn-primary { background: var(--cyan-neon) !important; color: #0a0a10 !important; }
-.btn-secondary { background: var(--pink-neon) !important; color: #fff !important; }
+.btn-primary { 
+  background: var(--cyan-neon) !important; 
+  color: #0a0a10 !important; 
+  box-shadow: 0 5px 15px rgba(34, 211, 238, 0.3);
+}
+
+.btn-secondary { 
+  background: var(--pink-neon) !important; 
+  color: #fff !important; 
+  box-shadow: 0 5px 15px rgba(230, 87, 181, 0.3);
+}
+
 .btn-outline { 
   border: 1px solid var(--cyan-neon) !important; 
   color: var(--cyan-neon) !important; 
   background: transparent; 
 }
 
-/* --- LOWER LAYOUT (About/Contact) --- */
-.about-contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
+.btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
 }
 
-.about-box { border-color: var(--pink-neon) !important; }
+/* --- FOOTER --- */
+.site-footer {
+  padding: 60px;
+  text-align: center;
+  opacity: 0.4;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(34, 211, 238, 0.1);
+}
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media (max-width: 900px) {
-  .card-grid, .about-contact-grid { grid-template-columns: 1fr; }
-  .hero-banner { border-radius: 12px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .hero-banner { mask-image: none; -webkit-mask-image: none; border-radius: 15px; }
 }
