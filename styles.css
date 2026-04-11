@@ -1,245 +1,51 @@
-/* --- ANOM ORIGINALS CORE STYLES --- */
-:root {
-  --bg-dark: #0a0a10;
-  --cyan-neon: #22d3ee;
-  --pink-neon: #e657b5;
-  --text-main: #f4f7ff;
-  --text-dim: #a9b2c7;
-  --glass-bg: rgba(18, 18, 26, 0.65);
-}
+<section class="section">
+      <div class="section-heading">
+        <span class="eyebrow">What I Create</span>
+        <h2>Art built with mood, glow, and personality.</h2>
+        <p>Six core lanes. Digital identity and motion assets built for your space.</p>
+      </div>
 
-* { 
-  box-sizing: border-box; 
-}
+      <div class="card-grid">
+        <a href="gallery.html#mood" class="card-link">
+          <article class="info-card">
+            <h3>Backgrounds</h3>
+            <p>Custom backgrounds and headers designed to bring your digital space to life.</p>
+          </article>
+        </a>
 
-body {
-  margin: 0;
-  font-family: 'Inter', Arial, sans-serif;
-  color: var(--text-main);
-  background-color: var(--bg-dark);
-  background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), var(--bg-dark);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
+        <a href="gallery.html#identity" class="card-link">
+          <article class="info-card">
+            <h3>Profile Pictures</h3>
+            <p>Digital identity graphics and profile images with style, mood, and personality.</p>
+          </article>
+        </a>
 
-/* --- HEADER & NAV --- */
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5%;
-  background: rgba(10, 10, 16, 0.9);
-  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(15px);
-}
+        <a href="gallery.html#mood-pieces" class="card-link">
+          <article class="info-card">
+            <h3>Mood Collection</h3>
+            <p>Expressive art pieces built for humor, feeling, and digital attitude.</p>
+          </article>
+        </a>
 
-.site-nav a {
-  margin-left: 20px;
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-}
+        <a href="gallery.html#merch-art" class="card-link">
+          <article class="info-card">
+            <h3>Merch Designs</h3>
+            <p>Bold visual designs built to work beautifully on physical products without losing style.</p>
+          </article>
+        </a>
 
-.site-nav a:hover { 
-  color: var(--cyan-neon); 
-  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); 
-}
+        <a href="custom.html#digital-boutique" class="card-link">
+          <article class="info-card">
+            <h3>Digital Boutique</h3>
+            <p>High-fidelity MP4 motion art files for digital frames and wallpaper engines.</p>
+          </article>
+        </a>
 
-/* --- HERO SECTION --- */
-.hero {
-  padding: 80px 0 40px;
-  text-align: center;
-}
-
-.page-title {
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
-  margin: 0;
-  color: #dfe4f2;
-  text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
-  letter-spacing: -1px;
-}
-
-.eyebrow {
-  color: var(--cyan-neon);
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-}
-
-.hero-banner {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-/* --- BUTTONS --- */
-.btn {
-  padding: 16px 40px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  display: inline-block;
-  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-}
-
-.btn-primary {
-  background: var(--cyan-neon);
-  color: #031019;
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
-}
-
-.btn-secondary {
-  background: var(--pink-neon);
-  color: #fff;
-  box-shadow: 0 0 20px rgba(230, 87, 181, 0.4);
-}
-
-.btn-outline {
-  background: transparent;
-  color: var(--cyan-neon);
-  border: 1px solid var(--cyan-neon);
-}
-
-.btn:hover {
-  transform: scale(1.05);
-  filter: brightness(1.15);
-}
-
-/* --- PREMIUM CARDS & GLASSMORPHISM --- */
-.service-card, .price-card, .info-card, .feature-card, .note-box, .cta-box {
-  background: var(--glass-bg);
-  padding: 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(34, 211, 238, 0.08);
-  backdrop-filter: blur(12px);
-  transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  height: 100%;
-}
-
-.card-grid {
-  display: grid;
-  gap: 25px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  margin-top: 30px;
-}
-
-/* Standard Hover Effect */
-.service-card:hover, .info-card:hover, .price-card:hover {
-  border-color: var(--cyan-neon);
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px -10px rgba(34, 211, 238, 0.2);
-}
-
-/* --- ANTI-THEFT PROTECTION --- */
-.service-img-wrapper, .feature-img-wrapper, .img-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #050508;
-  height: 240px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* The Ghost Layer - prevents right click/long press */
-.service-img-wrapper::after, .img-wrapper::after, .feature-img-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(255,255,255,0);
-  z-index: 10;
-}
-
-img {
-  max-width: 100%;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* --- BUSINESS SECTION (PINK THEME) --- */
-#business .eyebrow { 
-  color: var(--pink-neon) !important; 
-}
-
-#business .service-card:hover, #business .price-card:hover {
-  border-color: var(--pink-neon);
-  box-shadow: 0 15px 40px -10px rgba(230, 87, 181, 0.25);
-}
-
-#business .service-button {
-  background: linear-gradient(90deg, var(--cyan-neon), #38bdf8);
-  color: #031019;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-#business .service-button:hover {
-  background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
-  color: #fff;
-  box-shadow: 0 0 20px rgba(230, 87, 181, 0.4);
-}
-
-.price-tag {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin: 10px 0;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
-/* --- FEATURED PULSE ANIMATION --- */
-.featured {
-  border-color: var(--cyan-neon);
-  animation: pulseCyan 3s infinite ease-in-out;
-}
-
-#business .featured {
-  border-color: var(--pink-neon);
-  animation: pulsePink 3s infinite ease-in-out;
-}
-
-@keyframes pulseCyan {
-  0% { box-shadow: 0 0 10px rgba(34, 211, 238, 0.1); }
-  50% { box-shadow: 0 0 25px rgba(34, 211, 238, 0.3); }
-  100% { box-shadow: 0 0 10px rgba(34, 211, 238, 0.1); }
-}
-
-@keyframes pulsePink {
-  0% { box-shadow: 0 0 10px rgba(230, 87, 181, 0.1); }
-  50% { box-shadow: 0 0 25px rgba(230, 87, 181, 0.3); }
-  100% { box-shadow: 0 0 10px rgba(230, 87, 181, 0.1); }
-}
-
-/* --- FOOTER --- */
-.site-footer {
-  padding: 80px 5%;
-  text-align: center;
-  border-top: 1px solid rgba(34, 211, 238, 0.1);
-  color: var(--text-dim);
-  background: rgba(10, 10, 16, 0.5);
-}
-
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-  .hero { padding: 60px 0 20px; }
-  .service-card, .price-card { padding: 25px; }
-  .site-header { padding: 10px 5%; }
-}
+        <a href="custom.html#business" class="card-link">
+          <article class="info-card">
+            <h3>Brand Solutions</h3>
+            <p>Professional shop rebuilds and marketplace aesthetics for creators and sellers.</p>
+          </article>
+        </a>
+      </div>
+    </section>
