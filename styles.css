@@ -1,4 +1,4 @@
-/* --- ANOM ORIGINALS: PREMIUM LARGE SCALING --- */
+/* --- ANOM ORIGINALS: TIGHT & ALIGNED SCALING --- */
 :root {
   --bg-dark: #0a0a10;
   --cyan-neon: #22d3ee;
@@ -17,104 +17,112 @@ body {
   color: var(--text-main);
   background-color: var(--bg-dark);
   background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.1), transparent 30%), var(--bg-dark);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
-/* --- BIG HERO SECTION --- */
+/* --- TIGHTER HEADER --- */
+.site-header {
+  padding: 15px 5%; /* Reduced from 25px to bring logo up */
+  background: rgba(10, 10, 16, 0.8);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+/* --- COMPACT HERO SECTION --- */
 .hero {
-  padding: 140px 0 80px; /* Increased size significantly */
+  padding: 40px 0 20px; /* Dramatically reduced top space from 140px */
   text-align: center;
 }
 
 .hero-banner {
-  max-width: 900px; /* Bigger logo presence */
-  width: 90%;
+  max-width: 750px; /* Slightly tighter logo */
+  width: 85%;
   height: auto;
-  margin-bottom: 40px;
+  margin-bottom: 10px; /* Reduced gap between logo and "Digital Art" text */
   filter: drop-shadow(0 0 30px rgba(34, 211, 238, 0.2));
 }
 
-h1 {
-  font-size: clamp(3rem, 10vw, 4.5rem); /* Massive scaling title */
-  margin: 20px 0;
-  letter-spacing: -2px;
+.hero-actions {
+  margin-top: 25px; /* Brings buttons closer to the main content */
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-/* --- THE 6-BLOCK GRID: SIZED UP --- */
+/* --- SECTION ALIGNMENT --- */
 .section {
-  width: min(1300px, 94%); /* Wider container */
+  width: min(1250px, 94%);
   margin: 0 auto;
-  padding: 100px 0; /* Huge breathing room between sections */
+  padding: 60px 0; /* Reduced from 100px to keep the momentum going */
 }
 
 .section-heading {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .card-grid {
   display: grid;
-  gap: 30px;
+  gap: 20px;
   grid-template-columns: repeat(3, 1fr);
 }
 
+/* --- CARDS & BUTTONS --- */
 .info-card {
   background: var(--glass-bg);
-  padding: 50px 40px; /* Much deeper padding inside cards */
-  border-radius: 28px;
+  padding: 35px 30px; /* Balanced padding */
+  border-radius: 24px;
   border: 1px solid rgba(34, 211, 238, 0.15);
   backdrop-filter: blur(15px);
   transition: 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .info-card h3 {
   color: var(--cyan-neon);
-  font-size: 1.6rem; /* Bigger headers */
-  margin: 0 0 15px 0;
-  text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
 }
 
 .info-card p {
   color: var(--ice-blue);
-  font-size: 1.05rem; /* More readable, larger text */
+  font-size: 0.95rem;
   opacity: 0.9;
 }
 
-/* --- PREMIUM BUTTONS --- */
-.hero-actions {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
+.btn {
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary { background: var(--cyan-neon); color: #0a0a10; }
+.btn-secondary { background: var(--pink-neon); color: #fff; }
+.btn-outline { border: 1px solid var(--cyan-neon); color: var(--cyan-neon); }
+
+.site-nav a {
+  margin-left: 20px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- ABOUT/CONTACT GRID --- */
+.about-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.btn {
-  padding: 18px 45px; /* Bigger, "chunkier" buttons */
-  border-radius: 100px;
-  font-size: 1.1rem;
-  font-weight: 800;
-  transition: 0.3s;
-}
-
-/* --- FOOTER & MISC --- */
-.site-header {
-  padding: 25px 5%; /* Thicker header */
-  background: rgba(10, 10, 16, 0.8);
-  backdrop-filter: blur(20px);
-}
-
-.site-footer {
-  padding: 100px 0;
-  opacity: 0.5;
-  font-size: 1rem;
-}
-
-/* Mobile Fix */
-@media (max-width: 1000px) {
-  .card-grid { grid-template-columns: 1fr; }
-  .hero { padding: 80px 0 40px; }
-  .info-card { padding: 40px 30px; }
+@media (max-width: 900px) {
+  .card-grid, .about-contact-grid { grid-template-columns: 1fr; }
+  .hero { padding: 30px 0 10px; }
 }
