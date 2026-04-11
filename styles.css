@@ -1,115 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anom Originals • Where digital art meets identity.</title>
-  <meta name="description" content="Anom Originals creates expressive visuals built from mood, style, and personality." />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
-      </a>
-    </div>
-    <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="custom.html">Custom</a>
-      <a href="merch.html">Merch</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+:root {
+  --bg-dark: #0a0a10;
+  --cyan-neon: #22d3ee;
+  --pink-neon: #e657b5;
+  --text-main: #f4f7ff;
+  --ice-blue: #d1dbff; /* The readable subtext color */
+  --glass-bg: rgba(18, 18, 26, 0.85);
+}
 
-  <main>
-    <section class="hero">
-      <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals" class="hero-banner" />
-      <span class="eyebrow">Digital Identity • Neon Mood • Custom Art</span>
-      <h1>Turn your vibe into art.</h1>
-      <p class="hero-subheadline">
-        Custom digital art, identity graphics, and merch-ready visuals built with personality.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="gallery.html">Explore My Work</a>
-        <a class="btn btn-secondary" href="custom.html">Custom Work</a>
-        <a class="btn btn-outline" href="custom.html">View Services</a>
-      </div>
-    </section>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), var(--bg-dark);
+}
 
-    <section class="section">
-      <div class="section-heading">
-        <span class="eyebrow">What I Create</span>
-        <h2>Art built with mood, glow, and personality.</h2>
-        <p>Six core lanes. Digital identity and motion assets built for your space.</p>
-      </div>
+.section { width: min(1200px, 92%); margin: 0 auto; padding: 60px 0; }
 
-      <div class="card-grid">
-        <a href="gallery.html#mood" class="card-link">
-          <article class="info-card">
-            <h3>Backgrounds</h3>
-            <p>Custom backgrounds and headers designed to bring your digital space to life.</p>
-          </article>
-        </a>
+/* THE GRID FIX */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+  gap: 20px;
+}
 
-        <a href="gallery.html#identity" class="card-link">
-          <article class="info-card">
-            <h3>Profile Pictures</h3>
-            <p>Digital identity graphics and profile images with style, mood, and personality.</p>
-          </article>
-        </a>
+@media (max-width: 900px) {
+  .card-grid { grid-template-columns: 1fr; } /* 1 Column on phone */
+}
 
-        <a href="gallery.html#mood-pieces" class="card-link">
-          <article class="info-card">
-            <h3>Mood Collection</h3>
-            <p>Expressive art pieces built for humor, feeling, and digital attitude.</p>
-          </article>
-        </a>
+/* THE CARD STYLE */
+.info-card {
+  background: var(--glass-bg);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
 
-        <a href="gallery.html#merch-art" class="card-link">
-          <article class="info-card">
-            <h3>Merch Designs</h3>
-            <p>Bold visual designs built to work beautifully on physical products.</p>
-          </article>
-        </a>
+.info-card:hover {
+  border-color: var(--cyan-neon);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+}
 
-        <a href="custom.html#digital-boutique" class="card-link">
-          <article class="info-card">
-            <h3>Digital Boutique</h3>
-            <p>High-fidelity MP4 motion art files for digital frames and wallpapers.</p>
-          </article>
-        </a>
+.info-card h3 { color: var(--cyan-neon); margin: 0 0 10px 0; }
+.info-card p { color: var(--ice-blue); margin: 0; font-size: 0.95rem; }
 
-        <a href="custom.html#business" class="card-link">
-          <article class="info-card">
-            <h3>Brand Solutions</h3>
-            <p>Professional shop rebuilds and marketplace aesthetics for creators.</p>
-          </article>
-        </a>
-      </div>
-    </section>
+/* ABOUT/CONTACT GRID */
+.about-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
 
-    <section class="section" id="contact">
-      <div class="about-contact-grid">
-        <article class="about-box">
-          <span class="eyebrow">About Anom Originals</span>
-          <h2>Identity first.</h2>
-          <p>Digital identity, expressive design, and visuals with personality.</p>
-        </article>
+@media (max-width: 768px) {
+  .about-contact-grid { grid-template-columns: 1fr; }
+}
 
-        <article class="contact-box">
-          <span class="eyebrow">Contact</span>
-          <h2>Want custom work?</h2>
-          <div style="margin-top: 24px;">
-            <a class="btn btn-secondary" href="mailto:hello@anomartsy.xyz">Get in Touch</a>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>© 2026 Anom Originals • Built for Identity</p>
-  </footer>
-</body>
-</html>
+/* HEADER & BUTTONS */
+.site-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; border-bottom: 1px solid rgba(34, 211, 238, 0.15); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
+.site-nav a { margin-left: 20px; color: var(--text-dim); text-decoration: none; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
+.btn { padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
+.btn-primary { background: var(--cyan-neon); color: #0a0a10; }
+.btn-secondary { background: var(--pink-neon); color: #fff; }
+.btn-outline { border: 1px solid var(--cyan-neon); color: var(--cyan-neon); }
+.hero-banner { max-width: 100%; height: auto; }
+.site-footer { padding: 40px; text-align: center; opacity: 0.6; }
