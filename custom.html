@@ -17,17 +17,18 @@
       line-height: 1.6;
     }
 
+    /* Premium Polish - Header */
     .site-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 15px 5%;
-      background: rgba(10, 10, 16, 0.95);
+      background: rgba(10, 10, 16, 0.9); /* More transparent for blur */
       border-bottom: 1px solid rgba(34, 211, 238, 0.15);
       position: sticky;
       top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
+      z-index: 1000;
+      backdrop-filter: blur(15px); /* Stronger glass effect */
     }
 
     .site-nav a {
@@ -40,7 +41,7 @@
       letter-spacing: 1px;
     }
 
-    .site-nav a:hover { color: #22d3ee; }
+    .site-nav a:hover { color: #22d3ee; text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
 
     main {
       width: min(1200px, 92%);
@@ -57,7 +58,7 @@
       font-size: 3.5rem;
       margin: 0;
       color: #dfe4f2;
-      text-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+      text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
       letter-spacing: -1px;
     }
 
@@ -69,9 +70,7 @@
       letter-spacing: 2px;
     }
 
-    .section {
-      padding: 40px 0 60px;
-    }
+    .section { padding: 40px 0 60px; }
 
     .card-grid {
       display: grid;
@@ -86,29 +85,33 @@
       display: block;
     }
 
+    /* Premium Polish - Glassmorphism Cards */
     .service-card,
     .price-card,
     .note-box {
-      background: rgba(18, 18, 26, 0.8);
+      background: rgba(18, 18, 26, 0.65); /* More transparent */
       padding: 40px;
       border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.1);
-      transition: 0.3s ease;
+      border: 1px solid rgba(34, 211, 238, 0.08);
+      backdrop-filter: blur(10px); /* Glass blur effect */
+      transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     }
 
-    .service-link:hover .service-card,
-    .price-card:hover {
-      border-color: #22d3ee;
+    /* Hover effect for Cyan (Standard) Cards */
+    .service-link:hover .service-card {
+      border-color: rgba(34, 211, 238, 0.7);
       transform: translateY(-5px);
+      box-shadow: 0 15px 40px -10px rgba(34, 211, 238, 0.2);
     }
 
-    .service-card h3,
-    .price-card h3 {
+    .service-card h3 {
       color: #22d3ee;
       margin-top: 0;
       font-size: 1.5rem;
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
     }
 
+    /* ANTI-THEFT PROTECTION: The Ghost Layer */
     .service-img-wrapper {
       display: flex;
       align-items: center;
@@ -120,6 +123,18 @@
       margin-bottom: 20px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative; /* Needed for the protection layer */
+    }
+
+    /* Invisible protection layer covers the image */
+    .service-img-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0); /* Completely transparent */
+      z-index: 10;
+      cursor: default;
     }
 
     .service-img-wrapper img {
@@ -127,6 +142,8 @@
       height: 100%;
       object-fit: contain;
       display: block;
+      pointer-events: none; /* Disables right-click directly on image */
+      user-select: none;    /* Prevents dragging the image */
     }
 
     .service-price {
@@ -137,124 +154,117 @@
       color: #f4f7ff;
     }
 
-    .b2b-card {
-      border-color: rgba(230, 87, 181, 0.3);
+    /* Premium Polish - Magenta Pink B2B (Businesses) Section */
+    #business .section-heading h2 {
+      text-shadow: 0 0 20px rgba(230, 87, 181, 0.25);
     }
 
-    .b2b-card:hover {
-      border-color: #e657b5;
-      box-shadow: 0 10px 30px rgba(230, 87, 181, 0.15);
+    #business .service-card,
+    #business .price-card {
+      border-color: rgba(230, 87, 181, 0.15);
     }
 
-    .b2b-card h3,
-    .price-card h3 {
-      color: #e657b5;
+    /* B2B Cards (Pink Hover) */
+    #business .service-card:hover,
+    #business .price-card:hover {
+      border-color: rgba(230, 87, 181, 0.9) !important;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px -10px rgba(230, 87, 181, 0.25);
+    }
+
+    #business .service-card h3,
+    #business .price-card h3,
+    #business .section-heading .eyebrow {
+      color: #e657b5 !important;
+      text-shadow: 0 0 10px rgba(230, 87, 181, 0.4);
     }
 
     .price-intro {
-      background: rgba(230, 87, 181, 0.08);
-      border: 1px solid rgba(230, 87, 181, 0.22);
+      background: rgba(230, 87, 181, 0.1);
+      border: 1px solid rgba(230, 87, 181, 0.3);
       border-radius: 24px;
-      padding: 28px;
+      padding: 35px;
       margin: 24px 0 30px;
+      backdrop-filter: blur(5px);
     }
 
     .price-intro h3 {
       margin: 0 0 8px;
-      color: #f4f7ff;
-      font-size: 1.5rem;
+      color: #dfe4f2;
+      font-size: 1.6rem;
     }
 
-    .price-intro p {
-      margin: 0;
-      color: #c2cade;
-    }
-
-    .price-grid,
-    .addon-grid {
+    .price-grid, .addon-grid {
       display: grid;
       gap: 25px;
       margin-top: 24px;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .price-card {
-      padding: 30px;
+    .price-card { padding: 35px; }
+
+    /* Premium Polish - Featured Card Pulsing Border */
+    .price-card.featured {
+      background: linear-gradient(rgba(18, 18, 26, 0.8), rgba(18, 18, 26, 0.8)) padding-box,
+                  linear-gradient(45deg, #e657b5, rgba(230,87,181,0.2), #e657b5) border-box;
+      border-color: transparent;
+      animation: pulsateB2Bborder 2.5s infinite linear;
+      box-shadow: 0 0 30px rgba(230, 87, 181, 0.1);
     }
 
-    .price-card.featured {
-      border-color: rgba(230, 87, 181, 0.45);
-      box-shadow: 0 0 30px rgba(230, 87, 181, 0.08);
+    @keyframes pulsateB2Bborder {
+      0% { box-shadow: 0 0 20px rgba(230, 87, 181, 0.15); }
+      50% { box-shadow: 0 0 40px rgba(230, 87, 181, 0.3); }
+      100% { box-shadow: 0 0 20px rgba(230, 87, 181, 0.15); }
     }
 
     .price-tag {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
-      color: #f4f7ff;
+      color: #dfe4f2;
       margin: 8px 0 14px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.1);
     }
 
-    .price-card p {
-      margin: 0;
-      color: #b8c1d6;
-    }
+    .price-card p { margin: 0; color: #b8c1d6; }
+    .price-card small { display: block; margin-top: 12px; color: #8fa0bf; font-size: 0.85rem; }
 
-    .price-card small {
-      display: block;
-      margin-top: 12px;
-      color: #8fa0bf;
-      font-size: 0.82rem;
-    }
-
-    .addon-title {
-      margin: 38px 0 12px;
-      color: #f4f7ff;
-      font-size: 1.6rem;
-    }
+    .addon-title { margin: 45px 0 15px; color: #dfe4f2; font-size: 1.7rem; }
 
     .addon-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(34, 211, 238, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(34, 211, 238, 0.15);
       border-radius: 18px;
-      padding: 22px;
+      padding: 25px;
+      transition: 0.3s;
+    }
+    
+    .addon-card:hover {
+      border-color: #22d3ee;
+      background: rgba(34, 211, 238, 0.05);
     }
 
-    .addon-card h4 {
-      margin: 0 0 8px;
-      color: #22d3ee;
-      font-size: 1.05rem;
-    }
+    .addon-card h4 { margin: 0 0 8px; color: #22d3ee; font-size: 1.1rem; }
+    .addon-card p { margin: 0; color: #b8c1d6; font-size: 0.95rem; }
+    .addon-price { display: inline-block; margin-top: 10px; font-weight: bold; color: #dfe4f2; font-size: 1rem;}
 
-    .addon-card p {
-      margin: 0;
-      color: #b8c1d6;
-    }
-
-    .addon-price {
-      display: inline-block;
-      margin-top: 10px;
-      font-weight: bold;
-      color: #f4f7ff;
-    }
-
-    .note-box {
-      margin-top: 35px;
-      padding: 30px;
-      border-color: rgba(230, 87, 181, 0.2);
-    }
-
-    .note-box h3 {
-      margin-top: 0;
-      color: #f4f7ff;
-    }
+    .note-box { margin-top: 40px; padding: 35px; border-color: rgba(230, 87, 181, 0.3); }
+    .note-box h3 { margin-top: 0; color: #dfe4f2; }
 
     .cta-box {
-      background: #12121a;
-      padding: 50px;
+      background: rgba(18, 18, 26, 0.65);
+      backdrop-filter: blur(10px);
+      padding: 60px;
       border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.15);
       text-align: center;
-      margin-top: 40px;
+      margin-top: 50px;
+      transition: 0.3s;
+    }
+    
+    .cta-box:hover {
+      border-color: rgba(34, 211, 238, 0.7);
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.2);
     }
 
     .btn {
@@ -263,68 +273,65 @@
       text-decoration: none;
       font-weight: bold;
       display: inline-block;
-      transition: 0.3s;
+      transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
       font-size: 1rem;
+      cursor: pointer;
     }
 
     .btn-primary {
       background: #22d3ee;
-      color: #0a0a10;
-      box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+      color: #031019;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
     }
 
-    .btn-primary:hover { transform: scale(1.05); }
-
-    .card-actions {
-      margin-top: 18px;
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(34, 211, 238, 0.6);
     }
 
+    .card-actions { margin-top: 20px; }
+
+    /* Premium Polish - Neon Business (PayPal) Buttons */
     .service-button {
       display: inline-block;
-      padding: 12px 22px;
+      padding: 14px 28px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #22d3ee, #38bdf8);
+      background: linear-gradient(90deg, #22d3ee, #38bdf8); /* Cyan Gradient default */
       color: #031019;
       font-weight: 700;
       text-decoration: none;
       box-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: 0.3s;
     }
 
     .service-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 24px rgba(34, 211, 238, 0.5);
+      background: linear-gradient(90deg, #22d3ee, #e657b5); /* Transitions Cyan to Pink */
+      color: #ffffff;
+      box-shadow: 0 0 24px rgba(230, 87, 181, 0.5);
     }
 
     .payment-note {
-      margin-top: 28px;
+      margin-top: 35px;
       color: #8fa0bf;
-      font-size: 0.92rem;
-      line-height: 1.7;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      max-width: 900px;
     }
 
     .site-footer {
-      padding: 60px;
+      padding: 70px;
       text-align: center;
       border-top: 1px solid rgba(34, 211, 238, 0.1);
       color: #a9b2c7;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 700px) {
-      .service-card,
-      .price-card,
-      .note-box,
-      .cta-box {
-        padding: 26px;
-      }
-
-      .page-title {
-        font-size: 2.5rem;
-      }
-
-      .service-img-wrapper {
-        height: 210px;
-      }
+      .service-card, .price-card, .note-box, .cta-box, .price-intro { padding: 30px; }
+      .page-title { font-size: 2.6rem; }
+      .service-img-wrapper { height: 210px; }
+      .hero { padding: 60px 0 30px; }
     }
   </style>
 </head>
@@ -384,20 +391,20 @@
 
     <section class="section" id="business">
       <div class="section-heading">
-        <span class="eyebrow" style="color: #e657b5;">For Businesses</span>
+        <span class="eyebrow">For Businesses</span>
         <h2>Marketplace &amp; Brand Solutions</h2>
-        <p style="color: #a9b2c7;">Helping Etsy sellers and creators dominate their space.</p>
+        <p style="color: #a9b2c7; max-width: 650px;">Helping Etsy sellers and creators dominate their visual lane.</p>
       </div>
 
       <div class="price-intro">
         <h3>Transparent Pricing. No guessing.</h3>
         <p>
-          I want this lane to feel clear and easy to understand. These are my starting Etsy service prices, with custom quotes available for bigger or more layered projects.
+          I want this lane to feel clear and easy to understand. These are my standard Etsy service prices, with custom quotes available for bigger or more layered projects.
         </p>
       </div>
 
       <div class="price-grid">
-        <article class="price-card b2b-card">
+        <article class="price-card">
           <h3>Shop Audit</h3>
           <div class="price-tag">$35</div>
           <p>Quick written review with honest feedback on visuals, branding, listings, and what needs the most attention first.</p>
@@ -407,7 +414,7 @@
           </div>
         </article>
 
-        <article class="price-card b2b-card">
+        <article class="price-card">
           <h3>Shop Refresh</h3>
           <div class="price-tag">$125</div>
           <p>Banner update, profile/shop image polish, and a cleaner visual presentation for an existing Etsy space.</p>
@@ -417,7 +424,7 @@
           </div>
         </article>
 
-        <article class="price-card b2b-card featured">
+        <article class="price-card featured">
           <h3>Etsy Rebuild</h3>
           <div class="price-tag">$275</div>
           <p>Custom banner, polished product imagery, visual cleanup, and listing presentation guidance built to help the shop look intentional and ready to convert.</p>
@@ -427,7 +434,7 @@
           </div>
         </article>
 
-        <article class="price-card b2b-card">
+        <article class="price-card">
           <h3>Etsy + Social Starter</h3>
           <div class="price-tag">$395</div>
           <p>Etsy rebuild plus matching social graphics for platforms like Instagram or Facebook so the brand feels connected everywhere.</p>
@@ -477,26 +484,10 @@
         </article>
       </div>
 
-      <p class="payment-note">
-        All services are based on approved project scope. Final files are delivered after payment is complete. Additional revisions, expanded scope, or add-ons may be billed separately.
-      </p>
-
-      <div class="card-grid">
-        <article class="service-card b2b-card">
-          <h3>Etsy Shop Rebuild</h3>
-          <p>Complete visual overhaul: custom shop banners, polished product images, and compelling descriptions that convert visitors into buyers.</p>
-        </article>
-
-        <article class="service-card b2b-card">
-          <h3>Social Media Overhaul</h3>
-          <p>Strategy-led graphics for Instagram, TikTok, and Facebook. I rebuild your pages to align with your brand’s true identity.</p>
-        </article>
-      </div>
-
       <div class="note-box">
         <h3>Need something more custom?</h3>
-        <p>
-          If your project does not fit neatly into one of these options, I can still quote it. Multi-product shops, custom product imagery, seasonal launches, and paired Etsy + social work can all be priced as custom packages.
+        <p style="color: #c2cade; max-width: 900px;">
+          If your project does not fit neatly into one of these options, I can still quote it. Multi-product shops, custom product imagery, seasonal launches, and paired Etsy + social work can all be priced as custom packages.final files are delivered after scope is approved and payment is complete.
         </p>
       </div>
     </section>
@@ -504,15 +495,15 @@
     <section class="cta-box">
       <span class="eyebrow">Ready to begin?</span>
       <h2>Get a Custom Quote</h2>
-      <p style="color: #a9b2c7; margin-bottom: 30px;">
-        Whether it's one piece of art or a full shop rebuild, let’s build something intentional.
+      <p style="color: #a9b2c7; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Whether it's one piece of identity art or a full shop rebuild, let’s build something intentional.
       </p>
       <a href="mailto:hello@anomartsy.xyz?subject=Project%20Quote%20Request" class="btn btn-primary">Request Your Quote</a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Digital Art &amp; Agency Services</p>
+    <p>© 2026 Anom Originals • Built for Identity • Agency Services</p>
   </footer>
 </body>
 </html>
