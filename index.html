@@ -30,8 +30,8 @@
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 15% 12%, rgba(34, 211, 238, 0.10), transparent 26%),
-        radial-gradient(circle at 72% 0%, rgba(230, 87, 181, 0.08), transparent 28%),
+        radial-gradient(circle at 15% 12%, rgba(34, 211, 238, 0.08), transparent 26%),
+        radial-gradient(circle at 72% 0%, rgba(230, 87, 181, 0.06), transparent 28%),
         linear-gradient(180deg, var(--bg-top) 0%, #050b19 52%, var(--bg-deep) 100%);
       line-height: 1.6;
     }
@@ -84,7 +84,7 @@
 
     .hero {
       text-align: center;
-      padding: 22px 0 0;
+      padding: 18px 0 0;
       position: relative;
     }
 
@@ -92,11 +92,11 @@
       position: relative;
       width: 100%;
       background: var(--hero-black);
-      min-height: 320px;
+      min-height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px 24px;
+      padding: 30px 20px 18px;
       margin: 0 0 2px;
       overflow: hidden;
       box-shadow:
@@ -109,41 +109,41 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      filter: blur(28px);
-      opacity: 0.12;
+      filter: blur(32px);
+      opacity: 0.07;
       pointer-events: none;
     }
 
     .hero-visual-wrap::before {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       background: rgba(34, 211, 238, 0.45);
-      top: 34px;
-      left: 60px;
+      top: 40px;
+      left: 70px;
     }
 
     .hero-visual-wrap::after {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       background: rgba(230, 87, 181, 0.42);
-      right: 60px;
-      bottom: 34px;
+      right: 70px;
+      bottom: 40px;
     }
 
     .hero-logo-image {
       position: relative;
       z-index: 1;
-      width: 420px;
+      width: 410px;
       max-width: 92%;
       display: block;
-      margin: 18px auto 0;
+      margin: 8px auto 0;
       filter:
-        drop-shadow(0 0 12px rgba(34, 211, 238, 0.20))
-        drop-shadow(0 0 18px rgba(230, 87, 181, 0.16));
+        drop-shadow(0 0 10px rgba(34, 211, 238, 0.18))
+        drop-shadow(0 0 14px rgba(230, 87, 181, 0.14));
     }
 
     .hero-kicker {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
       margin: 0;
       font-weight: 700;
@@ -152,22 +152,22 @@
 
     .hero-title {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-size: clamp(2.1rem, 4.3vw, 3.2rem);
       line-height: 1.02;
-      margin: 2px 0 4px;
+      margin: 0 0 4px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--text-main);
-      text-shadow: 0 0 18px rgba(143, 220, 255, 0.08);
+      text-shadow: 0 0 16px rgba(143, 220, 255, 0.07);
     }
 
     .hero-subline {
       max-width: 760px;
-      margin: 0 auto 12px;
-      font-size: 1.02rem;
+      margin: 0 auto 10px;
+      font-size: 1rem;
       color: var(--baby-blue);
-      line-height: 1.55;
-      text-shadow: 0 0 12px rgba(34, 211, 238, 0.08);
+      line-height: 1.5;
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.06);
     }
 
     .hero-actions {
@@ -217,7 +217,7 @@
     }
 
     .section {
-      padding-top: 16px;
+      padding-top: 14px;
     }
 
     .section-label {
@@ -386,13 +386,13 @@
 
       .hero-visual-wrap {
         min-height: 240px;
-        padding: 24px 8px 16px;
+        padding: 22px 8px 14px;
       }
 
       .hero-logo-image {
         width: 300px;
         max-width: 90%;
-        margin-top: 10px;
+        margin-top: 6px;
       }
 
       .hero-title {
