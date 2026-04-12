@@ -90,14 +90,15 @@
 
     .hero-visual-wrap {
       position: relative;
+      width: 100%;
       background: var(--hero-black);
-      padding: 18px 18px 10px;
-      margin: 0 0 8px;
-      overflow: hidden;
-      min-height: 350px;
+      min-height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 26px 20px;
+      margin: 0 0 8px;
+      overflow: hidden;
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.02),
         0 20px 60px rgba(0,0,0,0.6);
@@ -109,36 +110,36 @@
       position: absolute;
       border-radius: 999px;
       filter: blur(28px);
-      opacity: 0.14;
+      opacity: 0.12;
       pointer-events: none;
     }
 
     .hero-visual-wrap::before {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       background: rgba(34, 211, 238, 0.45);
-      top: 32px;
-      left: 58px;
+      top: 34px;
+      left: 60px;
     }
 
     .hero-visual-wrap::after {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       background: rgba(230, 87, 181, 0.42);
-      right: 58px;
+      right: 60px;
       bottom: 34px;
     }
 
     .hero-logo-image {
       position: relative;
       z-index: 1;
-      width: 560px;
-      max-width: 94%;
+      width: 420px;
+      max-width: 92%;
       display: block;
       margin: 0 auto;
       filter:
-        drop-shadow(0 0 12px rgba(34, 211, 238, 0.22))
-        drop-shadow(0 0 18px rgba(230, 87, 181, 0.18));
+        drop-shadow(0 0 12px rgba(34, 211, 238, 0.20))
+        drop-shadow(0 0 18px rgba(230, 87, 181, 0.16));
     }
 
     .hero-kicker {
@@ -383,22 +384,22 @@
         width: min(100% - 28px, 1200px);
       }
 
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-
       .hero-visual-wrap {
         min-height: 260px;
-        padding: 14px 8px 8px;
+        padding: 18px 8px;
       }
 
       .hero-logo-image {
-        width: 340px;
+        width: 300px;
         max-width: 90%;
       }
 
       .hero-title {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
