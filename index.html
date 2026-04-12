@@ -6,10 +6,14 @@
   <title>Anom Originals • Where digital art meets identity.</title>
   <style>
     :root {
+      --bg-deep: #030714;
+      --bg-top: #0a1630;
       --panel: rgba(15, 22, 42, 0.94);
-      --text: #f4f7ff;
-      --muted: #a9b2c7;
+      --text-main: #cfefff;
+      --text-soft: #8fdcff;
+      --text-muted: #9ab6d4;
       --cyan: #22d3ee;
+      --baby-blue: #8fdcff;
       --magenta: #e657b5;
       --border: rgba(34, 211, 238, 0.22);
       --hero-black: #020306;
@@ -24,11 +28,11 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
+      color: var(--text-main);
       background:
-        radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.12), transparent 28%),
-        radial-gradient(circle at 60% 0%, rgba(139, 92, 246, 0.08), transparent 30%),
-        linear-gradient(180deg, #091224 0%, #050916 58%, #030611 100%);
+        radial-gradient(circle at 15% 12%, rgba(34, 211, 238, 0.10), transparent 26%),
+        radial-gradient(circle at 72% 0%, rgba(230, 87, 181, 0.08), transparent 28%),
+        linear-gradient(180deg, var(--bg-top) 0%, #050b19 52%, var(--bg-deep) 100%);
       line-height: 1.6;
     }
 
@@ -59,7 +63,7 @@
     }
 
     .site-nav a {
-      color: var(--text);
+      color: var(--text-main);
       text-decoration: none;
       font-size: 0.8rem;
       text-transform: uppercase;
@@ -69,7 +73,7 @@
     }
 
     .site-nav a:hover {
-      color: var(--cyan);
+      color: var(--baby-blue);
       opacity: 1;
     }
 
@@ -80,39 +84,104 @@
 
     .hero {
       text-align: center;
-      padding: 24px 0 0;
+      padding: 22px 0 0;
+      position: relative;
     }
 
-    .hero-panel {
+    .hero-visual-wrap {
+      position: relative;
       background: var(--hero-black);
-      padding: 8px 10px 0;
-      margin: 0 0 0;
+      padding: 24px 18px 12px;
+      margin: 0 0 8px;
+      overflow: hidden;
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.02),
         0 20px 60px rgba(0,0,0,0.6);
-      overflow: hidden;
     }
-.hero-banner {
-  width: min(100%, 860px);
-  display: block;
-  margin: 0 auto -20px;
-}
- 
 
-    .eyebrow {
+    .hero-visual-wrap::before,
+    .hero-visual-wrap::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(24px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero-visual-wrap::before {
+      width: 180px;
+      height: 180px;
+      background: rgba(34, 211, 238, 0.18);
+      top: 18px;
+      left: 40px;
+    }
+
+    .hero-visual-wrap::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(230, 87, 181, 0.18);
+      right: 40px;
+      bottom: 10px;
+    }
+
+    .hero-deco-left,
+    .hero-deco-right {
+      position: absolute;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      filter: blur(22px);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .hero-deco-left {
+      left: -18px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.75) 0%, rgba(34, 211, 238, 0) 70%);
+    }
+
+    .hero-deco-right {
+      right: -18px;
+      background: radial-gradient(circle, rgba(230, 87, 181, 0.75) 0%, rgba(230, 87, 181, 0) 70%);
+    }
+
+    .hero-logo-image {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 760px);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hero-kicker {
       font-size: 0.82rem;
-      color: var(--muted);
-      margin: 2px 0 0;
-      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0 0 2px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
     .hero h1 {
       font-family: Georgia, "Times New Roman", serif;
       font-size: clamp(2rem, 4vw, 3.15rem);
       line-height: 1.02;
-      margin: 2px 0 10px;
+      margin: 0 0 8px;
       font-weight: 700;
       letter-spacing: -0.02em;
+      color: var(--text-main);
+      text-shadow: 0 0 18px rgba(143, 220, 255, 0.08);
+    }
+
+    .hero-subline {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      font-size: 1.02rem;
+      color: var(--baby-blue);
+      line-height: 1.55;
+      text-shadow: 0 0 12px rgba(34, 211, 238, 0.08);
     }
 
     .hero-actions {
@@ -141,7 +210,7 @@
 
     .btn-primary {
       background: linear-gradient(90deg, var(--cyan), var(--magenta));
-      color: #000;
+      color: #041018;
       box-shadow: 0 0 18px rgba(34, 211, 238, 0.18);
     }
 
@@ -153,7 +222,7 @@
 
     .btn-outline {
       border: 2px solid var(--cyan);
-      color: var(--cyan);
+      color: var(--baby-blue);
       background: transparent;
     }
 
@@ -162,14 +231,14 @@
     }
 
     .section {
-      padding-top: 14px;
+      padding-top: 16px;
     }
 
     .section-label {
       font-size: 0.84rem;
       font-weight: 700;
       margin-bottom: 2px;
-      color: var(--text);
+      color: var(--text-main);
     }
 
     .section h2 {
@@ -179,6 +248,7 @@
       margin: 0 0 18px;
       font-weight: 700;
       letter-spacing: -0.01em;
+      color: var(--text-main);
     }
 
     .card-grid {
@@ -226,7 +296,7 @@
 
     .info-card p {
       font-size: 0.97rem;
-      color: #d6def0;
+      color: #c9dcf3;
       margin: 0;
     }
 
@@ -254,7 +324,7 @@
     }
 
     .panel-label.right {
-      color: var(--text);
+      color: var(--text-main);
     }
 
     .about-contact-grid h2 {
@@ -263,11 +333,12 @@
       line-height: 1.08;
       margin: 0 0 12px;
       font-weight: 700;
+      color: var(--text-main);
     }
 
     .about-contact-grid p {
       margin: 0;
-      color: #d6def0;
+      color: #c9dcf3;
       font-size: 0.97rem;
     }
 
@@ -296,7 +367,7 @@
       text-align: center;
       padding: 38px 0;
       font-size: 0.8rem;
-      color: var(--muted);
+      color: var(--text-muted);
       border-top: 1px solid rgba(34, 211, 238, 0.05);
       margin-top: 40px;
     }
@@ -331,11 +402,11 @@
         grid-template-columns: 1fr;
       }
 
-      .hero-panel {
-        padding: 6px 8px 0;
+      .hero-visual-wrap {
+        padding: 16px 8px 10px;
       }
 
-      .hero-banner {
+      .hero-logo-image {
         width: 100%;
       }
     }
@@ -358,13 +429,19 @@
 
   <main>
     <section class="hero">
-      <div class="hero-panel">
-        <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals" class="hero-banner" />
+      <div class="hero-visual-wrap">
+        <div class="hero-deco-left"></div>
+        <div class="hero-deco-right"></div>
+        <img src="Futuristic Anom Originals logo.png" alt="Anom Originals logo" class="hero-logo-image" />
       </div>
 
-      <div class="eyebrow">Digital Identity • Neon Mood • Custom Art</div>
+      <div class="hero-kicker">Digital Identity • Neon Mood • Custom Art</div>
 
       <h1>Turn your vibe into art.</h1>
+
+      <p class="hero-subline">
+        Built for custom visuals, neon atmosphere, identity graphics, and original digital design with unmistakable AO energy.
+      </p>
 
       <div class="hero-actions">
         <a class="btn btn-primary" href="gallery.html">Explore My Work</a>
