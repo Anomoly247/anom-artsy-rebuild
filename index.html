@@ -1,16 +1,3 @@
-Ohhh yes — now we’re in the fun part.
-
-This version already looks good. The “level it up” pass should add:
-
-* smoother hover glow
-* cleaner button polish
-* subtle card depth
-* slightly richer hero atmosphere
-* softer interaction feel without getting cheesy
-
-Here is a **full upgraded `index.html`** you can paste in as one clean file:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -379,6 +366,17 @@ Here is a **full upgraded `index.html`** you can paste in as one clean file:
         inset 0 0 0 1px rgba(255,255,255,0.02);
     }
 
+    .about-contact-grid .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
+
+    .about-contact-grid .card-link .info-card {
+      height: 100%;
+    }
+
     .panel-label {
       font-size: 0.84rem;
       font-weight: 700;
@@ -427,6 +425,10 @@ Here is a **full upgraded `index.html`** you can paste in as one clean file:
         0 0 26px rgba(230, 87, 181, 0.22),
         0 0 34px rgba(230, 87, 181, 0.14);
       filter: brightness(1.03);
+    }
+
+    .about-contact-grid .card-link .email-btn {
+      pointer-events: none;
     }
 
     .site-footer {
@@ -597,12 +599,14 @@ Here is a **full upgraded `index.html`** you can paste in as one clean file:
           <p>Anom Originals is about digital identity and visuals that aren't generic, flat, or forgettable.</p>
         </div>
 
-        <div class="info-card">
-          <div class="panel-label right">Get In Touch</div>
-          <h2>Let's build it.</h2>
-          <p>Custom work, collabs, or shop rebuild requests.</p>
-          <a class="email-btn" href="mailto:hello@anomartsy.xyz">Email Me</a>
-        </div>
+        <a href="custom.html" class="card-link">
+          <div class="info-card">
+            <div class="panel-label right">Custom Services</div>
+            <h2>Need something built for you?</h2>
+            <p>Custom profile art, themed visuals, rebuild requests, and branded digital design made to fit your vibe.</p>
+            <span class="email-btn">View Custom Services</span>
+          </div>
+        </a>
       </div>
     </section>
   </main>
@@ -612,4 +616,3 @@ Here is a **full upgraded `index.html`** you can paste in as one clean file:
   </footer>
 </body>
 </html>
-```
