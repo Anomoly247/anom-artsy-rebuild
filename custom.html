@@ -4,135 +4,169 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Custom Services • Anom Originals</title>
-  
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    * { box-sizing: border-box; }
-    
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      color: #f4f7ff;
-      background-color: #0a0a10;
-      background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
-      line-height: 1.6;
+    .custom-page .hero {
+      padding: 26px 0 0;
     }
 
-    /* Premium Polish - Header */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 5%;
-      background: rgba(10, 10, 16, 0.9); /* More transparent for blur */
-      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(15px); /* Stronger glass effect */
+    .custom-page .hero-copy {
+      padding: 46px 24px 34px;
     }
 
-    .site-nav a {
-      margin-left: 20px;
-      color: #a9b2c7;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .custom-page .page-title {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 4.8vw, 3.8rem);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #e9f7ff;
+      text-shadow:
+        0 0 14px rgba(143, 220, 255, 0.08),
+        0 0 28px rgba(34, 211, 238, 0.05);
     }
 
-    .site-nav a:hover { color: #22d3ee; text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
-
-    main {
-      width: min(1200px, 92%);
+    .custom-page .page-subline {
+      max-width: 760px;
       margin: 0 auto;
-      padding-bottom: 100px;
+      font-size: 1rem;
+      color: var(--baby-blue);
+      line-height: 1.65;
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.04);
     }
 
-    .hero {
-      padding: 80px 0 40px;
-      text-align: center;
+    .section-heading {
+      margin-bottom: 10px;
     }
 
-    .page-title {
-      font-size: 3.5rem;
+    .section-heading .eyebrow {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: var(--magenta);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .section-heading h2 {
       margin: 0;
-      color: #dfe4f2;
-      text-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
-      letter-spacing: -1px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3.3vw, 2.7rem);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
     }
 
-    .eyebrow {
-      color: #22d3ee;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
+    .section-heading p {
+      margin: 10px 0 0;
+      max-width: 680px;
+      color: var(--text-muted);
     }
 
-    .section { padding: 40px 0 60px; }
-
-    .card-grid {
+    .custom-grid {
       display: grid;
-      gap: 25px;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      margin-top: 30px;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 24px;
     }
 
     .service-link {
-      text-decoration: none;
-      color: inherit;
       display: block;
+      color: inherit;
+      text-decoration: none;
     }
 
-    /* Premium Polish - Glassmorphism Cards */
+    .service-link,
+    .service-link * {
+      text-decoration: none !important;
+    }
+
     .service-card,
     .price-card,
-    .note-box {
-      background: rgba(18, 18, 26, 0.65); /* More transparent */
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.08);
-      backdrop-filter: blur(10px); /* Glass blur effect */
-      transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    .note-box,
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--panel-soft);
+      box-shadow:
+        var(--shadow-deep),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    /* Hover effect for Cyan (Standard) Cards */
-    .service-link:hover .service-card {
-      border-color: rgba(34, 211, 238, 0.7);
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px -10px rgba(34, 211, 238, 0.2);
+    .service-card,
+    .price-card,
+    .addon-card {
+      border: 2px solid var(--border-cyan);
     }
 
-    .service-card h3 {
-      color: #22d3ee;
-      margin-top: 0;
-      font-size: 1.5rem;
-      text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+    .service-card::before,
+    .price-card::before,
+    .note-box::before,
+    .cta-box::before,
+    .addon-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(34, 211, 238, 0.06),
+        transparent 35%,
+        transparent 65%,
+        rgba(230, 87, 181, 0.04)
+      );
+      transition: opacity 0.25s ease;
     }
 
-    /* ANTI-THEFT PROTECTION: The Ghost Layer */
+    .service-link:hover .service-card,
+    .price-card:hover,
+    .addon-card:hover,
+    .note-box:hover,
+    .cta-box:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 0 26px rgba(34, 211, 238, 0.14),
+        0 14px 36px rgba(0, 0, 0, 0.34);
+    }
+
+    .service-link:hover .service-card,
+    .addon-card:hover {
+      border-color: var(--magenta);
+    }
+
+    .service-link:hover .service-card::before,
+    .price-card:hover::before,
+    .addon-card:hover::before,
+    .note-box:hover::before,
+    .cta-box:hover::before {
+      opacity: 1;
+    }
+
     .service-img-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 240px;
-      background: #050508;
-      border-radius: 18px;
       margin-bottom: 20px;
       overflow: hidden;
+      border-radius: 18px;
+      background: #050508;
       border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative; /* Needed for the protection layer */
+      position: relative;
     }
 
-    /* Invisible protection layer covers the image */
     .service-img-wrapper::after {
       content: "";
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(255,255,255,0); /* Completely transparent */
+      inset: 0;
+      background: rgba(255, 255, 255, 0);
       z-index: 10;
       cursor: default;
     }
@@ -142,220 +176,285 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      pointer-events: none; /* Disables right-click directly on image */
-      user-select: none;    /* Prevents dragging the image */
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .service-card h3,
+    .price-card h3 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      line-height: 1.12;
+    }
+
+    .service-card h3 {
+      color: var(--cyan);
+    }
+
+    .service-card p,
+    .price-card p,
+    .addon-card p,
+    .note-box p,
+    .cta-box p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.98rem;
     }
 
     .service-price {
       display: inline-block;
       margin-top: 14px;
-      font-weight: bold;
-      font-size: 1.05rem;
-      color: #f4f7ff;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-main);
     }
 
-    /* Premium Polish - Magenta Pink B2B (Businesses) Section */
-    #business .section-heading h2 {
-      text-shadow: 0 0 20px rgba(230, 87, 181, 0.25);
-    }
-
-    #business .service-card,
-    #business .price-card {
-      border-color: rgba(230, 87, 181, 0.15);
-    }
-
-    /* B2B Cards (Pink Hover) */
-    #business .service-card:hover,
-    #business .price-card:hover {
-      border-color: rgba(230, 87, 181, 0.9) !important;
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px -10px rgba(230, 87, 181, 0.25);
-    }
-
-    #business .service-card h3,
+    #business .section-heading .eyebrow,
     #business .price-card h3,
-    #business .section-heading .eyebrow {
-      color: #e657b5 !important;
-      text-shadow: 0 0 10px rgba(230, 87, 181, 0.4);
+    #business .price-intro h3,
+    #business .addon-title {
+      color: var(--magenta);
     }
 
     .price-intro {
-      background: rgba(230, 87, 181, 0.1);
-      border: 1px solid rgba(230, 87, 181, 0.3);
+      margin: 24px 0 28px;
+      padding: 28px 30px;
+      border: 2px solid rgba(230, 87, 181, 0.38);
       border-radius: 24px;
-      padding: 35px;
-      margin: 24px 0 30px;
-      backdrop-filter: blur(5px);
+      background: linear-gradient(180deg, rgba(38, 20, 42, 0.45), rgba(20, 18, 39, 0.82));
+      box-shadow:
+        0 0 22px rgba(230, 87, 181, 0.1),
+        var(--shadow-deep),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
     .price-intro h3 {
-      margin: 0 0 8px;
-      color: #dfe4f2;
-      font-size: 1.6rem;
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.7rem;
+      line-height: 1.08;
     }
 
-    .price-grid, .addon-grid {
+    .price-intro p {
+      margin: 0;
+      color: var(--text-soft);
+    }
+
+    .price-grid,
+    .addon-grid {
       display: grid;
-      gap: 25px;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       margin-top: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .price-card { padding: 35px; }
+    .price-card {
+      border-color: rgba(230, 87, 181, 0.42);
+    }
 
-    /* Premium Polish - Featured Card Pulsing Border */
+    .price-card:hover {
+      border-color: rgba(230, 87, 181, 0.9);
+      box-shadow:
+        0 0 28px rgba(230, 87, 181, 0.18),
+        0 14px 36px rgba(0, 0, 0, 0.34);
+    }
+
     .price-card.featured {
-      background: linear-gradient(rgba(18, 18, 26, 0.8), rgba(18, 18, 26, 0.8)) padding-box,
-                  linear-gradient(45deg, #e657b5, rgba(230,87,181,0.2), #e657b5) border-box;
-      border-color: transparent;
-      animation: pulsateB2Bborder 2.5s infinite linear;
-      box-shadow: 0 0 30px rgba(230, 87, 181, 0.1);
-    }
-
-    @keyframes pulsateB2Bborder {
-      0% { box-shadow: 0 0 20px rgba(230, 87, 181, 0.15); }
-      50% { box-shadow: 0 0 40px rgba(230, 87, 181, 0.3); }
-      100% { box-shadow: 0 0 20px rgba(230, 87, 181, 0.15); }
+      border-color: rgba(230, 87, 181, 0.9);
+      box-shadow:
+        0 0 30px rgba(230, 87, 181, 0.14),
+        var(--shadow-deep),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
     .price-tag {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #dfe4f2;
       margin: 8px 0 14px;
-      text-shadow: 0 0 15px rgba(255,255,255,0.1);
+      font-size: 2.15rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--text-main);
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
     }
 
-    .price-card p { margin: 0; color: #b8c1d6; }
-    .price-card small { display: block; margin-top: 12px; color: #8fa0bf; font-size: 0.85rem; }
+    .price-card small {
+      display: block;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
 
-    .addon-title { margin: 45px 0 15px; color: #dfe4f2; font-size: 1.7rem; }
+    .addon-title {
+      margin: 42px 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.8rem;
+      line-height: 1.08;
+    }
 
     .addon-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(34, 211, 238, 0.15);
-      border-radius: 18px;
-      padding: 25px;
-      transition: 0.3s;
-    }
-    
-    .addon-card:hover {
-      border-color: #22d3ee;
-      background: rgba(34, 211, 238, 0.05);
-    }
-
-    .addon-card h4 { margin: 0 0 8px; color: #22d3ee; font-size: 1.1rem; }
-    .addon-card p { margin: 0; color: #b8c1d6; font-size: 0.95rem; }
-    .addon-price { display: inline-block; margin-top: 10px; font-weight: bold; color: #dfe4f2; font-size: 1rem;}
-
-    .note-box { margin-top: 40px; padding: 35px; border-color: rgba(230, 87, 181, 0.3); }
-    .note-box h3 { margin-top: 0; color: #dfe4f2; }
-
-    .cta-box {
-      background: rgba(18, 18, 26, 0.65);
-      backdrop-filter: blur(10px);
-      padding: 60px;
-      border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.15);
-      text-align: center;
-      margin-top: 50px;
-      transition: 0.3s;
-    }
-    
-    .cta-box:hover {
-      border-color: rgba(34, 211, 238, 0.7);
-      box-shadow: 0 0 40px rgba(34, 211, 238, 0.2);
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border-radius: 20px;
+      background: var(--panel-soft);
+      box-shadow:
+        var(--shadow-deep),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .btn {
-      padding: 16px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
+    .addon-card h4 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.12rem;
+      line-height: 1.15;
+      color: var(--cyan);
+    }
+
+    .addon-price {
       display: inline-block;
-      transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+      margin-top: 10px;
+      font-weight: 700;
+      color: var(--text-main);
       font-size: 1rem;
-      cursor: pointer;
     }
 
-    .btn-primary {
-      background: #22d3ee;
-      color: #031019;
-      box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+    .card-actions {
+      margin-top: 18px;
     }
 
-    .btn-primary:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(34, 211, 238, 0.6);
-    }
-
-    .card-actions { margin-top: 20px; }
-
-    /* Premium Polish - Neon Business (PayPal) Buttons */
     .service-button {
-      display: inline-block;
-      padding: 14px 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 12px 22px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #22d3ee, #38bdf8); /* Cyan Gradient default */
-      color: #031019;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      color: #041018;
+      font-size: 0.92rem;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
-      transition: 0.3s;
+      box-shadow:
+        0 0 18px rgba(34, 211, 238, 0.18),
+        0 0 22px rgba(230, 87, 181, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
     }
 
     .service-button:hover {
       transform: translateY(-2px);
-      background: linear-gradient(90deg, #22d3ee, #e657b5); /* Transitions Cyan to Pink */
-      color: #ffffff;
-      box-shadow: 0 0 24px rgba(230, 87, 181, 0.5);
+      color: #041018;
+      filter: brightness(1.03);
+      box-shadow:
+        0 0 20px rgba(34, 211, 238, 0.24),
+        0 0 28px rgba(230, 87, 181, 0.18);
     }
 
-    .payment-note {
-      margin-top: 35px;
-      color: #8fa0bf;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      max-width: 900px;
+    .note-box {
+      margin-top: 38px;
+      border: 2px solid rgba(230, 87, 181, 0.42);
+      box-shadow:
+        0 0 22px rgba(230, 87, 181, 0.1),
+        var(--shadow-deep),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02);
     }
 
-    .site-footer {
-      padding: 70px;
+    .note-box h3,
+    .cta-box h2 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.08;
+      color: var(--text-main);
+    }
+
+    .note-box h3 {
+      font-size: 1.75rem;
+    }
+
+    .cta-box {
+      margin-top: 46px;
+      padding: 40px 30px;
       text-align: center;
-      border-top: 1px solid rgba(34, 211, 238, 0.1);
-      color: #a9b2c7;
-      font-size: 0.9rem;
+      border: 2px solid rgba(34, 211, 238, 0.28);
     }
 
-    @media (max-width: 700px) {
-      .service-card, .price-card, .note-box, .cta-box, .price-intro { padding: 30px; }
-      .page-title { font-size: 2.6rem; }
-      .service-img-wrapper { height: 210px; }
-      .hero { padding: 60px 0 30px; }
+    .cta-box h2 {
+      font-size: clamp(2rem, 3vw, 2.5rem);
+    }
+
+    .cta-box .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--magenta);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-box p {
+      max-width: 620px;
+      margin: 0 auto 28px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 980px) {
+      .custom-grid,
+      .price-grid,
+      .addon-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .custom-page .hero-copy {
+        padding: 34px 18px 28px;
+      }
+
+      .custom-page .page-title {
+        font-size: clamp(2rem, 8vw, 2.9rem);
+      }
+
+      .service-card,
+      .price-card,
+      .addon-card,
+      .note-box,
+      .cta-box,
+      .price-intro {
+        padding: 22px;
+      }
+
+      .service-img-wrapper {
+        height: 210px;
+      }
     }
   </style>
 </head>
-<body>
+<body class="custom-page">
   <header class="site-header">
     <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
+      <a href="index.html" aria-label="Anom Originals home">
+        <img src="ao-logo-neon-square.png" alt="Anom Originals Logo" />
       </a>
     </div>
+
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="gallery.html">Work</a>
       <a href="merch.html">Merch</a>
+      <a href="custom.html">Contact</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <span class="eyebrow">The Identity Lab</span>
-      <h1 class="page-title">CUSTOM SERVICES</h1>
-      <p style="color: #a9b2c7; max-width: 700px; margin: 15px auto;">
-        From personal profile art to professional marketplace overhauls.
-      </p>
+      <div class="hero-copy">
+        <div class="hero-kicker">The Identity Lab</div>
+        <h1 class="page-title">Custom Services</h1>
+        <p class="page-subline">
+          From personal profile art to professional marketplace overhauls.
+        </p>
+      </div>
     </section>
 
     <section class="section">
@@ -364,7 +463,7 @@
         <h2>Personal Identity Art</h2>
       </div>
 
-      <div class="card-grid">
+      <div class="custom-grid">
         <a href="gallery.html#identity" class="service-link">
           <article class="service-card">
             <div class="service-img-wrapper">
@@ -393,13 +492,14 @@
       <div class="section-heading">
         <span class="eyebrow">For Businesses</span>
         <h2>Marketplace &amp; Brand Solutions</h2>
-        <p style="color: #a9b2c7; max-width: 650px;">Helping Etsy sellers and creators dominate their visual lane.</p>
+        <p>Helping Etsy sellers and creators dominate their visual lane.</p>
       </div>
 
       <div class="price-intro">
         <h3>Transparent Pricing. No guessing.</h3>
         <p>
-          I want this lane to feel clear and easy to understand. These are my standard Etsy service prices, with custom quotes available for bigger or more layered projects.
+          I want this lane to feel clear and easy to understand. These are my standard Etsy
+          service prices, with custom quotes available for bigger or more layered projects.
         </p>
       </div>
 
@@ -446,6 +546,7 @@
       </div>
 
       <h3 class="addon-title">Add-Ons</h3>
+
       <div class="addon-grid">
         <article class="addon-card">
           <h4>5 Listing Image Polish Set</h4>
@@ -486,8 +587,11 @@
 
       <div class="note-box">
         <h3>Need something more custom?</h3>
-        <p style="color: #c2cade; max-width: 900px;">
-          If your project does not fit neatly into one of these options, I can still quote it. Multi-product shops, custom product imagery, seasonal launches, and paired Etsy + social work can all be priced as custom packages.final files are delivered after scope is approved and payment is complete.
+        <p>
+          If your project does not fit neatly into one of these options, I can still quote it.
+          Multi-product shops, custom product imagery, seasonal launches, and paired Etsy + social
+          work can all be priced as custom packages. Final files are delivered after scope is
+          approved and payment is complete.
         </p>
       </div>
     </section>
@@ -495,7 +599,7 @@
     <section class="cta-box">
       <span class="eyebrow">Ready to begin?</span>
       <h2>Get a Custom Quote</h2>
-      <p style="color: #a9b2c7; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <p>
         Whether it's one piece of identity art or a full shop rebuild, let’s build something intentional.
       </p>
       <a href="mailto:hello@anomartsy.xyz?subject=Project%20Quote%20Request" class="btn btn-primary">Request Your Quote</a>
@@ -503,7 +607,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Anom Originals • Built for Identity • Agency Services</p>
+    © 2026 Anom Originals • Built for Identity • Agency Services
   </footer>
 </body>
 </html>
