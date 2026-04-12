@@ -2,554 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gallery • Anom Originals</title>
-
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      color: #f4f7ff;
-      background-color: #0a0a10;
-      background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
-      line-height: 1.6;
-    }
-
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 5%;
-      background: rgba(10, 10, 16, 0.95);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .site-nav a {
-      margin-left: 20px;
-      color: #a9b2c7;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .site-nav a:hover { color: #22d3ee; }
-
-    main {
-      width: min(1280px, 94%);
-      margin: 0 auto;
-      padding-bottom: 100px;
-    }
-
-    .hero {
-      padding: 80px 0 40px;
-      text-align: center;
-    }
-
-    .page-title {
-      font-size: 3.5rem;
-      margin: 0;
-      color: #dfe4f2;
-      text-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
-      letter-spacing: -1px;
-    }
-
-    .eyebrow {
-      color: #22d3ee;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-    }
-
-    .section {
-      padding: 40px 0 80px;
-      scroll-margin-top: 100px;
-    }
-
-    .section-heading {
-      margin-bottom: 30px;
-    }
-
-    .section-heading h2 {
-      font-size: 2rem;
-      margin: 10px 0;
-    }
-
-    .section-heading p {
-      color: #a9b2c7;
-      margin: 0;
-      max-width: 850px;
-    }
-
-    .card-grid {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    }
-
-    .gallery-card {
-      background: rgba(18, 18, 26, 0.84);
-      padding: 24px;
-      border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.1);
-      transition: 0.3s ease;
-    }
-
-    .gallery-card:hover {
-      border-color: #22d3ee;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1);
-    }
-
-    .img-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 320px;
-      background: #050508;
-      border-radius: 18px;
-      margin-bottom: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .gallery-card h3 {
-      margin: 0 0 8px;
-      color: #22d3ee;
-      font-size: 1.2rem;
-    }
-
-    .gallery-card p {
-      margin: 0;
-      color: #b8c1d6;
-      font-size: 0.96rem;
-    }
-
-    .b2b-section {
-      border-top: 1px solid rgba(230, 87, 181, 0.2);
-      padding-top: 80px;
-    }
-
-    .b2b-eyebrow {
-      color: #e657b5;
-    }
-
-    .b2b-card {
-      border-color: rgba(230, 87, 181, 0.2);
-    }
-
-    .b2b-card:hover {
-      border-color: #e657b5;
-      box-shadow: 0 10px 30px rgba(230, 87, 181, 0.1);
-    }
-
-    .site-footer {
-      padding: 60px;
-      text-align: center;
-      border-top: 1px solid rgba(34, 211, 238, 0.1);
-      color: #a9b2c7;
-    }
-
-    @media (max-width: 700px) {
-      .page-title {
-        font-size: 2.5rem;
-      }
-
-      .img-wrapper {
-        height: 260px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
-      </a>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html">
+      <img src="ao-logo-neon-square.png" alt="AO Logo"/>
+    </a>
+  </div>
+
+  <nav class="site-nav">
+    <a href="gallery.html">Work</a>
+    <a href="custom.html">Custom</a>
+    <a href="merch.html">Merch</a>
+    <a href="custom.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-kicker">Visual Archive</div>
+
+    <h1 class="hero-title">The Gallery</h1>
+
+    <p class="hero-subline">
+      Identity art, custom backgrounds, mood pieces, and merch-ready visuals — built to stand out.
+    </p>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section class="section">
+  <div class="section-label">Lane 01</div>
+  <h2>Identity & Profile Art</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ghost.jpg">
+      </div>
+      <h3>Rainbow Ghost</h3>
+      <p>Expressive identity artwork built for standout presence.</p>
     </div>
-    <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="custom.html">Custom</a>
-      <a href="merch.html">Merch</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <span class="eyebrow">Visual Archive</span>
-      <h1 class="page-title">THE GALLERY</h1>
-      <p style="color: #a9b2c7; max-width: 820px; margin: 15px auto 0;">
-        Exploring the lanes of identity art, custom build backgrounds, mood pieces, and merch-ready visuals.
-      </p>
-    </section>
-
-    <section class="section" id="identity">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 01</span>
-        <h2>Identity &amp; Profile Art</h2>
-        <p>Profile visuals, standout identity pieces, and custom art built to make your online presence feel unmistakably yours.</p>
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-card-diamond-certified.png">
       </div>
+      <h3>Diamond Certified</h3>
+      <p>Bold identity art with strong recognition energy.</p>
+    </div>
 
-      <div class="card-grid">
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ghost.jpg" alt="Rainbow Ghost identity piece" />
-          </div>
-          <h3>Rainbow Ghost</h3>
-          <p>Expressive digital identity artwork designed for a unique online presence.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-anom-crystal-splash-full.png" alt="Anom Crystal Splash identity piece" />
-          </div>
-          <h3>Anom Crystal Splash</h3>
-          <p>Branded identity art with a polished, standout social-media feel.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-crown-of-the-king-queen.png" alt="Crown of the King and Queen identity piece" />
-          </div>
-          <h3>Crown of the King &amp; Queen</h3>
-          <p>Regal profile-driven artwork made for recognition and personality.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-diamond-certified.png" alt="Diamond Certified identity piece" />
-          </div>
-          <h3>Diamond Certified</h3>
-          <p>Bold, polished identity art with a strong branded confidence.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-earned-my-stripes-v2.png" alt="Earned My Stripes identity piece" />
-          </div>
-          <h3>Earned My Stripes</h3>
-          <p>Recognition-led art with attitude and a polished social profile feel.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-solid-gold-profile-clean.png" alt="Solid Gold Profile identity piece" />
-          </div>
-          <h3>Solid Gold Profile</h3>
-          <p>Clean profile-forward artwork made to stand out across platforms.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-the-vip-rope.png" alt="The VIP Rope identity piece" />
-          </div>
-          <h3>The VIP Rope</h3>
-          <p>Status-driven identity art for a profile that feels exclusive and polished.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-emote-rare-gem.png" alt="Rare Gem identity piece" />
-          </div>
-          <h3>Rare Gem</h3>
-          <p>Identity artwork with shine, confidence, and standout recognition energy.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-emote-space-astronaut.png" alt="Space Astronaut identity piece" />
-          </div>
-          <h3>Space Astronaut</h3>
-          <p>Playful cosmic identity art with a unique themed profile vibe.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-emote-still-royal-clean.png" alt="Still Royal identity piece" />
-          </div>
-          <h3>Still Royal</h3>
-          <p>Regal identity art built for confidence, profile packages, and branded presence.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-emote-still-shining-v2.png" alt="Still Shining identity piece" />
-          </div>
-          <h3>Still Shining</h3>
-          <p>Polished identity art with recognition and glow-forward personality.</p>
-        </article>
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-card-solid-gold-profile-clean.png">
       </div>
-    </section>
+      <h3>Solid Gold Profile</h3>
+      <p>Clean, high-visibility profile artwork.</p>
+    </div>
 
-    <section class="section" id="mood">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 02</span>
-        <h2>Custom Build Backgrounds</h2>
-        <p>Backgrounds that can stand alone or become part of a themed package for a profile picture, header, or full social media page look.</p>
+  </div>
+</section>
+
+<!-- BACKGROUNDS -->
+<section class="section">
+  <div class="section-label">Lane 02</div>
+  <h2>Custom Backgrounds</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-background-neon-love-lounge-13.png">
       </div>
+      <h3>Neon Love Lounge</h3>
+      <p>Rich neon lounge environment built for themed profiles.</p>
+    </div>
 
-      <div class="card-grid">
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-aqua-butterfly-heart-dream-14.png" alt="Aqua Butterfly Heart Dream background" /></div>
-          <h3>Aqua Butterfly Heart Dream</h3>
-          <p>Dreamy glow background built for feminine themed packages and page styling.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-butterfly-heart-frame-17.png" alt="Butterfly Heart Frame background" /></div>
-          <h3>Butterfly Heart Frame</h3>
-          <p>Framed neon background art designed for themed profile and header sets.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-celestial-angel-falls-07.png" alt="Celestial Angel Falls background" /></div>
-          <h3>Celestial Angel Falls</h3>
-          <p>Atmospheric fantasy background built for a magical social page feel.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-celestial-anom-throne-24.png" alt="Celestial Anom Throne background" /></div>
-          <h3>Celestial Anom Throne</h3>
-          <p>Dramatic glam-fantasy background built to anchor a bold themed package.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-cosmic-mushroom-cat-06.png" alt="Cosmic Mushroom Cat background" /></div>
-          <h3>Cosmic Mushroom Cat</h3>
-          <p>Whimsical fantasy background perfect for playful visual packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-cyber-creator-desk-02.pn.png" alt="Cyber Creator Desk background" /></div>
-          <h3>Cyber Creator Desk</h3>
-          <p>Creator-themed neon workspace background for a full branded vibe.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-dual-heart-starlight-glow-15.png" alt="Dual Heart Starlight Glow background" /></div>
-          <h3>Dual Heart Starlight Glow</h3>
-          <p>Romantic glow background built for feminine page styling and packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-dual-neon-butterfly-glow-18.png" alt="Dual Neon Butterfly Glow background" /></div>
-          <h3>Dual Neon Butterfly Glow</h3>
-          <p>Neon butterfly background art made for dreamy themed visual sets.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-emerald-moon-dragon-castle-09.png" alt="Emerald Moon Dragon Castle background" /></div>
-          <h3>Emerald Moon Dragon Castle</h3>
-          <p>Fantasy castle background built for dramatic custom page themes.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-enchanted-river-realm-10.png" alt="Enchanted River Realm background" /></div>
-          <h3>Enchanted River Realm</h3>
-          <p>Magical landscape background designed for immersive page styling.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-floral-butterfly-glow-20.png" alt="Floral Butterfly Glow background" /></div>
-          <h3>Floral Butterfly Glow</h3>
-          <p>Soft floral glow background for dreamy profile and header packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-moonlit-castle-unicorn-dragon-12.png" alt="Moonlit Castle Unicorn Dragon background" /></div>
-          <h3>Moonlit Castle Unicorn Dragon</h3>
-          <p>Magical fantasy background built for full themed identity sets.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-moonlit-forest-spirit-05.png" alt="Moonlit Forest Spirit background" /></div>
-          <h3>Moonlit Forest Spirit</h3>
-          <p>Mystical forest background designed for immersive custom packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-moonlit-magic-river-23.png" alt="Moonlit Magic River background" /></div>
-          <h3>Moonlit Magic River</h3>
-          <p>Dreamlike fantasy backdrop for social page themes and bundles.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-neon-butterfly-heart-spark-19.png" alt="Neon Butterfly Heart Spark background" /></div>
-          <h3>Neon Butterfly Heart Spark</h3>
-          <p>Bright glow background made for romantic and feminine visual lanes.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-neon-cosmic-muse-03.png" alt="Neon Cosmic Muse background" /></div>
-          <h3>Neon Cosmic Muse</h3>
-          <p>Cosmic neon background art for a dramatic, expressive page look.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-neon-dragon-dream-01.png" alt="Neon Dragon Dream background" /></div>
-          <h3>Neon Dragon Dream</h3>
-          <p>Fantasy dragon background built for bold themed packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-neon-heart-trails-16.png" alt="Neon Heart Trails background" /></div>
-          <h3>Neon Heart Trails</h3>
-          <p>Romantic neon backdrop for custom build sets and page styling.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-neon-love-lounge-13.png" alt="Neon Love Lounge background" /></div>
-          <h3>Neon Love Lounge</h3>
-          <p>Rich lounge-style background art made for custom profile packages.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-rainbow-castle-realm-08.png" alt="Rainbow Castle Realm background" /></div>
-          <h3>Rainbow Castle Realm</h3>
-          <p>Whimsical fantasy background for vibrant social media themes.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-starlit-dragon-lounge-04.png" alt="Starlit Dragon Lounge background" /></div>
-          <h3>Starlit Dragon Lounge</h3>
-          <p>Dramatic fantasy lounge background with a strong neon atmosphere.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-starlit-mushroom-forest-path-11.png" alt="Starlit Mushroom Forest Path background" /></div>
-          <h3>Starlit Mushroom Forest Path</h3>
-          <p>Fantasy forest background for magical custom page styling.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-y2k-neon-frame-ui-21.png" alt="Y2K Neon Frame UI background" /></div>
-          <h3>Y2K Neon Frame UI</h3>
-          <p>Interface-inspired background art for a custom digital package look.</p>
-        </article>
-
-        <article class="gallery-card">
-          <div class="img-wrapper"><img src="ao-background-y2k-pink-browser-frame-22.png" alt="Y2K Pink Browser Frame background" /></div>
-          <h3>Y2K Pink Browser Frame</h3>
-          <p>Browser-style background art built for playful custom social themes.</p>
-        </article>
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-background-celestial-angel-falls-07.png">
       </div>
-    </section>
+      <h3>Celestial Falls</h3>
+      <p>Fantasy environment with immersive atmosphere.</p>
+    </div>
 
-    <section class="section" id="mood-pieces">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 03</span>
-        <h2>Mood Pieces</h2>
-        <p>Expressive art built for phone cases, stickers, profiles, decor, shareable posts, and digital mood packs.</p>
+  </div>
+</section>
+
+<!-- MOOD -->
+<section class="section">
+  <div class="section-label">Lane 03</div>
+  <h2>Mood Pieces</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="sarcasm.jpg">
       </div>
+      <h3>Sarcasm Loading</h3>
+      <p>Expressive mood art with shareable personality.</p>
+    </div>
 
-      <div class="card-grid">
-        <article class="gallery-card"><div class="img-wrapper"><img src="sarcasm.jpg" alt="Sarcasm Loading mood piece" /></div><h3>Sarcasm Loading</h3><p>Expressive mood art with shareable attitude and standout humor.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-answers-not-needed-v2.png" alt="Answers Not Needed mood piece" /></div><h3>Answers Not Needed</h3><p>Attitude-driven mood card art for stickers, posts, and small-format merch.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-boundaries-enforced-v2.png" alt="Boundaries Enforced mood piece" /></div><h3>Boundaries Enforced</h3><p>Strong quote-card style artwork built for cases, mugs, and digital packs.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-celestial-moon.png" alt="Celestial Moon mood piece" /></div><h3>Celestial Moon</h3><p>Dreamy celestial mood art with strong decor and sticker potential.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-dragons-fire.png" alt="Dragon's Fire mood piece" /></div><h3>Dragon’s Fire</h3><p>Fantasy attitude piece built for expressive small-format products.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-enchanted-forest.png" alt="Enchanted Forest mood piece" /></div><h3>Enchanted Forest</h3><p>Dreamy fantasy mood art for decor, cases, and digital packs.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-my-people-get-me-v2.png" alt="My People Get Me mood piece" /></div><h3>My People Get Me</h3><p>Relatable expressive artwork made for social sharing and merch crossover.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-potion-of-popularity-clean.png" alt="Potion of Popularity mood piece" /></div><h3>Potion of Popularity</h3><p>Playful fantasy mood art with strong sticker and case energy.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-risen-and-shining-v2.png" alt="Risen and Shining mood piece" /></div><h3>Risen and Shining</h3><p>Bright expressive card art built for digital mood packs and decor.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-sarcasm-is-my-love-v2.png" alt="Sarcasm Is My Love mood piece" /></div><h3>Sarcasm Is My Love</h3><p>Attitude-forward quote art with strong crossover into cases and mugs.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-still-dangerous-full.png" alt="Still Dangerous mood piece" /></div><h3>Still Dangerous</h3><p>Edgy expressive art designed for high-visibility small merch.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-card-winging-it-since-forever-full.png" alt="Winging It Since Forever mood piece" /></div><h3>Winging It Since Forever</h3><p>Relatable mood art with strong sticker, mug, and social post appeal.</p></article>
-
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-adulting-break-v2.png" alt="Adulting Break mood emote" /></div><h3>Adulting Break</h3><p>Expressive emote art built for digital packs and small merch.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-big-heart.png" alt="Big Heart mood emote" /></div><h3>Big Heart</h3><p>Cute expressive art made for stickers, posts, and small products.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-candy-heart-energy-v3.png" alt="Candy Heart Energy mood emote" /></div><h3>Candy Heart Energy</h3><p>Playful mood art with strong sticker and phone case potential.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-coffee-power-clean.png" alt="Coffee Power mood emote" /></div><h3>Coffee Power</h3><p>Expressive coffee-themed art perfect for mugs, stickers, and posts.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-cute-robot.png" alt="Cute Robot mood emote" /></div><h3>Cute Robot</h3><p>Playful emote art with novelty merch and sticker-pack potential.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-daily-dose.png" alt="Daily Dose mood emote" /></div><h3>Daily Dose</h3><p>Shareable emote-style artwork built for digital and physical crossover.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-leveling-up-clean.png" alt="Leveling Up mood emote" /></div><h3>Leveling Up</h3><p>Gamified expressive art with strong mug, sticker, and post appeal.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-main-character-v2.png" alt="Main Character mood emote" /></div><h3>Main Character</h3><p>Confidence-driven mood art made for shareable social graphics.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-mental-fuel-v2.png" alt="Mental Fuel mood emote" /></div><h3>Mental Fuel</h3><p>Expressive mood art built for digital sticker packs and merch crossover.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-my-last-nerve-v2.png" alt="My Last Nerve mood emote" /></div><h3>My Last Nerve</h3><p>Relatable emote art with strong shareable and sticker-ready energy.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-out-of-office-v2.png" alt="Out of Office mood emote" /></div><h3>Out of Office</h3><p>Expressive work-life mood art perfect for mugs and social posts.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-patched-but-powerful-v3.png" alt="Patched But Powerful mood emote" /></div><h3>Patched But Powerful</h3><p>Strong expressive art with resilience and attitude built in.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-professionally-unbothered-v2.png" alt="Professionally Unbothered mood emote" /></div><h3>Professionally Unbothered</h3><p>Sharp mood art designed for social posts, mugs, and stickers.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-rest-is-resistance-v2.png" alt="Rest Is Resistance mood emote" /></div><h3>Rest Is Resistance</h3><p>Statement-style mood art with strong small-merch potential.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-romance-ish-v4.png" alt="Romance-ish mood emote" /></div><h3>Romance-ish</h3><p>Playful mood art that works well in stickers, cases, and posts.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-snooze-life-v2.png" alt="Snooze Life mood emote" /></div><h3>Snooze Life</h3><p>Relatable emote art for sleepy-girl mood packs and merch crossover.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-still-figuring-it-out-v2.png" alt="Still Figuring It Out mood emote" /></div><h3>Still Figuring It Out</h3><p>Expressive mood art built for shareable posts and sticker sets.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-still-making-moves-v2.png" alt="Still Making Moves mood emote" /></div><h3>Still Making Moves</h3><p>Motivated expressive art for digital packs and small products.</p></article>
-        <article class="gallery-card"><div class="img-wrapper"><img src="ao-emote-winging-it-v2.png" alt="Winging It mood emote" /></div><h3>Winging It</h3><p>Playful mood art with strong case, sticker, and mug appeal.</p></article>
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-card-boundaries-enforced-v2.png">
       </div>
-    </section>
+      <h3>Boundaries Enforced</h3>
+      <p>Bold quote-driven mood artwork.</p>
+    </div>
 
-    <section class="section" id="merch-art">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 04</span>
-        <h2>Merch-Ready Art</h2>
-        <p>High-impact designs built to move from digital art into shirts, mugs, cases, stickers, and statement products.</p>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="section">
+  <div class="section-label">Lane 04</div>
+  <h2>Merch-Ready Art</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="Streaming mode activated with gaming setup.png">
       </div>
+      <h3>Streaming Mode</h3>
+      <p>High-impact apparel-ready design.</p>
+    </div>
 
-      <div class="card-grid">
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="Streaming mode activated with gaming setup.png" alt="Streaming Mode merch-ready design" />
-          </div>
-          <h3>Streaming Mode</h3>
-          <p>Apparel-focused design optimized for print and high-visibility wear.</p>
-        </article>
+  </div>
+</section>
 
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-card-boundaries-enforced-v2.png" alt="Boundaries Enforced merch-ready design" />
-          </div>
-          <h3>Boundaries Enforced</h3>
-          <p>Strong quote-card artwork with excellent mug, hoodie, and small-merch crossover.</p>
-        </article>
+</main>
 
-        <article class="gallery-card">
-          <div class="img-wrapper">
-            <img src="ao-emote-coffee-power-clean.png" alt="Coffee Power merch-ready design" />
-          </div>
-          <h3>Coffee Power</h3>
-          <p>Expressive design with strong mug, sticker, and lifestyle merch potential.</p>
-        </article>
-      </div>
-    </section>
+<footer class="site-footer">
+  © 2026 Anom Originals • Built for Identity
+</footer>
 
-    <section class="section b2b-section" id="business">
-      <div class="section-heading">
-        <span class="b2b-eyebrow eyebrow">Business Solutions</span>
-        <h2>Etsy &amp; Social Media Rebuilds</h2>
-        <p style="color: #a9b2c7;">Visual storytelling and shop optimization for professional creators.</p>
-      </div>
-
-      <div class="card-grid">
-        <article class="gallery-card b2b-card">
-          <div class="img-wrapper">
-            <div style="color:#e657b5; font-weight:bold; text-align:center; padding:20px;">Project Showcase Coming Soon</div>
-          </div>
-          <h3>Shop Identity Overhaul</h3>
-          <p>Custom product imagery, shop banners, and branded visual cleanup for Etsy sellers.</p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>© 2026 Anom Originals • Built for Identity</p>
-  </footer>
 </body>
 </html>
