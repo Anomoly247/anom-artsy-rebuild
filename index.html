@@ -1,139 +1,440 @@
-:root {
-  --panel: rgba(15, 22, 42, 0.94);
-  --text: #f4f7ff;
-  --muted: #a9b2c7;
-  --cyan: #22d3ee;
-  --magenta: #e657b5;
-  --border: rgba(34, 211, 238, 0.22);
-  --hero-black: #020306;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anom Originals • Where digital art meets identity.</title>
+  <style>
+    :root {
+      --panel: rgba(15, 22, 42, 0.94);
+      --text: #f4f7ff;
+      --muted: #a9b2c7;
+      --cyan: #22d3ee;
+      --magenta: #e657b5;
+      --border: rgba(34, 211, 238, 0.22);
+      --hero-black: #020306;
+      --shadow-cyan: 0 0 18px rgba(34, 211, 238, 0.15);
+      --shadow-magenta: 0 0 24px rgba(230, 87, 181, 0.16);
+    }
 
-/* BASE */
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.10), transparent 30%),
-    radial-gradient(circle at 70% 0%, rgba(230, 87, 181, 0.08), transparent 30%),
-    linear-gradient(180deg, #081224 0%, #040814 60%, #020510 100%);
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* HERO */
-.hero-panel {
-  background: var(--hero-black);
-  padding: 28px 10px;
-  margin: 0 0 4px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.02),
-    0 20px 60px rgba(0,0,0,0.6);
-}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.12), transparent 28%),
+        radial-gradient(circle at 60% 0%, rgba(139, 92, 246, 0.08), transparent 30%),
+        linear-gradient(180deg, #091224 0%, #050916 58%, #030611 100%);
+      line-height: 1.6;
+    }
 
-.hero-banner {
-  width: min(100%, 900px);
-  display: block;
-  margin: 0 auto;
-}
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.14);
+    }
 
-/* HEADINGS */
-.hero h1 {
-  font-family: Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3.1rem);
-  margin: 0 0 14px;
-}
+    .brand a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
 
-.section h2 {
-  font-family: Georgia, serif;
-  font-size: clamp(1.9rem, 3vw, 2.4rem);
-  margin-bottom: 18px;
-}
+    .brand img {
+      display: block;
+      height: 40px;
+      width: auto;
+    }
 
-/* CARDS */
-.info-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 22px;
-  min-height: 178px;
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.35),
-    inset 0 0 0 1px rgba(255,255,255,0.02);
+    .site-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
 
-  transition: all 0.25s ease;
-}
+    .site-nav a:hover {
+      color: var(--cyan);
+      opacity: 1;
+    }
 
-.card-link:hover .info-card {
-  transform: translateY(-4px);
+    main {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
 
-  box-shadow:
-    0 0 30px rgba(34, 211, 238, 0.18),
-    0 12px 40px rgba(0,0,0,0.4);
-}
+    .hero {
+      text-align: center;
+      padding: 24px 0 0;
+    }
 
-/* CARD TEXT */
-.info-card h3 {
-  font-family: Georgia, serif;
-  font-size: 1.05rem;
-  margin-bottom: 10px;
-  color: var(--cyan);
-}
+    .hero-panel {
+      background: var(--hero-black);
+      padding: 28px 10px;
+      margin: 0 0 2px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.02),
+        0 20px 60px rgba(0,0,0,0.6);
+    }
 
-.info-card p {
-  color: #cfd8ee;
-  font-size: 0.96rem;
-}
+    .hero-banner {
+      width: min(100%, 900px);
+      display: block;
+      margin: 0 auto;
+    }
 
-/* BUTTONS */
-.btn-primary {
-  background: linear-gradient(90deg, var(--cyan), var(--magenta));
-  color: #000;
+    .eyebrow {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
 
-  box-shadow:
-    0 0 20px rgba(34, 211, 238, 0.25),
-    0 0 40px rgba(230, 87, 181, 0.15);
-}
+    .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.03;
+      margin: 0 0 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
 
-.btn-secondary {
-  background: var(--magenta);
-  color: #fff;
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-  box-shadow:
-    0 0 20px rgba(230, 87, 181, 0.25);
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      min-width: 140px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
 
-.btn-outline {
-  border: 2px solid var(--cyan);
-  color: var(--cyan);
-}
+    .btn:hover {
+      transform: translateY(-2px);
+    }
 
-.btn:hover {
-  transform: translateY(-2px) scale(1.02);
-}
+    .btn-primary {
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      color: #000;
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.18);
+    }
 
-/* BOTTOM PANELS */
-.about-contact-grid .info-card:first-child {
-  border-color: rgba(230, 87, 181, 0.5);
+    .btn-secondary {
+      background: var(--magenta);
+      color: #fff;
+      box-shadow: 0 0 18px rgba(230, 87, 181, 0.16);
+    }
 
-  box-shadow:
-    0 0 25px rgba(230, 87, 181, 0.12);
-}
+    .btn-outline {
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      background: transparent;
+    }
 
-.email-btn {
-  background: rgba(230, 87, 181, 0.95);
-  box-shadow:
-    0 0 25px rgba(230, 87, 181, 0.25);
-}
+    .btn-outline:hover {
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.14);
+    }
 
-.email-btn:hover {
-  box-shadow:
-    0 0 40px rgba(230, 87, 181, 0.35);
-}
+    .section {
+      padding-top: 18px;
+    }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 38px 0;
-  font-size: 0.8rem;
-  color: var(--muted);
-}
+    .section-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: var(--text);
+    }
+
+    .section h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3.3vw, 2.6rem);
+      line-height: 1.08;
+      margin: 0 0 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .info-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 178px;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.02);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card-link:hover .info-card,
+    .about-contact-grid .info-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(230, 87, 181, 0.38);
+      box-shadow:
+        0 0 30px rgba(34, 211, 238, 0.18),
+        0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .info-card h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      margin: 0 0 10px;
+      color: var(--cyan);
+      font-weight: 700;
+    }
+
+    .info-card p {
+      font-size: 0.97rem;
+      color: #d6def0;
+      margin: 0;
+    }
+
+    .about-contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .about-contact-grid .info-card {
+      min-height: 190px;
+    }
+
+    .about-contact-grid .info-card:first-child {
+      border-color: rgba(230, 87, 181, 0.5);
+      box-shadow: 0 0 25px rgba(230, 87, 181, 0.12);
+    }
+
+    .panel-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--magenta);
+    }
+
+    .panel-label.right {
+      color: var(--text);
+    }
+
+    .about-contact-grid h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+
+    .about-contact-grid p {
+      margin: 0;
+      color: #d6def0;
+      font-size: 0.97rem;
+    }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: rgba(230, 87, 181, 0.96);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: var(--shadow-magenta);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .email-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 26px rgba(230, 87, 181, 0.22);
+    }
+
+    footer {
+      text-align: center;
+      padding: 38px 0;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(34, 211, 238, 0.05);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 900px) {
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about-contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .site-header {
+        padding: 16px 18px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .site-nav {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      main {
+        width: min(100% - 28px, 1200px);
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        padding: 20px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html">
+        <img src="ao-logo-neon-square.png" alt="AO Logo" />
+      </a>
+    </div>
+    <nav class="site-nav">
+      <a href="gallery.html">Work</a>
+      <a href="custom.html">Custom</a>
+      <a href="merch.html">Merch</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-panel">
+        <img src="Neon Glow design for Anom Originals.png" alt="Anom Originals" class="hero-banner" />
+      </div>
+
+      <div class="eyebrow">Digital Identity • Neon Mood • Custom Art</div>
+
+      <h1>Turn your vibe into art.</h1>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="gallery.html">Explore My Work</a>
+        <a class="btn btn-secondary" href="custom.html">Custom Work</a>
+        <a class="btn btn-outline" href="custom.html">View Services</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-label">The Lanes</div>
+      <h2>Visual Solutions &amp; Digital Goods</h2>
+
+      <div class="card-grid">
+        <a href="gallery.html#mood" class="card-link">
+          <article class="info-card">
+            <h3>Backgrounds</h3>
+            <p>Custom 4K headers and digital environments for your space.</p>
+          </article>
+        </a>
+
+        <a href="gallery.html#identity" class="card-link">
+          <article class="info-card">
+            <h3>Profile Pictures</h3>
+            <p>Identity graphics and avatars built with personality and glow.</p>
+          </article>
+        </a>
+
+        <a href="gallery.html#mood-pieces" class="card-link">
+          <article class="info-card">
+            <h3>Mood Collection</h3>
+            <p>Expressive digital art built for humor, feeling, and attitude.</p>
+          </article>
+        </a>
+
+        <a href="gallery.html#merch-art" class="card-link">
+          <article class="info-card">
+            <h3>Merch Designs</h3>
+            <p>Bold visual art optimized for high-quality apparel and print.</p>
+          </article>
+        </a>
+
+        <a href="custom.html#digital-boutique" class="card-link">
+          <article class="info-card">
+            <h3>MP4 Motion Vault</h3>
+            <p>High-fidelity motion art files for digital frames and displays.</p>
+          </article>
+        </a>
+
+        <a href="merch.html" class="card-link">
+          <article class="info-card">
+            <h3>Lifestyle &amp; Gear</h3>
+            <p>Stickers, phone cases, and pet merch featuring AO designs.</p>
+          </article>
+        </a>
+      </div>
+
+      <div class="about-contact-grid" id="contact">
+        <div class="info-card">
+          <div class="panel-label">About AO</div>
+          <h2>Identity First.</h2>
+          <p>Anom Originals is about digital identity and visuals that aren't generic, flat, or forgettable.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="panel-label right">Get In Touch</div>
+          <h2>Let's build it.</h2>
+          <p>Custom work, collabs, or shop rebuild requests.</p>
+          <a class="email-btn" href="mailto:hello@anomartsy.xyz">Email Me</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Anom Originals • Where digital art meets identity.
+  </footer>
+</body>
+</html>
