@@ -4,13 +4,309 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anom Originals • Where digital art meets identity.</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    :root {
+      --bg: #060914;
+      --panel: rgba(15, 22, 42, 0.94);
+      --text: #f4f7ff;
+      --muted: #a9b2c7;
+      --cyan: #22d3ee;
+      --magenta: #e657b5;
+      --pink-neon: #e657b5;
+      --border: rgba(34, 211, 238, 0.22);
+      --shadow-cyan: 0 0 24px rgba(34, 211, 238, 0.16);
+      --shadow-magenta: 0 0 26px rgba(230, 87, 181, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.12), transparent 28%),
+        radial-gradient(circle at 60% 0%, rgba(139, 92, 246, 0.08), transparent 30%),
+        linear-gradient(180deg, #091224 0%, #050916 58%, #030611 100%);
+      line-height: 1.6;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 48px;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.14);
+      background: rgba(7, 10, 20, 0.88);
+    }
+
+    .brand a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand img {
+      display: block;
+      height: 50px;
+      width: auto;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .site-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.88;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    .site-nav a:hover {
+      color: var(--cyan);
+      opacity: 1;
+    }
+
+    main {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 34px 0 24px;
+      text-align: center;
+    }
+
+    .hero-banner {
+      display: block;
+      width: min(100%, 720px);
+      margin: 0 auto 22px;
+      border-radius: 26px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      margin: 0 0 22px;
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      line-height: 1.04;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--cyan), #4fdcff 42%, #c36de8 85%, var(--magenta));
+      color: #08111d;
+      box-shadow: var(--shadow-cyan);
+    }
+
+    .btn-secondary {
+      background: rgba(230, 87, 181, 0.96);
+      color: #fff;
+      box-shadow: var(--shadow-magenta);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      box-shadow: var(--shadow-cyan);
+    }
+
+    .section {
+      padding: 70px 0 0;
+    }
+
+    .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      margin: 6px 0 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .info-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 24px;
+      min-height: 170px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card-link:hover .info-card,
+    .about-contact-grid .info-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(230, 87, 181, 0.52);
+      box-shadow: 0 0 24px rgba(34, 211, 238, 0.12);
+    }
+
+    .info-card h3 {
+      margin: 0 0 14px;
+      color: var(--cyan);
+      font-size: 1.9rem;
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--text);
+      opacity: 0.92;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .info-card h2 {
+      margin: 6px 0 14px;
+      font-size: 2.2rem;
+      line-height: 1.05;
+    }
+
+    .about-contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .about-contact-grid .info-card:first-child {
+      border-color: rgba(230, 87, 181, 0.55);
+    }
+
+    .about-contact-grid .info-card:first-child .eyebrow {
+      color: var(--magenta);
+    }
+
+    .about-contact-grid .btn {
+      margin-top: 22px;
+      width: 100%;
+    }
+
+    .site-footer {
+      width: min(1200px, calc(100% - 48px));
+      margin: 70px auto 0;
+      padding: 34px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(34, 211, 238, 0.08);
+    }
+
+    @media (max-width: 980px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        padding: 16px 18px;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .site-nav {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      main,
+      .site-footer {
+        width: min(100% - 28px, 1200px);
+      }
+
+      .hero {
+        padding-top: 24px;
+      }
+
+      .hero-banner {
+        width: 100%;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card h3 {
+        font-size: 1.45rem;
+      }
+
+      .info-card h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="brand">
       <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
+        <img src="ao-logo-neon-square.png" alt="AO Logo" />
       </a>
     </div>
     <nav class="site-nav">
@@ -36,7 +332,7 @@
     <section class="section">
       <div class="section-heading">
         <span class="eyebrow">The Lanes</span>
-        <h2>Visual Solutions & Digital Goods</h2>
+        <h2>Visual Solutions &amp; Digital Goods</h2>
       </div>
 
       <div class="card-grid">
@@ -77,7 +373,7 @@
 
         <a href="merch.html" class="card-link">
           <article class="info-card">
-            <h3>Lifestyle & Gear</h3>
+            <h3>Lifestyle &amp; Gear</h3>
             <p>Stickers, phone cases, and pet merch featuring AO designs.</p>
           </article>
         </a>
@@ -86,8 +382,8 @@
 
     <section class="section" id="contact">
       <div class="about-contact-grid">
-        <div class="info-card" style="border-color: var(--pink-neon);">
-          <span class="eyebrow" style="color: var(--pink-neon);">About AO</span>
+        <div class="info-card">
+          <span class="eyebrow">About AO</span>
           <h2>Identity First.</h2>
           <p>Anom Originals is about digital identity and visuals that aren't generic, flat, or forgettable.</p>
         </div>
@@ -96,7 +392,7 @@
           <span class="eyebrow">Get In Touch</span>
           <h2>Let's build it.</h2>
           <p>Custom work, collabs, or shop rebuild requests.</p>
-          <a class="btn btn-secondary" href="mailto:hello@anomartsy.xyz" style="margin-top:20px;">Email Me</a>
+          <a class="btn btn-secondary" href="mailto:hello@anomartsy.xyz">Email Me</a>
         </div>
       </div>
     </section>
