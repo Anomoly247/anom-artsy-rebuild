@@ -85,23 +85,24 @@
 
     .hero-panel {
       background: var(--hero-black);
-      padding: 28px 10px;
-      margin: 0 0 2px;
+      padding: 8px 10px 0;
+      margin: 0 0 0;
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.02),
         0 20px 60px rgba(0,0,0,0.6);
+      overflow: hidden;
     }
 
     .hero-banner {
-      width: min(100%, 900px);
+      width: min(100%, 760px);
       display: block;
-      margin: 0 auto;
+      margin: 0 auto -8px;
     }
 
     .eyebrow {
       font-size: 0.82rem;
       color: var(--muted);
-      margin-bottom: 0;
+      margin: 2px 0 0;
       font-weight: 600;
     }
 
@@ -331,7 +332,11 @@
       }
 
       .hero-panel {
-        padding: 20px 8px;
+        padding: 6px 8px 0;
+      }
+
+      .hero-banner {
+        width: 100%;
       }
     }
   </style>
