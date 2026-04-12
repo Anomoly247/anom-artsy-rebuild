@@ -36,6 +36,11 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* HEADER */
 .site-header {
   position: sticky;
@@ -58,10 +63,10 @@ body {
 }
 
 .brand img {
-  display: block;
-  height: 38px;
+  height: 42px;
   width: auto;
-  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.18));
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.25));
 }
 
 .site-nav {
@@ -78,7 +83,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .site-nav a:hover {
@@ -143,7 +148,6 @@ main {
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--text-muted);
-  text-transform: none;
 }
 
 .hero-title {
@@ -160,7 +164,7 @@ main {
 }
 
 .hero-subline {
-  max-width: 840px;
+  max-width: 760px;
   margin: 0 auto 24px;
   font-size: 1rem;
   color: var(--baby-blue);
@@ -175,7 +179,7 @@ main {
   flex-wrap: wrap;
 }
 
-/* REMOVE OLD HERO IMAGE */
+/* OLD HERO IMAGE REMOVED */
 .hero-image-wrap,
 .hero-image,
 .hero-image-wrap::before,
@@ -300,7 +304,7 @@ main {
 /* CARDS */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -310,6 +314,11 @@ main {
   text-decoration: none;
 }
 
+.card-link,
+.card-link * {
+  text-decoration: none !important;
+}
+
 .info-card {
   position: relative;
   overflow: hidden;
@@ -317,7 +326,7 @@ main {
   border-radius: 20px;
   border: 2px solid var(--border-cyan);
   background: var(--panel-soft);
-  min-height: 140px;
+  min-height: 158px;
   box-shadow:
     var(--shadow-deep),
     inset 0 0 0 1px rgba(255, 255, 255, 0.02);
@@ -340,19 +349,22 @@ main {
   transition: opacity 0.25s ease;
 }
 
-.info-card:hover,
+.card-link:hover .info-card,
 .feature-panel:hover {
   transform: translateY(-4px);
   border-color: var(--magenta);
+  box-shadow:
+    0 0 26px rgba(34, 211, 238, 0.14),
+    0 14px 36px rgba(0, 0, 0, 0.34);
 }
 
-.info-card:hover::before,
+.card-link:hover .info-card::before,
 .feature-panel:hover::before {
   opacity: 1;
 }
 
 .info-card h3 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.12rem;
   line-height: 1.15;
