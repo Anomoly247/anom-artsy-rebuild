@@ -7,32 +7,24 @@
   --bg-soft: #0e1224;
   --text: #f4f7ff;
   --muted: #a9b2c7;
-
   --cyan: #22d3ee;
   --magenta: #e657b5;
   --violet: #8b5cf6;
-
   --border: rgba(34, 211, 238, 0.18);
 }
 
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY */
 body {
   font-family: 'Inter', Arial, sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top, #0c122b 0%, #070910 70%);
   line-height: 1.6;
 }
-
-/* =========================
-   NAVBAR
-   ========================= */
 
 .navbar {
   display: flex;
@@ -56,10 +48,6 @@ body {
   opacity: 1;
 }
 
-/* =========================
-   HERO
-   ========================= */
-
 .hero {
   text-align: center;
   padding: 60px 20px 40px;
@@ -81,8 +69,6 @@ body {
   color: var(--muted);
   margin-bottom: 24px;
 }
-
-/* BUTTONS */
 
 .hero-buttons {
   display: flex;
@@ -114,10 +100,6 @@ body {
   box-shadow: 0 0 20px rgba(34, 211, 238, 0.25);
 }
 
-/* =========================
-   SECTION TITLES
-   ========================= */
-
 .section {
   padding: 40px 24px;
 }
@@ -133,7 +115,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -142,6 +124,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 22px;
+  min-height: 150px;
   transition: all 0.3s ease;
 }
 
@@ -160,11 +143,8 @@ body {
 .card p {
   color: var(--muted);
   font-size: 0.95rem;
+  line-height: 1.6;
 }
-
-/* =========================
-   BOTTOM PANELS
-   ========================= */
 
 .bottom {
   display: grid;
@@ -188,8 +168,6 @@ body {
   color: var(--muted);
 }
 
-/* CTA BUTTON */
-
 .email-btn {
   display: block;
   margin-top: 18px;
@@ -208,10 +186,6 @@ body {
   box-shadow: 0 0 25px rgba(255, 105, 210, 0.4);
 }
 
-/* =========================
-   FOOTER
-   ========================= */
-
 footer {
   text-align: center;
   padding: 30px 20px;
@@ -219,17 +193,25 @@ footer {
   font-size: 0.85rem;
 }
 
-/* =========================
-   MOBILE
-   ========================= */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-@media (max-width: 768px) {
   .bottom {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
