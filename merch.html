@@ -2,181 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boutique • Anom Originals</title>
-  
-  <style>
-    /* --- ANOM ORIGINALS BOUTIQUE MASTER STYLES --- */
-    * { box-sizing: border-box; }
-    
-    body {
-      margin: 0;
-      font-family: 'Inter', Arial, sans-serif;
-      color: #f4f7ff;
-      background-color: #0a0a10; 
-      background: radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.08), transparent 28%), #0a0a10;
-      line-height: 1.6;
-    }
-
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 5%;
-      background: rgba(10, 10, 16, 0.95);
-      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .site-nav a {
-      margin-left: 20px;
-      color: #a9b2c7;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .site-nav a:hover { color: #22d3ee; }
-
-    main { width: min(1200px, 92%); margin: 0 auto; padding-bottom: 100px; }
-
-    .hero { padding: 80px 0 40px; text-align: center; }
-    .page-title { font-size: 3.5rem; margin: 0; color: #dfe4f2; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); letter-spacing: -1px; }
-    .eyebrow { color: #22d3ee; text-transform: uppercase; font-weight: bold; font-size: 0.75rem; letter-spacing: 2px; }
-
-    .section { padding: 40px 0 60px; }
-    .section-heading { margin-bottom: 30px; }
-
-    /* --- THE BOUTIQUE GRID --- */
-    .card-grid {
-      display: grid;
-      gap: 25px;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .merch-card {
-      background: rgba(18, 18, 26, 0.8);
-      padding: 25px;
-      border-radius: 24px;
-      border: 1px solid rgba(34, 211, 238, 0.1);
-      transition: 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .merch-card:hover { border-color: #22d3ee; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(34, 211, 238, 0.1); }
-
-    .img-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 280px; 
-      background: #050508;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .price-badge {
-      display: inline-block;
-      margin-top: 10px;
-      color: #22d3ee;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-
-    .btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; text-align: center; margin-top: auto; }
-    .btn-primary { background: #22d3ee; color: #0a0a10; }
-    .btn-outline { border: 1px solid rgba(34, 211, 238, 0.3); color: #22d3ee; }
-
-    .site-footer { padding: 60px; text-align: center; border-top: 1px solid rgba(34, 211, 238, 0.1); color: #a9b2c7; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Merch • Anom Originals</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" style="height:50px;" />
-      </a>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html">
+      <img src="ao-logo-neon-square.png" alt="AO Logo"/>
+    </a>
+  </div>
+
+  <nav class="site-nav">
+    <a href="gallery.html">Work</a>
+    <a href="custom.html">Custom</a>
+    <a href="merch.html">Merch</a>
+    <a href="custom.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-kicker">The Boutique</div>
+
+    <h1 class="hero-title">Shop the World</h1>
+
+    <p class="hero-subline">
+      Curated art you can wear, display, and use — built with identity and attitude.
+    </p>
+  </div>
+</section>
+
+<!-- DIGITAL -->
+<section class="section">
+  <div class="section-label">Lane 01</div>
+  <h2>Digital Drops</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="sarcasm.jpg">
+      </div>
+      <h3>Atmosphere Pack v1</h3>
+      <p>4K digital backgrounds and headers for desktop and mobile.</p>
+      <span class="service-price">$15.00</span>
+      <a href="#" class="btn btn-primary">Download Now</a>
     </div>
-    <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="gallery.html">Work</a>
-      <a href="custom.html">Custom</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <span class="eyebrow">The Boutique</span>
-      <h1 class="page-title">SHOP THE WORLD</h1>
-      <p style="color: #a9b2c7;">Curated art you can wear, display, and use.</p>
-    </section>
+  </div>
+</section>
 
-    <section class="section">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 01</span>
-        <h2>Digital Identity Assets</h2>
-        <p style="color: #a9b2c7;">Instant downloads to glow up your digital space.</p>
+<!-- PHYSICAL -->
+<section class="section">
+  <div class="section-label">Lane 02</div>
+  <h2>Statement Gear</h2>
+
+  <div class="card-grid">
+
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ghost.jpg">
       </div>
-      <div class="card-grid">
-        <article class="merch-card">
-          <div class="img-wrapper">
-             <img src="sarcasm.jpg" alt="Wallpaper Pack" />
-          </div>
-          <h3>Atmosphere Pack v1</h3>
-          <p>4K Digital Backgrounds & Headers for Desktop/Mobile.</p>
-          <span class="price-badge">$15.00</span>
-          <a href="#" class="btn btn-primary">Download Now</a>
-        </article>
-      </div>
-    </section>
+      <h3>Rainbow Ghost Case</h3>
+      <p>Impact-resistant identity protection for iPhone & Samsung.</p>
+      <span class="service-price">$28.00</span>
+      <a href="#" class="btn btn-outline">Order on Spreadshop</a>
+    </div>
 
-    <section class="section">
-      <div class="section-heading">
-        <span class="eyebrow">Lane 02</span>
-        <h2>Statement Gear</h2>
-        <p style="color: #a9b2c7;">Phone cases, bottles, and coffee cups built for your aesthetic.</p>
+    <div class="info-card">
+      <div class="service-img-wrapper">
+        <img src="ao-emote-coffee-power-clean.png">
       </div>
-      <div class="card-grid">
-        <article class="merch-card">
-          <div class="img-wrapper">
-             <img src="ghost.jpg" alt="Phone Case" />
-          </div>
-          <h3>"Rainbow Ghost" Case</h3>
-          <p>Impact-resistant identity protection for iPhone & Samsung.</p>
-          <span class="price-badge">$28.00</span>
-          <a href="#" class="btn btn-outline">Order on Spreadshop</a>
-        </article>
+      <h3>AO Reusable Bottle</h3>
+      <p>Matte black stainless steel with neon identity logo.</p>
+      <span class="service-price">$32.00</span>
+      <a href="#" class="btn btn-outline">Order on Printful</a>
+    </div>
 
-        <article class="merch-card">
-          <div class="img-wrapper">
-             <img src="ao-emote-coffee-power-clean.png" alt="Water Bottle" />
-          </div>
-          <h3>AO Reusable Bottle</h3>
-          <p>Matte black stainless steel with neon identity logo.</p>
-          <span class="price-badge">$32.00</span>
-          <a href="#" class="btn btn-outline">Order on Printful</a>
-        </article>
-      </div>
-    </section>
-  </main>
+  </div>
+</section>
 
-  <footer class="site-footer">
-    <p>© 2026 Anom Originals • Boutique Active</p>
-  </footer>
+<!-- CTA -->
+<section class="intro-panel" style="text-align:center;">
+  <div class="intro-label">More Drops Coming</div>
+  <h2>New designs are always in progress</h2>
+  <p>Follow the brand — this lane evolves constantly.</p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  © 2026 Anom Originals • Built for Identity
+</footer>
+
 </body>
 </html>
