@@ -5,12 +5,13 @@
 :root {
   --bg: #070910;
   --bg-soft: #0e1224;
+  --panel: #10162b;
   --text: #f4f7ff;
-  --muted: #a9b2c7;
+  --muted: #b8c0d9;
   --cyan: #22d3ee;
   --magenta: #e657b5;
   --violet: #8b5cf6;
-  --border: rgba(34, 211, 238, 0.18);
+  --border: rgba(34, 211, 238, 0.22);
 }
 
 * {
@@ -19,199 +20,423 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+}
+
 body {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top, #0c122b 0%, #070910 70%);
+  background:
+    radial-gradient(circle at top center, rgba(25, 77, 150, 0.28) 0%, rgba(7, 9, 16, 0) 38%),
+    radial-gradient(circle at left center, rgba(34, 211, 238, 0.10) 0%, rgba(7, 9, 16, 0) 32%),
+    linear-gradient(180deg, #071120 0%, #040816 55%, #030611 100%);
   line-height: 1.6;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 32px;
+/* =========================
+   PAGE WRAPPER
+   ========================= */
+
+.container,
+.page-wrap,
+.site-wrap {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
 }
 
-.navbar a {
+/* =========================
+   NAV
+   ========================= */
+
+.navbar,
+.site-header,
+header {
+  width: 100%;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+}
+
+.navbar .container,
+.site-header .container,
+header .container,
+.nav-inner {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo,
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo img,
+.site-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+.nav-links,
+.navbar nav,
+.nav-menu {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+}
+
+.nav-links a,
+.navbar a,
+.nav-menu a {
   color: var(--text);
   text-decoration: none;
-  margin-left: 24px;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
-  opacity: 0.8;
-  transition: 0.3s ease;
+  text-transform: uppercase;
+  opacity: 0.88;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-.navbar a:hover {
+.nav-links a:hover,
+.navbar a:hover,
+.nav-menu a:hover {
   color: var(--cyan);
   opacity: 1;
 }
 
+/* =========================
+   HERO
+   ========================= */
+
 .hero {
+  width: min(1200px, calc(100% - 48px));
+  margin: 34px auto 0;
   text-align: center;
-  padding: 60px 20px 40px;
 }
 
+.hero-image-wrap,
+.hero-image,
+.hero-art {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.hero-image-wrap img,
+.hero-image img,
+.hero-art img,
 .hero img {
-  max-width: 600px;
-  width: 100%;
-  margin-bottom: 20px;
+  width: min(100%, 720px);
+  display: block;
+  border-radius: 24px;
+}
+
+.hero-kicker,
+.hero-topline,
+.hero-mini {
+  font-size: 1.05rem;
+  color: var(--text);
+  opacity: 0.95;
+  margin-bottom: 10px;
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin-bottom: 16px;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1.06;
   font-weight: 800;
+  margin-bottom: 20px;
 }
 
 .hero p {
   color: var(--muted);
-  margin-bottom: 24px;
 }
 
-.hero-buttons {
+.hero-buttons,
+.button-row,
+.cta-row {
   display: flex;
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
-}
-
-.btn {
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--cyan), var(--magenta));
-  color: #000;
-}
-
-.btn-secondary {
-  border: 1px solid var(--cyan);
-  color: var(--cyan);
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.25);
-}
-
-.section {
-  padding: 40px 24px;
-}
-
-.section h2 {
-  margin-bottom: 18px;
-  font-size: 1.6rem;
+  margin-top: 10px;
 }
 
 /* =========================
-   GRID CARDS
+   BUTTONS
    ========================= */
 
-.grid {
+.btn,
+.button,
+.hero-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.btn:hover,
+.button:hover,
+.hero-buttons a:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary,
+.button-primary {
+  background: linear-gradient(135deg, var(--cyan), #58dfff 35%, var(--magenta) 100%);
+  color: #09101c;
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.22);
+}
+
+.btn-secondary,
+.button-secondary {
+  background: rgba(230, 87, 181, 0.95);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(230, 87, 181, 0.18);
+}
+
+.btn-outline,
+.button-outline {
+  border: 2px solid var(--cyan);
+  color: var(--cyan);
+  background: transparent;
+}
+
+/* =========================
+   SECTIONS
+   ========================= */
+
+.section,
+.content-section {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 70px 0 0;
+}
+
+.section-label,
+.eyebrow,
+.kicker {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.section h2,
+.content-section h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 26px;
+}
+
+/* =========================
+   3 x 2 CARD GRID
+   ========================= */
+
+.grid,
+.lanes-grid,
+.cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
 }
 
-.card {
-  background: var(--bg-soft);
+.card,
+.lane-card,
+.service-card {
+  background: rgba(16, 22, 43, 0.94);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 22px;
-  min-height: 150px;
-  transition: all 0.3s ease;
+  border-radius: 22px;
+  padding: 28px 24px;
+  min-height: 160px;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.card:hover {
+.card:hover,
+.lane-card:hover,
+.service-card:hover {
   transform: translateY(-4px);
-  border-color: var(--magenta);
-  box-shadow: 0 0 20px rgba(230, 87, 181, 0.2);
+  border-color: rgba(230, 87, 181, 0.52);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.10);
 }
 
-.card h3 {
+.card h3,
+.lane-card h3,
+.service-card h3 {
   color: var(--cyan);
-  margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1.9rem;
+  line-height: 1.05;
+  margin-bottom: 16px;
 }
 
-.card p {
-  color: var(--muted);
-  font-size: 0.95rem;
+.card p,
+.lane-card p,
+.service-card p {
+  color: var(--text);
+  opacity: 0.92;
+  font-size: 1.08rem;
   line-height: 1.6;
 }
 
-.bottom {
+/* stop default blue underlined links inside cards */
+.card a,
+.lane-card a,
+.service-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   BOTTOM PANELS
+   ========================= */
+
+.bottom,
+.bottom-panels,
+.about-contact-grid {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 90px 0 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  padding: 40px 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
 }
 
-.panel {
-  background: var(--bg-soft);
-  border-radius: 20px;
-  padding: 24px;
+.panel,
+.bottom-panel,
+.info-panel {
+  background: rgba(16, 22, 43, 0.94);
   border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px 24px;
+  min-height: 220px;
 }
 
-.panel h3 {
+.panel:first-child,
+.bottom-panel:first-child,
+.info-panel:first-child {
+  border-color: rgba(230, 87, 181, 0.55);
+}
+
+.panel .small-label,
+.bottom-panel .small-label,
+.info-panel .small-label,
+.panel .eyebrow,
+.bottom-panel .eyebrow,
+.info-panel .eyebrow {
+  color: #f08ad0;
+  font-size: 0.95rem;
   margin-bottom: 10px;
 }
 
-.panel p {
-  color: var(--muted);
+.panel h3,
+.bottom-panel h3,
+.info-panel h3 {
+  font-size: 2.1rem;
+  line-height: 1.05;
+  margin-bottom: 14px;
 }
 
-.email-btn {
-  display: block;
-  margin-top: 18px;
-  padding: 14px;
-  text-align: center;
+.panel p,
+.bottom-panel p,
+.info-panel p {
+  color: var(--text);
+  opacity: 0.92;
+  font-size: 1.08rem;
+}
+
+.email-btn,
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24px;
+  padding: 16px 24px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--magenta), #ff8edb);
-  color: #fff;
   text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s ease;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #d85fae, #ee74bf);
+  box-shadow: 0 0 26px rgba(230, 87, 181, 0.34);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.email-btn:hover {
+.email-btn:hover,
+.contact-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(255, 105, 210, 0.4);
+  box-shadow: 0 0 32px rgba(230, 87, 181, 0.42);
 }
+
+/* =========================
+   FOOTER
+   ========================= */
 
 footer {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
   text-align: center;
-  padding: 30px 20px;
+  padding: 64px 0 36px;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
+  opacity: 0.9;
 }
 
-@media (max-width: 900px) {
-  .grid {
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 980px) {
+  .grid,
+  .lanes-grid,
+  .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .bottom {
+  .bottom,
+  .bottom-panels,
+  .about-contact-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
+@media (max-width: 700px) {
+  .nav-links,
+  .navbar nav,
+  .nav-menu {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
-}
 
-@media (max-width: 640px) {
-  .grid {
+  .hero h1 {
+    font-size: clamp(2.1rem, 8vw, 3.4rem);
+  }
+
+  .grid,
+  .lanes-grid,
+  .cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .container,
+  .page-wrap,
+  .site-wrap,
+  .hero,
+  .section,
+  .content-section,
+  .bottom,
+  .bottom-panels,
+  .about-contact-grid,
+  footer {
+    width: min(100% - 28px, 1200px);
   }
 }
