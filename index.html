@@ -91,8 +91,8 @@
     .hero-visual-wrap {
       position: relative;
       background: var(--hero-black);
-      padding: 24px 18px 12px;
-      margin: 0 0 8px;
+      padding: 20px 18px 12px;
+      margin: 0 0 10px;
       overflow: hidden;
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.02),
@@ -151,9 +151,13 @@
     .hero-logo-image {
       position: relative;
       z-index: 1;
-      width: min(100%, 760px);
+      width: 320px;
+      max-width: 90%;
       display: block;
       margin: 0 auto;
+      filter:
+        drop-shadow(0 0 12px rgba(34, 211, 238, 0.25))
+        drop-shadow(0 0 18px rgba(230, 87, 181, 0.18));
     }
 
     .hero-kicker {
@@ -407,7 +411,8 @@
       }
 
       .hero-logo-image {
-        width: 100%;
+        width: 260px;
+        max-width: 88%;
       }
     }
   </style>
