@@ -9,7 +9,7 @@
       --bg-deep: #030714;
       --bg-top: #0a1630;
       --panel: rgba(15, 22, 42, 0.94);
-      --text-main: #cfefff;
+      --text-main: #d8f2ff;
       --text-soft: #8fdcff;
       --text-muted: #9ab6d4;
       --cyan: #22d3ee;
@@ -91,9 +91,13 @@
     .hero-visual-wrap {
       position: relative;
       background: var(--hero-black);
-      padding: 10px 18px 8px;
-      margin: 0 0 6px;
+      padding: 18px 18px 10px;
+      margin: 0 0 8px;
       overflow: hidden;
+      min-height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow:
         inset 0 0 0 1px rgba(255,255,255,0.02),
         0 20px 60px rgba(0,0,0,0.6);
@@ -104,75 +108,52 @@
       content: "";
       position: absolute;
       border-radius: 999px;
-      filter: blur(24px);
-      opacity: 0.35;
+      filter: blur(28px);
+      opacity: 0.14;
       pointer-events: none;
     }
 
     .hero-visual-wrap::before {
-      width: 180px;
-      height: 180px;
-      background: rgba(34, 211, 238, 0.18);
-      top: 18px;
-      left: 40px;
+      width: 200px;
+      height: 200px;
+      background: rgba(34, 211, 238, 0.45);
+      top: 32px;
+      left: 58px;
     }
 
     .hero-visual-wrap::after {
-      width: 180px;
-      height: 180px;
-      background: rgba(230, 87, 181, 0.18);
-      right: 40px;
-      bottom: 10px;
-    }
-
-    .hero-deco-left,
-    .hero-deco-right {
-      position: absolute;
-      top: 50%;
-      width: 120px;
-      height: 120px;
-      transform: translateY(-50%);
-      border-radius: 999px;
-      filter: blur(22px);
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
-    .hero-deco-left {
-      left: -18px;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.75) 0%, rgba(34, 211, 238, 0) 70%);
-    }
-
-    .hero-deco-right {
-      right: -18px;
-      background: radial-gradient(circle, rgba(230, 87, 181, 0.75) 0%, rgba(230, 87, 181, 0) 70%);
+      width: 200px;
+      height: 200px;
+      background: rgba(230, 87, 181, 0.42);
+      right: 58px;
+      bottom: 34px;
     }
 
     .hero-logo-image {
       position: relative;
       z-index: 1;
-      width: 460px;
-      max-width: 92%;
+      width: 560px;
+      max-width: 94%;
       display: block;
       margin: 0 auto;
       filter:
-        drop-shadow(0 0 12px rgba(34, 211, 238, 0.25))
+        drop-shadow(0 0 12px rgba(34, 211, 238, 0.22))
         drop-shadow(0 0 18px rgba(230, 87, 181, 0.18));
     }
 
     .hero-kicker {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin: 0;
+      margin: 0 0 2px;
       font-weight: 700;
       letter-spacing: 0.02em;
     }
 
-    .hero h1 {
+    .hero-title {
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
       line-height: 1.02;
-      margin: 2px 0 6px;
+      margin: 0 0 6px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--text-main);
@@ -181,7 +162,7 @@
 
     .hero-subline {
       max-width: 760px;
-      margin: 0 auto 10px;
+      margin: 0 auto 12px;
       font-size: 1.02rem;
       color: var(--baby-blue);
       line-height: 1.55;
@@ -407,12 +388,17 @@
       }
 
       .hero-visual-wrap {
-        padding: 16px 8px 10px;
+        min-height: 260px;
+        padding: 14px 8px 8px;
       }
 
       .hero-logo-image {
-        width: 260px;
-        max-width: 88%;
+        width: 340px;
+        max-width: 90%;
+      }
+
+      .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
       }
     }
   </style>
@@ -435,14 +421,12 @@
   <main>
     <section class="hero">
       <div class="hero-visual-wrap">
-        <div class="hero-deco-left"></div>
-        <div class="hero-deco-right"></div>
-        <img src="Futuristic Anom Originals logo.png" alt="Anom Originals logo" class="hero-logo-image" />
+        <img src="Neon A and Infinity logo.png" alt="Anom Originals logo" class="hero-logo-image" />
       </div>
 
       <div class="hero-kicker">Digital Identity • Neon Mood • Custom Art</div>
 
-      <h1>Turn your vibe into art.</h1>
+      <h1 class="hero-title">Anom Originals</h1>
 
       <p class="hero-subline">
         Built for custom visuals, neon atmosphere, identity graphics, and original digital design with unmistakable AO energy.
