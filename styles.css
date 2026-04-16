@@ -113,7 +113,22 @@ img {
   opacity: 1;
 }
 
-/* ANOM'S CORNER NAV LINK */
+/* NAVIGATION LINKS - EPIC STYLING */
+.site-nav a {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(230, 87, 181, 0.1));
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.15);
+  transition: all 0.3s ease;
+}
+
+.site-nav a:hover {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25), 0 0 16px rgba(230, 87, 181, 0.15);
+}
+
+/* ANOM'S CORNER NAV LINK - FEATURED */
 .site-nav a[href="kids-corner.html"] {
   background: linear-gradient(90deg, var(--cyan), var(--magenta));
   color: #0a0a0a;
