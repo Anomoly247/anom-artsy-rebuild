@@ -107,6 +107,57 @@ img {
   transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
 }
 
+@media (max-width: 768px) {
+  .site-header {
+    padding: 12px 20px;
+    gap: 12px;
+  }
+
+  .brand img {
+    height: 32px;
+  }
+
+  .site-nav {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .site-nav a {
+    font-size: 0.65rem;
+    padding: 6px 10px !important;
+    border-radius: 6px !important;
+  }
+
+  .site-nav a[href="kids-corner.html"] {
+    padding: 6px 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .brand img {
+    height: 28px;
+  }
+
+  .site-nav {
+    gap: 6px;
+  }
+
+  .site-nav a {
+    font-size: 0.6rem;
+    padding: 5px 8px !important;
+    letter-spacing: 0.04em;
+  }
+
+  .site-nav a[href="kids-corner.html"] {
+    padding: 5px 10px !important;
+  }
+}
+
 .site-nav a:hover {
   color: var(--baby-blue);
   transform: translateY(-1px);
@@ -121,11 +172,19 @@ img {
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(230, 87, 181, 0.1));
   box-shadow: 0 0 8px rgba(34, 211, 238, 0.15);
   transition: all 0.3s ease;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.79rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .site-nav a:hover {
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
   box-shadow: 0 0 12px rgba(34, 211, 238, 0.25), 0 0 16px rgba(230, 87, 181, 0.15);
+  color: var(--baby-blue);
+  transform: translateY(-1px);
 }
 
 /* ANOM'S CORNER NAV LINK - FEATURED */
