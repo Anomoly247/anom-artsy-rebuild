@@ -113,6 +113,27 @@ img {
   opacity: 1;
 }
 
+/* ANOM'S CORNER NAV LINK */
+.site-nav a[href="kids-corner.html"] {
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  color: #0a0a0a;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.3),
+    0 0 20px rgba(230, 87, 181, 0.2);
+  transition: all 0.3s ease;
+}
+
+.site-nav a[href="kids-corner.html"]:hover {
+  color: #0a0a0a;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 0 18px rgba(34, 211, 238, 0.4),
+    0 0 28px rgba(230, 87, 181, 0.3);
+}
+
 /* MAIN */
 main {
   width: min(var(--max-width), calc(100% - 40px));

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anom's Corner • Kids Stories & Fun</title>
+  <meta name="description" content="Anom's Corner: A safe, colorful space for kids to watch digital storybooks while parents browse fun merchandise and stickers." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Kids Corner Specific Styles */
+    .kids-corner-hero .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--magenta);
+      text-shadow:
+        0 0 18px rgba(230, 87, 181, 0.3),
+        0 0 32px rgba(230, 87, 181, 0.15);
+    }
+
+    .kids-corner-hero .hero-subline {
+      color: var(--text-main);
+      font-size: 1.1rem;
+      text-shadow: 0 0 12px rgba(34, 211, 238, 0.08);
+    }
+
+    .kids-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 1400px;
+      padding: 0 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .kids-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-player-section {
+      background: linear-gradient(145deg, rgba(10, 10, 10, 0.9), rgba(20, 18, 39, 0.95));
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(34, 211, 238, 0.3);
+    }
+
+    .video-player-section h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.8rem;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      text-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #000;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 16px;
+    }
+
+    .video-info {
+      background: rgba(34, 211, 238, 0.05);
+      border-left: 4px solid var(--cyan);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .video-info h3 {
+      color: var(--cyan);
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .video-info p {
+      color: var(--text-soft);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .story-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0 0;
+    }
+
+    .story-list li {
+      padding: 12px;
+      margin-bottom: 10px;
+      background: rgba(230, 87, 181, 0.08);
+      border-left: 3px solid var(--magenta);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .story-list li:hover {
+      background: rgba(230, 87, 181, 0.15);
+      transform: translateX(4px);
+      color: var(--text-main);
+    }
+
+    .story-list li.active {
+      background: rgba(230, 87, 181, 0.2);
+      color: var(--magenta);
+      font-weight: 700;
+    }
+
+    .merch-browse-section {
+      background: linear-gradient(145deg, rgba(10, 10, 10, 0.9), rgba(20, 18, 39, 0.95));
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(230, 87, 181, 0.3);
+    }
+
+    .merch-browse-section h2 {
+      font-family: 'Georgia', serif;
+      font-size: 1.8rem;
+      color: var(--magenta);
+      margin-bottom: 20px;
+      text-shadow: 0 0 12px rgba(230, 87, 181, 0.2);
+    }
+
+    .merch-browse-section p {
+      color: var(--text-soft);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .merch-category-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .merch-category-btn {
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(34, 211, 238, 0.1), rgba(230, 87, 181, 0.1));
+      border: 2px solid rgba(230, 87, 181, 0.4);
+      color: var(--text-main);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .merch-category-btn:hover {
+      background: linear-gradient(90deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
+      border-color: var(--magenta);
+      box-shadow: 0 0 15px rgba(230, 87, 181, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .parent-note {
+      background: rgba(34, 211, 238, 0.08);
+      border: 2px solid rgba(34, 211, 238, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .parent-note h3 {
+      color: var(--cyan);
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+
+    .parent-note p {
+      color: var(--text-soft);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .cta-download {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      color: #0a0a0a;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow:
+        0 0 15px rgba(34, 211, 238, 0.2),
+        0 0 20px rgba(230, 87, 181, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .cta-download:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 20px rgba(34, 211, 238, 0.3),
+        0 0 30px rgba(230, 87, 181, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" aria-label="Anom Originals home">
+        <img src="ao-logo-neon-square.png" alt="AO Logo" />
+      </a>
+    </div>
+
+    <nav class="site-nav">
+      <a href="gallery.html">Work</a>
+      <a href="custom.html">Custom</a>
+      <a href="merch.html">Merch</a>
+      <a href="kids-corner.html">Anom's Corner</a>
+      <a href="custom.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero kids-corner-hero">
+      <div class="hero-copy">
+        <div class="hero-kicker">Safe • Colorful • Fun</div>
+        <h1 class="hero-title">Anom's Corner</h1>
+        <p class="hero-subline">
+          A magical space where kids watch engaging digital storybooks while parents explore fun merchandise and creative assets.
+        </p>
+      </div>
+    </section>
+
+    <div class="kids-layout">
+
+      <!-- Video Player Section -->
+      <div class="video-player-section">
+        <h2>📺 Watch Stories</h2>
+
+        <div class="video-container">
+          <video width="100%" height="auto" controls style="border-radius: 16px;">
+            <source src="assets/pixel_dot_full_story_final.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="video-info">
+          <h3>🌟 Pixel & Dot's New Adventure</h3>
+          <p>Join Pixel as they welcome their new baby sibling, Dot, to the family! A heartwarming story about nervous excitement, connection, and the special bond between siblings.</p>
+        </div>
+
+        <h3 style="color: var(--cyan); margin-top: 20px; margin-bottom: 12px;">More Stories Coming Soon!</h3>
+        <ul class="story-list">
+          <li class="active">🎮 Pixel & Dot's New Adventure</li>
+          <li>👵 Grandma Moves In (Coming Soon)</li>
+          <li>🎓 First Day of School (Coming Soon)</li>
+          <li>🌍 Making New Friends (Coming Soon)</li>
+        </ul>
+      </div>
+
+      <!-- Merchandise Browse Section -->
+      <div class="merch-browse-section">
+        <h2>🎁 Shop & Explore</h2>
+        <p>While the kids are watching, parents can browse our collection of fun stickers, digital assets, and merchandise!</p>
+
+        <div class="merch-category-buttons">
+          <a href="merch.html" class="merch-category-btn">🎨 Stickers & Merch</a>
+          <a href="gallery.html" class="merch-category-btn">💎 Digital Asset Packs</a>
+          <a href="gallery.html" class="merch-category-btn">🌈 Neon Collections</a>
+        </div>
+
+        <div class="parent-note">
+          <h3>👨‍👩‍👧‍👦 For Parents</h3>
+          <p>
+            Anom's Corner is designed to give you peace of mind. Our stories are age-appropriate, colorful, and crafted with care. While your kids enjoy engaging digital adventures, you can explore our full collection of merchandise and creative assets.
+          </p>
+          <a href="merch.html" class="cta-download">Browse All Products</a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    © 2026 Anom Originals • Where digital art meets identity.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+file '/home/ubuntu/anom-artsy-rebuild/assets/pixel_dot_scene_1_meeting.mp4'
+file '/home/ubuntu/anom-artsy-rebuild/assets/pixel_dot_scene_2_debugging.mp4'
+file '/home/ubuntu/anom-artsy-rebuild/assets/pixel_dot_scene_3_special_sound.mp4'
+file '/home/ubuntu/anom-artsy-rebuild/assets/pixel_dot_scene_4_sharing_room.mp4'
+file '/home/ubuntu/anom-artsy-rebuild/assets/pixel_dot_scene_5_sleeping.mp4'
