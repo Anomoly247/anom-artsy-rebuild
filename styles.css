@@ -81,13 +81,39 @@ img {
   text-decoration: none;
 }
 
+.brand a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.brand a:hover {
+  transform: scale(1.05);
+}
+
 .brand img {
   height: 42px;
   width: auto;
   display: block;
   filter:
-    drop-shadow(0 0 10px rgba(34, 211, 238, 0.22))
-    drop-shadow(0 0 16px rgba(230, 87, 181, 0.08));
+    drop-shadow(0 0 10px rgba(34, 211, 238, 0.3))
+    drop-shadow(0 0 16px rgba(230, 87, 181, 0.15));
+  transition: all 0.3s ease;
+}
+
+.brand a:hover img {
+  filter: 
+    drop-shadow(0 0 15px var(--cyan))
+    drop-shadow(0 0 25px var(--magenta));
+  animation: logoGlitch 0.4s infinite alternate;
+}
+
+@keyframes logoGlitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(-2px, -1px); }
+  60% { transform: translate(2px, 1px); }
+  80% { transform: translate(2px, -1px); }
+  100% { transform: translate(0); }
 }
 
 .site-nav {
@@ -98,30 +124,34 @@ img {
   justify-content: flex-end;
 }
 
-.nav-gear-icon {
+.nav-camera-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(34, 211, 238, 0.1);
-  border: 1px solid rgba(34, 211, 238, 0.3);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
+  border: 2px solid var(--cyan);
   color: var(--cyan);
-  transition: all 0.3s ease;
-  margin-left: 8px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-left: 12px;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
 }
 
-.nav-gear-icon:hover {
-  background: var(--cyan);
+.nav-camera-icon:hover {
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
   color: #0a0a0a;
-  box-shadow: 0 0 15px var(--cyan);
-  transform: rotate(45deg);
+  box-shadow: 
+    0 0 25px var(--cyan),
+    0 0 35px var(--magenta);
+  transform: scale(1.15) rotate(-5deg);
 }
 
-.nav-gear-icon svg {
-  width: 20px;
-  height: 20px;
+.nav-camera-icon svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 5px currentColor);
 }
 
 .site-nav a {
@@ -377,8 +407,14 @@ main {
   background: linear-gradient(90deg, var(--cyan), var(--magenta));
   color: #041018;
   box-shadow:
-    0 0 18px rgba(34, 211, 238, 0.18),
-    0 0 22px rgba(230, 87, 181, 0.08);
+    0 0 20px rgba(34, 211, 238, 0.3),
+    0 0 30px rgba(230, 87, 181, 0.2);
+  animation: buttonGlow 3s infinite alternate;
+}
+
+@keyframes buttonGlow {
+  0% { box-shadow: 0 0 15px rgba(34, 211, 238, 0.3), 0 0 25px rgba(230, 87, 181, 0.2); }
+  100% { box-shadow: 0 0 25px rgba(34, 211, 238, 0.5), 0 0 45px rgba(230, 87, 181, 0.4); }
 }
 
 .btn-primary:hover,
