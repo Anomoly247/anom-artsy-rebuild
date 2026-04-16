@@ -457,8 +457,9 @@ main {
   box-shadow:
     var(--shadow-deep),
     inset 0 0 0 1px rgba(255, 255, 255, 0.02);
-  transition:
-    transform 0.
+  transition: transform 0.25s ease;
+}
+
 /* ===== PREMIUM POLISH PASS ===== */
 
 /* Softer card glow + depth */
