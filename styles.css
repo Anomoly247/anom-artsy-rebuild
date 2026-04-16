@@ -164,48 +164,68 @@ img {
   opacity: 1;
 }
 
-/* NAVIGATION LINKS - EPIC STYLING */
+/* NAVIGATION LINKS - FULL NEON GLOW STYLING */
 .site-nav a {
   position: relative;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(230, 87, 181, 0.1));
-  box-shadow: 0 0 8px rgba(34, 211, 238, 0.15);
-  transition: all 0.3s ease;
+  padding: 8px 20px;
+  border-radius: 999px; /* Pill shape for all */
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 10px rgba(34, 211, 238, 0.1),
+    0 0 15px rgba(230, 87, 181, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   color: var(--text-main);
   text-decoration: none;
-  font-size: 0.79rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .site-nav a:hover {
-  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(230, 87, 181, 0.2));
-  box-shadow: 0 0 12px rgba(34, 211, 238, 0.25), 0 0 16px rgba(230, 87, 181, 0.15);
-  color: var(--baby-blue);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.4), rgba(230, 87, 181, 0.4));
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 
+    0 0 20px rgba(34, 211, 238, 0.3),
+    0 0 30px rgba(230, 87, 181, 0.2);
+  color: #fff;
+  transform: translateY(-3px) scale(1.05);
 }
 
-/* ANOM'S CORNER NAV LINK - FEATURED */
+/* ANOM'S CORNER NAV LINK - THE ULTIMATE FEATURED */
 .site-nav a[href="kids-corner.html"] {
   background: linear-gradient(90deg, var(--cyan), var(--magenta));
-  color: #0a0a0a;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-weight: 800;
+  color: #0a0a0a !important; /* Force dark text for readability on bright bg */
+  padding: 10px 24px;
+  font-weight: 900;
   box-shadow:
-    0 0 12px rgba(34, 211, 238, 0.3),
-    0 0 20px rgba(230, 87, 181, 0.2);
-  transition: all 0.3s ease;
+    0 0 15px rgba(34, 211, 238, 0.4),
+    0 0 25px rgba(230, 87, 181, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  border: none;
 }
 
 .site-nav a[href="kids-corner.html"]:hover {
-  color: #0a0a0a;
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-4px) scale(1.1);
   box-shadow:
-    0 0 18px rgba(34, 211, 238, 0.4),
-    0 0 28px rgba(230, 87, 181, 0.3);
+    0 0 25px rgba(34, 211, 238, 0.6),
+    0 0 40px rgba(230, 87, 181, 0.5),
+    inset 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* MOBILE ADJUSTMENTS FOR NEW BUTTONS */
+@media (max-width: 768px) {
+  .site-nav a {
+    padding: 6px 12px !important;
+    font-size: 0.65rem;
+  }
+  .site-nav a[href="kids-corner.html"] {
+    padding: 8px 16px !important;
+  }
 }
 
 /* MAIN */
