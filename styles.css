@@ -446,19 +446,7 @@ main {
     0 0 28px rgba(230, 87, 181, 0.18);
 }
 
-.btn-secondary {
-  background: rgba(230, 87, 181, 0.96);
-  color: #ffffff;
-  box-shadow:
-    0 0 18px rgba(230, 87, 181, 0.16),
-    0 0 24px rgba(230, 87, 181, 0.08);
-}
 
-.btn-secondary:hover {
-  box-shadow:
-    0 0 22px rgba(230, 87, 181, 0.24),
-    0 0 30px rgba(230, 87, 181, 0.14);
-}
 
 /* PANELS */
 .intro-panel,
