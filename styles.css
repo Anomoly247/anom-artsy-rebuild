@@ -406,6 +406,28 @@ main {
   margin-top: 12px;
   flex-wrap: wrap;
 }
+.payment-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-secondary {
+  background: #00d632;
+  color: #000;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #00ff41;
+}
 
 .btn-primary,
 .btn-outline,
