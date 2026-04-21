@@ -406,13 +406,6 @@ main {
   margin-top: 12px;
   flex-wrap: wrap;
 }
-.payment-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-  flex-wrap: wrap;
-}
-
 .btn-secondary {
   background: #00d632;
   color: #000;
