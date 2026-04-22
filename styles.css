@@ -151,8 +151,11 @@ img {
 .nav-camera-icon svg {
   width: 22px;
   height: 22px;
+  stroke: currentColor;
+  fill: none;
   filter: drop-shadow(0 0 5px currentColor);
 }
+
 
 .site-nav a {
   color: var(--text-main);
