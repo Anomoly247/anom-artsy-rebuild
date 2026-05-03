@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Contact | Anom Artsy Rebuild</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #00ffff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .terminal-container {
+            width: 100%;
+            max-width: 900px;
+            border: 4px solid #00ffff;
+            margin: 40px 20px;
+            background: #000000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 2px solid #ff00ff;
+        }
+        h1 {
+            font-size: 38px;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px #ff00ff;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: #161b22;
+            border-bottom: 1px solid #00ffff;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        nav a:hover { color: #ff00ff; }
+
+        .about-content {
+            padding: 40px;
+            line-height: 1.6;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .contact-card {
+            border: 1px solid #004d4d;
+            padding: 20px;
+            background: #0b0f19;
+        }
+        .contact-card h3 {
+            color: #ff00ff;
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 18px;
+        }
+        .link-button {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .link-button:hover {
+            background: #00ffff;
+            color: #000000;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #004d4d;
+            font-size: 14px;
+            color: #008b8b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-container">
+        <header>
+            <h1>ABOUT & CONTACT</h1>
+            <div style="color: #ff00ff; letter-spacing: 2px;">The Architect // Behind the Code</div>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="custom.html">Custom Work</a>
+            <a href="merch.html">Merch</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <div class="about-content">
+            <h2 style="color: #00ffff; text-transform: uppercase;">The Anom Story</h2>
+            <p>
+                I am a Digital Identity Architect specializing in high-contrast aesthetics and custom profile transformations. My work at <strong>AO</strong> is built on the belief that your online presence shouldn't just be a placeholder—it should be a curated art piece.
+            </p>
+            <p>
+                With a background in community moderation and graphic design, I bridge the gap between technical code and raw, expressive art. Every project is handled with an art-first mindset to ensure you stand out.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>Boutique Gear</h3>
+                    <p style="font-size: 14px;">Premium custom-cut apparel and high-end prints powered by Printful.</p>
+                    <a href="#" class="link-button">Shop Custom</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>AO Essentials</h3>
+                    <p style="font-size: 14px;">Classic AO branded gear, stickers, and everyday merchandise.</p>
+                    <a href="#" class="link-button">Shop Essentials</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Direct Connect</h3>
+                    <p style="font-size: 14px;">Find me in the lounges or send a PM for custom service inquiries.</p>
+                    <a href="#" class="link-button">Profile Contact</a>
+                </div>
+
+                <div class="contact-card">
+                    <h3>Inquiries</h3>
+                    <p style="font-size: 14px;">For brand collaborations, professional design projects, or AO support.</p>
+                    <a href="#" class="link-button">Send Message</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            ANOM ORIGINALS (AO) // 2026 ARCHIVE<br>
+            <span style="font-size: 18px; color: #00ffff; font-weight: bold; display: block; margin-top: 10px;">Signature: Anom</span>
+        </footer>
+    </div>
+
+</body>
+</html>
