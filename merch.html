@@ -1,402 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Merch • Anom Originals</title>
-  <meta name="description" content="Custom digital art, graphic design, and AI-assisted creative direction. Transform your personality into vibrant visual experiences with Anom Originals." />
-  <meta name="keywords" content="digital art, graphic design, custom illustrations, neon art, AI creative direction, personal branding, digital illustration services, emotes, profile pictures, merchandise" />
-  <meta name="author" content="Eliza Wood - Anom Originals" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <meta name="color-scheme" content="dark" />
-  <link rel="canonical" href="https://anomartsy.xyz/merch.html" />
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://anomartsy.xyz/merch.html" />
-  <meta property="og:title" content="Merch - Anom Originals" />
-  <meta property="og:description" content="Custom digital art, graphic design, and AI-assisted creative direction. Emotes, profile pictures, merchandise, and more." />
-  <meta property="og:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310519663404343710/8vpTXzdJWtzLJPMkvmwcBn/anom-social-preview-3znYqEaehtEFrNyV8Ao9sH.png" />
-  <meta property="og:site_name" content="Anom Originals" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merch | Anom Artsy Rebuild</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #00ffff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        .terminal-container {
+            width: 100%;
+            max-width: 900px;
+            border: 4px solid #00ffff;
+            margin: 40px 20px;
+            background: #000000;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 2px solid #ff00ff;
+        }
+        h1 {
+            font-size: 38px;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 5px;
+            text-shadow: 2px 2px #ff00ff;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: #161b22;
+            border-bottom: 1px solid #00ffff;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        nav a:hover { color: #ff00ff; }
 
+        /* MERCH LAYOUT */
+        .merch-section {
+            padding: 40px;
+            text-align: center;
+        }
+        .featured-kit {
+            border: 1px solid #004d4d;
+            background: #0b0f19;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-right: 5px solid #00ffff;
+        }
+        .merch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .merch-card {
+            border: 1px solid #ff00ff;
+            padding: 20px;
+            background: #000000;
+        }
+        .shop-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            border: 2px solid #ff00ff;
+            color: #ff00ff;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .shop-button:hover {
+            background: #ff00ff;
+            color: #000000;
+            box-shadow: 0 0 15px #ff00ff;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #004d4d;
+            font-size: 14px;
+            color: #008b8b;
+        }
+    </style>
+</head>
 <body>
 
-  <header class="site-header">
-    <div class="brand">
-      <a href="index.html" aria-label="Anom Originals home">
-        <img src="ao-logo-neon-square.png" alt="AO Logo" />
-      </a>
+    <div class="terminal-container">
+        <header>
+            <h1>MERCH</h1>
+            <div style="color: #ff00ff; letter-spacing: 2px;">AO Wearables // Digital-to-Physical</div>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="custom.html">Custom Work</a>
+            <a href="merch.html">Merch</a>
+            <a href="#">About</a>
+        </nav>
+
+        <div class="merch-section">
+            <div class="featured-kit">
+                <h2 style="color: #00ffff; text-transform: uppercase;">✦ The Architect Collection ✦</h2>
+                <p>Limited run apparel and accessories designed with the AO high-contrast signature. Art-first, premium-cut, intentional.</p>
+                <a href="#" class="shop-button">Enter Spreadshop</a>
+            </div>
+
+            <div class="merch-grid">
+                <div class="merch-card">
+                    <h3 style="color: #ff00ff;">Mood Patch Sets</h3>
+                    <p style="font-size: 14px;">Sticker sheets featuring the original Anom Mood Patch series.</p>
+                    <a href="#" style="color: #00ffff; font-size: 12px; text-decoration: none;">[ Browse Sets ]</a>
+                </div>
+                <div class="merch-card">
+                    <h3 style="color: #ff00ff;">Digital Bling</h3>
+                    <p style="font-size: 14px;">Exclusive profile backgrounds and avatar assets for fubar/socials.</p>
+                    <a href="#" style="color: #00ffff; font-size: 12px; text-decoration: none;">[ View Assets ]</a>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            ANOM ORIGINALS (AO) // 2026 ARCHIVE<br>
+            <span style="font-size: 18px; color: #00ffff; font-weight: bold; display: block; margin-top: 10px;">Signature: Anom</span>
+        </footer>
     </div>
-
-    <nav class="site-nav">
-      <a href="gallery.html">Work</a>
-      <a href="custom.html">Custom</a>
-      <a href="merch.html">Merch</a>
-      <a href="kids-corner.html">Anom's Corner</a>
-      <a href="mailto:helloanomoriginals@gmail.com">Contact</a>
-      <a href="https://anomoriginals.myspreadshop.com/" target="_blank" class="nav-camera-icon" aria-label="Spreadshirt Store">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-      </a>
-    </nav>
-  </header>
-
-  <main>
-
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="hero-kicker">The Boutique</div>
-        <h1 class="hero-title">Custom Gear &amp; Digital Assets</h1>
-        <p class="hero-subline">
-          Your identity, your gear. Use Anom Originals assets to build your own custom merch or download high-res packs.
-        </p>
-        <div class="hero-actions" style="margin-top: 24px;">
-          <a href="https://anomoriginals.myspreadshop.com/design-your-own" target="_blank" class="btn btn-primary">Design Your Own Gear</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-label">Lane 01</div>
-      <h2>Digital Asset Packs</h2>
-      <div class="card-grid">
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-animals-v1.png" alt="Neon Spirit Animals Pack v1" />
-          </div>
-          <h3>Neon Spirit Pack v1</h3>
-          <p>6 High-res neon animal icons: Wolf, Cat, Dragon, Owl, Panda, Lion.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-animals-v2.png" alt="Neon Spirit Animals Pack v2" />
-          </div>
-          <h3>Neon Spirit Pack v2</h3>
-          <p>6 High-res neon animal icons: Doberman, Fox, Shark, Eagle, Tiger, Bear.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-exotic-v1.png" alt="Exotic Neon Pack v1" />
-          </div>
-          <h3>Exotic Neon Pack v1</h3>
-          <p>6 High-res exotic neon icons: Chameleon, Peacock, Red Panda, Toucan, Axolotl, Lemur.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-streamer-v1.png" alt="Streamer & Creator Pack v1" />
-          </div>
-          <h3>Streamer & Creator Pack v1</h3>
-          <p>6 High-res neon streamer icons: Ban Hammer, Bug Fixed, FUBAR Mug, Level Up, Skull, Ghost.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-bar-v1.png" alt="Neon Bar & Drinks Pack v1" />
-          </div>
-          <h3>Neon Bar & Drinks Pack v1</h3>
-          <p>6 High-res neon drink icons: Martini, Cocktail, Whiskey, Beer, Champagne, Shot Glass.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-classic-v1.png" alt="Neon Classic Pointers Pack v1" />
-          </div>
-          <h3>Neon Classic Pointers Pack v1</h3>
-          <p>6 High-res neon classic icons: Paw Prints, Up/Down/Left/Right Pointers, Double Paw Print.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-streamer-v2.png" alt="Streamer & Creator Pack v2" />
-          </div>
-          <h3>Streamer & Creator Pack v2</h3>
-          <p>6 High-res neon streamer icons: Warning, Scanning, Top Secret, Mute, Crown, Gamepad.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-system-v1.png" alt="Neon System & Moderator Pack v1" />
-          </div>
-          <h3>Neon System & Moderator Pack v1</h3>
-          <p>6 High-res neon system icons: System Lock, Data Stream, Moderator, Heart, Alert, Crown.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-crit-chaos.webp" alt="Crit Chaos Asset Pack" />
-          </div>
-          <h3>Crit Chaos Pack</h3>
-          <p>High-energy gaming assets: Explosive barrels and glitch effects.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-anom-salute.webp" alt="Anom Salute Asset Pack" />
-          </div>
-          <h3>Anom Salute Pack</h3>
-          <p>Epic pixel-glitch D20 salute for the ultimate gaming identity.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-sarcasm-boundaries.jpg" alt="Sarcasm & Boundaries Pack" />
-          </div>
-          <h3>Sarcasm & Boundaries</h3>
-          <p>Neon icons for the unbothered: Sarcasm, Boundaries, and Risen & Shining.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-low-expectations.jpg" alt="Low Expectations & Self-Love Pack" />
-          </div>
-          <h3>Low Expectations</h3>
-          <p>3D rendered hearts and treats for the self-love journey.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-main-character.jpg" alt="Main Character & Resistance Pack" />
-          </div>
-          <h3>Main Character Pack</h3>
-          <p>Neon icons for the main character energy: Rest is Resistance and more.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-mental-fuel.jpg" alt="Mental Fuel & Snooze Life Pack" />
-          </div>
-          <h3>Mental Fuel Pack</h3>
-          <p>3D rendered "Adulting" humor: Bathtubs, Snooze Life, and Mental Fuel.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-3d-bling.jpg" alt="3D Bling Asset Pack" />
-          </div>
-          <h3>3D Bling Pack</h3>
-          <p>Premium 3D assets: Coffee Power, Rare Gem, Still Royal, and more.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-neon-celebration.jpg" alt="Neon Celebration Pack" />
-          </div>
-          <h3>Neon Celebration</h3>
-          <p>Cheers to Us, I've Earned This, and Adulting is Hard neon icons.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-gamer-dev.jpg" alt="Gamer & Dev Asset Pack" />
-          </div>
-          <h3>Gamer & Dev Pack</h3>
-          <p>Debugger, NPC Energy, Doomscroll, and Git Gud icons.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-cozy-chaos.png" alt="Cozy Chaos Asset Pack" />
-          </div>
-          <h3>Cozy Chaos Pack</h3>
-          <p>16+ relatable icons: Crime Scene Couch, Brain Glasses, and more.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-office-animals-v1.jpg" alt="Office Animals Pack v1" />
-          </div>
-          <h3>Office Animals v1</h3>
-          <p>Too Many Meetings, No Drama Llama, and Trash Panda Snack.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-glamour-attitude.png" alt="Glamour & Attitude Pack" />
-          </div>
-          <h3>Glamour & Attitude</h3>
-          <p>Bath & Bubbles, Lipstick & Attitude, and Morning Trouble.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-asset-algorithm-god.png" alt="The Algorithm God Asset" />
-          </div>
-          <h3>The Algorithm God</h3>
-          <p>High-impact individual scroll asset for the digital era.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-office-animals-v2.jpg" alt="Office Animals Pack v2" />
-          </div>
-          <h3>Office Animals v2</h3>
-          <p>Work From Home Kitty, Party Puppy, and Magic Kitty.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-infinite-potential.jpg" alt="Infinite Potential Pack" />
-          </div>
-          <h3>Infinite Potential</h3>
-          <p>Laughing Through It, Slay the Day, and Still Evolving neon icons.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-space-explorers.png" alt="Space Explorers Pack" />
-          </div>
-          <h3>Space Explorers</h3>
-          <p>Chibi Astronaut, Robot, and Alien assets for cosmic identity.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-disco-inferno.webp" alt="Disco Inferno Pack" />
-          </div>
-          <h3>Disco Inferno</h3>
-          <p>Dance Floor Diva and Disco Inferno neon badges.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-pixel-mystic.png" alt="Pixel Mystic Pack" />
-          </div>
-          <h3>Pixel Mystic</h3>
-          <p>Pixel art Swans, VR Gorilla, and Mystic Tree assets.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-chill-flow.webp" alt="Chill & Flow Pack" />
-          </div>
-          <h3>Chill & Flow</h3>
-          <p>Touch Grass, Chill Out, and Creative Flow neon badges.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-meme-legends.png" alt="Meme Legends Pack" />
-          </div>
-          <h3>Meme Legends</h3>
-          <p>This is Fine, Keyboard Cat, and Rickrolled chibi art.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-streamer-milestones.png" alt="Streamer Milestones Pack" />
-          </div>
-          <h3>Streamer Milestones</h3>
-          <p>Verified Star, Live Webcam, and 1M Views Rocket icons.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-party-vibes.webp" alt="Party & Vibes Pack" />
-          </div>
-          <h3>Party & Vibes</h3>
-          <p>Game On, Party Disco, Thrill Ride, and Good Vibes neon.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-gamer-culture.webp" alt="Gamer Culture Pack" />
-          </div>
-          <h3>Gamer Culture</h3>
-          <p>Lurker, Rickrolled, Touch Grass, and Glow Up pixel art.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-pack-new-year-chaos.png" alt="New Year Chaos Pack" />
-          </div>
-          <h3>New Year Chaos</h3>
-          <p>New Year Same Me, Midnight Countdown, and Resolution Failed.</p>
-          <span class="service-price">$10.00</span>
-          <a href="https://www.paypal.com/ncp/payment/QTZJ42GLP3KVQ" target="_blank" class="btn btn-primary">Buy Pack</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-label">Lane 02</div>
-      <h2>Novelty Gear</h2>
-      <p>Mugs, stickers, and water bottles featuring Anom Originals neon identity art.</p>
-      <div class="card-grid">
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-emote-coffee-power-clean.png" alt="Neon Identity Mug" />
-          </div>
-          <h3>Neon Identity Mug</h3>
-          <p>11oz ceramic mug with high-impact neon glow design.</p>
-          <span class="service-price">$18.00</span>
-          <a href="https://anomoriginals.myspreadshop.com/" target="_blank" class="btn btn-outline">Order on Spreadshop</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-identity-glitch-skull.png" alt="Glitch Skull Sticker" />
-          </div>
-          <h3>Glitch Skull Sticker</h3>
-          <p>Durable, high-opacity vinyl sticker with neon glitch effect.</p>
-          <span class="service-price">$6.00</span>
-          <a href="https://anomoriginals.myspreadshop.com/" target="_blank" class="btn btn-outline">Order on Spreadshop</a>
-        </div>
-        <div class="info-card">
-          <div class="service-img-wrapper">
-            <img src="ao-identity-glitch-heart.png" alt="Neon Heart Bottle" />
-          </div>
-          <h3>Neon Heart Bottle</h3>
-          <p>Stainless steel water bottle with vibrant neon heart art.</p>
-          <span class="service-price">$32.00</span>
-          <a href="https://anomoriginals.myspreadshop.com/" target="_blank" class="btn btn-outline">Order on Spreadshop</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="intro-panel" style="text-align:center;">
-      <div class="intro-label">More Drops Coming</div>
-      <h2>New designs are always in progress</h2>
-      <p>Follow the brand — this lane evolves constantly.</p>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    © 2026 Anom Originals • Built for Identity
-  </footer>
 
 </body>
 </html>
