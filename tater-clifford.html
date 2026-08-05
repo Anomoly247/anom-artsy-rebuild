@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tater & Clifford - Anom Universe</title>
-<style>
-body{margin:0;background:#0a0a0f;color:#fff;font-family:system-ui;text-align:center}
-.nav{position:sticky;top:0;background:#0a0a0f;padding:12px;border-bottom:1px solid #222;z-index:999}
-.nav a{margin:5px;padding:8px 14px;border-radius:8px;text-decoration:none;color:#fff;background:#222;display:inline-block;font-size:14px}
-.nav a.active{background:#8a5cff}
-.hero{padding:60px 20px;background:radial-gradient(circle at top,#1a1033,#0a0a0f)}
-.hero h1{font-size:48px;margin:0;text-shadow:0 0 20px #8a5cff}
-.card{max-width:800px;margin:30px auto;background:#111;border:1px solid #222;border-radius:16px;padding:30px;text-align:left}
-.btn{display:inline-block;margin:8px;padding:12px 20px;border-radius:10px;background:#8a5cff;color:#fff;text-decoration:none;font-weight:bold}
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tater & Clifford • Vault</title>
+<style>:root{--bg:#08080a;--line:#1e1e22;--cyan:#00fff0;--lime:#bfff00;--mag:#ff00e5;--text:#f5f5f7;--muted:#9a9aa3}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;line-height:1.5}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,10,.85);backdrop-filter:blur(16px)}.logo{font-weight:900;letter-spacing:.12em;font-size:14px}.logo span{color:var(--lime)}.navlinks{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.navlinks a:hover{color:var(--text)}
+.hero{position:relative;max-width:1200px;margin:0 auto;padding:96px 24px 32px;overflow:hidden}.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;pointer-events:none}.orb1{width:600px;height:600px;background:radial-gradient(circle,var(--lime),transparent 70%);top:-160px;left:-120px}.orb2{width:600px;height:600px;background:radial-gradient(circle,var(--mag),transparent 70%);top:10%;right:-180px}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:14px;position:relative}.h1{font-size:clamp(36px,8vw,80px);font-weight:900;line-height:.9;position:relative}.sub{max-width:560px;margin-top:14px;color:var(--muted);line-height:1.6;position:relative}.btn{display:inline-flex;margin-top:20px;padding:12px 22px;border-radius:999px;background:var(--text);color:var(--bg);font-weight:700;font-size:13px;position:relative}
+.label{max-width:1200px;margin:36px auto 0;padding:0 24px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.grid{max-width:1200px;margin:0 auto;padding:12px 24px 24px;display:grid;gap:14px}.grid.banners{grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}.card{background:#0f0f12;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s}.card:hover{border-color:rgba(191,255,0,.4);transform:translateY(-2px)}.card img{width:100%;display:block;background:#0f0f12;aspect-ratio:16/9;object-fit:contain;padding:12px}.meta{padding:10px 12px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line)}
+.footer{border-top:1px solid var(--line);padding:24px;max-width:1200px;margin:40px auto 0;color:var(--muted);font-size:12px;display:flex;justify-content:space-between}
 </style></head><body>
-
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:14px;background:#0a0a0f;position:sticky;top:0;z-index:999;border-bottom:1px solid #222">
-<a href="/" style="padding:10px 16px;border-radius:10px;background:#222 ;color:#fff;text-decoration:none;font-weight:bold;font-size:14px">HOME</a>
-<a href="/shop.html" style="padding:10px 16px;border-radius:10px;background:#222 ;color:#fff;text-decoration:none;font-weight:bold;font-size:14px">SHOP</a>
-<a href="/youtube.html" style="padding:10px 16px;border-radius:10px;background:#222 ;color:#fff;text-decoration:none;font-weight:bold;font-size:14px">WATCH</a>
-<a href="/tater-clifford.html" style="padding:10px 16px;border-radius:10px;background:#8a5cff ;color:#fff;text-decoration:none;font-weight:bold;font-size:14px">TATER & CLIFFORD</a>
-<a href="/pixel-dot.html" style="padding:10px 16px;border-radius:10px;background:#222 ;color:#fff;text-decoration:none;font-weight:bold;font-size:14px">PIXEL & DOT</a>
-</div>
-
-
-<div class="hero"><h1>🥔 Tater & Clifford</h1><p>Chaotic comfort duo - snack missions, lazy adventures & found-family chaos</p><p><a class="btn" href="https://www.youtube.com/@AnomOriginals-u1y" target="_blank">Watch on Main Channel</a> <a class="btn" style="background:#222" href="/youtube.html">Video Hub</a></p></div>
-<div class="card"><h2>Meet The Duo</h2><p><b>Tater</b> - small, round, snack-driven philosopher.</p><p><b>Clifford</b> - big feelings, big loyalty, big chaos energy.</p><p>Together they turn everyday boredom into comfort adventures.</p><h3>Coming Soon</h3><ul><li>Episodes + Lore Vault</li><li>Comic strips</li><li>Merch - plush + stickers</li></ul></div>
+<div class="nav"><div class="logo">ANOM <span>ORIGINALS</span></div><div class="navlinks"><a href="/">HOME</a><a href="/#lanes">LANES</a><a href="/kids-corner.html">KIDS CORNER</a><a href="/shop.html">SHOP</a></div></div>
+<div class="hero"><div class="orb orb1"></div><div class="orb orb2"></div><div class="kicker">Achievements • 3 Files Live</div><div class="h1">TATER &<br>CLIFFORD</div><div class="sub"><b>Tater</b> — anxious, big-hearted chaos gremlin. <b>Clifford</b> — stoic, deadpan guardian. Vault where you log wins. Live from assets/achievements/.</div><a class="btn" href="/shop.html">Shop Their Drop</a></div>
+<div class="label">Masters</div><div class="grid banners"><div class="card"><img src="assets/achievements/tater_clifford_MASTER_feet_transparent.png"><div class="meta">Master Transparent • Feet Visible</div></div></div>
+<div class="label">Vault Chronicles</div><div class="grid banners"><div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles.webp"><div class="meta">Vault Chronicles</div></div><div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles-1.webp"><div class="meta">Vault Chronicles Alt</div></div></div>
+<div class="footer"><div>© Anom Originals • Achievements wired</div><div><a href="/">Home</a></div></div>
 </body></html>
