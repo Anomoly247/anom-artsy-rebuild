@@ -1,1 +1,87 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anom Originals</title><style>body{margin:0;background:#08080a;color:#f5f5f7;font-family:system-ui,sans-serif}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:10;padding:14px 20px;border-bottom:1px solid #1e1e22;background:#08080acc;backdrop-filter:blur(12px);display:flex;justify-content:space-between;align-items:center}nav{display:flex;gap:16px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9a9aa3}nav a:hover{color:#fff}h1{font-size:clamp(40px,9vw,80px);line-height:.9;margin:72px 24px 0;font-weight:900}h1 span{color:#00fff0;text-shadow:0 0 24px #00fff099}.sub{color:#9a9aa3;margin:18px 24px;max-width:520px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:24px;max-width:1100px}.card{border:1px solid #1e1e22;border-radius:16px;padding:18px;background:#111113;transition:.2s;display:block}.card:hover{border-color:#00fff055;transform:translateY(-2px)}.card h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.card p{font-size:13px;color:#9a9aa3;line-height:1.5}</style></head><body><header><a href="/"><b>ANOM ORIGINALS</b></a><nav><a href="#lanes">Lanes</a><a href="kids-corner.html">Kids Corner</a><a href="shop.html">Shop</a><a href="assets/">Assets</a></nav></header><h1 id="top">IDENTITY,<br><span>AMPLIFIED</span></h1><p class="sub">Neon identity art, portraits, creator packs, and digital spaces built around your vibe. <a href="#lanes" style="color:#00fff0;text-decoration:underline">Explore lanes ↓</a></p><div class="grid" id="lanes"><a class="card" href="assets/"><h3>Backgrounds</h3><p>4K headers & neon environments →</p></a><a class="card" href="assets/"><h3>Profile Pics</h3><p>Identity portraits & avatars →</p></a><a class="card" href="assets/"><h3>Mood Collection</h3><p>Expressive neon art →</p></a><a class="card" href="shop.html"><h3>Merch Designs</h3><p>Your real merch art lives in assets/ →</p></a><a class="card" href="assets/"><h3>Motion Vault</h3><p>MP4 loops →</p></a><a class="card" href="shop.html"><h3>Lifestyle</h3><p>Stickers, cases, gear →</p></a></div><div style="padding:24px;color:#5a5a63;font-size:11px;border-top:1px solid #1e1e22;margin-top:40px">© anomartsy.xyz • <a href="#top" style="text-decoration:underline">Back to top ↑</a></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anom Originals • Identity in Every Pixel</title>
+<style>
+:root{--bg:#08080a;--card:#111113;--line:#1e1e22;--cyan:#00fff0;--mag:#ff00e5;--pur:#7c3aed;--lime:#bfff00;--text:#f5f5f7;--muted:#9a9aa3}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,10,.8);backdrop-filter:blur(16px)}
+.logo{font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+.logo span{color:var(--cyan)}
+.navlinks{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.navlinks a:hover{color:#fff}
+.hero{position:relative;padding:96px 24px 64px;max-width:1200px;margin:0 auto}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;pointer-events:none}
+.orb1{width:520px;height:520px;background:radial-gradient(circle at 30% 30%,var(--mag),transparent 70%);top:-120px;left:-120px}
+.orb2{width:640px;height:640px;background:radial-gradient(circle at 50% 50%,var(--cyan),transparent 70%);top:10%;right:-180px}
+.orb3{width:480px;height:480px;background:radial-gradient(circle at 50% 50%,var(--pur),transparent 70%);bottom:-100px;left:30%}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+.h1{font-size:clamp(40px,9vw,92px);line-height:.9;font-weight:900;letter-spacing:-.04em}
+.h1 .amp{color:transparent;-webkit-text-stroke:1px var(--muted)}
+.h1 .glow{color:var(--text);text-shadow:0 0 20px rgba(0,255,240,.6),0 0 60px rgba(255,0,229,.35)}
+.sub{max-width:560px;margin-top:24px;color:var(--muted);font-size:17px;line-height:1.6}
+.cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:14px 22px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);transition:.2s}
+.btn-primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn-ghost{color:var(--text)}
+.grid{max-width:1200px;margin:0 auto;padding:32px 24px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:20px;padding:22px;transition:.25s}
+.card:hover{border-color:rgba(0,255,240,.35);transform:translateY(-2px)}
+.card h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.card p{font-size:14px;line-height:1.6;color:var(--muted)}
+.tag{display:inline-flex;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-bottom:12px}
+.section-label{max-width:1200px;margin:0 auto;padding:0 24px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.video-wrap{max-width:1200px;margin:24px auto 80px;padding:0 24px}
+.video{border-radius:24px;border:1px solid var(--line);background:#0f0f12;aspect-ratio:16/9;display:grid;place-items:center;position:relative;overflow:hidden}
+.video-inner{position:relative;text-align:center;padding:24px}
+.footer{border-top:1px solid var(--line);padding:32px 24px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="logo">ANOM <span>ORIGINALS</span></div>
+  <div class="navlinks">
+    <a href="#lanes">Lanes</a>
+    <a href="kids-corner.html">Kids Corner</a>
+    <a href="shop.html">Shop</a>
+  </div>
+</div>
+<div class="hero">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="kicker">anomartsy.xyz • Identity in Every Pixel</div>
+  <div class="h1"><div class="amp">IDENTITY,</div><div class="glow">AMPLIFIED</div></div>
+  <div class="sub">Your personality isn't generic — your visuals shouldn't be either. Neon identity art, custom portraits, creator packs, and digital spaces built around your vibe.</div>
+  <div class="cta">
+    <a class="btn btn-primary" href="#lanes">Explore The Lanes</a>
+    <a class="btn btn-ghost" href="kids-corner.html">View Kids Corner</a>
+  </div>
+</div>
+<div class="section-label" id="lanes">Visual Solutions & Digital Goods — 6 Lanes</div>
+<div class="grid">
+  <div class="card"><div class="tag" style="color:var(--cyan)">Backgrounds</div><h3>4K Headers & Neon Environments</h3><p>Custom headers and immersive neon worlds.</p></div>
+  <div class="card"><div class="tag" style="color:var(--mag)">Profile Pictures</div><h3>Identity Portraits & Avatars</h3><p>Glow, personality, and presence.</p></div>
+  <div class="card"><div class="tag">Mood Collection</div><h3>Expressive Neon Art</h3><p>Humor, emotion, attitude, storytelling.</p></div>
+  <div class="card"><div class="tag">Merch Designs</div><h3>High-Impact Neon Graphics</h3><p>Apparel-ready, print-ready.</p></div>
+  <div class="card"><div class="tag" style="color:var(--lime)">Motion Vault</div><h3>Motion Art for Screens</h3><p>Neon motion loops for frames & streams.</p></div>
+  <div class="card"><div class="tag">Lifestyle & Gear</div><h3>Stickers, Cases, Accessories</h3><p>Built from your assets/ folder.</p></div>
+</div>
+<div class="video-wrap">
+  <div class="video">
+    <div class="video-inner">
+      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px">Featured • Pixel & Dot</div>
+      <div style="font-size:clamp(20px,4vw,32px);font-weight:800">Pixel & Dot's New Adventure</div>
+      <div style="color:var(--muted);margin-top:8px;font-size:14px">Watch the full story in Kids Corner</div>
+      <div style="margin-top:18px"><a class="btn btn-primary" href="kids-corner.html">Open Kids Corner</a></div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div>© Anom Originals • anomartsy.xyz</div>
+  <div>Dark base • Bold but clean</div>
+</div>
+</body>
+</html>
