@@ -1,70 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shop • Anom Originals</title>
-<style>
-:root{--bg:#08080a;--line:#1e1e22;--cyan:#00fff0;--mag:#ff00e5;--lime:#bfff00;--text:#f5f5f7;--muted:#9a9aa3}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}
-a{color:inherit;text-decoration:none}
-.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,10,.85);backdrop-filter:blur(16px)}
-.logo{font-weight:900;letter-spacing:.12em;font-size:14px}.logo span{color:var(--cyan)}
-.navlinks{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.navlinks a:hover,.navlinks a.active{color:var(--text)}
-.hero{max-width:1200px;margin:0 auto;padding:56px 24px 24px}
-.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:12px}
-.h1{font-size:clamp(28px,6vw,56px);font-weight:900;line-height:.95}
-.sub{color:var(--muted);margin-top:12px;max-width:600px;line-height:1.6}
-.section{max-width:1200px;margin:32px auto 0;padding:0 24px}
-.label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:32px}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.card img{width:100%;aspect-ratio:1;object-fit:contain;background:#111;display:block;padding:8px}
-.card .meta{padding:10px 12px;font-size:11px;color:var(--muted);letter-spacing:.06em}
-.shopbox{border-top:1px solid var(--line);margin-top:24px}
-.shopbox iframe{width:100%;height:85vh;border:0;display:block}
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shop • Anom Originals</title>
+<style>:root{--bg:#08080a;--line:#1e1e22;--cyan:#00fff0;--lime:#bfff00;--text:#f5f5f7;--muted:#9a9aa3}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;line-height:1.5}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,10,.85);backdrop-filter:blur(16px)}.logo{font-weight:900;letter-spacing:.12em;font-size:14px}.logo span{color:var(--cyan)}.navlinks{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.navlinks a.active{color:var(--text)}
+.hero{max-width:1200px;margin:0 auto;padding:56px 24px 24px}.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}.h1{font-size:clamp(28px,6vw,56px);font-weight:900;line-height:.95}.sub{color:var(--muted);margin-top:10px;max-width:600px;line-height:1.6}
+.section{max-width:1200px;margin:28px auto 0;padding:0 24px}.label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px}.card{background:#0f0f12;border:1px solid var(--line);border-radius:16px;overflow:hidden}.card img{width:100%;aspect-ratio:1;object-fit:contain;background:#0f0f12;display:block;padding:8px}.card .meta{padding:10px 12px;font-size:10px;color:var(--muted);letter-spacing:.08em;border-top:1px solid var(--line)}
+.shopbox{border-top:1px solid var(--line);margin-top:24px;background:#0a0a0c}.shophead{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;max-width:1200px;margin:0 auto}.shophead h3{font-size:16px}.shophead a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
+.shopframe{width:100%;height:85vh;border:0;display:block;background:#fff}
 .footer{border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;max-width:1200px;margin:40px auto 0}
-</style>
-</head>
-<body>
-<div class="nav">
-  <div class="logo">ANOM <span>ORIGINALS</span></div>
-  <div class="navlinks">
-    <a href="/">Home</a>
-    <a href="/#lanes">Lanes</a>
-    <a href="/kids-corner.html">Kids Corner</a>
-    <a href="/shop.html" class="active">Shop</a>
-  </div>
-</div>
-<div class="hero">
-  <div class="kicker">Spreadshop + Local Vault</div>
-  <div class="h1">SHOP • IDENTITY TO WEAR</div>
-  <div class="sub">Your real art from assets/ is now wired above the Spreadshop — visitors see your brand, moods, and achievements first.</div>
-</div>
-<div class="section">
-  <div class="label">Brand • assets/brand/</div>
-  <div class="grid">
-    <div class="card"><img src="assets/brand/Anom_Originals_Neon_Branding_Blueprint.png"><div class="meta">Branding Blueprint</div></div>
-    <div class="card"><img src="assets/brand/ao_cyberpunk_emblem.webp"><div class="meta">Cyberpunk Emblem</div></div>
-    <div class="card"><img src="assets/brand/ao_duo_neon_chibi.webp"><div class="meta">Duo Neon Chibi</div></div>
-  </div>
-  <div class="label">Moods • assets/moods/</div>
-  <div class="grid">
-    <div class="card"><img src="assets/moods/mood_memes_MASTER_feet_transparent.png"><div class="meta">Mood Master</div></div>
-    <div class="card"><img src="assets/moods/mood_memes_game_builds_banner.webp"><div class="meta">Game Builds Banner</div></div>
-  </div>
-  <div class="label">Achievements • assets/achievements/</div>
-  <div class="grid">
-    <div class="card"><img src="assets/achievements/tater_clifford_MASTER_feet_transparent.png"><div class="meta">Tater Clifford Master</div></div>
-    <div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles.webp"><div class="meta">Vault Chronicles</div></div>
-    <div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles-1.webp"><div class="meta">Vault Alt</div></div>
-  </div>
-</div>
-<div class="shopbox">
-  <div class="section"><div class="label" style="padding-top:16px">Live Spreadshop • anomoriginals.myspreadshop.com</div></div>
-  <iframe src="https://anomoriginals.myspreadshop.com/" loading="lazy"></iframe>
-</div>
-<div class="footer"><div>© Anom Originals • Wired to local assets/ + Spreadshop</div><div><a href="/kids-corner.html">Kids Corner</a> • <a href="/">Home</a></div></div>
-</body>
-</html>
-
+</style></head><body>
+<div class="nav"><div class="logo">ANOM <span>ORIGINALS</span></div><div class="navlinks"><a href="/">HOME</a><a href="/#lanes">LANES</a><a href="/kids-corner.html">KIDS CORNER</a><a href="/shop.html" class="active">SHOP</a></div></div>
+<div class="hero"><div class="kicker">Local Vault + Spreadshop • No Redirect Fix</div><div class="h1">SHOP • IDENTITY TO WEAR</div><div class="sub">Your real art from assets/ is on top. Shops below are sandboxed so they can't hijack the page. Main store + games store.</div></div>
+<div class="section"><div class="label">Brand • assets/brand/</div><div class="grid"><div class="card"><img src="assets/brand/Anom_Originals_Neon_Branding_Blueprint.png"><div class="meta">Branding Blueprint</div></div><div class="card"><img src="assets/brand/ao_cyberpunk_emblem.webp"><div class="meta">Cyberpunk Emblem</div></div><div class="card"><img src="assets/brand/ao_duo_neon_chibi.webp"><div class="meta">Duo Neon Chibi</div></div></div>
+<div class="label">Moods • assets/moods/</div><div class="grid"><div class="card"><img src="assets/moods/mood_memes_MASTER_feet_transparent.png"><div class="meta">Mood Master</div></div><div class="card"><img src="assets/moods/mood_memes_game_builds_banner.webp"><div class="meta">Game Builds Banner</div></div></div>
+<div class="label">Achievements • assets/achievements/</div><div class="grid"><div class="card"><img src="assets/achievements/tater_clifford_MASTER_feet_transparent.png"><div class="meta">Tater Clifford Master</div></div><div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles.webp"><div class="meta">Vault Chronicles</div></div><div class="card"><img src="assets/achievements/tater_clifford_vault_chronicles-1.webp"><div class="meta">Vault Alt</div></div></div></div>
+<div class="shopbox"><div class="shophead"><h3>Main Store • anomoriginals.myspreadshop.com</h3><a href="https://anomoriginals.myspreadshop.com/" target="_blank">Open in new tab →</a></div><iframe class="shopframe" src="https://anomoriginals.myspreadshop.com/" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
+<div class="shopbox" style="border-top:1px solid var(--line)"><div class="shophead"><h3>Games Store • Second Shop</h3><a href="https://anomoriginals.myspreadshop.com/" target="_blank">Replace this link with your games store URL →</a></div><div style="padding:24px;max-width:1200px;margin:0 auto;color:var(--muted);font-size:14px;line-height:1.6">Tell me your games store URL (the other Spreadshop link) and I'll wire it here so both live on anomartsy.xyz/shop.html — main on top, games below. For now this is placeholder so page doesn't break. Your anomartsy.lol domain still exists, just not linked here yet.</div></div>
+<div class="footer"><div>© Anom Originals • No-redirect shop fix</div><div><a href="/kids-corner.html">Kids Corner</a> • <a href="/">Home</a></div></div>
+</body></html>
