@@ -1,51 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anom Originals — Identity Amplified</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anom Originals — Identity in Every Pixel</title>
+<meta name="description" content="Anom Originals is a neon-cyberpunk digital identity brand. Art, characters, merch, and Sanctuary — a social platform built for identity, not imitation.">
+<link rel="canonical" href="https://anomartsy.xyz/">
+<meta property="og:title" content="Anom Originals — Identity in Every Pixel">
+<meta property="og:description" content="A neon-cyberpunk digital identity brand. Art, characters, merch, and the Sanctuary platform.">
+<meta property="og:url" content="https://anomartsy.xyz/">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#08080a;--line:#1e1e22;--cyan:#00fff0;--mag:#ff00e5;--lime:#bfff00;--text:#f5f5f7;--muted:#9a9aa3}
-*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;line-height:1.5}
+:root{
+  --bg:#0a0a0f; --panel:#12121a; --line:#2a2a38;
+  --cyan:#00eaff; --magenta:#ff00c8; --gold:#e8b64c;
+  --text:#e8e8ee; --muted:#8a8a99; --dim:#b8b8c4;
+  --mono:'Space Mono',ui-monospace,monospace;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-.nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);background:rgba(8,8,10,.85);backdrop-filter:blur(16px)}
-.logo{font-weight:900;letter-spacing:.12em;font-size:14px}.logo span{color:var(--cyan)}
-.navlinks{display:flex;gap:18px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;padding:16px 24px}
+.logo{font-family:var(--mono);font-weight:700;letter-spacing:.14em;font-size:15px}
+.logo span{color:var(--cyan)}
+.navlinks{display:flex;gap:22px;font-size:12px;font-family:var(--mono);letter-spacing:.1em;color:var(--muted);flex-wrap:wrap}
 .navlinks a:hover{color:var(--text)}
-.hero{position:relative;max-width:1200px;margin:0 auto;padding:96px 24px 48px;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.38;pointer-events:none}
-.orb1{width:600px;height:600px;background:radial-gradient(circle,var(--mag),transparent 70%);top:-180px;left:-150px}
-.orb2{width:700px;height:700px;background:radial-gradient(circle,var(--cyan),transparent 70%);top:18%;right:-220px}
-.orb3{width:500px;height:500px;background:radial-gradient(circle,var(--lime),transparent 70%);bottom:-120px;left:30%}
-.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px;position:relative}
-.h1{font-size:clamp(42px,9vw,96px);font-weight:900;line-height:.88;letter-spacing:-.03em;position:relative}
-.h1 .outline{color:transparent;-webkit-text-stroke:1px #3a3a40}
-.h1 .glow{color:var(--text);text-shadow:0 0 32px rgba(0,255,240,.55)}
-.sub{max-width:540px;margin-top:18px;color:var(--muted);font-size:15px;line-height:1.6;position:relative}
-.btns{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;position:relative}
-.btn{display:inline-flex;padding:13px 24px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:.2s}
-.btn.primary{background:var(--text);color:var(--bg)}.btn.ghost{border:1px solid var(--line);color:var(--text)}
-.section{max-width:1200px;margin:0 auto;padding:32px 24px}
-.label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.card{display:block;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--line);border-radius:20px;padding:20px;transition:.2s}
-.card:hover{border-color:rgba(0,255,240,.45);transform:translateY(-3px)}
-.card .top{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
-.card h3{font-size:18px;margin-bottom:8px}.card p{font-size:13px;color:var(--muted);line-height:1.5}.card .go{margin-top:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
-.featured{margin-top:48px;background:linear-gradient(180deg,rgba(124,58,237,.12),rgba(255,0,229,.06));border:1px solid var(--line);border-radius:24px;padding:28px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
-@media(max-width:800px){.featured{grid-template-columns:1fr}}
-.featured img{width:100%;border-radius:16px;background:#111;aspect-ratio:16/9;object-fit:contain;padding:8px}
-.footer{border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;max-width:1200px;margin:60px auto 0}
-</style></head><body>
-<div class="nav"><div class="logo">ANOM <span>ORIGINALS</span></div><div class="navlinks"><a href="/">HOME</a><a href="#lanes">LANES</a><a href="/kids-corner.html">KIDS CORNER</a><a href="/shop.html">SHOP</a></div></div>
-<div class="hero"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="kicker">Anom's Universe • Homeworld 7.5K • Wired</div><div class="h1"><span class="outline">IDENTITY,</span><br><span class="glow">AMPLIFIED</span></div><div class="sub">This is the map, not the merch. 6 lanes wired to your real assets/ — 19 files live. Click a lane, you land in its world.</div><div class="btns"><a class="btn primary" href="#lanes">Explore Lanes</a><a class="btn ghost" href="/shop.html">Shop Drop</a></div></div>
-<div class="section" id="lanes"><div class="label">6 Lanes • All Wired • Clickable</div><div class="grid">
-<a class="card" href="/kids-corner.html"><div class="top">Backgrounds • 11 files • Pixel & Dot</div><h3>Backgrounds</h3><p>Kawaii space banners, magical banners, sticker sheets. Lives in assets/backgrounds/ — fixed contain sizing.</p><div class="go">Enter →</div></a>
-<a class="card" href="/shop.html"><div class="top">Brand • 3 files</div><h3>Merch Designs</h3><p>Neon blueprint, cyberpunk emblem, duo chibi. Wired above Spreadshop.</p><div class="go">Shop →</div></a>
-<a class="card" href="/shop.html"><div class="top">Moods • 2 files</div><h3>Mood Collection</h3><p>Master transparent + game builds banner.</p><div class="go">Shop →</div></a>
-<a class="card" href="/tater-clifford.html"><div class="top">Achievements • 3 files</div><h3>Tater & Clifford Vault</h3><p>Vault chronicles. Wired to assets/achievements/.</p><div class="go">Enter Vault →</div></a>
-<a class="card" href="/youtube.html"><div class="top">MP4 Motion Vault</div><h3>Watch + Lessons</h3><p>Anom's Corner YouTube hub, Pixel & Dot shorts.</p><div class="go">Watch →</div></a>
-<a class="card" href="/shop.html"><div class="top">Lifestyle & Gear</div><h3>Shop + Spreadshop</h3><p>Local vault grids + live iframe. Identity to wear.</p><div class="go">Shop →</div></a>
-</div>
-<div class="featured"><div><div class="label" style="margin-bottom:8px;color:var(--cyan)">Featured • Pixel & Dot</div><h3 style="font-size:28px;line-height:1.1;margin-bottom:10px">Kids Corner fixed sizing</h3><p style="color:var(--muted);line-height:1.6;font-size:14px">Banners now 16:9 contain, stickers 1:1 contain. No more cropped hands. Master shows full feet.</p><div class="btns"><a class="btn primary" href="/kids-corner.html">Open Kids Corner</a><a class="btn ghost" href="https://www.youtube.com/@anomoriginals" target="_blank">YouTube</a></div></div><img src="assets/backgrounds/pixel_dot_kawaii_sticker.webp" alt="preview"></div></div>
-<div class="footer"><div>© Anom Originals • Homeworld wired to 19 assets</div><div><a href="/kids-corner.html">Kids Corner</a> • <a href="/shop.html">Shop</a></div></div>
-</body></html>
+.hero{padding:96px 0 72px;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+.h1{font-family:var(--mono);font-size:clamp(38px,7.5vw,76px);font-weight:700;line-height:1.02;letter-spacing:-.01em}
+.h1 em{font-style:normal;color:var(--magenta)}
+.lede{max-width:620px;margin-top:22px;font-size:17px;color:var(--dim)}
+.rule{display:flex;gap:6px;margin-top:28px}
+.rule i{display:block;width:34px;height:4px}
+.rule i:nth-child(1){background:var(--cyan)}
+.rule i:nth-child(2){background:var(--magenta)}
+.rule i:nth-child(3){background:var(--gold)}
+.cta{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 26px;border-radius:2px;font-size:13px;font-weight:600;letter-spacing:.04em;border:1px solid var(--cyan);color:var(--cyan);transition:.2s}
+.btn:hover{background:var(--cyan);color:var(--bg)}
+.btn.solid{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.btn.solid:hover{background:transparent;color:var(--magenta)}
+.sec{padding:72px 0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.h2{font-family:var(--mono);font-size:clamp(22px,3.4vw,32px);font-weight:700;margin-bottom:10px}
+.sectext{max-width:640px;color:var(--muted);font-size:15px;margin-bottom:34px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px;transition:.2s;display:block}
+.card:hover{transform:translateY(-3px)}
+.card.c:hover{border-color:var(--cyan);box-shadow:0 0 22px rgba(0,234,255,.14)}
+.card.m:hover{border-color:var(--magenta);box-shadow:0 0 22px rgba(255,0,200,.14)}
+.card.g:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(232,182,76,.14)}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.card.c .tag{color:var(--cyan)} .card.m .tag{color:var(--magenta)} .card.g .tag{color:var(--gold)}
+.ct{font-size:20px;font-weight:600;margin-bottom:8px}
+.cd{font-size:14px;color:var(--muted);margin-bottom:18px}
+.go{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
+.rar{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+.tier b{font-family:var(--mono);font-size:15px;display:block;margin-bottom:4px}
+.tier span{font-size:12px;color:var(--muted)}
+.t1 b{color:var(--cyan)} .t2 b{color:var(--cyan)} .t3 b{color:var(--magenta)} .t4 b{color:var(--gold)}
+footer{border-top:1px solid var(--line);padding:52px 0 40px;margin-top:32px}
+.fgrid{display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:40px}
+.fh{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.fl{display:flex;flex-direction:column;gap:9px;font-size:14px;color:var(--dim)}
+.fl a:hover{color:var(--cyan)}
+.fbot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+.fbot .mono{font-family:var(--mono);letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <div class="logo">ANOM <span>ORIGINALS</span></div>
+  <div class="navlinks">
+    <a href="/">HOME</a>
+    <a href="#worlds">WORLDS</a>
+    <a href="/kids-corner.html">KIDS CORNER</a>
+    <a href="/shop.html">SHOP</a>
+    <a href="/youtube.html">WATCH</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kicker">Anom Originals · Est. 2019 · Woodbridge, VA</div>
+  <h1 class="h1">Identity in<br>every <em>pixel</em>.</h1>
+  <p class="lede">A neon-cyberpunk creative studio building digital identity — original art, character worlds, wearable design, and a social platform where your profile is something you earn, not something you copy.</p>
+  <div class="rule"><i></i><i></i><i></i></div>
+  <div class="cta">
+    <a class="btn solid" href="/shop.html">Enter the Archive</a>
+    <a class="btn" href="#worlds">Explore the Worlds</a>
+  </div>
+</div></header>
+
+<section class="sec" id="worlds"><div class="wrap">
+  <div class="eyebrow">Six Worlds</div>
+  <h2 class="h2">One universe, connected.</h2>
+  <p class="sectext">Every world shares the same DNA — neon on near-black, cyan, magenta, gold — while keeping its own character.</p>
+
+  <div class="grid">
+    <a class="card m" href="/shop.html">
+      <div class="tag">The Anomoly Archive</div>
+      <div class="ct">Shop</div>
+      <div class="cd">Original digital art and wearable design across four rarity tiers. Neon-dark identity you can actually put on.</div>
+      <div class="go">BROWSE →</div>
+    </a>
+
+    <a class="card c" href="/kids-corner.html">
+      <div class="tag">Kids Corner</div>
+      <div class="ct">Pixel &amp; Dot</div>
+      <div class="cd">A curious light sprite and a sleepy grounding force. Gentle stories about sharing, empathy, and figuring people out.</div>
+      <div class="go">ENTER →</div>
+    </a>
+
+    <a class="card g" href="/tater-clifford.html">
+      <div class="tag">Security Division</div>
+      <div class="ct">Tater &amp; Clifford</div>
+      <div class="cd">K9 Security and Executive Leadership. An anxious gremlin, a stoic guardian, and the achievement vault they preside over.</div>
+      <div class="go">OPEN VAULT →</div>
+    </a>
+
+    <a class="card c" href="/sanctuary.html">
+      <div class="tag">In Development</div>
+      <div class="ct">Sanctuary</div>
+      <div class="cd">A social platform built for identity over imitation — earned profiles, private lounges, and a community economy.</div>
+      <div class="go">LEARN MORE →</div>
+    </a>
+
+    <a class="card m" href="/youtube.html">
+      <div class="tag">Motion Vault</div>
+      <div class="ct">Watch</div>
+      <div class="cd">Anom's Corner, Pixel &amp; Dot shorts, and calm neon loops. Soft chaos with gentle lessons underneath.</div>
+      <div class="go">WATCH →</div>
+    </a>
+
+    <a class="card g" href="/houses.html">
+      <div class="tag">Art &amp; Identity</div>
+      <div class="ct">The Gallery</div>
+      <div class="cd">Backgrounds, mood collections, brand marks, and the visual language everything else is built from.</div>
+      <div class="go">VIEW →</div>
+    </a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="eyebrow">The Archive</div>
+  <h2 class="h2">Four rarity tiers.</h2>
+  <p class="sectext">Every piece in the Anomoly Archive is graded. Novelty is where most people start. Anomoly is where almost nobody gets.</p>
+  <div class="rar">
+    <div class="tier t1"><b>Novelty</b><span>Open edition</span></div>
+    <div class="tier t2"><b>Curiosity</b><span>Limited run</span></div>
+    <div class="tier t3"><b>Relic</b><span>Rare</span></div>
+    <div class="tier t4"><b>Anomoly</b><span>One of one</span></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <div class="fh">Worlds</div>
+      <div class="fl">
+        <a href="/kids-corner.html">Kids Corner</a>
+        <a href="/tater-clifford.html">Tater &amp; Clifford</a>
+        <a href="/sanctuary.html">Sanctuary</a>
+        <a href="/houses.html">Gallery</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Shop</div>
+      <div class="fl">
+        <a href="/shop.html">The Anomoly Archive</a>
+        <a href="https://anomarsty.lol" target="_blank" rel="noopener">anomarsty.lol</a>
+        <a href="https://anomoriginals.myspreadshop.com" target="_blank" rel="noopener">Spreadshop</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Follow</div>
+      <div class="fl">
+        <a href="https://www.youtube.com/@anomoriginals" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://github.com/Anomoly247" target="_blank" rel="noopener">GitHub</a>
+        <a href="/youtube.html">Motion Vault</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Studio</div>
+      <div class="fl">
+        <a href="mailto:anom@anomartsy.xyz">anom@anomartsy.xyz</a>
+        <span>Woodbridge, Virginia</span>
+        <span>Elizabeth Wood, Founder</span>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span class="mono">© 2026 ANOM ORIGINALS · IDENTITY IN EVERY PIXEL</span>
+    <span>anomartsy.xyz</span>
+  </div>
+</div></footer>
+
+</body>
+</html>
