@@ -70,7 +70,15 @@ async function startServer() {
       createContext,
     })
   );
-  // development mode uses Vite, production mode uses static files
+  // Keep every API and OAuth request inside the server boundary. This terminal
+  // API handler runs after registered API routes and before Vite/static SPA
+  // fallbacks, preventing unregistered endpoints from rendering index.html.
+  app.use("/api", (_req, res) => {
+    res.status(404).json({ error: "API route not found" });
+  });
+
+  // Development mode uses Vite; production mode uses static files. Both
+  // fallbacks are intentionally registered only after every server endpoint.
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {

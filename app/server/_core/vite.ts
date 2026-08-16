@@ -6,6 +6,10 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import viteConfig from "../../vite.config";
 
+export function shouldServeSpaFallback(requestPath: string) {
+  return !requestPath.startsWith("/api/");
+}
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -22,6 +26,11 @@ export async function setupVite(app: Express, server: Server) {
 
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
+    if (!shouldServeSpaFallback(req.path)) {
+      res.status(404).json({ error: "API route not found" });
+      return;
+    }
+
     const url = req.originalUrl;
 
     try {
@@ -60,8 +69,13 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // Fall through to the SPA only for non-API client routes. API and OAuth
+  // requests must continue to return server responses instead of HTML.
+  app.use("*", (req, res) => {
+    if (!shouldServeSpaFallback(req.path)) {
+      res.status(404).json({ error: "API route not found" });
+      return;
+    }
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
