@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `status` enum('active','suspended') DEFAULT 'active' NOT NULL;

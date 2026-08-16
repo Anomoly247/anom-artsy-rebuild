@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /owner-settings
+Disallow: /api/
+Sitemap: https://anomsanctuary-bxvj5ftt.manus.space/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
