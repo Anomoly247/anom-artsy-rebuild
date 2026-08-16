@@ -558,7 +558,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <h3 className="text-xl font-bold text-[#00ffff] mb-4">Quick Actions</h3>
-            <div className="space-y-3">
+            <div className="quick-actions space-y-3">
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/profile")}>
                 View Profile
               </Button>
@@ -568,13 +568,13 @@ export default function Home() {
               <Button className="w-full btn-neon-gold" onClick={() => navigate("/achievements")}>
                 View Achievements
               </Button>
-              <Button className="w-full btn-neon-cyan" onClick={() => navigate("/kids-corner")}>
+              <Button className="w-full btn-neon-cyan" onClick={() => window.location.assign("/pages/kids-corner.html")}>
                 Anom's Corner
               </Button>
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/feed")}>
                 Social Feed
               </Button>
-              <Button className="w-full btn-neon-outline" onClick={() => navigate("/games")}>
+              <Button className="w-full btn-neon-outline" onClick={() => window.location.assign("/pages/tater-clifford.html")}>
                 Play Games
               </Button>
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/merch")}>

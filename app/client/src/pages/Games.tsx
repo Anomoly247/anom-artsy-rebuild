@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Gamepad2, Trophy, Zap, Star, X } from "lucide-react";
+import { Compass, Gamepad2, Grid3X3, Radar, Sprout, Trophy, Zap, Star, X } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -305,6 +305,45 @@ export default function Games() {
     },
   });
 
+  const districtBStations = [
+    {
+      id: "sky-navigator",
+      title: "Sky Navigator",
+      description: "Chart the neon routes above District B and plot a safe course.",
+      icon: Compass,
+      accent: "cyan",
+      actionLabel: "Select Station",
+      portal: null,
+    },
+    {
+      id: "identity-grid",
+      title: "Identity Grid",
+      description: "Decode the district signals and align every identity marker.",
+      icon: Grid3X3,
+      accent: "magenta",
+      actionLabel: "Select Station",
+      portal: null,
+    },
+    {
+      id: "arcade-high-score-matrix",
+      title: "Arcade High-Score Matrix",
+      description: "Review the live matrix and claim your place in the arcade record.",
+      icon: Radar,
+      accent: "gold",
+      actionLabel: "Open Matrix",
+      portal: null,
+    },
+    {
+      id: "moonberry-farm",
+      title: "Moonberry Farm",
+      description: "Cross the realm portal and enter Anom's Corner in Moonberry.",
+      icon: Sprout,
+      accent: "gold",
+      actionLabel: "Enter Portal",
+      portal: "/pages/kids-corner.html",
+    },
+  ] as const;
+
   const games = [
     {
       id: "trivia",
@@ -428,6 +467,62 @@ export default function Games() {
             </div>
           </Card>
         </div>
+
+        {/* District B Arcade Roster */}
+        <section className="mb-12" aria-labelledby="district-b-arcade-title">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#ffd700]">District B / Arcade Access</p>
+              <h2 id="district-b-arcade-title" className="text-3xl font-bold text-[#00ffff]">District B Arcade</h2>
+            </div>
+            <p className="max-w-xl text-sm text-[#7a7f8e]">Select a station to reserve its future gameplay loop, or cross the active portal into Moonberry Farm.</p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {districtBStations.map((station) => {
+              const StationIcon = station.icon;
+              const accent = station.accent === "cyan"
+                ? { border: "#00ffff", text: "#00ffff", glow: "rgba(0, 255, 255, 0.22)" }
+                : station.accent === "magenta"
+                  ? { border: "#ff00cc", text: "#ff00cc", glow: "rgba(255, 0, 204, 0.2)" }
+                  : { border: "#ffd700", text: "#ffd700", glow: "rgba(255, 215, 0, 0.2)" };
+
+              return (
+                <Card
+                  key={station.id}
+                  className="flex h-full flex-col bg-[#1a1f2e] p-5 transition-transform hover:-translate-y-1"
+                  style={{ border: `1px solid ${accent.border}`, boxShadow: `0 0 16px ${accent.glow}` }}
+                >
+                  <div className="mb-5 flex items-start justify-between gap-4">
+                    <div className="rounded-lg bg-[#0b0e14] p-3" style={{ color: accent.text }}>
+                      <StationIcon className="h-7 w-7" aria-hidden="true" />
+                    </div>
+                    <span className="rounded-full border border-[#2a2f3e] px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#7a7f8e]">
+                      {station.portal ? "Portal" : "Coming soon"}
+                    </span>
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold" style={{ color: accent.text }}>{station.title}</h3>
+                  <p className="mb-6 flex-1 text-sm leading-6 text-[#7a7f8e]">{station.description}</p>
+                  <Button
+                    variant="outline"
+                    className="w-full bg-transparent font-bold"
+                    style={{ borderColor: accent.border, color: accent.text }}
+                    onClick={() => {
+                      if (station.portal) {
+                        window.location.assign(station.portal);
+                        return;
+                      }
+                      toast.info(`${station.title} is staged as a District B Arcade placeholder.`);
+                    }}
+                  >
+                    <StationIcon className="mr-2 h-4 w-4" aria-hidden="true" />
+                    {station.actionLabel}
+                  </Button>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
 
         {/* Games Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
