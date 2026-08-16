@@ -24,11 +24,12 @@ import {
   saveBackgroundImageRecord,
   setActiveBackgroundId,
 } from "../../../shared/backgroundImageStore";
-import { EXTERNAL_ROUTES } from "@/lib/externalRoutes";
+import { useOwnerView } from "@/contexts/OwnerViewContext";
 
 export default function Home() {
   const { user, loading, isAuthenticated, logout } = useAuth();
   const [, navigate] = useLocation();
+  const { linkConfig } = useOwnerView();
   const [backgroundUrl, setBackgroundUrl] = useState<string>(readStoredBackground);
   const [showBgMenu, setShowBgMenu] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -162,7 +163,7 @@ export default function Home() {
             <Button className="w-full btn-neon-magenta text-xs">Visit Anom's Corner</Button>
           </div>
 
-          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.assign(EXTERNAL_ROUTES.shop)}>
+          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.assign(linkConfig.store)}>
             <div className="text-4xl mb-3">🛍️</div>
             <h3 className="text-xl font-bold text-[#ffd700] mb-2">Anom Originals Shop</h3>
             <p className="text-gray-400 text-sm mb-4">Discover bespoke artwork, apparel, and verified creator gear.</p>
@@ -186,7 +187,7 @@ export default function Home() {
                 Join the Anom Artsy community — a neon-lit sanctuary where family comes first, creativity thrives, and your identity matters. Every interaction drives real-world social good impact.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button onClick={() => window.location.href = "https://universe.anomartsy.xyz/"} className="btn-neon-cyan text-lg py-6 px-8">
+                <Button onClick={() => window.location.href = linkConfig.universe} className="btn-neon-cyan text-lg py-6 px-8">
                   Enter the Universe
                 </Button>
                 <a href="/mission-hub">
@@ -635,7 +636,7 @@ export default function Home() {
               <Button className="w-full btn-neon-outline" onClick={() => window.location.assign("/pages/tater-clifford.html")}>
                 Play Games
               </Button>
-              <Button className="w-full btn-neon-cyan" onClick={() => window.location.assign(EXTERNAL_ROUTES.shop)}>
+              <Button className="w-full btn-neon-cyan" onClick={() => window.location.assign(linkConfig.store)}>
                 Shop / Merch
               </Button>
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/collaboration")}>

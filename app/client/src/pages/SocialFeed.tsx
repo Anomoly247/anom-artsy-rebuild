@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heart, MessageCircle, Share2, Zap, Play, Volume2, ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
+import { useOwnerView } from "@/contexts/OwnerViewContext";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -31,6 +32,7 @@ interface Reel {
 export default function SocialFeed() {
   const { isAuthenticated, loading } = useAuth();
   const [, navigate] = useLocation();
+  const { linkConfig } = useOwnerView();
   const [posts, setPosts] = useState<FeedPost[]>([
     {
       id: "1",
@@ -277,7 +279,7 @@ export default function SocialFeed() {
               <p className="text-sm text-gray-300 mb-4">{activeReel.description}</p>
               <div className="flex justify-between items-center">
                 <span className="text-xs text-[#7a7f8e]">Creator: {activeReel.creator} • 👁️ {activeReel.views.toLocaleString()} views</span>
-                <Button className="btn-neon-cyan" onClick={() => window.open("https://anomoriginals.myspreadshop.com", "_blank")}>
+                <Button className="btn-neon-cyan" onClick={() => window.open(linkConfig.store, "_blank")}>
                   Support Creator Merch
                 </Button>
               </div>

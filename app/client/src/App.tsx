@@ -31,10 +31,18 @@ import AnomsCorner from "./pages/AnomsCorner";
 import PixelProfile from "./pages/PixelProfile";
 import DotProfile from "./pages/DotProfile";
 import ExternalRedirect from "./components/ExternalRedirect";
-import { EXTERNAL_ROUTES } from "./lib/externalRoutes";
+import { useOwnerView } from "./contexts/OwnerViewContext";
+import { OwnerViewProvider } from "./contexts/OwnerViewContext";
+import { OwnerPanel, OwnerViewToggle } from "./components/OwnerViewControls";
 
-const OpenUniverse = () => <ExternalRedirect destination={EXTERNAL_ROUTES.universe} label="Anom's Universe" />;
-const OpenShop = () => <ExternalRedirect destination={EXTERNAL_ROUTES.shop} label="the Anom Originals shop" />;
+const OpenUniverse = () => {
+  const { linkConfig } = useOwnerView();
+  return <ExternalRedirect destination={linkConfig.universe} label="Anom's Universe" />;
+};
+const OpenShop = () => {
+  const { linkConfig } = useOwnerView();
+  return <ExternalRedirect destination={linkConfig.store} label="the Anom Originals shop" />;
+};
 
 const AppRoutes = () => {
   // make sure to consider if you need authentication for certain routes
@@ -106,9 +114,13 @@ function App() {
               },
             }}
           />
-          <ColorCustomizer />
-          <AppRoutes />
-          {isAuthenticated && <ChatWidget />}
+          <OwnerViewProvider>
+            <OwnerViewToggle />
+            <ColorCustomizer />
+            <AppRoutes />
+            <OwnerPanel />
+            {isAuthenticated && <ChatWidget />}
+          </OwnerViewProvider>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
