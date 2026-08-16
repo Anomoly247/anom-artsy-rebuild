@@ -9,9 +9,10 @@ Homeworld: anomartsy.xyz
 
 Realms:
 - / -> Art & Identity - Anom Originals neon identity art
-- /kids-corner.html -> Anoms Corner - Moonberry Farm, Pixel & Dot
-- /tater-clifford.html -> Security Division - Role-Swap Day + Walmart Work + mission
+- /pages/kids-corner.html -> Anoms Corner - Moonberry Farm, Pixel & Dot
+- /pages/tater-clifford.html -> Security Division - Role-Swap Day + Walmart Work + mission
 - /sanctuary.html -> Sanctuary social platform placeholder (profiles, coin economy, lounges)
+- /dashboard -> React member dashboard (Manus OAuth, Glow Points, lounges, games)
 - /store.html -> redirects to Spreadshop, later anomartsy.lol
 - /gallery.html -> art vault
 - /about.html -> brand story
@@ -29,8 +30,11 @@ Pulled from Anoms-Hub/anom-artsy - this is where your whole economy lives:
 - assets/backgrounds/ -> 4K headers, profile pics
 - assets/brand/ -> from ANOMS-Brand-Kit (logos, colors, typography)
 
-## App (profiles + auth)
-- app/frontend, backend -> from anom-originals-app + anom-social-sanctuary
+## Unified production build
+- The repository root remains the native static Homeworld at `/`.
+- The Node server in `app/` copies the root static site and `/pages/` realm files into its production bundle.
+- The React member application is mounted at `/dashboard` and keeps all internal SPA routes below that path.
+- OAuth callbacks land at `/dashboard`, so authenticated members do not fall back onto the public Homeworld.
 
 ## Brand
 Anom Originals • Identity in Every Pixel

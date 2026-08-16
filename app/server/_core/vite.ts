@@ -48,20 +48,29 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
-      : path.resolve(import.meta.dirname, "public");
-  if (!fs.existsSync(distPath)) {
+  const dashboardDistPath = path.resolve(import.meta.dirname, "public");
+  const siteDistPath = path.resolve(import.meta.dirname, "site");
+
+  if (!fs.existsSync(dashboardDistPath)) {
     console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
+      `Could not find the dashboard build directory: ${dashboardDistPath}, make sure to build the client first`
+    );
+  }
+  if (!fs.existsSync(siteDistPath)) {
+    console.error(
+      `Could not find the static Homeworld directory: ${siteDistPath}, make sure to run the unified build first`
     );
   }
 
-  app.use(express.static(distPath));
+  app.use("/dashboard", express.static(dashboardDistPath));
+  app.get(["/dashboard", "/dashboard/*"], (_req, res) => {
+    res.sendFile(path.resolve(dashboardDistPath, "index.html"));
+  });
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  // The root origin stays a native static Homeworld. This includes /pages/* realm
+  // documents and preserves legacy root HTML aliases during the transition.
+  app.use(express.static(siteDistPath));
+  app.use((_req, res) => {
+    res.status(404).sendFile(path.resolve(siteDistPath, "index.html"));
   });
 }

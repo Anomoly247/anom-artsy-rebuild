@@ -2,7 +2,7 @@ import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/_core/hooks/useAuth";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Router, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -99,9 +99,11 @@ function App() {
               },
             }}
           />
-          <ColorCustomizer />
-          <AppRoutes />
-          {isAuthenticated && <ChatWidget />}
+          <Router base="/dashboard">
+            <ColorCustomizer />
+            <AppRoutes />
+            {isAuthenticated && <ChatWidget />}
+          </Router>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
