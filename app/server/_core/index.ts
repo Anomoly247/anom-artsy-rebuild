@@ -2,11 +2,7 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
-import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";
-import { registerStorageProxy } from "./storageProxy";
-import { appRouter } from "../routers";
-import { createContext } from "./context";
+import { registerBackendRoutes } from "./backendRoutes";
 import { serveStatic, setupVite } from "./vite";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -34,48 +30,9 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  registerStorageProxy(app);
-  registerOAuthRoutes(app);
-
-  // Shop and Merch redirects to https://anomartsy.lol
-  app.get(["/shop", "/shop.html", "/merch", "/lol-shop"], (req, res) => {
-    res.redirect(301, "https://anomartsy.lol");
-  });
-
-  // Server-Sent Events (SSE) stream for real-time lounge messages and unread badge sync
-  const sseClients = new Set<import("express").Response>();
-  app.get("/api/stream/lounge", (req, res) => {
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
-    res.flushHeaders?.();
-
-    res.write(`data: ${JSON.stringify({ type: "connected", timestamp: Date.now() })}\n\n`);
-    sseClients.add(res);
-
-    const heartbeat = setInterval(() => {
-      res.write(`data: ${JSON.stringify({ type: "ping", timestamp: Date.now() })}\n\n`);
-    }, 15000);
-
-    req.on("close", () => {
-      clearInterval(heartbeat);
-      sseClients.delete(res);
-    });
-  });
-  // tRPC API
-  app.use(
-    "/api/trpc",
-    createExpressMiddleware({
-      router: appRouter,
-      createContext,
-    })
-  );
-  // Keep every API and OAuth request inside the server boundary. This terminal
-  // API handler runs after registered API routes and before Vite/static SPA
-  // fallbacks, preventing unregistered endpoints from rendering index.html.
-  app.use("/api", (_req, res) => {
-    res.status(404).json({ error: "API route not found" });
-  });
+  // Register all server-owned routes before any development or production SPA
+  // middleware. `registerBackendRoutes` ends with the API JSON fallback.
+  registerBackendRoutes(app);
 
   // Development mode uses Vite; production mode uses static files. Both
   // fallbacks are intentionally registered only after every server endpoint.
