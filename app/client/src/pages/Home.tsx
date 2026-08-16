@@ -185,7 +185,7 @@ export default function Home() {
                 Join the Anom Artsy community — a neon-lit sanctuary where family comes first, creativity thrives, and your identity matters. Every interaction drives real-world social good impact.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button onClick={startLogin} className="btn-neon-cyan text-lg py-6 px-8">
+                <Button onClick={() => window.location.href = "https://universe.anomartsy.xyz/"} className="btn-neon-cyan text-lg py-6 px-8">
                   Enter the Universe
                 </Button>
                 <a href="/mission-hub">
