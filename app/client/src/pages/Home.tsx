@@ -24,6 +24,7 @@ import {
   saveBackgroundImageRecord,
   setActiveBackgroundId,
 } from "../../../shared/backgroundImageStore";
+import { EXTERNAL_ROUTES } from "@/lib/externalRoutes";
 
 export default function Home() {
   const { user, loading, isAuthenticated, logout } = useAuth();
@@ -161,7 +162,7 @@ export default function Home() {
             <Button className="w-full btn-neon-magenta text-xs">Visit Anom's Corner</Button>
           </div>
 
-          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.href = "https://anomartsy.lol"}>
+          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.assign(EXTERNAL_ROUTES.shop)}>
             <div className="text-4xl mb-3">🛍️</div>
             <h3 className="text-xl font-bold text-[#ffd700] mb-2">Anom Originals Shop</h3>
             <p className="text-gray-400 text-sm mb-4">Discover bespoke artwork, apparel, and verified creator gear.</p>
@@ -634,7 +635,7 @@ export default function Home() {
               <Button className="w-full btn-neon-outline" onClick={() => window.location.assign("/pages/tater-clifford.html")}>
                 Play Games
               </Button>
-              <Button className="w-full btn-neon-cyan" onClick={() => window.location.href = "https://anomartsy.lol"}>
+              <Button className="w-full btn-neon-cyan" onClick={() => window.location.assign(EXTERNAL_ROUTES.shop)}>
                 Shop / Merch
               </Button>
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/collaboration")}>

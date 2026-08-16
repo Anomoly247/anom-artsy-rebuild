@@ -14,7 +14,6 @@ import LoungeDetail from "./pages/LoungeDetail";
 import KidsCorner from "./pages/KidsCorner";
 import SocialFeed from "./pages/SocialFeed";
 import Games from "./pages/Games";
-import Merch from "./pages/Merch";
 import Admin from "./pages/Admin";
 import PublicProfile from "./pages/PublicProfile";
 import CollaborationStation from "./pages/CollaborationStation";
@@ -31,13 +30,21 @@ import MusicLibrary from "./pages/MusicLibrary";
 import AnomsCorner from "./pages/AnomsCorner";
 import PixelProfile from "./pages/PixelProfile";
 import DotProfile from "./pages/DotProfile";
+import ExternalRedirect from "./components/ExternalRedirect";
+import { EXTERNAL_ROUTES } from "./lib/externalRoutes";
+
+const OpenUniverse = () => <ExternalRedirect destination={EXTERNAL_ROUTES.universe} label="Anom's Universe" />;
+const OpenShop = () => <ExternalRedirect destination={EXTERNAL_ROUTES.shop} label="the Anom Originals shop" />;
 
 const AppRoutes = () => {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/dashboard"} component={Home} />
+      <Route path={"/dashboard"} component={OpenUniverse} />
+      <Route path={"/sanctuary"} component={OpenUniverse} />
+      <Route path={"/shop"} component={OpenShop} />
+      <Route path={"/store"} component={OpenShop} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/wallet"} component={Wallet} />
       <Route path={"/achievements"} component={Achievements} />
@@ -49,7 +56,7 @@ const AppRoutes = () => {
       <Route path={"/characters/dot"} component={DotProfile} />
       <Route path={"/feed"} component={SocialFeed} />
       <Route path={"/games"} component={Games} />
-      <Route path={"/merch"} component={Merch} />
+      <Route path={"/merch"} component={OpenShop} />
       <Route path="/admin" component={Admin} />
       <Route path="/collaboration" component={CollaborationStation} />
       <Route path="/owner-settings" component={OwnerSettings} />
