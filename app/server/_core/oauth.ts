@@ -6,6 +6,8 @@ import { getSessionCookieOptions } from "./cookies";
 import { ENV } from "./env";
 import { sdk } from "./sdk";
 
+export const POST_LOGIN_REDIRECT = "/dashboard";
+
 function getQueryParam(req: Request, key: string): string | undefined {
   const value = req.query[key];
   return typeof value === "string" ? value : undefined;
@@ -82,21 +84,26 @@ export function registerOAuthRoutes(app: Express) {
     try {
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
+      const normalizedUserInfo = userInfo as typeof userInfo & {
+        id?: string | null;
+        sub?: string | null;
+      };
+      const userOpenId = normalizedUserInfo.openId || normalizedUserInfo.id || normalizedUserInfo.sub;
 
-      if (!userInfo.openId) {
-        res.status(400).json({ error: "openId missing from user info" });
+      if (!userOpenId) {
+        res.status(400).json({ error: "openId, id, or sub missing from user info" });
         return;
       }
 
       await db.upsertUser({
-        openId: userInfo.openId,
+        openId: userOpenId,
         name: userInfo.name || null,
         email: userInfo.email ?? null,
         loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
         lastSignedIn: new Date(),
       });
 
-      const sessionToken = await sdk.createSessionToken(userInfo.openId, {
+      const sessionToken = await sdk.createSessionToken(userOpenId, {
         name: userInfo.name || "",
         expiresInMs: ONE_YEAR_MS,
       });
@@ -104,7 +111,7 @@ export function registerOAuthRoutes(app: Express) {
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, "/");
+      res.redirect(302, POST_LOGIN_REDIRECT);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       res.status(500).json({ error: "OAuth callback failed" });
