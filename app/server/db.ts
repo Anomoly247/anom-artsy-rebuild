@@ -1,7 +1,7 @@
 import { and, desc, eq, gt, gte, inArray, like, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
-import { InsertUser, users, userProfiles, decorationPackages, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips } from "../drizzle/schema";
+import { InsertUser, users, userProfiles, decorationPackages, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips, feedPosts, gameScores, userNotifications, userSouvenirBadges, seasonalChallenges, challengeParticipants } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -688,8 +688,8 @@ export async function getCollaborationProjects() {
   try {
     return await db.select().from(collaborationProjects);
   } catch (error) {
-    console.error("[Database] Failed to get collaboration projects:", error);
-    throw error;
+    console.warn("[Database] Collaboration projects table missing or query failed, returning fallback:", error);
+    return [];
   }
 }
 
@@ -1403,5 +1403,261 @@ export async function updateLoungeSoundscape(
   } catch (error) {
     console.error("[Database] Failed to update lounge soundscape:", error);
     throw error;
+  }
+}
+
+export async function getLiveActivityFeed(limit = 10) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    const [posts, scores, events] = await Promise.all([
+      safeRows(db.select().from(feedPosts).orderBy(desc(feedPosts.createdAt)).limit(limit), "feed_posts"),
+      safeRows(db.select().from(gameScores).orderBy(desc(gameScores.createdAt)).limit(limit), "game_scores"),
+      safeRows(db.select().from(auditLog).where(eq(auditLog.entityType, "event")).orderBy(desc(auditLog.createdAt)).limit(limit), "audit_events"),
+    ]);
+
+    const items = [
+      ...posts.map((p) => ({
+        id: `post-${p.id}`,
+        title: p.title || "Community Update",
+        description: p.content || "",
+        category: p.postType,
+        createdAt: p.createdAt,
+      })),
+      ...scores.map((s) => ({
+        id: `score-${s.id}`,
+        title: `High Score in ${s.gameName}`,
+        description: `Scored ${s.score} points and earned ${s.coinReward} Glow Points!`,
+        category: "achievement",
+        createdAt: s.createdAt,
+      })),
+      ...events.map((e) => {
+        const details = (e.details ?? {}) as Record<string, unknown>;
+        return {
+          id: `event-${e.id}`,
+          title: typeof details.title === "string" ? details.title : e.action,
+          description: typeof details.description === "string" ? details.description : "New universe announcement.",
+          category: "update",
+          createdAt: e.createdAt,
+        };
+      }),
+    ];
+
+    items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return items.slice(0, limit);
+  } catch (error) {
+    console.warn("[Database] Failed to fetch live activity feed:", error);
+    return [];
+  }
+}
+
+export async function recordGameScore(userId: number, gameName: string, score: number, coinReward: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    const result = await db.insert(gameScores).values({
+      userId,
+      gameName,
+      score,
+      coinReward,
+    });
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to record game score:", error);
+    throw error;
+  }
+}
+
+export async function getGameScoresHistory(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(gameScores)
+      .where(eq(gameScores.userId, userId))
+      .orderBy(desc(gameScores.createdAt));
+  } catch (error) {
+    console.warn("[Database] Failed to get user game score history:", error);
+    return [];
+  }
+}
+
+export async function getGlobalLeaderboard(limit = 10) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    const rows = await db
+      .select({
+        userId: gameScores.userId,
+        userName: users.name,
+        topScore: sql<number>`max(${gameScores.score})`,
+        totalGames: sql<number>`count(*)`,
+      })
+      .from(gameScores)
+      .leftJoin(users, eq(gameScores.userId, users.id))
+      .groupBy(gameScores.userId, users.name)
+      .orderBy(desc(sql`max(${gameScores.score})`))
+      .limit(limit);
+
+    return rows;
+  } catch (error) {
+    console.warn("[Database] Failed to get global leaderboard:", error);
+    return [];
+  }
+}
+
+export async function mintSouvenirBadge(userId: number, badgeKey: string, badgeTitle: string, realmName = "Moonberry Farm", imageUrl?: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    const existing = await db
+      .select()
+      .from(userSouvenirBadges)
+      .where(and(eq(userSouvenirBadges.userId, userId), eq(userSouvenirBadges.badgeKey, badgeKey)))
+      .limit(1);
+
+    if (existing.length > 0) {
+      return { success: true, badge: existing[0], alreadyOwned: true };
+    }
+
+    await db.insert(userSouvenirBadges).values({
+      userId,
+      badgeKey,
+      badgeTitle,
+      realmName,
+      imageUrl: imageUrl || null,
+    });
+
+    await db.insert(userNotifications).values({
+      userId,
+      title: `Souvenir Badge Unlocked: ${badgeTitle}!`,
+      message: `You successfully minted the ${badgeTitle} souvenir badge in ${realmName}.`,
+      type: "badge",
+    });
+
+    const newlyMinted = await db
+      .select()
+      .from(userSouvenirBadges)
+      .where(and(eq(userSouvenirBadges.userId, userId), eq(userSouvenirBadges.badgeKey, badgeKey)))
+      .limit(1);
+
+    return { success: true, badge: newlyMinted[0], alreadyOwned: false };
+  } catch (error) {
+    console.error("[Database] Failed to mint souvenir badge:", error);
+    throw error;
+  }
+}
+
+export async function getUserSouvenirBadges(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(userSouvenirBadges)
+      .where(eq(userSouvenirBadges.userId, userId))
+      .orderBy(desc(userSouvenirBadges.earnedAt));
+  } catch (error) {
+    console.warn("[Database] Failed to get user souvenir badges:", error);
+    return [];
+  }
+}
+
+export async function getUserNotifications(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(userNotifications)
+      .where(eq(userNotifications.userId, userId))
+      .orderBy(desc(userNotifications.createdAt))
+      .limit(50);
+  } catch (error) {
+    console.warn("[Database] Failed to get user notifications:", error);
+    return [];
+  }
+}
+
+export async function markNotificationRead(notificationId: number, userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    await db
+      .update(userNotifications)
+      .set({ isRead: true })
+      .where(and(eq(userNotifications.id, notificationId), eq(userNotifications.userId, userId)));
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to mark notification as read:", error);
+    throw error;
+  }
+}
+
+export async function createUserNotification(userId: number, title: string, message: string, type: "achievement" | "event" | "badge" | "system" = "system") {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  try {
+    await db.insert(userNotifications).values({
+      userId,
+      title,
+      message,
+      type,
+    });
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to create notification:", error);
+    throw error;
+  }
+}
+
+export async function getActiveSeasonalChallenges() {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(seasonalChallenges)
+      .where(eq(seasonalChallenges.isActive, true))
+      .orderBy(desc(seasonalChallenges.createdAt));
+  } catch (error) {
+    console.warn("[Database] Failed to fetch seasonal challenges:", error);
+    return [];
+  }
+}
+
+export async function getChallengeLeaderboard(challengeId: number, limit = 10) {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    const rows = await db
+      .select({
+        userId: challengeParticipants.userId,
+        userName: users.name,
+        progressScore: challengeParticipants.progressScore,
+        completed: challengeParticipants.completed,
+      })
+      .from(challengeParticipants)
+      .leftJoin(users, eq(challengeParticipants.userId, users.id))
+      .where(eq(challengeParticipants.challengeId, challengeId))
+      .orderBy(desc(challengeParticipants.progressScore))
+      .limit(limit);
+
+    return rows;
+  } catch (error) {
+    console.warn("[Database] Failed to get challenge leaderboard:", error);
+    return [];
   }
 }

@@ -98,7 +98,7 @@ export default function SocialFeed() {
     },
     {
       id: "reel-2",
-      title: "Clifford's Comedy Hour",
+      title: "Clifford's Comedy Corner",
       creator: "Anom Studios",
       description: "Laugh along with Clifford's hilarious takes on digital life!",
       thumbnail: "😂",
@@ -125,6 +125,8 @@ export default function SocialFeed() {
     },
   ];
 
+  const [activeReel, setActiveReel] = useState<Reel | null>(null);
+
   const handleLike = (postId: string) => {
     setPosts(
       posts.map((post) =>
@@ -150,29 +152,13 @@ export default function SocialFeed() {
     const shareUrl = `${window.location.origin}/feed/post/${postId}`;
     const shareText = `${post.content} - Check out this post on Anom Artsy!`;
 
-    // Social media share options
-    const shareOptions = [
-      {
-        name: 'Twitter',
-        url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=AnonArtsy,SocialGood`,
-      },
-      {
-        name: 'Facebook',
-        url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
-      },
-      {
-        name: 'LinkedIn',
-        url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
-      },
-    ];
-
-    // Copy to clipboard
     navigator.clipboard.writeText(shareUrl);
     toast.success('Link copied! Share on social media or paste anywhere.');
   };
 
-  const handlePlayReel = (reelId: string) => {
-    toast.success("Playing reel! 🎥");
+  const handlePlayReel = (reel: Reel) => {
+    setActiveReel(reel);
+    toast.success(`Now playing: ${reel.title} 🎬`);
   };
 
   if (loading) {
@@ -227,7 +213,7 @@ export default function SocialFeed() {
                 style={{
                   boxShadow: "0 0 10px rgba(255, 0, 204, 0.3), 0 0 20px rgba(255, 0, 204, 0.1)",
                 }}
-                onClick={() => handlePlayReel(reel.id)}
+                onClick={() => handlePlayReel(reel)}
               >
                 {/* Reel Thumbnail */}
                 <div className="relative bg-gradient-to-br from-[#1a1f2e] to-[#0b0e14] aspect-video flex items-center justify-center overflow-hidden">
@@ -252,7 +238,7 @@ export default function SocialFeed() {
                       className="bg-[#ff00cc] hover:bg-[#ff00cc]/80 text-black font-bold"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handlePlayReel(reel.id);
+                        handlePlayReel(reel);
                       }}
                     >
                       <Play className="w-3 h-3 mr-1" />
@@ -264,6 +250,40 @@ export default function SocialFeed() {
             ))}
           </div>
         </div>
+
+        {/* Video Player Modal */}
+        {activeReel && (
+          <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <Card className="bg-[#1a1f2e] border-2 border-[#ff00cc] w-full max-w-2xl p-6 shadow-[0_0_30px_rgba(255,0,204,0.4)]">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-[#ff00cc]">{activeReel.title}</h3>
+                <Button variant="ghost" className="text-[#00eaff]" onClick={() => setActiveReel(null)}>
+                  ✕ Close
+                </Button>
+              </div>
+              <div className="relative bg-gradient-to-br from-[#1a1f2e] via-[#0b0e14] to-[#1a1f2e] aspect-video rounded-lg overflow-hidden mb-4 border-2 border-[#ff00cc] flex flex-col items-center justify-center p-6 text-center">
+                <div className="text-7xl mb-3 animate-bounce">{activeReel.thumbnail}</div>
+                <h4 className="text-xl font-bold text-[#00eaff] mb-1">{activeReel.title}</h4>
+                <p className="text-xs text-gray-300 font-mono mb-4">Official Anom Studios Production • {activeReel.duration}</p>
+                <div className="flex items-center gap-3">
+                  <Button className="btn-neon-magenta" onClick={() => toast.success("Playing official Anom Studios episode stream!")}>
+                    ▶ Play Full Episode
+                  </Button>
+                  <Button variant="outline" className="border-[#00eaff] text-[#00eaff]" onClick={() => window.open("https://anomartsy.xyz", "_blank")}>
+                    Explore AO Universe
+                  </Button>
+                </div>
+              </div>
+              <p className="text-sm text-gray-300 mb-4">{activeReel.description}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-xs text-[#7a7f8e]">Creator: {activeReel.creator} • 👁️ {activeReel.views.toLocaleString()} views</span>
+                <Button className="btn-neon-cyan" onClick={() => window.open("https://anomoriginals.myspreadshop.com", "_blank")}>
+                  Support Creator Merch
+                </Button>
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* Divider */}
         <div className="border-t border-[#2a2f3e] my-12"></div>

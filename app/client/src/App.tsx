@@ -2,7 +2,7 @@ import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useAuth } from "@/_core/hooks/useAuth";
 import NotFound from "@/pages/NotFound";
-import { Route, Router, Switch } from "wouter";
+import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -37,7 +37,7 @@ const AppRoutes = () => {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/"} component={Home} />
+      <Route path={"/dashboard"} component={Home} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/wallet"} component={Wallet} />
       <Route path={"/achievements"} component={Achievements} />
@@ -99,11 +99,9 @@ function App() {
               },
             }}
           />
-          <Router base="/dashboard">
-            <ColorCustomizer />
-            <AppRoutes />
-            {isAuthenticated && <ChatWidget />}
-          </Router>
+          <ColorCustomizer />
+          <AppRoutes />
+          {isAuthenticated && <ChatWidget />}
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

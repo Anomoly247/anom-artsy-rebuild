@@ -36,6 +36,32 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   registerStorageProxy(app);
   registerOAuthRoutes(app);
+
+  // Shop and Merch redirects to https://anomartsy.lol
+  app.get(["/shop", "/shop.html", "/merch", "/lol-shop"], (req, res) => {
+    res.redirect(301, "https://anomartsy.lol");
+  });
+
+  // Server-Sent Events (SSE) stream for real-time lounge messages and unread badge sync
+  const sseClients = new Set<import("express").Response>();
+  app.get("/api/stream/lounge", (req, res) => {
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.flushHeaders?.();
+
+    res.write(`data: ${JSON.stringify({ type: "connected", timestamp: Date.now() })}\n\n`);
+    sseClients.add(res);
+
+    const heartbeat = setInterval(() => {
+      res.write(`data: ${JSON.stringify({ type: "ping", timestamp: Date.now() })}\n\n`);
+    }, 15000);
+
+    req.on("close", () => {
+      clearInterval(heartbeat);
+      sseClients.delete(res);
+    });
+  });
   // tRPC API
   app.use(
     "/api/trpc",

@@ -36,6 +36,20 @@
       "when": 1786480032037,
       "tag": "0004_normal_whiplash",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1786849671737,
+      "tag": "0005_puzzling_kitty_pryde",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1786849925418,
+      "tag": "0006_flippant_black_cat",
+      "breakpoints": true
     }
   ]
 }

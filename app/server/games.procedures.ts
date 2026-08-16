@@ -1,6 +1,6 @@
-import { protectedProcedure, router } from "./_core/trpc";
 import { z } from "zod";
-import { addCoinTransaction, addXP, getOrCreateUserProfile } from "./db";
+import { addCoinTransaction, addXP, getOrCreateUserProfile, recordGameScore, getGameScoresHistory, getGlobalLeaderboard } from "./db";
+import { router, protectedProcedure } from "./_core/trpc";
 
 const GAME_COIN_REWARDS: Record<string, number> = {
   trivia: 50,
@@ -26,18 +26,15 @@ export const gamesRouter = router({
     )
     .mutation(async ({ ctx, input }) => {
       try {
-        // Get base coin reward for the game
         const baseReward = GAME_COIN_REWARDS[input.gameId] || 50;
-        
-        // Calculate coin reward based on score (score can multiply the base reward)
-        // For example: if score is 100 and base is 50, reward is 100 coins
         const coinReward = Math.max(baseReward, Math.floor(input.score / 10) * 10);
-        
-        // Get XP reward
         const xpReward = GAME_XP_REWARDS[input.gameId] || 10;
 
+        // Record score persistently
+        await recordGameScore(ctx.user.id, input.gameId, input.score, coinReward.toString());
+
         // Award coins
-        const coinResult = await addCoinTransaction(
+        await addCoinTransaction(
           ctx.user.id,
           "earn",
           coinReward.toString(),
@@ -47,7 +44,6 @@ export const gamesRouter = router({
         // Award XP
         await addXP(ctx.user.id, xpReward);
 
-        // Get updated profile
         const profile = await getOrCreateUserProfile(ctx.user.id);
 
         return {
@@ -56,7 +52,7 @@ export const gamesRouter = router({
           xpAwarded: xpReward,
           newBalance: profile?.anomCoinBalance || "0",
           newLevel: profile?.level || 1,
-          message: `🎉 You earned ${coinReward} Anom Coins and ${xpReward} XP!`,
+          message: `🎉 You earned ${coinReward} Glow Points and ${xpReward} XP!`,
         };
       } catch (error) {
         console.error("Error saving game score:", error);
@@ -66,12 +62,12 @@ export const gamesRouter = router({
 
   getGameHistory: protectedProcedure.query(async ({ ctx }) => {
     try {
-      // For now, return empty array as we don't have a game_history table yet
-      // This can be expanded later to track detailed game history
+      const history = await getGameScoresHistory(ctx.user.id);
+      const totalCoins = history.reduce((sum, item) => sum + Number(item.coinReward || 0), 0);
       return {
-        games: [],
-        totalCoinsEarned: "0",
-        totalGamesPlayed: 0,
+        games: history,
+        totalCoinsEarned: totalCoins.toString(),
+        totalGamesPlayed: history.length,
       };
     } catch (error) {
       console.error("Error fetching game history:", error);
@@ -83,13 +79,13 @@ export const gamesRouter = router({
     }
   }),
 
-  getLeaderboard: protectedProcedure.query(async () => {
+  getLeaderboard: protectedProcedure.query(async ({ ctx }) => {
     try {
-      // For now, return empty array as we don't have detailed game tracking yet
-      // This can be expanded later with actual leaderboard data
+      const topPlayers = await getGlobalLeaderboard(10);
+      const index = topPlayers.findIndex((p) => p.userId === ctx.user.id);
       return {
-        topPlayers: [],
-        yourRank: 0,
+        topPlayers,
+        yourRank: index >= 0 ? index + 1 : 0,
       };
     } catch (error) {
       console.error("Error fetching leaderboard:", error);

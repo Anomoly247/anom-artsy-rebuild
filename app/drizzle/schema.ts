@@ -552,3 +552,67 @@ export const loungeSoundscapes = mysqlTable("lounge_soundscapes", {
 
 export type LoungeSoundscape = typeof loungeSoundscapes.$inferSelect;
 export type InsertLoungeSoundscape = typeof loungeSoundscapes.$inferInsert;
+
+/**
+ * User Notifications — persistent in-app notifications for achievements, events, and badge mints
+ */
+export const userNotifications = mysqlTable("user_notifications", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  title: varchar("title", { length: 150 }).notNull(),
+  message: text("message").notNull(),
+  type: mysqlEnum("notification_type", ["achievement", "event", "badge", "system"]).default("system").notNull(),
+  isRead: boolean("is_read").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type UserNotification = typeof userNotifications.$inferSelect;
+export type InsertUserNotification = typeof userNotifications.$inferInsert;
+
+/**
+ * Souvenir Badges — Moonberry Farm & Realm completion badges
+ */
+export const userSouvenirBadges = mysqlTable("user_souvenir_badges", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  badgeKey: varchar("badge_key", { length: 50 }).notNull(),
+  badgeTitle: varchar("badge_title", { length: 100 }).notNull(),
+  realmName: varchar("realm_name", { length: 50 }).default("Moonberry Farm").notNull(),
+  imageUrl: text("image_url"),
+  earnedAt: timestamp("earned_at").defaultNow().notNull(),
+});
+
+export type UserSouvenirBadge = typeof userSouvenirBadges.$inferSelect;
+export type InsertUserSouvenirBadge = typeof userSouvenirBadges.$inferInsert;
+
+/**
+ * Seasonal Challenges & Automated Leaderboard
+ */
+export const seasonalChallenges = mysqlTable("seasonal_challenges", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 150 }).notNull(),
+  description: text("description").notNull(),
+  seasonName: varchar("season_name", { length: 50 }).default("Autumn 2026").notNull(),
+  rewardCoins: int("reward_coins").default(100).notNull(),
+  isActive: boolean("is_active").default(true).notNull(),
+  endDate: timestamp("end_date").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type SeasonalChallenge = typeof seasonalChallenges.$inferSelect;
+export type InsertSeasonalChallenge = typeof seasonalChallenges.$inferInsert;
+
+export const challengeParticipants = mysqlTable("challenge_participants", {
+  id: int("id").autoincrement().primaryKey(),
+  challengeId: int("challenge_id").notNull(),
+  userId: int("user_id").notNull(),
+  progressScore: int("progress_score").default(0).notNull(),
+  completed: boolean("completed").default(false).notNull(),
+  rewardClaimed: boolean("reward_claimed").default(false).notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ChallengeParticipant = typeof challengeParticipants.$inferSelect;
+export type InsertChallengeParticipant = typeof challengeParticipants.$inferInsert;
+
+// Note: We can add pinned badges or store them via dedicated helpers or json column

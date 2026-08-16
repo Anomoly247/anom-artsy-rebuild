@@ -6,7 +6,7 @@ import { membershipRouter } from "./membership.procedures";
 import { settingsRouter } from "./settings.procedures";
 import { gamesRouter } from "./games.procedures";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
-import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress } from "./db";
+import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress, getLiveActivityFeed, mintSouvenirBadge, getUserSouvenirBadges, getUserNotifications, markNotificationRead, getActiveSeasonalChallenges, getChallengeLeaderboard } from "./db";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
@@ -15,6 +15,11 @@ export const appRouter = router({
   system: systemRouter,
   settings: settingsRouter,
   games: gamesRouter,
+  feed: router({
+    getLive: publicProcedure.query(async () => {
+      return await getLiveActivityFeed();
+    }),
+  }),
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -130,6 +135,48 @@ export const appRouter = router({
     getMyProgress: protectedProcedure.query(async ({ ctx }) => {
       return await getUserKidsProgress(ctx.user.id);
     }),
+
+    mintBadge: protectedProcedure
+      .input(
+        z.object({
+          badgeKey: z.string(),
+          badgeTitle: z.string(),
+          realmName: z.string().optional(),
+          imageUrl: z.string().optional(),
+        })
+      )
+      .mutation(async ({ ctx, input }) => {
+        // Award souvenir badge and bonus reward coins/XP
+        await addCoinTransaction(ctx.user.id, "earn", "25", `Moonberry Souvenir Badge: ${input.badgeTitle}`);
+        await addXP(ctx.user.id, 15);
+        return await mintSouvenirBadge(ctx.user.id, input.badgeKey, input.badgeTitle, input.realmName || "Moonberry Farm", input.imageUrl);
+      }),
+
+    getMyBadges: protectedProcedure.query(async ({ ctx }) => {
+      return await getUserSouvenirBadges(ctx.user.id);
+    }),
+  }),
+
+  notifications: router({
+    list: protectedProcedure.query(async ({ ctx }) => {
+      return await getUserNotifications(ctx.user.id);
+    }),
+    markRead: protectedProcedure
+      .input(z.object({ notificationId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        return await markNotificationRead(input.notificationId, ctx.user.id);
+      }),
+  }),
+
+  challenges: router({
+    listActive: publicProcedure.query(async () => {
+      return await getActiveSeasonalChallenges();
+    }),
+    getLeaderboard: publicProcedure
+      .input(z.object({ challengeId: z.number() }))
+      .query(async ({ input }) => {
+        return await getChallengeLeaderboard(input.challengeId, 10);
+      }),
   }),
 
   lounge: router({

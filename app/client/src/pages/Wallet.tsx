@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { Coins, TrendingUp, TrendingDown, Zap } from "lucide-react";
 
@@ -14,9 +15,12 @@ export default function Wallet() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#0b0e14] text-white flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-[#7a7f8e] mb-4">Sign in to view your Anom Coin wallet</p>
+      <div className="min-h-screen bg-[#0b0e14] text-white flex items-center justify-center p-6">
+        <div className="text-center max-w-md w-full bg-[#121824] border border-[#2a2f3e] p-8 rounded-xl shadow-xl">
+          <p className="text-[#7a7f8e] mb-6">Sign in to view your Glow Points and Anom Coin wallet</p>
+          <Button onClick={startLogin} className="w-full bg-[#00ffff] hover:bg-[#00ffff]/80 text-black font-bold py-3">
+            Sign In with Manus
+          </Button>
         </div>
       </div>
     );
@@ -35,112 +39,46 @@ export default function Wallet() {
         </div>
 
         {/* Balance Card */}
-        <div
-          className="rounded-lg border-2 border-[#ff00cc] p-8 mb-8"
-          style={{
-            boxShadow: "0 0 20px rgba(255, 0, 204, 0.3)",
-          }}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[#7a7f8e] text-sm mb-2">Current Balance</p>
-              <p className="text-5xl font-bold text-[#ff00cc]">{balance}</p>
-              <p className="text-[#00eaff] text-sm mt-2">Anom Coins</p>
-            </div>
-            <Coins className="w-24 h-24 text-[#ff00cc] opacity-50" />
+        <div className="bg-[#121824] border-2 border-[#00ffff] rounded-xl p-6 mb-8 shadow-[0_0_20px_rgba(0,255,255,0.15)]">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-[#7a7f8e] font-medium">Available Balance</span>
+            <Coins className="w-8 h-8 text-[#00ffff]" />
           </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <Button className="bg-[#ff00cc] hover:bg-[#ff00cc]/80 text-white font-bold py-6">
-            <Zap className="w-4 h-4 mr-2" />
-            Earn Coins
-          </Button>
-          <Button className="bg-[#00eaff] hover:bg-[#00eaff]/80 text-[#0b0e14] font-bold py-6">
-            <TrendingUp className="w-4 h-4 mr-2" />
-            Spend Coins
-          </Button>
-          <Button className="border-2 border-[#8b00ff] hover:bg-[#8b00ff]/10 text-[#8b00ff] font-bold py-6">
-            <TrendingDown className="w-4 h-4 mr-2" />
-            History
-          </Button>
+          <div className="text-5xl font-extrabold text-[#00ffff] mb-2">
+            {balanceLoading ? "..." : balance} <span className="text-xl text-white">AC</span>
+          </div>
+          <p className="text-sm text-[#7a7f8e]">Earn Anom Coin through community contribution and social good missions.</p>
         </div>
 
         {/* Transaction History */}
-        <div>
-          <h2 className="text-2xl font-bold text-[#00eaff] mb-4">Transaction History</h2>
+        <div className="bg-[#121824] border border-[#2a2f3e] rounded-xl p-6">
+          <h2 className="text-xl font-bold text-white mb-4">Transaction History</h2>
           {historyLoading ? (
-            <div className="text-center py-8">
-              <p className="text-[#7a7f8e]">Loading transactions...</p>
-            </div>
+            <p className="text-[#7a7f8e]">Loading history...</p>
           ) : transactions.length === 0 ? (
-            <div
-              className="rounded-lg border-2 border-[#7a7f8e] p-8 text-center"
-              style={{
-                boxShadow: "0 0 10px rgba(122, 127, 142, 0.2)",
-              }}
-            >
-              <p className="text-[#7a7f8e]">No transactions yet. Start earning Anom Coins!</p>
-            </div>
+            <p className="text-[#7a7f8e]">No transactions yet. Complete a mission or participate in lounges to earn coins!</p>
           ) : (
             <div className="space-y-3">
-              {transactions.map((transaction) => (
-                <div
-                  key={transaction.id}
-                  className="rounded-lg border-2 border-[#7a7f8e] p-4 flex items-center justify-between hover:border-[#ff00cc] transition-colors"
-                  style={{
-                    boxShadow: "0 0 10px rgba(122, 127, 142, 0.1)",
-                  }}
-                >
-                  <div className="flex items-center gap-4">
-                    {transaction.type === "earn" ? (
-                      <TrendingUp className="w-6 h-6 text-[#00eaff]" />
+              {transactions.map((tx: any) => (
+                <div key={tx.id} className="flex items-center justify-between p-4 bg-[#0b0e14] rounded-lg border border-[#2a2f3e]">
+                  <div className="flex items-center gap-3">
+                    {Number(tx.amount) >= 0 ? (
+                      <TrendingUp className="w-5 h-5 text-[#00ff88]" />
                     ) : (
-                      <TrendingDown className="w-6 h-6 text-[#ff00cc]" />
+                      <TrendingDown className="w-5 h-5 text-[#ff00cc]" />
                     )}
                     <div>
-                      <p className="font-bold text-white capitalize">{transaction.reason}</p>
-                      <p className="text-[#7a7f8e] text-sm">
-                        {new Date(transaction.createdAt).toLocaleDateString()}
-                      </p>
+                      <p className="font-semibold text-white">{tx.description || "Transaction"}</p>
+                      <p className="text-xs text-[#7a7f8e]">{new Date(tx.createdAt).toLocaleDateString()}</p>
                     </div>
                   </div>
-                  <div className={`text-lg font-bold ${transaction.type === "earn" ? "text-[#00eaff]" : "text-[#ff00cc]"}`}>
-                    {transaction.type === "earn" ? "+" : "-"}
-                    {transaction.amount}
-                  </div>
+                  <span className={`font-bold ${Number(tx.amount) >= 0 ? "text-[#00ff88]" : "text-[#ff00cc]"}`}>
+                    {Number(tx.amount) >= 0 ? `+${tx.amount}` : tx.amount} AC
+                  </span>
                 </div>
               ))}
             </div>
           )}
-        </div>
-
-        {/* Earning Guide */}
-        <div className="mt-12 rounded-lg border-2 border-[#8b00ff] p-6" style={{ boxShadow: "0 0 15px rgba(139, 0, 255, 0.2)" }}>
-          <h3 className="text-xl font-bold text-[#8b00ff] mb-4">How to Earn Anom Coins</h3>
-          <ul className="space-y-3 text-[#7a7f8e]">
-            <li className="flex items-start gap-3">
-              <span className="text-[#00eaff] font-bold">•</span>
-              <span>Complete Kids Corner lessons and activities</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-[#00eaff] font-bold">•</span>
-              <span>Help others in family and friend lounges</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-[#00eaff] font-bold">•</span>
-              <span>Win mini-games (Trivia, Memory, Mood Matcher, Snack Vault Rush)</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-[#00eaff] font-bold">•</span>
-              <span>Achieve milestones and unlock achievements</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-[#00eaff] font-bold">•</span>
-              <span>Participate in community events and challenges</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>

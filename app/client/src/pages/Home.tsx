@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ImagePlus, Images, Zap, Users, Gamepad2, Heart, Sparkles, ShoppingBag, Upload, Palette } from "lucide-react";
+import { ImagePlus, Images, Zap, Users, Gamepad2, Heart, Sparkles, ShoppingBag, Upload, Palette, Share2, Trophy } from "lucide-react";
+import { GlowParticles } from "@/components/GlowParticles";
 import { startLogin } from "@/const";
 import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -122,16 +123,55 @@ export default function Home() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#0b0e14] text-[#00eaff] flex flex-col">
-        {/* Navigation */}
-        <nav className="border-b border-[#2a2f3e] px-6 py-4">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div className="text-2xl font-bold neon-text-magenta">Anom Artsy</div>
-            <Button onClick={startLogin} className="btn-neon-magenta">Sign In</Button>
+      {/* Immersive Universe Header */}
+      <nav className="sticky top-0 z-40 border-b border-[#00eaff]/40 bg-[#0b0e14]/95 px-6 py-4 backdrop-blur">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="text-2xl font-bold neon-text-magenta flex items-center gap-2">
+            <span>🪐</span> AO Universe & Sanctuary
           </div>
-        </nav>
+          <div className="flex items-center gap-4">
+            <Button onClick={() => navigate("/games")} className="btn-neon-cyan text-xs">District B Arcade</Button>
+            <Button onClick={() => navigate("/anoms-corner")} className="btn-neon-magenta text-xs">Anom's Corner</Button>
+            <Button onClick={startLogin} className="btn-neon-magenta text-sm font-bold">Sign In</Button>
+          </div>
+        </div>
+      </nav>
 
-        {/* Hero Section */}
-        <section className="flex-1 px-6 py-20">
+      {/* Hero Worlds Grid */}
+      <section className="px-6 py-12 max-w-7xl mx-auto w-full">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-extrabold neon-text-cyan mb-4">Welcome to the AO Universe</h1>
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
+            Explore our live neon worlds, interactive arcades, and family sanctuary. Select a world below to dive right in.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="rounded-xl border-2 border-[#00eaff] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(0,234,255,0.2)] hover:border-[#ff00cc] transition-all cursor-pointer" onClick={() => navigate("/games")}>
+            <div className="text-4xl mb-3">🎮</div>
+            <h3 className="text-xl font-bold text-[#00eaff] mb-2">District B Arcade</h3>
+            <p className="text-gray-400 text-sm mb-4">Play Sky Navigator, Identity Grid, and high-score arcade challenges.</p>
+            <Button className="w-full btn-neon-cyan text-xs">Enter Arcade</Button>
+          </div>
+
+          <div className="rounded-xl border-2 border-[#ff00cc] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,0,204,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => navigate("/anoms-corner")}>
+            <div className="text-4xl mb-3">🌟</div>
+            <h3 className="text-xl font-bold text-[#ff00cc] mb-2">Anom's Corner & Moonberry</h3>
+            <p className="text-gray-400 text-sm mb-4">Immersive Pixel & Dot stories, Moonberry Farm, and family games.</p>
+            <Button className="w-full btn-neon-magenta text-xs">Visit Anom's Corner</Button>
+          </div>
+
+          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.href = "https://anomartsy.lol"}>
+            <div className="text-4xl mb-3">🛍️</div>
+            <h3 className="text-xl font-bold text-[#ffd700] mb-2">Anom Originals Shop</h3>
+            <p className="text-gray-400 text-sm mb-4">Discover bespoke artwork, apparel, and verified creator gear.</p>
+            <Button className="w-full btn-neon-gold text-xs">Browse Shop</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Section */}
+      <section className="flex-1 px-6 py-10">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="mb-6 inline-block bg-[#ff00cc]/20 border border-[#ff00cc] rounded-lg px-4 py-2">
@@ -491,6 +531,22 @@ export default function Home() {
                 </div>
               )}
             </div>
+            <Button
+              variant="outline"
+              onClick={() => {
+                const shareText = `Check out Anom Artsy - The Official AO Sanctuary! Earn Glow Points, explore neon realms, and join the community.`;
+                if (navigator.share) {
+                  navigator.share({ title: "Anom Artsy", text: shareText, url: window.location.origin }).catch(() => {});
+                } else {
+                  navigator.clipboard.writeText(window.location.origin);
+                  toast.success("🔗 Sanctuary link copied to clipboard!");
+                }
+              }}
+              className="w-full border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 sm:w-auto"
+            >
+              <Share2 className="w-4 h-4 mr-2" />
+              Share
+            </Button>
             {user?.role === 'admin' && (
               <Button onClick={() => navigate('/owner')} className="w-full bg-[#00ffff] font-bold text-[#0b0e14] hover:bg-[#00ffff]/80 sm:w-auto">
                 Owner Panel
@@ -507,7 +563,8 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {/* Glow Points */}
-          <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.35), 0 0 28px rgba(0, 255, 255, 0.14)'}}>
+          <div className="relative rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.35), 0 0 28px rgba(0, 255, 255, 0.14)'}}>
+            <GlowParticles triggerKey={user?.id || 1} type="earn" />
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#7a7f8e] text-sm">Glow Points</p>
@@ -577,8 +634,8 @@ export default function Home() {
               <Button className="w-full btn-neon-outline" onClick={() => window.location.assign("/pages/tater-clifford.html")}>
                 Play Games
               </Button>
-              <Button className="w-full btn-neon-cyan" onClick={() => navigate("/merch")}>
-                Custom Merch
+              <Button className="w-full btn-neon-cyan" onClick={() => window.location.href = "https://anomartsy.lol"}>
+                Shop / Merch
               </Button>
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/collaboration")}>
                 Collaboration Station
@@ -586,11 +643,32 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
-            <h3 className="text-xl font-bold text-[#00ffff] mb-4">Live from the Universe</h3>
-            <p className="text-[#7a7f8e] text-sm">
-              Check back soon for community highlights, memes, and universe updates!
-            </p>
+          <div className="space-y-6">
+            <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
+              <h3 className="text-xl font-bold text-[#00ffff] mb-4">Live from the Universe</h3>
+              <p className="text-[#7a7f8e] text-sm">
+                Check back soon for community highlights, memes, and universe updates!
+              </p>
+            </div>
+
+            {/* Trophy Room Pinned Badges */}
+            <div className="rounded-lg border border-[#ffd700]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.3), 0 0 28px rgba(255, 215, 0, 0.1)'}}>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-xl font-bold text-[#ffd700] flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-[#ffd700]" />
+                  Trophy Room
+                </h3>
+                <span className="text-xs text-[#7a7f8e]">Top 3 Pinned Badges</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                {[1, 2, 3].map((slot) => (
+                  <div key={slot} className="border border-[#2a2f3e] rounded-lg p-3 text-center bg-[#0b0e14]/60 flex flex-col items-center justify-center min-h-[90px]">
+                    <Trophy className="w-6 h-6 text-[#ffd700]/50 mb-1" />
+                    <span className="text-xs text-[#7a7f8e]">Pin Slot {slot}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
