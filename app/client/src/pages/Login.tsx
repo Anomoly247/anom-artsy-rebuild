@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { startLogin } from "@/const";
+import { startGoogleLogin } from "@/authEntryRoutes";
 
 export default function Login() {
   const started = useRef(false);
@@ -12,7 +12,7 @@ export default function Login() {
     started.current = true;
 
     try {
-      startLogin();
+      startGoogleLogin();
     } catch {
       started.current = false;
       setError("Secure sign-in is temporarily unavailable. Please try again shortly.");

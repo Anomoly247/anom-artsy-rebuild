@@ -1,8 +1,9 @@
-import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState } from "@shared/const";
+import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState, encodeOAuthState } from "@shared/const";
 import { parse as parseCookieHeader } from "cookie";
 import type { Express, Request, Response } from "express";
 import * as db from "../db";
 import { getSessionCookieOptions } from "./cookies";
+import { ENV } from "./env";
 import { sdk } from "./sdk";
 
 function getQueryParam(req: Request, key: string): string | undefined {
@@ -10,7 +11,54 @@ function getQueryParam(req: Request, key: string): string | undefined {
   return typeof value === "string" ? value : undefined;
 }
 
+function getRequestOrigin(req: Request) {
+  const host = req.headers["x-forwarded-host"] ?? req.get("host");
+  if (!host || Array.isArray(host)) return undefined;
+
+  const forwardedProto = req.headers["x-forwarded-proto"];
+  const protocol = typeof forwardedProto === "string"
+    ? forwardedProto.split(",")[0]?.trim()
+    : req.protocol;
+
+  return `${protocol === "https" ? "https" : "http"}://${host}`;
+}
+
 export function registerOAuthRoutes(app: Express) {
+  // The frontend sends users here for Google-backed platform OAuth. Register it
+  // before the SPA fallback so an unavailable or misconfigured OAuth service
+  // always returns a server response rather than index.html.
+  app.get("/api/auth/google", (req: Request, res: Response) => {
+    if (!ENV.oAuthServerUrl || !ENV.appId) {
+      res.status(503).json({ error: "Google OAuth is not configured" });
+      return;
+    }
+
+    const origin = getRequestOrigin(req);
+    if (!origin) {
+      res.status(400).json({ error: "Unable to determine OAuth callback origin" });
+      return;
+    }
+
+    const nonce = crypto.randomUUID();
+    const redirectUri = `${origin}/api/oauth/callback`;
+    const state = encodeOAuthState({ redirectUri, nonce });
+    const cookieOptions = getSessionCookieOptions(req);
+
+    res.cookie(OAUTH_STATE_COOKIE, nonce, {
+      ...cookieOptions,
+      httpOnly: true,
+      maxAge: 10 * 60 * 1000,
+    });
+    res.setHeader("Cache-Control", "no-store");
+
+    const oauthUrl = new URL("/app-auth", ENV.oAuthServerUrl);
+    oauthUrl.searchParams.set("appId", ENV.appId);
+    oauthUrl.searchParams.set("redirectUri", redirectUri);
+    oauthUrl.searchParams.set("state", state);
+    oauthUrl.searchParams.set("type", "signIn");
+    res.redirect(302, oauthUrl.toString());
+  });
+
   app.get("/api/oauth/callback", async (req: Request, res: Response) => {
     const code = getQueryParam(req, "code");
     const state = getQueryParam(req, "state");

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ImagePlus, Images, Zap, Users, Gamepad2, Heart, Sparkles, ShoppingBag, Upload, Palette, Share2, Trophy } from "lucide-react";
 import { GlowParticles } from "@/components/GlowParticles";
 import { useLocation } from "wouter";
+import { startGoogleLogin } from "@/authEntryRoutes";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -134,7 +135,7 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <Button onClick={() => navigate("/games")} className="btn-neon-cyan text-xs">District B Arcade</Button>
             <Button onClick={() => navigate("/anoms-corner")} className="btn-neon-magenta text-xs">Anom's Corner</Button>
-            <Button onClick={() => navigate("/login")} className="btn-neon-magenta text-sm font-bold">Sign In</Button>
+            <Button onClick={startGoogleLogin} className="btn-neon-magenta text-sm font-bold">Sign In</Button>
           </div>
         </div>
       </nav>
@@ -292,7 +293,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-6 text-[#00eaff]">
               Ready to join the Anom Universe?
             </h2>
-            <Button onClick={() => navigate("/login")} className="btn-neon-magenta text-lg py-6 px-8">
+            <Button onClick={startGoogleLogin} className="btn-neon-magenta text-lg py-6 px-8">
               Get Started Now
             </Button>
           </div>
