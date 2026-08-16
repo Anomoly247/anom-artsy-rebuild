@@ -27,6 +27,8 @@ import ChatWidget from "./components/ChatWidget";
 import MissionRally from "./pages/MissionRally";
 import MissionHub from "./pages/MissionHub";
 import MusicLibrary from "./pages/MusicLibrary";
+import Login from "./pages/Login";
+import { AUTH_ENTRY_ROUTES } from "./authEntryRoutes";
 import AnomsCorner from "./pages/AnomsCorner";
 import PixelProfile from "./pages/PixelProfile";
 import DotProfile from "./pages/DotProfile";
@@ -65,6 +67,7 @@ const AppRoutes = () => {
       <Route path={"/feed"} component={SocialFeed} />
       <Route path={"/games"} component={Games} />
       <Route path={"/merch"} component={OpenShop} />
+      {AUTH_ENTRY_ROUTES.map((path) => <Route key={path} path={path} component={Login} />)}
       <Route path="/admin" component={Admin} />
       <Route path="/collaboration" component={CollaborationStation} />
       <Route path="/owner-settings" component={OwnerSettings} />
