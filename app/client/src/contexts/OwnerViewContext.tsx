@@ -1,4 +1,5 @@
 import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
 import {
   DEFAULT_LINK_CONFIG,
   LINK_CONFIG_STORAGE_KEY,
@@ -9,6 +10,11 @@ import {
 } from "@/lib/linkConfig";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
+export type LinkPatch = Omit<Partial<LinkConfig>, "social" | "banner"> & {
+  social?: Partial<LinkConfig["social"]>;
+  banner?: Partial<LinkConfig["banner"]>;
+};
+
 const ADMIN_VIEW_STORAGE_KEY = "ao-admin-view-enabled-v1";
 
 type OwnerViewContextValue = {
@@ -17,7 +23,9 @@ type OwnerViewContextValue = {
   setAdminView: (enabled: boolean) => void;
   toggleAdminView: () => void;
   linkConfig: LinkConfig;
-  updateLink: (key: keyof LinkConfig, value: string) => void;
+  updateLink: (patch: LinkPatch) => void;
+  saveLinks: (config?: LinkConfig) => Promise<LinkConfig>;
+  isSavingLinks: boolean;
   resetLinks: () => void;
 };
 
@@ -28,9 +36,21 @@ function readAdminViewPreference(): boolean {
   return window.localStorage.getItem(ADMIN_VIEW_STORAGE_KEY) === "true";
 }
 
+function toClientLinkConfig(value: {
+  universe: string;
+  store: string;
+  social: LinkConfig["social"];
+  banner: LinkConfig["banner"];
+  partners: LinkConfig["partners"];
+}): LinkConfig {
+  return normalizeLinkConfig(value);
+}
+
 export function OwnerViewProvider({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
   const isOwner = user?.role === "admin";
+  const publicConfigQuery = trpc.ownerSettings.getPublicConfig.useQuery();
+  const saveConfigMutation = trpc.ownerSettings.saveLinkConfig.useMutation();
   const [isAdminView, setIsAdminView] = useState(readAdminViewPreference);
   const [linkConfig, setLinkConfig] = useState<LinkConfig>(readLinkConfig);
 
@@ -38,6 +58,13 @@ export function OwnerViewProvider({ children }: { children: React.ReactNode }) {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(ADMIN_VIEW_STORAGE_KEY, String(isAdminView));
   }, [isAdminView]);
+
+  useEffect(() => {
+    if (!publicConfigQuery.data) return;
+    const remoteConfig = toClientLinkConfig(publicConfigQuery.data);
+    setLinkConfig(remoteConfig);
+    persistLinkConfig(remoteConfig);
+  }, [publicConfigQuery.data]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -67,13 +94,33 @@ export function OwnerViewProvider({ children }: { children: React.ReactNode }) {
     setIsAdminView((current) => !current);
   }, []);
 
-  const updateLink = useCallback((key: keyof LinkConfig, value: string) => {
+  const updateLink = useCallback((patch: LinkPatch) => {
     setLinkConfig((current) => {
-      const next = normalizeLinkConfig({ ...current, [key]: value });
+      const next = normalizeLinkConfig({
+        ...current,
+        ...patch,
+        social: { ...current.social, ...patch.social },
+        banner: { ...current.banner, ...patch.banner },
+      });
       persistLinkConfig(next);
       return next;
     });
   }, []);
+
+  const saveLinks = useCallback(async (config?: LinkConfig) => {
+    const configToSave = normalizeLinkConfig(config ?? linkConfig);
+    const saved = await saveConfigMutation.mutateAsync({
+      universeUrl: configToSave.universe,
+      storeUrl: configToSave.store,
+      socialLinks: configToSave.social,
+      customBanner: configToSave.banner,
+      partnerSites: configToSave.partners,
+    });
+    const next = toClientLinkConfig(saved);
+    setLinkConfig(next);
+    persistLinkConfig(next);
+    return next;
+  }, [linkConfig, saveConfigMutation]);
 
   const resetLinks = useCallback(() => {
     setLinkConfig(DEFAULT_LINK_CONFIG);
@@ -87,8 +134,10 @@ export function OwnerViewProvider({ children }: { children: React.ReactNode }) {
     toggleAdminView,
     linkConfig,
     updateLink,
+    saveLinks,
+    isSavingLinks: saveConfigMutation.isPending,
     resetLinks,
-  }), [isOwner, isAdminView, setAdminView, toggleAdminView, linkConfig, updateLink, resetLinks]);
+  }), [isOwner, isAdminView, setAdminView, toggleAdminView, linkConfig, updateLink, saveLinks, saveConfigMutation.isPending, resetLinks]);
 
   return <OwnerViewContext.Provider value={value}>{children}</OwnerViewContext.Provider>;
 }

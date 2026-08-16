@@ -10,6 +10,7 @@ import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCo
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
+import { DEFAULT_SITE_LINK_CONFIG } from "../shared/siteConfig";
 
 export const appRouter = router({
   system: systemRouter,
@@ -473,7 +474,22 @@ export const appRouter = router({
   sharing: sharingRouter,
   membership: membershipRouter,
   ownerSettings: router({
-    getSettings: publicProcedure.query(async () => {
+    getPublicConfig: publicProcedure.query(async () => {
+      const { getPlatformSettings } = await import("./db");
+      const settings = await getPlatformSettings();
+      return {
+        universe: settings?.universeUrl || DEFAULT_SITE_LINK_CONFIG.universe,
+        store: settings?.storeUrl || DEFAULT_SITE_LINK_CONFIG.store,
+        social: { ...DEFAULT_SITE_LINK_CONFIG.social, ...(settings?.socialLinks ?? {}) },
+        banner: { ...DEFAULT_SITE_LINK_CONFIG.banner, ...(settings?.customBanner ?? {}) },
+        partners: settings?.partnerSites ?? DEFAULT_SITE_LINK_CONFIG.partners,
+      };
+    }),
+
+    getSettings: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user?.role !== "admin") {
+        throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+      }
       const { getPlatformSettings } = await import("./db");
       return await getPlatformSettings();
     }),
@@ -483,6 +499,27 @@ export const appRouter = router({
         z.object({
           siteName: z.string().optional(),
           siteDescription: z.string().optional(),
+          universeUrl: z.string().url().optional(),
+          storeUrl: z.string().url().optional(),
+          socialLinks: z.object({
+            youtube: z.string().url().or(z.literal("")),
+            instagram: z.string().url().or(z.literal("")),
+            github: z.string().url().or(z.literal("")),
+            tiktok: z.string().url().or(z.literal("")),
+            x: z.string().url().or(z.literal("")),
+          }).optional(),
+          customBanner: z.object({
+            enabled: z.boolean(),
+            eyebrow: z.string().max(80),
+            title: z.string().max(160),
+            message: z.string().max(500),
+            ctaLabel: z.string().max(80),
+            ctaUrl: z.string().url(),
+          }).optional(),
+          partnerSites: z.array(z.object({
+            label: z.string().min(1).max(100),
+            url: z.string().url(),
+          })).max(8).optional(),
           primaryColor: z.string().optional(),
           secondaryColor: z.string().optional(),
           accentColor: z.string().optional(),
@@ -505,6 +542,52 @@ export const appRouter = router({
         const result = await updatePlatformSettings(input);
         await logAuditAction(ctx.user.id, "update_settings", JSON.stringify(input));
         return result;
+      }),
+
+    saveLinkConfig: protectedProcedure
+      .input(z.object({
+        universeUrl: z.string().url(),
+        storeUrl: z.string().url(),
+        socialLinks: z.object({
+          youtube: z.string().url().or(z.literal("")),
+          instagram: z.string().url().or(z.literal("")),
+          github: z.string().url().or(z.literal("")),
+          tiktok: z.string().url().or(z.literal("")),
+          x: z.string().url().or(z.literal("")),
+        }),
+        customBanner: z.object({
+          enabled: z.boolean(),
+          eyebrow: z.string().max(80),
+          title: z.string().max(160),
+          message: z.string().max(500),
+          ctaLabel: z.string().max(80),
+          ctaUrl: z.string().url(),
+        }),
+        partnerSites: z.array(z.object({
+          label: z.string().min(1).max(100),
+          url: z.string().url(),
+        })).max(8),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user?.role !== "admin") {
+          throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
+        }
+        const { updatePlatformSettings, logAuditAction } = await import("./db");
+        const result = await updatePlatformSettings({
+          universeUrl: input.universeUrl,
+          storeUrl: input.storeUrl,
+          socialLinks: input.socialLinks,
+          customBanner: input.customBanner,
+          partnerSites: input.partnerSites,
+        });
+        await logAuditAction(ctx.user.id, "update_link_config", JSON.stringify(input));
+        return {
+          universe: result?.universeUrl || DEFAULT_SITE_LINK_CONFIG.universe,
+          store: result?.storeUrl || DEFAULT_SITE_LINK_CONFIG.store,
+          social: { ...DEFAULT_SITE_LINK_CONFIG.social, ...(result?.socialLinks ?? {}) },
+          banner: { ...DEFAULT_SITE_LINK_CONFIG.banner, ...(result?.customBanner ?? {}) },
+          partners: result?.partnerSites ?? DEFAULT_SITE_LINK_CONFIG.partners,
+        };
       }),
 
     getAuditLog: protectedProcedure

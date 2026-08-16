@@ -25,6 +25,7 @@ import {
   setActiveBackgroundId,
 } from "../../../shared/backgroundImageStore";
 import { useOwnerView } from "@/contexts/OwnerViewContext";
+import { type LinkConfig } from "@/lib/linkConfig";
 
 export default function Home() {
   const { user, loading, isAuthenticated, logout } = useAuth();
@@ -138,6 +139,8 @@ export default function Home() {
           </div>
         </div>
       </nav>
+
+      <PublicSiteContent config={linkConfig} />
 
       {/* Hero Worlds Grid */}
       <section className="px-6 py-12 max-w-7xl mx-auto w-full">
@@ -561,6 +564,8 @@ export default function Home() {
         </div>
       </nav>
 
+      <PublicSiteContent config={linkConfig} />
+
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-6 mb-12">
@@ -680,5 +685,39 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+
+function PublicSiteContent({ config }: { config: LinkConfig }) {
+  const socialEntries = [
+    ["YouTube", config.social.youtube],
+    ["Instagram", config.social.instagram],
+    ["GitHub", config.social.github],
+    ["TikTok", config.social.tiktok],
+    ["X", config.social.x],
+  ].filter(([, url]) => Boolean(url));
+
+  if (!config.banner.enabled && config.partners.length === 0 && socialEntries.length === 0) return null;
+
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl space-y-5 px-6 pt-6">
+      {config.banner.enabled && (
+        <div className="rounded-2xl border border-[#e853dc]/70 bg-gradient-to-r from-[#e853dc]/20 via-[#0b0e14]/90 to-[#20cde2]/20 p-6 shadow-[0_0_35px_rgba(232,83,220,0.2)] sm:flex sm:items-center sm:justify-between sm:gap-6">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#d7ab4e]">{config.banner.eyebrow}</p>
+            <h2 className="mt-2 text-2xl font-bold text-[#20cde2]">{config.banner.title}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">{config.banner.message}</p>
+          </div>
+          <a href={config.banner.ctaUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex shrink-0 items-center justify-center rounded-md bg-[#e853dc] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#e853dc]/90 sm:mt-0">{config.banner.ctaLabel}</a>
+        </div>
+      )}
+      {(socialEntries.length > 0 || config.partners.length > 0) && (
+        <div className="grid gap-4 md:grid-cols-2">
+          {socialEntries.length > 0 && <div className="rounded-xl border border-[#20cde2]/30 bg-[#0b0e14]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#20cde2]">Connect with AO</p><div className="flex flex-wrap gap-2">{socialEntries.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#e853dc] hover:text-white">{label}</a>)}</div></div>}
+          {config.partners.length > 0 && <div className="rounded-xl border border-[#d7ab4e]/30 bg-[#0b0e14]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#d7ab4e]">External Partners</p><div className="flex flex-wrap gap-2">{config.partners.map((partner) => <a key={`${partner.label}-${partner.url}`} href={partner.url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#d7ab4e] hover:text-white">{partner.label}</a>)}</div></div>}
+        </div>
+      )}
+    </section>
   );
 }

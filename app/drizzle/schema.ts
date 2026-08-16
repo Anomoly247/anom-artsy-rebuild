@@ -322,6 +322,21 @@ export const platformSettings = mysqlTable("platform_settings", {
   siteDescription: text("site_description"),
   logoUrl: text("logo_url"),
   faviconUrl: text("favicon_url"),
+
+  // Owner-managed public destinations and content
+  universeUrl: text("universe_url"),
+  storeUrl: text("store_url"),
+  socialLinks: json("social_links").$type<Record<string, string>>(),
+  customBanner: json("custom_banner").$type<{
+    enabled: boolean;
+    eyebrow: string;
+    title: string;
+    message: string;
+    ctaLabel: string;
+    ctaUrl: string;
+  }>(),
+  partnerSites: json("partner_sites").$type<Array<{ label: string; url: string }>>(),
+
   primaryColor: varchar("primary_color", { length: 7 }).default("#ff00cc"), // magenta
   secondaryColor: varchar("secondary_color", { length: 7 }).default("#00eaff"), // cyan
   accentColor: varchar("accent_color", { length: 7 }).default("#9d4edd"), // purple
