@@ -26,17 +26,28 @@ export default function GuardianLedgerPanel() {
 
   const pendingIds = new Set(queue.map((item) => item.sourceRecordId));
   const visibleCandidates = queue.length > 0
-    ? queue.map((item) => ({
-        id: item.sourceRecordId,
-        route: item.route ?? "unassigned",
-        snippet: item.reviewerNote || "Queued authored source record awaiting Guardian review.",
-        status: item.status,
-      }))
+    ? queue.map((item) => {
+        const source = aoHandoffRecords.find((record) => record.id === item.sourceRecordId);
+        return {
+          id: item.sourceRecordId,
+          route: item.route ?? source?.route ?? "unassigned",
+          snippet: item.reviewerNote || source?.snippet || "Queued authored source record awaiting Guardian review.",
+          status: item.status,
+          mediaType: source?.mediaType ?? "Unclassified",
+          worldPath: source?.worldPath ?? "Source path not yet mapped",
+          sourceUrl: source?.sourceUrl,
+          created: source?.created ?? "Not recorded",
+        };
+      })
     : reviewCandidates.map((record) => ({
         id: record.id,
         route: record.route ?? "unassigned",
         snippet: record.snippet,
         status: record.status === "pending-review" ? "pending" : "pending",
+        mediaType: record.mediaType ?? "Unclassified",
+        worldPath: record.worldPath ?? "Source path not yet mapped",
+        sourceUrl: record.sourceUrl,
+        created: record.created ?? "Not recorded",
       }));
 
   const review = (sourceRecordId: string, route: string, status: "pending" | "approved" | "rejected") => {
@@ -95,7 +106,15 @@ export default function GuardianLedgerPanel() {
                   <div className="min-w-0">
                     <p className="break-all text-xs font-bold uppercase tracking-ao-kicker text-ao-gold">{record.id}</p>
                     <p className="mt-2 text-sm leading-6 text-ao-copy">{record.snippet}</p>
-                    <p className="mt-2 text-xs text-ao-copy-subtle">Destination: {record.route}</p>
+                    <div className="mt-3 grid gap-2 text-xs text-ao-copy-subtle sm:grid-cols-2">
+                      <p><span className="font-bold text-ao-cyan">Source record:</span> retained</p>
+                      <p><span className="font-bold text-ao-cyan">Media:</span> {record.mediaType}</p>
+                      <p><span className="font-bold text-ao-cyan">World path:</span> {record.worldPath}</p>
+                      <p><span className="font-bold text-ao-cyan">Created:</span> {record.created}</p>
+                      <p><span className="font-bold text-ao-cyan">Destination:</span> {record.route}</p>
+                      <p><span className="font-bold text-ao-cyan">Authorship:</span> unchanged</p>
+                    </div>
+                    {record.sourceUrl ? <a href={record.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex text-xs font-bold text-ao-gold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-ao-focus">Open original source reference</a> : null}
                   </div>
                   <div className="flex shrink-0 flex-wrap gap-2">
                     {!isQueued ? <Button size="sm" variant="outline" className="border-ao-gold/60 text-ao-gold hover:bg-ao-gold/10" onClick={() => review(record.id, record.route, "pending")} disabled={reviewMutation.isPending}>Queue for review</Button> : null}

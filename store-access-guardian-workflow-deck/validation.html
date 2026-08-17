@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Workflow Is Ready for Real-Database Application</title>
+<style>
+*{box-sizing:border-box}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:62px 82px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(34deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(146deg,transparent 48%,#e853dc 49%,transparent 50%),radial-gradient(circle at 82% 22%,#d8ae55 0 2px,transparent 3px);background-size:260px 200px,310px 230px,180px 160px}
+.inner{position:relative;z-index:1}
+.eyebrow{color:#d8ae55;font-size:14px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+.title{font-size:42px;line-height:1.08;margin:14px 0 12px;letter-spacing:-1px;max-width:900px}
+.lede{font-size:20px;line-height:1.4;color:#b9c4d8;max-width:900px}
+/* Reduced spacing to fit under 720px */
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:24px;align-items:start}
+.pass{border-top:3px solid #20cde2;padding-top:18px}
+.pass-label{font-size:16px;letter-spacing:5px;text-transform:uppercase;color:#20cde2;font-weight:800}
+.pass-word{font-size:72px;line-height:1;color:#f4f7ff;margin-top:8px;letter-spacing:-3px}
+.checks{margin-top:16px;display:grid;gap:4px}
+.check{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;border-bottom:1px solid #26354e;padding-bottom:2px}
+.tick{color:#20cde2;font-size:20px;font-weight:800}
+.check strong{display:block;font-size:18px;color:#f4f7ff}
+.check span{display:block;margin-top:3px;font-size:14px;color:#8f9bb2;line-height:1.35}
+.gate{border-top:3px solid #e853dc;padding-top:18px;min-height:220px}
+.gate-label{font-size:16px;letter-spacing:5px;text-transform:uppercase;color:#e853dc;font-weight:800}
+.gate h2{font-size:30px;line-height:1.1;margin:18px 0 14px;max-width:420px}
+.gate p{font-size:17px;line-height:1.5;color:#b9c4d8;max-width:450px;margin:0}
+.command{margin-top:18px;border-top:1px solid #26354e;padding-top:10px;color:#d8ae55;font-family:ui-monospace,SFMono-Regular,monospace;font-size:15px;line-height:1.45}
+.footer{margin-top:12px;color:#f4f7ff;font-size:17px;border-top:1px solid #26354e;padding-top:12px}.footer span{color:#20cde2}
+</style>
+</head>
+<body>
+<div class="slide-container"><div class="web"></div><div class="inner"><div class="eyebrow">Release readiness / evidence before production</div><h1 class="title">The workflow is ready for real-database application.</h1><p class="lede">The application behavior is validated locally. The only remaining gate is applying the prepared migration chain with the protected production connection.</p><div class="layout"><section class="pass"><div class="pass-label">Verified locally</div><div class="pass-word">PASS</div><div class="checks"><div class="check"><div class="tick">✓</div><div><strong>Store API mock</strong><span>Membership visibility, pending filters, and unlocks.</span></div></div><div class="check"><div class="tick">✓</div><div><strong>Economy mock</strong><span>Coin balance, blocked reviews, and ownership edge-cases.</span></div></div><div class="check"><div class="tick">✓</div><div><strong>TypeScript and production build</strong><span>Frontend and server bundles compile.</span></div></div><div class="check"><div class="tick">✓</div><div><strong>Migration consistency</strong><span>Drizzle chain and uniqueness migration validated.</span></div></div></div></section><section class="gate"><div class="gate-label">Remaining gate</div><h2>Apply migrations with the real DATABASE_URL.</h2><p>No production database was contacted during local validation. Run the migration from the protected deployment environment, then verify catalog, membership, and access records with read-only queries.</p><div class="command">pnpm drizzle-kit check<br>pnpm drizzle-kit migrate</div></section></div><div class="footer"><span>Boundary:</span> local PASS is not a production deployment; it is the evidence required before one.</div></div></div>
+</body>
+</html>

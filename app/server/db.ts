@@ -223,17 +223,30 @@ export async function unlockStoreItemWithCoin(userId: number, catalogItemId: num
   const numericPrice = Number(price);
   if (!Number.isFinite(numericPrice) || numericPrice < 0) throw new Error("Invalid catalog price");
 
-  if (numericPrice > 0) {
-    await addCoinTransaction(userId, "spend", price, `store_unlock:${item.slug}`);
+  try {
+    await db.insert(userEntitlements).values({
+      userId,
+      catalogItemId,
+      grantSource: "coin",
+      status: "active",
+      sourceRef: `coin:${item.slug}`,
+    });
+  } catch (error) {
+    // A concurrent request may win the database uniqueness race; return its access record idempotently.
+    const concurrent = await db.select().from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.catalogItemId, catalogItemId), eq(userEntitlements.status, "active"))).limit(1);
+    if (concurrent.length > 0) return { entitlement: concurrent[0], alreadyOwned: true };
+    throw error;
   }
 
-  await db.insert(userEntitlements).values({
-    userId,
-    catalogItemId,
-    grantSource: "coin",
-    status: "active",
-    sourceRef: `coin:${item.slug}`,
-  });
+  try {
+    if (numericPrice > 0) {
+      await addCoinTransaction(userId, "spend", price, `store_unlock:${item.slug}`);
+    }
+  } catch (error) {
+    // Do not leave access behind when the Coin transaction fails.
+    await db.delete(userEntitlements).where(eq(userEntitlements.id, (await db.select({ id: userEntitlements.id }).from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.catalogItemId, catalogItemId), eq(userEntitlements.status, "active"))).limit(1))[0]?.id ?? -1));
+    throw error;
+  }
 
   const entitlement = await db.select().from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.catalogItemId, catalogItemId), eq(userEntitlements.status, "active"))).limit(1);
   return { entitlement: entitlement[0], alreadyOwned: false };

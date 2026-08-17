@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Database Blocks Duplicate Active Access</title>
+<style>
+*{box-sizing:border-box}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:48px 80px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(36deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(144deg,transparent 48%,#e853dc 49%,transparent 50%),radial-gradient(circle at 82% 23%,#d8ae55 0 2px,transparent 3px);background-size:260px 200px,310px 230px,180px 160px}
+.inner{position:relative;z-index:1}
+.eyebrow{color:#d8ae55;font-size:14px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+.title{margin:14px 0 12px;font-size:42px;line-height:1.08;letter-spacing:-1px}
+.lede{font-size:20px;line-height:1.4;color:#b9c4d8;max-width:900px;margin:12px 0 0}
+/* Reduced vertical spacing to remove overflow */
+.key-row{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;gap:12px;align-items:center;margin-top:28px}
+.key-part{border-top:3px solid #20cde2;padding-top:10px;min-height:96px}.key-part:nth-child(3){border-color:#e853dc}.key-part:nth-child(5){border-color:#d8ae55}
+.key-number{font-size:13px;letter-spacing:3px;color:#8b98b0}.key-part h2{font-size:27px;margin:10px 0 6px}.key-part p{margin:0;color:#b9c4d8;font-size:16px;line-height:1.4}
+.join{font-size:32px;text-align:center;color:#d8ae55}
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:28px;border-top:1px solid #26354e;padding-top:12px}.outcome h3{font-size:21px;margin:0 0 10px;color:#20cde2}.outcome:nth-child(2) h3{color:#e853dc}.outcome p{margin:0;color:#b9c4d8;font-size:16px;line-height:1.5;max-width:480px}.signal{margin-top:14px;color:#d8ae55;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.foot{margin-top:12px;color:#f4f7ff;font-size:18px}.foot span{color:#20cde2}
+</style>
+</head>
+<body>
+<div class="slide-container"><div class="web"></div><div class="inner"><div class="eyebrow">Database guard / active access integrity</div><h1 class="title">The database blocks duplicate active access.</h1><p class="lede">A composite uniqueness rule turns server idempotence into a database-level guarantee without erasing historical access states.</p><div class="key-row"><section class="key-part"><div class="key-number">01 / IDENTITY</div><h2>User ID</h2><p>Which account is requesting access?</p></section><div class="join">+</div><section class="key-part"><div class="key-number">02 / CATALOG</div><h2>Catalog item</h2><p>Which approved customization is being used?</p></section><div class="join">+</div><section class="key-part"><div class="key-number">03 / STATE</div><h2>Status</h2><p>Active, revoked, or expired access state.</p></section></div><div class="outcomes"><section class="outcome"><h3>First approved request</h3><p>The server verifies publication, Guardian approval, balance, and access history. One active access record is created and the Coin transaction proceeds.</p><div class="signal">One user · one item · one active row</div></section><section class="outcome"><h3>Simultaneous duplicate request</h3><p>The database uniqueness guard rejects the duplicate insert. The server re-reads the winning access record and returns it idempotently instead of creating a second active row.</p><div class="signal">Concurrent request → existing access</div></section></div><p class="foot"><span>Historical states remain visible:</span> revoked and expired records are preserved for the access history; only duplicate active state is blocked.</p></div></div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Admin Queue Makes Attribution Visible</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:60px 80px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(36deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(144deg,transparent 48%,#e853dc 49%,transparent 50%),radial-gradient(circle at 80% 28%,#d8ae55 0 2px,transparent 3px),radial-gradient(circle at 27% 78%,#20cde2 0 2px,transparent 3px);background-size:250px 190px,310px 230px,180px 160px,220px 180px}
+.inner{position:relative;z-index:1}
+.eyebrow{font-size:14px;letter-spacing:4px;text-transform:uppercase;color:#d8ae55;font-weight:700}
+.title{font-size:40px;line-height:1.08;letter-spacing:-1px;margin:14px 0 10px}
+.lede{font-size:19px;line-height:1.4;color:#b9c4d8;max-width:920px;margin:0}
+.columns{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;margin-top:28px}
+.section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#20cde2;font-weight:800;padding-bottom:11px;border-bottom:2px solid #20cde2}
+.record-id{font-size:20px;letter-spacing:1px;color:#d8ae55;margin-top:18px;overflow-wrap:anywhere}
+.snippet{font-size:17px;line-height:1.45;color:#f4f7ff;margin:12px 0 18px;max-width:620px}
+.metadata{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;border-top:1px solid #26354e}
+.metadata p{font-size:14px;line-height:1.35;color:#b9c4d8;margin:0;padding-top:8px;border-bottom:1px solid #26354e;min-height:40px}
+.metadata span{display:block;color:#20cde2;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;font-weight:800}
+.source-link{display:inline-block;margin-top:14px;color:#d8ae55;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px}
+.checks{display:grid;gap:10px;margin-top:12px}
+.check{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;padding-bottom:10px;border-bottom:1px solid #26354e}
+.tick{width:16px;height:16px;border:2px solid #20cde2;margin-top:2px;color:#20cde2;font-size:11px;line-height:12px;text-align:center;font-weight:900}
+.check strong{font-size:15px;line-height:1.2;color:#f4f7ff;display:block}.check small{display:block;font-size:13px;line-height:1.35;color:#8b98b0;margin-top:4px}
+.decisions{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap}.decision{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;padding-top:10px;border-top:2px solid #d8ae55;color:#d8ae55}.decision.approved{border-color:#20cde2;color:#20cde2}.decision.rejected{border-color:#e853dc;color:#e853dc}
+.footer{margin-top:20px;border-top:1px solid #26354e;padding-top:12px;font-size:17px;color:#f4f7ff}.footer span{color:#e853dc}
+</style>
+</head>
+<body>
+<div class="slide-container">
+  <div class="web"></div>
+  <div class="inner">
+    <div class="eyebrow">Guardian / admin control surface</div>
+    <h1 class="title">The admin queue makes attribution visible.</h1>
+    <p class="lede">Each review card keeps the source record, destination, media context, and authorship boundary in view before a decision is recorded.</p>
+    <div class="columns">
+      <section>
+        <div class="section-label">Authored source record</div>
+        <div class="record-id">post-828357303248602646522</div>
+        <p class="snippet">A queued source record remains readable as authored material while the Guardian decides whether the AO destination is ready for publication.</p>
+        <div class="metadata">
+          <p><span>Media</span>IMAGE / original reference</p>
+          <p><span>World path</span>worlds/clifford-tater/communities/heartfield-commons</p>
+          <p><span>Destination</span>/clifford-and-tater</p>
+          <p><span>Created</span>2026-08-10 15:00:29</p>
+          <p><span>Source record</span>Retained as stable identifier</p>
+          <p><span>Authorship</span>Unchanged by review</p>
+        </div>
+        <a class="source-link" href="https://www.facebook.com/anomoriginals/" target="_blank" rel="noreferrer">Open original source reference</a>
+      </section>
+      <section>
+        <div class="section-label">Verification checklist</div>
+        <div class="checks">
+          <div class="check"><div class="tick">✓</div><div><strong>Attribution anchor present</strong><small>Stable source record ID remains attached to the item.</small></div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>Provenance and privacy reviewed</strong><small>Source, media suitability, and intended use are visible before approval.</small></div></div>
+          <div class="check"><div class="tick">✓</div><div><strong>AO destination is explicit</strong><small>World path and route show where the record will live.</small></div></div>
+        </div>
+        <div class="decisions"><div class="decision">Pending</div><div class="decision approved">Approve</div><div class="decision rejected">Reject</div></div>
+      </section>
+    </div>
+    <div class="footer"><span>Boundary:</span> Guardian review controls publication and access context; it does not claim or transfer ownership of the authored work.</div>
+  </div>
+</div>
+</body>
+</html>

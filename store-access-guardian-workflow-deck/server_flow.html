@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Server Decides What Can Be Used</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:62px 60px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(35deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(145deg,transparent 48%,#e853dc 49%,transparent 50%),radial-gradient(circle at 18% 76%,#d8ae55 0 2px,transparent 3px);background-size:260px 200px,320px 240px,180px 170px}
+.inner{position:relative;z-index:1}
+.eyebrow{color:#d8ae55;font-size:14px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+.title{font-size:42px;line-height:1.08;letter-spacing:-1px;margin:14px 0 12px}
+.lede{font-size:20px;line-height:1.4;color:#b9c4d8;max-width:920px;margin:0}
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr) 1.2fr;gap:12px;align-items:start;margin-top:28px}
+.check{position:relative;min-height:140px;border-top:3px solid #20cde2;padding-top:8px}
+.check:nth-child(2){border-color:#e853dc}.check:nth-child(3){border-color:#d8ae55}.check:nth-child(4){border-color:#20cde2}
+.index{font-size:13px;letter-spacing:3px;color:#8b98b0;text-transform:uppercase}
+.check h2{font-size:22px;line-height:1.15;margin:14px 0 10px}.check p{font-size:16px;line-height:1.45;color:#b9c4d8;margin:0}.condition{margin-top:12px;color:#d8ae55;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;border-top:1px solid #26354e;padding-top:6px}
+.result{min-height:140px;border-left:2px solid #20cde2;padding-left:16px}.result h2{font-size:28px;line-height:1.1;color:#20cde2;margin:24px 0 12px}.result p{font-size:17px;line-height:1.5;color:#f4f7ff;margin:0}.result strong{color:#d8ae55;font-weight:700}
+.footer{margin-top:8px;border-top:1px solid #26354e;padding-top:8px;font-size:17px;color:#b9c4d8}
+.footer span{color:#e853dc;font-weight:700}
+</style>
+</head>
+<body>
+<div class="slide-container"><div class="web"></div><div class="inner"><div class="eyebrow">Store API / server-confirmed access</div><h1 class="title">The server decides what can be used.</h1><p class="lede">A preview can explain an item. Only the server can make the final access decision.</p><div class="pipeline"><section class="check"><div class="index">01 / Catalog</div><h2>Published</h2><p>The item is available in the catalog rather than draft or archived.</p><div class="condition">Otherwise: hidden</div></section><section class="check"><div class="index">02 / Guardian</div><h2>Approved</h2><p>The authored source passed provenance, attribution, privacy, and suitability review.</p><div class="condition">Otherwise: blocked</div></section><section class="check"><div class="index">03 / Coin</div><h2>Balance checked</h2><p>The server validates price, account balance, and the spend transaction.</p><div class="condition">Otherwise: no charge</div></section><section class="check"><div class="index">04 / History</div><h2>Access checked</h2><p>An existing active record is returned instead of charging a duplicate request.</p><div class="condition">Otherwise: create once</div></section><section class="result"><div class="index">Result / account access</div><h2>Approved use</h2><p>The server records which customization the account may use. <strong>Authorship remains unchanged.</strong></p></section></div><div class="footer"><span>Invariant:</span> client previews never approve content, alter provenance, or grant access on their own.</div></div></div>
+</body>
+</html>

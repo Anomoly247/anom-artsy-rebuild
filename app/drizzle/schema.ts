@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, boolean, json } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, decimal, boolean, json, uniqueIndex } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -112,9 +112,11 @@ export const userEntitlements = mysqlTable("user_entitlements", {
   status: mysqlEnum("status", ["active", "revoked", "expired"]).default("active").notNull(),
   grantedAt: timestamp("granted_at").defaultNow().notNull(),
   expiresAt: timestamp("expires_at"),
-  sourceRef: varchar("source_ref", { length: 160 }),
-});
-
+    sourceRef: varchar("source_ref", { length: 160 }),
+}, (table) => ({
+  /** One active/revoked/expired row per user-item-status; blocks simultaneous duplicate active access. */
+  userCatalogStatusUnique: uniqueIndex("user_entitlements_user_catalog_status_unique").on(table.userId, table.catalogItemId, table.status),
+}));
 export type UserEntitlement = typeof userEntitlements.$inferSelect;
 export type InsertUserEntitlement = typeof userEntitlements.$inferInsert;
 

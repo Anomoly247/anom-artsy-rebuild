@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ownership, Review, and Access Stay Separate</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:60px 80px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(34deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(145deg,transparent 48%,#e853dc 49%,transparent 50%);background-size:250px 190px,310px 230px}
+.inner{position:relative;z-index:1}
+.eyebrow{color:#d8ae55;font-size:14px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+.title{font-size:42px;line-height:1.08;margin:14px 0 12px;letter-spacing:-1px}
+.lede{color:#b9c4d8;font-size:20px;line-height:1.4;max-width:930px}
+.lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:48px}
+.lane{min-height:240px;border-top:3px solid #20cde2;padding-top:14px}
+.lane:nth-child(2){border-color:#e853dc}
+.lane:nth-child(3){border-color:#d8ae55}
+.lane:nth-child(4){border-color:#20cde2}
+.num{font-size:14px;letter-spacing:3px;color:#8b98b0}
+.lane h2{font-size:24px;line-height:1.15;margin:16px 0 12px}
+.lane p{color:#b9c4d8;font-size:16px;line-height:1.5;margin:0}
+.mark{margin-top:24px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#d8ae55;border-top:1px solid #26354e;padding-top:12px}
+</style>
+</head>
+<body>
+<div class="slide-container"><div class="web"></div><div class="inner"><div class="eyebrow">Operating model / four separate systems</div><h1 class="title">Ownership, review, and access stay separate.</h1><p class="lede">The Store can manage availability without changing who created the work or silently converting impact into currency.</p><div class="lanes"><section class="lane"><div class="num">01 / AUTHORSHIP</div><h2>Authored work</h2><p>Your stories, media, characters, and brand assets remain your intellectual property and creative work.</p><div class="mark">Ownership stays with creator</div></section><section class="lane"><div class="num">02 / GUARDIAN</div><h2>Review state</h2><p>Guardian checks source, attribution, privacy, suitability, and destination before publication.</p><div class="mark">Pending · approved · rejected</div></section><section class="lane"><div class="num">03 / ECONOMY</div><h2>Anom Coin</h2><p>A shared spendable balance used for eligible unlocks and tracked through Coin transactions.</p><div class="mark">Currency, not impact</div></section><section class="lane"><div class="num">04 / ACCESS</div><h2>Server-confirmed use</h2><p>A record states what an account may use after the server validates item state, balance, and access history.</p><div class="mark">Access, not ownership</div></section></div></div></div>
+</body>
+</html>

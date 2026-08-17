@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Guardian Review Preserves Provenance</title>
+<style>
+*{box-sizing:border-box}body{margin:0}
+.slide-container{width:1280px;min-height:720px;background:#050914;color:#f4f7ff;font-family:Inter,Arial,sans-serif;padding:62px 80px 0;position:relative;overflow:hidden}
+.web{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(38deg,transparent 48%,#20cde2 49%,transparent 50%),linear-gradient(142deg,transparent 48%,#e853dc 49%,transparent 50%);background-size:260px 200px,300px 230px}
+.inner{position:relative;z-index:1}
+.eyebrow{color:#d8ae55;font-size:14px;letter-spacing:4px;text-transform:uppercase;font-weight:700}
+.title{margin:14px 0 12px;font-size:42px;line-height:1.08}
+.lede{font-size:20px;color:#b9c4d8;line-height:1.4;max-width:900px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:38px;position:relative}
+.flow:before{content:"";position:absolute;top:24px;left:42px;right:42px;height:2px;background:linear-gradient(90deg,#20cde2,#e853dc,#d8ae55)}
+.stage{position:relative;z-index:1}
+.dot{width:50px;height:50px;border:2px solid #20cde2;background:#050914;color:#20cde2;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800}
+.stage:nth-child(2) .dot{border-color:#e853dc;color:#e853dc}
+.stage:nth-child(3) .dot{border-color:#d8ae55;color:#d8ae55}
+.stage:nth-child(4) .dot{border-color:#20cde2;color:#20cde2}
+.stage h2{font-size:22px;line-height:1.15;margin:8px 0 8px}
+.stage p{font-size:16px;line-height:1.5;color:#b9c4d8;margin:0;max-width:230px}
+.tag{margin-top:12px;color:#d8ae55;font-size:12px;letter-spacing:2px;text-transform:uppercase;border-top:1px solid #26354e;padding-top:8px}
+.bottom{margin-top:24px;border-top:1px solid #26354e;padding-top:18px;color:#f4f7ff;font-size:18px}
+.bottom span{color:#20cde2}
+</style>
+</head>
+<body>
+<div class="slide-container"><div class="web"></div><div class="inner"><div class="eyebrow">Guardian / authored source queue</div><h1 class="title">Guardian review preserves provenance.</h1><p class="lede">The review path exposes the source before a Store item appears, while keeping authorship and original records intact.</p><div class="flow"><section class="stage"><div class="dot">01</div><h2>Capture source</h2><p>Keep a stable source ID, original route, media reference, and destination.</p><div class="tag">Attribution anchor</div></section><section class="stage"><div class="dot">02</div><h2>Verify evidence</h2><p>Check provenance, privacy, media suitability, and caption/alt text.</p><div class="tag">Human review</div></section><section class="stage"><div class="dot">03</div><h2>Record decision</h2><p>Write pending, approved, or rejected status with reviewer, note, and time.</p><div class="tag">Auditable state</div></section><section class="stage"><div class="dot">04</div><h2>Control availability</h2><p>Only published and approved records become visible to the public Store.</p><div class="tag">Access gate</div></section></div><div class="bottom"><span>Core rule:</span> review controls availability and provenance tracking; it never transfers ownership of the authored work.</div></div></div>
+</body>
+</html>

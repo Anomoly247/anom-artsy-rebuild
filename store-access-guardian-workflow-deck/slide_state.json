@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "title": "AO Store — Server-Confirmed Access & Guardian Review",
+    "created": 1786988578.138,
+    "last_updated": 1786988849.334,
+    "total_slides": 8
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "separation",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "guardian_flow",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "server_flow",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "database_guard",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "interface",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "validation",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "closing",
+      "state": "edited",
+      "pageNum": 8
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "AO Store — Server-Confirmed Access & Guardian Review",
+      "summary": "Introduce the distinction between authored ownership, Guardian provenance review, and server-confirmed access records.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "separation",
+      "title": "Ownership, Review, and Access Stay Separate",
+      "summary": "Show the four distinct systems: authored work, Guardian review, Anom Coin, and server-confirmed access.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "guardian_flow",
+      "title": "Guardian Review Preserves Provenance",
+      "summary": "Explain the queue flow from source record to review decision while keeping authorship unchanged.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "server_flow",
+      "title": "The Server Decides What Can Be Used",
+      "summary": "Show the server-side catalog and unlock checks, including publication, Guardian approval, balance, and access creation.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "database_guard",
+      "title": "The Database Blocks Duplicate Active Access",
+      "summary": "Explain the composite uniqueness safeguard on user, catalog item, and status, plus the concurrent request behavior.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "interface",
+      "title": "The Admin Queue Makes Attribution Visible",
+      "summary": "Show how the Guardian interface exposes source record, media type, world path, destination, created date, original source, and authorship status.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "validation",
+      "title": "The Workflow Is Ready for Real-Database Application",
+      "summary": "Summarize passing mock, type, build, and migration consistency checks and identify the remaining production migration gate.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "closing",
+      "title": "One Reviewed Layer at a Time",
+      "summary": "Close with the operating principle: preserve authored ownership, review provenance, and grant access only through verified server records.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}
