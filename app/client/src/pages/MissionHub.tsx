@@ -5,12 +5,17 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function MissionHub() {
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [donationAmount, setDonationAmount] = useState("25");
+  const { data: socialGoodScore } = trpc.socialGood.getScore.useQuery(undefined, {
+    enabled: isAuthenticated,
+    staleTime: 30_000,
+  });
 
   const impactMetrics = [
     { label: "Lives Touched", value: "1,247", icon: Heart, color: "#ff00cc" },
@@ -117,6 +122,11 @@ export default function MissionHub() {
             Our Impact in Numbers
           </h3>
           <div className="grid md:grid-cols-4 gap-6">
+            <Card className="bg-[#0a0a0f] border-2 border-[#ffd23f] p-6 text-center shadow-[0_0_18px_rgba(255,210,63,0.18)]">
+              <Heart className="w-8 h-8 mx-auto mb-4 text-[#ffd23f]" />
+              <p className="text-4xl font-bold mb-2 text-[#ffd23f]">{socialGoodScore?.totalScore ?? 0}</p>
+              <p className="text-[#7a7f8e]">Your Social Good Score</p>
+            </Card>
             {impactMetrics.map((metric, idx) => {
               const Icon = metric.icon;
               return (

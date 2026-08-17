@@ -8,6 +8,8 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import SignUpConnectors from "@/components/SignUpConnectors";
 import HomepageIntegration from "@/components/HomepageIntegration";
+import UniverseMap from "@/components/UniverseMap";
+import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import CustomBackgroundGallery, { type GalleryBackground } from "@/components/CustomBackgroundGallery";
 import {
   BACKGROUND_STORAGE_KEY,
@@ -117,17 +119,18 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0b0e14] flex items-center justify-center">
-        <div className="text-[#00eaff] text-xl">Loading Anom Artsy...</div>
+      <div className="min-h-screen bg-[#050914] flex items-center justify-center">
+        <div className="text-[#20cde2] text-xl">Loading Anom Artsy...</div>
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#0b0e14] text-[#00eaff] flex flex-col">
+      <div className="ao-world-page min-h-screen bg-[#050914] text-[#20cde2] flex flex-col">
+      <LivingWorldWeb variant="cyan" />
       {/* Immersive Universe Header */}
-      <nav className="sticky top-0 z-40 border-b border-[#00eaff]/40 bg-[#0b0e14]/95 px-6 py-4 backdrop-blur">
+      <nav className="sticky top-0 z-40 border-b border-[#20cde2]/40 bg-[#050914]/95 px-6 py-4 backdrop-blur">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold neon-text-magenta flex items-center gap-2">
             <span>🪐</span> AO Universe & Sanctuary
@@ -142,49 +145,18 @@ export default function Home() {
 
       <PublicSiteContent config={linkConfig} />
 
-      {/* Hero Worlds Grid */}
-      <section className="px-6 py-12 max-w-7xl mx-auto w-full">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-extrabold neon-text-cyan mb-4">Welcome to the AO Universe</h1>
-          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
-            Explore our live neon worlds, interactive arcades, and family sanctuary. Select a world below to dive right in.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="rounded-xl border-2 border-[#00eaff] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(0,234,255,0.2)] hover:border-[#ff00cc] transition-all cursor-pointer" onClick={() => navigate("/games")}>
-            <div className="text-4xl mb-3">🎮</div>
-            <h3 className="text-xl font-bold text-[#00eaff] mb-2">District B Arcade</h3>
-            <p className="text-gray-400 text-sm mb-4">Play Sky Navigator, Identity Grid, and high-score arcade challenges.</p>
-            <Button className="w-full btn-neon-cyan text-xs">Enter Arcade</Button>
-          </div>
-
-          <div className="rounded-xl border-2 border-[#ff00cc] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,0,204,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => navigate("/anoms-corner")}>
-            <div className="text-4xl mb-3">🌟</div>
-            <h3 className="text-xl font-bold text-[#ff00cc] mb-2">Anom's Corner & Moonberry</h3>
-            <p className="text-gray-400 text-sm mb-4">Immersive Pixel & Dot stories, Moonberry Farm, and family games.</p>
-            <Button className="w-full btn-neon-magenta text-xs">Visit Anom's Corner</Button>
-          </div>
-
-          <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.assign(linkConfig.store)}>
-            <div className="text-4xl mb-3">🛍️</div>
-            <h3 className="text-xl font-bold text-[#ffd700] mb-2">Anom Originals Shop</h3>
-            <p className="text-gray-400 text-sm mb-4">Discover bespoke artwork, apparel, and verified creator gear.</p>
-            <Button className="w-full btn-neon-gold text-xs">Browse Shop</Button>
-          </div>
-        </div>
-      </section>
+      <UniverseMap shopUrl={linkConfig.store} />
 
       {/* Hero Section */}
       <section className="flex-1 px-6 py-10">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="mb-6 inline-block bg-[#ff00cc]/20 border border-[#ff00cc] rounded-lg px-4 py-2">
-                <p className="text-[#ff00cc] font-bold text-sm">🌍 Social Good First</p>
+              <div className="mb-6 inline-block bg-[#e853dc]/20 border border-[#e853dc] rounded-lg px-4 py-2">
+                <p className="text-[#e853dc] font-bold text-sm">🌍 Social Good First</p>
               </div>
               <h1 className="text-5xl font-bold mb-6">
                 <span className="neon-text-magenta">Identity</span>
-                <span className="text-[#00eaff]">, Amplified</span>
+                <span className="text-[#20cde2]">, Amplified</span>
               </h1>
               <p className="text-lg text-[#7a7f8e] mb-8">
                 Join the Anom Artsy community — a neon-lit sanctuary where family comes first, creativity thrives, and your identity matters. Every interaction drives real-world social good impact.
@@ -194,7 +166,7 @@ export default function Home() {
                   Enter the Universe
                 </Button>
                 <a href="/mission-hub">
-                  <Button className="bg-[#ff00cc] hover:bg-[#ff00cc]/80 text-black font-bold text-lg py-6 px-8">
+                  <Button className="bg-[#e853dc] hover:bg-[#e853dc]/80 text-black font-bold text-lg py-6 px-8">
                     💜 Support Our Mission
                   </Button>
                 </a>
@@ -205,11 +177,11 @@ export default function Home() {
         </section>
 
         {/* Mission Section */}
-        <section className="bg-gradient-to-r from-[#ff00cc]/10 to-[#00eaff]/10 border-t border-[#ff00cc] px-6 py-16">
+        <section className="bg-gradient-to-r from-[#e853dc]/10 to-[#20cde2]/10 border-t border-[#e853dc] px-6 py-16">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">
               <span className="neon-text-magenta">Social Good</span>
-              <span className="text-[#00eaff]"> Meets </span>
+              <span className="text-[#20cde2]"> Meets </span>
               <span className="neon-text-magenta">Creative Power</span>
             </h2>
             <p className="text-[#7a7f8e] max-w-2xl mx-auto mb-6">
@@ -224,61 +196,61 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="bg-[#1a1f2e] border-t border-[#2a2f3e] px-6 py-20">
+        <section className="bg-[#0d1b2b] border-t border-[#2a2f3e] px-6 py-20">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 neon-text-magenta">
               What Awaits You
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
               {/* Feature 1 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <Zap className="w-8 h-8 text-[#ff00cc] mb-4" />
-                <h3 className="text-xl font-bold text-[#00eaff] mb-2">Anom Coin Economy</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <Zap className="w-8 h-8 text-[#e853dc] mb-4" />
+                <h3 className="text-xl font-bold text-[#20cde2] mb-2">Anom Coin Economy</h3>
                 <p className="text-[#7a7f8e]">
                   Earn coins through social good actions, games, and community engagement. Spend them on profile decorations and exclusive lounges.
                 </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <Users className="w-8 h-8 text-[#00eaff] mb-4" />
-                <h3 className="text-xl font-bold text-[#ff00cc] mb-2">Private Lounges</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <Users className="w-8 h-8 text-[#20cde2] mb-4" />
+                <h3 className="text-xl font-bold text-[#e853dc] mb-2">Private Lounges</h3>
                 <p className="text-[#7a7f8e]">
                   Create family, friend, and coworker lounges. Chat, share goals, and customize your space with neon themes.
                 </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <Gamepad2 className="w-8 h-8 text-[#ff00cc] mb-4" />
-                <h3 className="text-xl font-bold text-[#00eaff] mb-2">Mini-Games</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <Gamepad2 className="w-8 h-8 text-[#e853dc] mb-4" />
+                <h3 className="text-xl font-bold text-[#20cde2] mb-2">Mini-Games</h3>
                 <p className="text-[#7a7f8e]">
                   Play Trivia, Memory, Mood Matcher, and Snack Vault Rush. Earn coins and climb the leaderboard.
                 </p>
               </div>
 
               {/* Feature 4 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <Heart className="w-8 h-8 text-[#00eaff] mb-4" />
-                <h3 className="text-xl font-bold text-[#ff00cc] mb-2">Anom's Corner</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <Heart className="w-8 h-8 text-[#20cde2] mb-4" />
+                <h3 className="text-xl font-bold text-[#e853dc] mb-2">Anom's Corner</h3>
                 <p className="text-[#7a7f8e] text-sm mb-4">
                   A safe space for children to watch Pixel & Dot episodes, play Off-Grid Adventure, and color.
                 </p>
               </div>
 
               {/* Feature 5 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <Sparkles className="w-8 h-8 text-[#ff00cc] mb-4" />
-                <h3 className="text-xl font-bold text-[#00eaff] mb-2">Profile Customization</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <Sparkles className="w-8 h-8 text-[#e853dc] mb-4" />
+                <h3 className="text-xl font-bold text-[#20cde2] mb-2">Profile Customization</h3>
                 <p className="text-[#7a7f8e]">
                   Apply neon themes, character badges, and mood glows to your profile. No coding required.
                 </p>
               </div>
 
               {/* Feature 6 */}
-              <div className="bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
-                <ShoppingBag className="w-8 h-8 text-[#00eaff] mb-4" />
-                <h3 className="text-xl font-bold text-[#ff00cc] mb-2">Custom Merch</h3>
+              <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
+                <ShoppingBag className="w-8 h-8 text-[#20cde2] mb-4" />
+                <h3 className="text-xl font-bold text-[#e853dc] mb-2">Custom Merch</h3>
                 <p className="text-[#7a7f8e]">
                   Request your bespoke artwork. We create and fulfill it through our trusted partners.
                 </p>
@@ -290,7 +262,7 @@ export default function Home() {
         {/* CTA Section */}
         <section className="px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 text-[#00eaff]">
+            <h2 className="text-3xl font-bold mb-6 text-[#20cde2]">
               Ready to join the Anom Universe?
             </h2>
             <Button onClick={startGoogleLogin} className="btn-neon-magenta text-lg py-6 px-8">
@@ -439,7 +411,7 @@ export default function Home() {
   // Authenticated Dashboard
   return (
     <div 
-      className="min-h-screen bg-[#0b0e14] text-[#00eaff]"
+      className="ao-world-page min-h-screen bg-[#050914] text-[#20cde2]"
       style={{
         backgroundImage: backgroundUrl.startsWith('linear-gradient') ? backgroundUrl : undefined,
         backgroundSize: 'cover',
@@ -461,6 +433,7 @@ export default function Home() {
           }}
         />
       )}
+      <LivingWorldWeb variant="cyan" />
       <CustomBackgroundGallery
         open={galleryOpen}
         onOpenChange={setGalleryOpen}
@@ -475,7 +448,7 @@ export default function Home() {
         onBlurChange={setBackgroundBlur}
       />
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 border-b border-[#2a2f3e] bg-[#0b0e14]/95 px-3 py-3 backdrop-blur sm:px-6 sm:py-4">
+      <nav className="sticky top-0 z-40 border-b border-[#2a2f3e] bg-[#050914]/95 px-3 py-3 backdrop-blur sm:px-6 sm:py-4">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="shrink-0 text-xl font-bold neon-text-magenta sm:text-2xl">Anom Artsy</div>
           <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center sm:gap-4">
@@ -483,30 +456,30 @@ export default function Home() {
             <div className="relative min-w-0">
               <Button 
                 onClick={() => setShowBgMenu(!showBgMenu)}
-                className="w-full bg-[#00ffff]/15 text-[#00ffff] hover:bg-[#00ffff]/25 sm:w-auto"
+                className="w-full bg-[#20cde2]/15 text-[#20cde2] hover:bg-[#20cde2]/25 sm:w-auto"
                 size="sm"
               >
                 <Palette className="w-4 h-4 mr-2" />
                 Background
               </Button>
               {showBgMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#1a1f2e] border border-[#2a2f3e] rounded-lg p-4 shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4 shadow-lg z-50">
                   <div className="space-y-2">
                     <button
                       onClick={() => handlePresetBackground('gradient1')}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#00ffff] text-sm"
+                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#20cde2] text-sm"
                     >
                       Magenta-Cyan
                     </button>
                     <button
                       onClick={() => handlePresetBackground('gradient2')}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#00ffff] text-sm"
+                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#20cde2] text-sm"
                     >
                       Purple-Magenta
                     </button>
                     <button
                       onClick={() => handlePresetBackground('gradient3')}
-                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#00ffff] text-sm"
+                      className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#20cde2] text-sm"
                     >
                       Cyan-Green
                     </button>
@@ -516,12 +489,12 @@ export default function Home() {
                         setGalleryOpen(true);
                         setShowBgMenu(false);
                       }}
-                      className="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-sm text-[#ff00ff] hover:bg-[#2a2f3e]"
+                      className="flex w-full items-center gap-2 rounded px-3 py-2 text-left text-sm text-[#e853dc] hover:bg-[#2a2f3e]"
                     >
                       <Images className="h-4 w-4" />
                       Open Gallery ({backgroundGallery.length})
                     </button>
-                    <label className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#00ffff] text-sm cursor-pointer flex items-center">
+                    <label className="w-full text-left px-3 py-2 rounded hover:bg-[#2a2f3e] text-[#20cde2] text-sm cursor-pointer flex items-center">
                       <Upload className="w-4 h-4 mr-2" />
                       Upload Image
                       <input
@@ -547,17 +520,17 @@ export default function Home() {
                   toast.success("🔗 Sanctuary link copied to clipboard!");
                 }
               }}
-              className="w-full border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 sm:w-auto"
+              className="w-full border-[#20cde2] text-[#20cde2] hover:bg-[#20cde2]/10 sm:w-auto"
             >
               <Share2 className="w-4 h-4 mr-2" />
               Share
             </Button>
             {user?.role === 'admin' && (
-              <Button onClick={() => navigate('/owner')} className="w-full bg-[#00ffff] font-bold text-[#0b0e14] hover:bg-[#00ffff]/80 sm:w-auto">
+              <Button onClick={() => navigate('/owner')} className="w-full bg-[#20cde2] font-bold text-[#050914] hover:bg-[#20cde2]/80 sm:w-auto">
                 Owner Panel
               </Button>
             )}
-            <Button variant="outline" onClick={logout} className="w-full border-[#00ffff] text-[#00ffff] hover:bg-[#00ffff]/10 hover:text-[#00ffff] sm:w-auto">
+            <Button variant="outline" onClick={logout} className="w-full border-[#20cde2] text-[#20cde2] hover:bg-[#20cde2]/10 hover:text-[#20cde2] sm:w-auto">
               Sign Out
             </Button>
           </div>
@@ -570,58 +543,58 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-4 gap-6 mb-12">
           {/* Glow Points */}
-          <div className="relative rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.35), 0 0 28px rgba(0, 255, 255, 0.14)'}}>
+          <div className="relative rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.35), 0 0 28px rgba(0, 255, 255, 0.14)'}}>
             <GlowParticles triggerKey={user?.id || 1} type="earn" />
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#7a7f8e] text-sm">Glow Points</p>
-                <p className="text-3xl font-bold text-[#00ffff]">0 GP</p>
+                <p className="text-3xl font-bold text-[#20cde2]">0 GP</p>
               </div>
-              <Zap className="w-8 h-8 text-[#00ffff]" />
+              <Zap className="w-8 h-8 text-[#20cde2]" />
             </div>
           </div>
 
           {/* Level / progression */}
-          <div className="rounded-lg border border-[#ffd700]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.32), 0 0 28px rgba(255, 215, 0, 0.12)'}}>
+          <div className="rounded-lg border border-[#d8ae55]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.32), 0 0 28px rgba(255, 215, 0, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#7a7f8e] text-sm">Your Level</p>
-                <p className="text-3xl font-bold text-[#ffd700]">1</p>
+                <p className="text-3xl font-bold text-[#d8ae55]">1</p>
               </div>
-              <Sparkles className="w-8 h-8 text-[#ffd700]" />
+              <Sparkles className="w-8 h-8 text-[#d8ae55]" />
             </div>
-            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#0b0e14]" aria-label="Confidence Path progression">
-              <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-[#ffd700] to-[#00ffff]" />
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#050914]" aria-label="Confidence Path progression">
+              <div className="h-full w-1/4 rounded-full bg-gradient-to-r from-[#d8ae55] to-[#20cde2]" />
             </div>
           </div>
 
           {/* Achievements */}
-          <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
+          <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#7a7f8e] text-sm">Achievements</p>
-                <p className="text-3xl font-bold text-[#00ffff]">0</p>
+                <p className="text-3xl font-bold text-[#20cde2]">0</p>
               </div>
-              <Heart className="w-8 h-8 text-[#ff00ff]" />
+              <Heart className="w-8 h-8 text-[#e853dc]" />
             </div>
           </div>
 
           {/* Lounges */}
-          <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
+          <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[#7a7f8e] text-sm">Your Lounges</p>
-                <p className="text-3xl font-bold text-[#00ffff]">0</p>
+                <p className="text-3xl font-bold text-[#20cde2]">0</p>
               </div>
-              <Users className="w-8 h-8 text-[#00ffff]" />
+              <Users className="w-8 h-8 text-[#20cde2]" />
             </div>
           </div>
         </div>
 
         {/* Quick Actions */}
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
-            <h3 className="text-xl font-bold text-[#00ffff] mb-4">Quick Actions</h3>
+          <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
+            <h3 className="text-xl font-bold text-[#20cde2] mb-4">Quick Actions</h3>
             <div className="quick-actions space-y-3">
               <Button className="w-full btn-neon-cyan" onClick={() => navigate("/profile")}>
                 View Profile
@@ -651,26 +624,26 @@ export default function Home() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-lg border border-[#00ffff]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
-              <h3 className="text-xl font-bold text-[#00ffff] mb-4">Live from the Universe</h3>
+            <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
+              <h3 className="text-xl font-bold text-[#20cde2] mb-4">Live from the Universe</h3>
               <p className="text-[#7a7f8e] text-sm">
                 Check back soon for community highlights, memes, and universe updates!
               </p>
             </div>
 
             {/* Trophy Room Pinned Badges */}
-            <div className="rounded-lg border border-[#ffd700]/70 bg-[#1a1f2e] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.3), 0 0 28px rgba(255, 215, 0, 0.1)'}}>
+            <div className="rounded-lg border border-[#d8ae55]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.3), 0 0 28px rgba(255, 215, 0, 0.1)'}}>
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-xl font-bold text-[#ffd700] flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-[#ffd700]" />
+                <h3 className="text-xl font-bold text-[#d8ae55] flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-[#d8ae55]" />
                   Trophy Room
                 </h3>
                 <span className="text-xs text-[#7a7f8e]">Top 3 Pinned Badges</span>
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {[1, 2, 3].map((slot) => (
-                  <div key={slot} className="border border-[#2a2f3e] rounded-lg p-3 text-center bg-[#0b0e14]/60 flex flex-col items-center justify-center min-h-[90px]">
-                    <Trophy className="w-6 h-6 text-[#ffd700]/50 mb-1" />
+                  <div key={slot} className="border border-[#2a2f3e] rounded-lg p-3 text-center bg-[#050914]/60 flex flex-col items-center justify-center min-h-[90px]">
+                    <Trophy className="w-6 h-6 text-[#d8ae55]/50 mb-1" />
                     <span className="text-xs text-[#7a7f8e]">Pin Slot {slot}</span>
                   </div>
                 ))}
@@ -703,7 +676,7 @@ function PublicSiteContent({ config }: { config: LinkConfig }) {
   return (
     <section className="relative z-10 mx-auto max-w-7xl space-y-5 px-6 pt-6">
       {config.banner.enabled && (
-        <div className="rounded-2xl border border-[#e853dc]/70 bg-gradient-to-r from-[#e853dc]/20 via-[#0b0e14]/90 to-[#20cde2]/20 p-6 shadow-[0_0_35px_rgba(232,83,220,0.2)] sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <div className="rounded-2xl border border-[#e853dc]/70 bg-gradient-to-r from-[#e853dc]/20 via-[#050914]/90 to-[#20cde2]/20 p-6 shadow-[0_0_35px_rgba(232,83,220,0.2)] sm:flex sm:items-center sm:justify-between sm:gap-6">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#d7ab4e]">{config.banner.eyebrow}</p>
             <h2 className="mt-2 text-2xl font-bold text-[#20cde2]">{config.banner.title}</h2>
@@ -714,8 +687,8 @@ function PublicSiteContent({ config }: { config: LinkConfig }) {
       )}
       {(socialEntries.length > 0 || config.partners.length > 0) && (
         <div className="grid gap-4 md:grid-cols-2">
-          {socialEntries.length > 0 && <div className="rounded-xl border border-[#20cde2]/30 bg-[#0b0e14]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#20cde2]">Connect with AO</p><div className="flex flex-wrap gap-2">{socialEntries.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#e853dc] hover:text-white">{label}</a>)}</div></div>}
-          {config.partners.length > 0 && <div className="rounded-xl border border-[#d7ab4e]/30 bg-[#0b0e14]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#d7ab4e]">External Partners</p><div className="flex flex-wrap gap-2">{config.partners.map((partner) => <a key={`${partner.label}-${partner.url}`} href={partner.url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#d7ab4e] hover:text-white">{partner.label}</a>)}</div></div>}
+          {socialEntries.length > 0 && <div className="rounded-xl border border-[#20cde2]/30 bg-[#050914]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#20cde2]">Connect with AO</p><div className="flex flex-wrap gap-2">{socialEntries.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#e853dc] hover:text-white">{label}</a>)}</div></div>}
+          {config.partners.length > 0 && <div className="rounded-xl border border-[#d7ab4e]/30 bg-[#050914]/80 p-4"><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#d7ab4e]">External Partners</p><div className="flex flex-wrap gap-2">{config.partners.map((partner) => <a key={`${partner.label}-${partner.url}`} href={partner.url} target="_blank" rel="noreferrer" className="rounded-full border border-white/15 px-3 py-1.5 text-xs text-slate-300 transition hover:border-[#d7ab4e] hover:text-white">{partner.label}</a>)}</div></div>}
         </div>
       )}
     </section>

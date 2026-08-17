@@ -2,11 +2,13 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, ShoppingBag, TrendingUp, Settings, AlertCircle, Play, CreditCard, Shield } from "lucide-react";
+import { Users, ShoppingBag, TrendingUp, Settings, AlertCircle, Play, CreditCard, Shield, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import GuardianLedgerPanel from "@/components/GuardianLedgerPanel";
 
 export default function Admin() {
   const { isAuthenticated, loading, user } = useAuth();
@@ -95,6 +97,10 @@ export default function Admin() {
             </Button>
             <h1 className="text-2xl font-bold neon-text-magenta">Admin Dashboard</h1>
           </div>
+          <Link href="/archive" className="inline-flex items-center gap-2 rounded-md border border-[#00eaff]/50 px-3 py-2 text-sm text-[#00eaff] transition-colors hover:bg-[#00eaff]/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffd23f]">
+            <BookOpen className="w-4 h-4" />
+            Story Archive
+          </Link>
           <Button variant="outline" className="text-[#ff00cc] border-[#2a2f3e] gap-2" onClick={() => navigate("/business-control")}>
             <Shield className="w-4 h-4" />
             Business Control
@@ -281,7 +287,9 @@ export default function Admin() {
               </Card>
             </div>
           </TabsContent>
-        </Tabs>
+          </Tabs>
+
+        <GuardianLedgerPanel />
       </main>
     </div>
   );

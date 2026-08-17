@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { startGoogleLogin } from "@/authEntryRoutes";
+import { Link } from "wouter";
 
 export default function Login() {
   const started = useRef(false);
@@ -39,7 +40,14 @@ export default function Login() {
             <Button type="button" onClick={beginSignIn} className="bg-[#e853dc] text-white hover:bg-[#e853dc]/90">Try Sign In Again</Button>
           </div>
         ) : (
+          <>
           <Button type="button" variant="outline" onClick={beginSignIn} className="mt-6 border-[#20cde2]/50 bg-transparent text-[#20cde2] hover:bg-[#20cde2]/10 hover:text-[#20cde2]">Continue to Sign In</Button>
+          {import.meta.env.DEV && (
+            <Link href="/api/auth/google" className="mt-4 block text-xs font-semibold uppercase tracking-[0.18em] text-[#ffd23f] underline decoration-[#ffd23f]/40 underline-offset-4 hover:text-white">
+              Local Admin Preview
+            </Link>
+          )}
+          </>
         )}
       </section>
     </main>

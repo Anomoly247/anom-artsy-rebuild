@@ -122,7 +122,8 @@ export function registerOAuthRoutes(app: Express) {
       }
 
       const normalizedEmail = userInfo.email?.trim().toLowerCase();
-      const role = normalizedEmail === ENV.adminEmail ? "admin" : undefined;
+      const isAdmin = normalizedEmail === ENV.adminEmail;
+      const role = isAdmin ? "admin" : undefined;
       await db.upsertUser({
         openId: userOpenId,
         name: userInfo.name || null,
@@ -140,7 +141,7 @@ export function registerOAuthRoutes(app: Express) {
       const cookieOptions = getSessionCookieOptions(req);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      res.redirect(302, POST_LOGIN_REDIRECT);
+      res.redirect(302, isAdmin ? "/admin" : POST_LOGIN_REDIRECT);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       res.status(500).json({ error: "OAuth callback failed" });

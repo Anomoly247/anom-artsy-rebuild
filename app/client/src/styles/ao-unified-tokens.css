@@ -1,0 +1,111 @@
+/*
+ * AO Universe — Unified Design Tokens
+ *
+ * Import this file before component styles:
+ *   @import "./ao-unified-tokens.css";
+ *
+ * Semantic roles are intentional: do not use accent colors as arbitrary decoration.
+ * Base and surface colors support the living-world web layer; cyan, magenta, and gold
+ * communicate different kinds of meaning across every Universe partition.
+ */
+
+:root {
+  /* Core palette */
+  --ao-color-midnight: #050914;
+  --ao-color-ink: #080b16;
+  --ao-color-surface: #0f1628;
+  --ao-color-surface-raised: #16233d;
+  --ao-color-surface-soft: #1b2946;
+  --ao-color-cyan: #20cde2;
+  --ao-color-magenta: #e853dc;
+  --ao-color-gold: #d8ae55;
+  --ao-color-white: #f8fbff;
+  --ao-color-copy: #dce7f5;
+  --ao-color-copy-muted: #aab9cf;
+  --ao-color-copy-subtle: #8192ad;
+  --ao-color-focus: #ffffff;
+
+  /* Transparent layers */
+  --ao-overlay-midnight-95: rgb(5 9 20 / 0.95);
+  --ao-overlay-midnight-88: rgb(5 9 20 / 0.88);
+  --ao-overlay-cyan-12: rgb(32 205 226 / 0.12);
+  --ao-overlay-cyan-20: rgb(32 205 226 / 0.20);
+  --ao-overlay-magenta-12: rgb(232 83 220 / 0.12);
+  --ao-overlay-magenta-20: rgb(232 83 220 / 0.20);
+  --ao-overlay-gold-12: rgb(216 174 85 / 0.12);
+  --ao-overlay-gold-20: rgb(216 174 85 / 0.20);
+
+  /* Semantic roles */
+  --ao-role-page-background: var(--ao-color-midnight);
+  --ao-role-content-surface: var(--ao-color-surface);
+  --ao-role-content-surface-raised: var(--ao-color-surface-raised);
+  --ao-role-navigation-signal: var(--ao-color-cyan);
+  --ao-role-story-identity: var(--ao-color-magenta);
+  --ao-role-metadata-status: var(--ao-color-gold);
+  --ao-role-primary-copy: var(--ao-color-copy);
+  --ao-role-secondary-copy: var(--ao-color-copy-muted);
+  --ao-role-focus-ring: var(--ao-color-focus);
+
+  /* Typography */
+  --ao-font-display: Georgia, Cambria, "Times New Roman", serif;
+  --ao-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ao-letter-label: 0.28em;
+  --ao-letter-kicker: 0.2em;
+  --ao-leading-display: 1.05;
+  --ao-leading-body: 1.65;
+
+  /* Shape, spacing, and effects */
+  --ao-radius-sm: 0.5rem;
+  --ao-radius-md: 0.875rem;
+  --ao-radius-lg: 1.25rem;
+  --ao-space-1: 0.25rem;
+  --ao-space-2: 0.5rem;
+  --ao-space-3: 0.75rem;
+  --ao-space-4: 1rem;
+  --ao-space-6: 1.5rem;
+  --ao-space-8: 2rem;
+  --ao-space-12: 3rem;
+  --ao-glow-cyan: 0 0 28px rgb(32 205 226 / 0.16);
+  --ao-glow-magenta: 0 0 28px rgb(232 83 220 / 0.16);
+  --ao-glow-gold: 0 0 22px rgb(216 174 85 / 0.16);
+  --ao-focus-outline: 2px solid var(--ao-role-focus-ring);
+  --ao-focus-offset: 3px;
+}
+
+.ao-living-world-surface {
+  color: var(--ao-role-primary-copy);
+  background:
+    radial-gradient(circle at 15% 20%, var(--ao-overlay-cyan-12), transparent 32%),
+    radial-gradient(circle at 90% 10%, var(--ao-overlay-magenta-12), transparent 34%),
+    var(--ao-role-page-background);
+  font-family: var(--ao-font-body);
+}
+
+.ao-display {
+  color: var(--ao-role-navigation-signal);
+  font-family: var(--ao-font-display);
+  line-height: var(--ao-leading-display);
+}
+
+.ao-kicker {
+  color: var(--ao-role-metadata-status);
+  font-family: var(--ao-font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: var(--ao-letter-kicker);
+  text-transform: uppercase;
+}
+
+.ao-focusable:focus-visible {
+  outline: var(--ao-focus-outline);
+  outline-offset: var(--ao-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

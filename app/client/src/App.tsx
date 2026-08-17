@@ -14,22 +14,30 @@ import LoungeDetail from "./pages/LoungeDetail";
 import KidsCorner from "./pages/KidsCorner";
 import SocialFeed from "./pages/SocialFeed";
 import Games from "./pages/Games";
+import DistrictBArcade from "./pages/DistrictBArcade";
 import Admin from "./pages/Admin";
 import PublicProfile from "./pages/PublicProfile";
 import CollaborationStation from "./pages/CollaborationStation";
 import OwnerControlPanel from "./pages/OwnerControlPanel";
 import OwnerSettings from "./pages/OwnerSettings";
+import CliffordAndTater from "./pages/CliffordAndTater";
+import CreatorWorlds from "./pages/CreatorWorlds";
+import Broadcast from "./pages/Broadcast";
+import NeonGallery from "./pages/NeonGallery";
+import PixelAndDot from "./pages/PixelAndDot";
 import ColorCustomizer from "./components/ColorCustomizer";
 import YouTubeManager from "./pages/YouTubeManager";
 import PaymentMerchManagement from "./pages/PaymentMerchManagement";
 import BusinessControlCenter from "./pages/BusinessControlCenter";
 import ChatWidget from "./components/ChatWidget";
+import SocialGoodScoreBadge from "./components/SocialGoodScoreBadge";
 import MissionRally from "./pages/MissionRally";
 import MissionHub from "./pages/MissionHub";
 import MusicLibrary from "./pages/MusicLibrary";
 import Login from "./pages/Login";
 import { AUTH_ENTRY_ROUTES } from "./authEntryRoutes";
-import AnomsCorner from "./pages/AnomsCorner";
+import AnomsCornerWorld from "./pages/AnomsCornerWorld";
+import { MoonberryFarm, StoryArchiveDetail, StoryArchiveIndex } from "./pages/StoryDestinations";
 import PixelProfile from "./pages/PixelProfile";
 import DotProfile from "./pages/DotProfile";
 import ExternalRedirect from "./components/ExternalRedirect";
@@ -53,6 +61,11 @@ const AppRoutes = () => {
       <Route path={"/"} component={Home} />
       <Route path={"/dashboard"} component={OpenUniverse} />
       <Route path={"/sanctuary"} component={OpenUniverse} />
+      <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
+      <Route path={"/creator-worlds"} component={CreatorWorlds} />
+      <Route path={"/broadcast"} component={Broadcast} />
+      <Route path={"/neon-gallery"} component={NeonGallery} />
+      <Route path={"/pixel-and-dot"} component={PixelAndDot} />
       <Route path={"/shop"} component={OpenShop} />
       <Route path={"/store"} component={OpenShop} />
       <Route path={"/profile"} component={Profile} />
@@ -61,10 +74,14 @@ const AppRoutes = () => {
       <Route path={"/lounges"} component={Lounges} />
       <Route path={"/lounges/:loungeId"} component={LoungeDetail} />
       <Route path={"/kids-corner"} component={KidsCorner} />
-      <Route path={"/anoms-corner"} component={AnomsCorner} />
+      <Route path={"/anoms-corner"} component={AnomsCornerWorld} />
+      <Route path={"/moonberry-farm"} component={MoonberryFarm} />
+      <Route path={"/archive"} component={StoryArchiveIndex} />
+      <Route path={"/archive/:slug"} component={StoryArchiveDetail} />
       <Route path={"/characters/pixel"} component={PixelProfile} />
       <Route path={"/characters/dot"} component={DotProfile} />
       <Route path={"/feed"} component={SocialFeed} />
+      <Route path={"/district-b-arcade"} component={DistrictBArcade} />
       <Route path={"/games"} component={Games} />
       <Route path={"/merch"} component={OpenShop} />
       {AUTH_ENTRY_ROUTES.map((path) => <Route key={path} path={path} component={Login} />)}
@@ -122,6 +139,7 @@ function App() {
             <ColorCustomizer />
             <AppRoutes />
             <OwnerPanel />
+            {isAuthenticated && <SocialGoodScoreBadge />}
             {isAuthenticated && <ChatWidget />}
           </OwnerViewProvider>
         </TooltipProvider>

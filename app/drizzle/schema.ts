@@ -209,6 +209,55 @@ export type GameScore = typeof gameScores.$inferSelect;
 export type InsertGameScore = typeof gameScores.$inferInsert;
 
 /**
+ * Social Good Scores — one persisted impact score per user.
+ */
+export const socialGoodScores = mysqlTable("social_good_scores", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull().unique(),
+  totalScore: int("total_score").default(0).notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SocialGoodScore = typeof socialGoodScores.$inferSelect;
+export type InsertSocialGoodScore = typeof socialGoodScores.$inferInsert;
+
+/**
+ * Social Good Events — auditable, moderation-aware score changes.
+ */
+export const socialGoodEvents = mysqlTable("social_good_events", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  eventKey: varchar("event_key", { length: 160 }).notNull().unique(),
+  eventType: varchar("event_type", { length: 80 }).notNull(),
+  points: int("points").notNull(),
+  sourceRoute: varchar("source_route", { length: 120 }).notNull(),
+  sourceRef: varchar("source_ref", { length: 160 }),
+  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("approved").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type SocialGoodEvent = typeof socialGoodEvents.$inferSelect;
+export type InsertSocialGoodEvent = typeof socialGoodEvents.$inferInsert;
+
+/**
+ * Guardian review queue for authored content and media provenance.
+ * This workflow is separate from both Anom Coin and Social Good scoring.
+ */
+export const guardianReviews = mysqlTable("guardian_reviews", {
+  id: int("id").autoincrement().primaryKey(),
+  sourceRecordId: varchar("source_record_id", { length: 160 }).notNull().unique(),
+  route: varchar("route", { length: 120 }),
+  status: mysqlEnum("status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  reviewerId: int("reviewer_id"),
+  reviewerNote: text("reviewer_note"),
+  reviewedAt: timestamp("reviewed_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type GuardianReview = typeof guardianReviews.$inferSelect;
+export type InsertGuardianReview = typeof guardianReviews.$inferInsert;
+
+/**
  * Social Feed Posts — community content (memes, highlights, updates)
  */
 export const feedPosts = mysqlTable("feed_posts", {

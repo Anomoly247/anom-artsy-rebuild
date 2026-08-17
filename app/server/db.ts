@@ -1,7 +1,7 @@
 import { and, desc, eq, gt, gte, inArray, like, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
-import { InsertUser, users, userProfiles, decorationPackages, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips, feedPosts, gameScores, userNotifications, userSouvenirBadges, seasonalChallenges, challengeParticipants } from "../drizzle/schema";
+import { InsertUser, users, userProfiles, decorationPackages, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips, feedPosts, gameScores, socialGoodScores, socialGoodEvents, guardianReviews, userNotifications, userSouvenirBadges, seasonalChallenges, challengeParticipants } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -224,19 +224,27 @@ export async function addCoinTransaction(userId: number, type: "earn" | "spend",
     const profile = await db.select().from(userProfiles).where(eq(userProfiles.userId, userId)).limit(1);
     if (!profile.length) return undefined;
 
-    const currentBalance = profile[0].anomCoinBalance || "0";
-    const current = BigInt(currentBalance);
-    const delta = BigInt(amount);
+    // MySQL DECIMAL values are returned as strings such as "0.00". The
+    // economy currently awards whole Anom Coins, so normalize both the
+    // stored balance and incoming reward before integer arithmetic.
+    const currentValue = Number(profile[0].anomCoinBalance ?? "0");
+    const amountValue = Number(amount);
+    if (!Number.isFinite(currentValue) || !Number.isFinite(amountValue)) {
+      throw new Error("Invalid Anom Coin balance or transaction amount");
+    }
+    const current = BigInt(Math.trunc(currentValue));
+    const delta = BigInt(Math.trunc(Math.abs(amountValue)));
     const newBalance = type === "earn" ? current + delta : current - delta;
+    const normalizedAmount = delta.toString();
 
     // Update profile balance
     await db.update(userProfiles).set({ anomCoinBalance: newBalance.toString() }).where(eq(userProfiles.userId, userId));
 
-    // Record transaction
+    // Record transaction using the normalized whole-coin amount
     await db.insert(coinTransactions).values({
       userId,
       type,
-      amount,
+      amount: normalizedAmount,
       reason,
     });
 
@@ -257,6 +265,93 @@ export async function getCoinTransactionHistory(userId: number) {
     console.error("[Database] Failed to get coin transaction history:", error);
     throw error;
   }
+}
+
+export async function getSocialGoodScore(userId: number) {
+  const db = await getDb();
+  if (!db) return { totalScore: 0 };
+
+  const rows = await db.select().from(socialGoodScores).where(eq(socialGoodScores.userId, userId)).limit(1);
+  if (rows.length > 0) return { totalScore: rows[0].totalScore };
+
+  await db.insert(socialGoodScores).values({ userId, totalScore: 0 });
+  return { totalScore: 0 };
+}
+
+export async function recordSocialGoodEvent(
+  userId: number,
+  input: { eventKey: string; eventType: string; points: number; sourceRoute: string; sourceRef?: string; status?: "pending" | "approved" | "rejected" },
+) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable");
+  if (!Number.isInteger(input.points) || input.points <= 0) throw new Error("Social Good points must be a positive integer");
+
+  const existing = await db.select().from(socialGoodEvents).where(eq(socialGoodEvents.eventKey, input.eventKey)).limit(1);
+  if (existing.length > 0) {
+    if (existing[0].userId !== userId) throw new Error("Social Good event key already belongs to another user");
+    return { duplicate: true, event: existing[0], score: await getSocialGoodScore(userId) };
+  }
+
+  const status = input.status ?? "approved";
+  const event = await db.insert(socialGoodEvents).values({
+    userId,
+    eventKey: input.eventKey,
+    eventType: input.eventType,
+    points: input.points,
+    sourceRoute: input.sourceRoute,
+    sourceRef: input.sourceRef,
+    status,
+  });
+
+  if (status === "approved") {
+    const score = await getSocialGoodScore(userId);
+    await db.update(socialGoodScores)
+      .set({ totalScore: score.totalScore + input.points })
+      .where(eq(socialGoodScores.userId, userId));
+  }
+
+  return { duplicate: false, event, score: await getSocialGoodScore(userId) };
+}
+
+export async function getGuardianReviewQueue(status?: "pending" | "approved" | "rejected") {
+  const db = await getDb();
+  if (!db) return [];
+  const filters = status ? eq(guardianReviews.status, status) : undefined;
+  return db.select().from(guardianReviews).where(filters).orderBy(desc(guardianReviews.createdAt));
+}
+
+export async function upsertGuardianReview(input: {
+  sourceRecordId: string;
+  route?: string;
+  status: "pending" | "approved" | "rejected";
+  reviewerId: number;
+  reviewerNote?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable");
+  const existing = await db.select().from(guardianReviews).where(eq(guardianReviews.sourceRecordId, input.sourceRecordId)).limit(1);
+  const reviewedAt = input.status === "pending" ? null : new Date();
+
+  if (existing.length > 0) {
+    await db.update(guardianReviews).set({
+      route: input.route,
+      status: input.status,
+      reviewerId: input.reviewerId,
+      reviewerNote: input.reviewerNote ?? null,
+      reviewedAt,
+    }).where(eq(guardianReviews.sourceRecordId, input.sourceRecordId));
+  } else {
+    await db.insert(guardianReviews).values({
+      sourceRecordId: input.sourceRecordId,
+      route: input.route,
+      status: input.status,
+      reviewerId: input.reviewerId,
+      reviewerNote: input.reviewerNote ?? null,
+      reviewedAt,
+    });
+  }
+
+  return db.select().from(guardianReviews).where(eq(guardianReviews.sourceRecordId, input.sourceRecordId)).limit(1);
 }
 
 export async function addXP(userId: number, amount: number) {
@@ -1087,11 +1182,20 @@ export async function createAuditLog(entry: {
   }
 }
 
+function normalizeAuditDetails<T extends { details: unknown }>(entry: T): T {
+  if (typeof entry.details !== "string") return entry;
+  try {
+    return { ...entry, details: JSON.parse(entry.details) };
+  } catch {
+    return entry;
+  }
+}
+
 export async function getAuditLogs(limit = 100) {
   const db = await getDb();
   if (!db) return [];
   try {
-    return await db
+    const rows = await db
       .select({
         id: auditLog.id,
         userId: auditLog.userId,
@@ -1107,6 +1211,8 @@ export async function getAuditLogs(limit = 100) {
       .leftJoin(users, eq(auditLog.userId, users.id))
       .orderBy(desc(auditLog.createdAt))
       .limit(limit);
+
+    return rows.map(normalizeAuditDetails);
   } catch (error) {
     console.warn("[Database] Audit log table unavailable or query failed:", error);
     return [];
@@ -1196,7 +1302,7 @@ export async function getFilteredAuditLogs(options: AuditLogFilterOptions = {}) 
       .limit(limit)
       .offset(offset);
 
-    return { logs: rows, total };
+    return { logs: rows.map(normalizeAuditDetails), total };
   } catch (error) {
     console.warn("[Database] Filtered audit log query failed:", error);
     return { logs: [], total: 0 };

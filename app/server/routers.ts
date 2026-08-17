@@ -5,8 +5,8 @@ import { sharingRouter } from "./sharing.procedures";
 import { membershipRouter } from "./membership.procedures";
 import { settingsRouter } from "./settings.procedures";
 import { gamesRouter } from "./games.procedures";
-import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
-import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress, getLiveActivityFeed, mintSouvenirBadge, getUserSouvenirBadges, getUserNotifications, markNotificationRead, getActiveSeasonalChallenges, getChallengeLeaderboard } from "./db";
+import { adminProcedure, publicProcedure, router, protectedProcedure } from "./_core/trpc";
+import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, getSocialGoodScore, recordSocialGoodEvent, getGuardianReviewQueue, upsertGuardianReview, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress, getLiveActivityFeed, mintSouvenirBadge, getUserSouvenirBadges, getUserNotifications, markNotificationRead, getActiveSeasonalChallenges, getChallengeLeaderboard } from "./db";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
@@ -104,6 +104,23 @@ export const appRouter = router({
     history: protectedProcedure.query(async ({ ctx }) => {
       return await getCoinTransactionHistory(ctx.user.id);
     }),
+  }),
+
+  socialGood: router({
+    getScore: protectedProcedure.query(async ({ ctx }) => {
+      return await getSocialGoodScore(ctx.user.id);
+    }),
+    recordEvent: protectedProcedure
+      .input(z.object({
+        eventKey: z.string().min(1).max(160),
+        eventType: z.string().min(1).max(80),
+        points: z.number().int().positive(),
+        sourceRoute: z.string().min(1).max(120),
+        sourceRef: z.string().max(160).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        return await recordSocialGoodEvent(ctx.user.id, input);
+      }),
   }),
 
   achievement: router({
@@ -428,6 +445,20 @@ export const appRouter = router({
         const { addCollaborationUpdate } = await import("./db");
         return await addCollaborationUpdate(input.projectId, ctx.user.id, input.content);
       }),
+  }),
+
+  guardian: router({
+    getQueue: adminProcedure
+      .input(z.object({ status: z.enum(["pending", "approved", "rejected"]).optional() }).optional())
+      .query(async ({ input }) => getGuardianReviewQueue(input?.status)),
+    review: adminProcedure
+      .input(z.object({
+        sourceRecordId: z.string().min(1).max(160),
+        route: z.string().max(120).optional(),
+        status: z.enum(["pending", "approved", "rejected"]),
+        reviewerNote: z.string().max(1000).optional(),
+      }))
+      .mutation(async ({ ctx, input }) => upsertGuardianReview({ ...input, reviewerId: ctx.user.id })),
   }),
 
   admin: router({
