@@ -103,7 +103,7 @@ export const membershipPlans = mysqlTable("membership_plans", {
 export type MembershipPlan = typeof membershipPlans.$inferSelect;
 export type InsertMembershipPlan = typeof membershipPlans.$inferInsert;
 
-/** Server-confirmed user access to a catalog item. */
+/** Server-confirmed access and provenance control for a user's approved catalog use. */
 export const userEntitlements = mysqlTable("user_entitlements", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("user_id").notNull(),

@@ -457,6 +457,7 @@ export const appRouter = router({
       }),
   }),
 
+  /** Guardian review controls attribution/provenance and Store availability; it does not transfer authorship. */
   guardian: router({
     getQueue: adminProcedure
       .input(z.object({ status: z.enum(["pending", "approved", "rejected"]).optional() }).optional())

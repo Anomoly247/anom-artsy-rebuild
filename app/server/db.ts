@@ -179,12 +179,14 @@ export async function getDecorationPackages() {
   }
 }
 
+/** Public catalog visibility requires both publication and Guardian approval; this controls access, not authorship. */
 export async function getStoreCatalog() {
   const db = await getDb();
   if (!db) return [];
   return db.select().from(storeCatalogItems).where(and(eq(storeCatalogItems.status, "published"), eq(storeCatalogItems.guardianStatus, "approved")));
 }
 
+/** Membership plans are visible only after their own pricing and policy review publishes them. */
 export async function getMembershipPlans() {
   const db = await getDb();
   if (!db) return [];
@@ -203,6 +205,7 @@ export async function getUserMemberships(userId: number) {
   return db.select().from(userMemberships).where(eq(userMemberships.userId, userId));
 }
 
+/** Server-confirmed access and provenance control: never grant from client preview state. */
 export async function unlockStoreItemWithCoin(userId: number, catalogItemId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database unavailable");
