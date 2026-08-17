@@ -7,6 +7,7 @@ import { SignJWT, jwtVerify } from "jose";
 import type { User } from "../../drizzle/schema";
 import * as db from "../db";
 import { ENV } from "./env";
+import { normalizeUserOpenId } from "./userIdentity";
 import type {
   ExchangeTokenRequest,
   ExchangeTokenResponse,
@@ -293,14 +294,21 @@ class SDKServer {
     if (!user) {
       try {
         const userInfo = await this.getUserInfoWithJwt(sessionToken ?? "");
+        const userOpenId = normalizeUserOpenId(userInfo);
+        if (!userOpenId) {
+          throw new Error("OAuth user identifier missing during session synchronization");
+        }
+        const normalizedEmail = userInfo.email?.trim().toLowerCase();
+        const role: "admin" | undefined = normalizedEmail === ENV.adminEmail ? "admin" : undefined;
         await db.upsertUser({
-          openId: userInfo.openId,
+          openId: userOpenId,
           name: userInfo.name || null,
           email: userInfo.email ?? null,
           loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
+          role,
           lastSignedIn: signedInAt,
         });
-        user = await db.getUserByOpenId(userInfo.openId);
+        user = await db.getUserByOpenId(userOpenId);
       } catch (error) {
         console.error("[Auth] Failed to sync user from OAuth:", error);
         throw ForbiddenError("Failed to sync user info");
@@ -315,10 +323,16 @@ class SDKServer {
       throw ForbiddenError("Account suspended");
     }
 
+    const normalizedUserEmail = user.email?.trim().toLowerCase();
+    const isAdministrator = normalizedUserEmail === ENV.adminEmail;
     await db.upsertUser({
       openId: user.openId,
+      role: isAdministrator ? "admin" : undefined,
       lastSignedIn: signedInAt,
     });
+    if (isAdministrator) {
+      user.role = "admin";
+    }
 
     return user;
   }

@@ -5,6 +5,7 @@ import * as db from "../db";
 import { getSessionCookieOptions } from "./cookies";
 import { ENV } from "./env";
 import { sdk } from "./sdk";
+import { normalizeUserOpenId } from "./userIdentity";
 
 export const POST_LOGIN_REDIRECT = "/dashboard";
 
@@ -29,7 +30,36 @@ export function registerOAuthRoutes(app: Express) {
   // The frontend sends users here for Google-backed platform OAuth. Register it
   // before the SPA fallback so an unavailable or misconfigured OAuth service
   // always returns a server response rather than index.html.
-  app.get("/api/auth/google", (req: Request, res: Response) => {
+  app.get("/api/auth/google", async (req: Request, res: Response) => {
+    if ((!ENV.oAuthServerUrl || !ENV.appId) && ENV.devAuthBypass) {
+      if (!ENV.cookieSecret) {
+        res.status(503).json({ error: "DEV_AUTH_BYPASS requires JWT_SECRET" });
+        return;
+      }
+
+      const userOpenId = ENV.devAuthUserId;
+      const userName = ENV.devAuthUserName;
+      const userEmail = ENV.devAuthUserEmail;
+      await db.upsertUser({
+        openId: userOpenId,
+        name: userName,
+        email: userEmail,
+        loginMethod: "development",
+        role: "admin",
+        lastSignedIn: new Date(),
+      });
+      const sessionToken = await sdk.createSessionToken(userOpenId, {
+        name: userName,
+        expiresInMs: ONE_YEAR_MS,
+      });
+      res.cookie(COOKIE_NAME, sessionToken, {
+        ...getSessionCookieOptions(req),
+        maxAge: ONE_YEAR_MS,
+      });
+      res.redirect(302, "/admin");
+      return;
+    }
+
     if (!ENV.oAuthServerUrl || !ENV.appId) {
       res.status(503).json({ error: "Google OAuth is not configured" });
       return;
@@ -84,22 +114,21 @@ export function registerOAuthRoutes(app: Express) {
     try {
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
-      const normalizedUserInfo = userInfo as typeof userInfo & {
-        id?: string | null;
-        sub?: string | null;
-      };
-      const userOpenId = normalizedUserInfo.openId || normalizedUserInfo.id || normalizedUserInfo.sub;
+      const userOpenId = normalizeUserOpenId(userInfo);
 
       if (!userOpenId) {
-        res.status(400).json({ error: "openId, id, or sub missing from user info" });
+        res.status(400).json({ error: "openId, id, sub, identifier, or nested profile identifier missing from user info" });
         return;
       }
 
+      const normalizedEmail = userInfo.email?.trim().toLowerCase();
+      const role = normalizedEmail === ENV.adminEmail ? "admin" : undefined;
       await db.upsertUser({
         openId: userOpenId,
         name: userInfo.name || null,
         email: userInfo.email ?? null,
         loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
+        role,
         lastSignedIn: new Date(),
       });
 
