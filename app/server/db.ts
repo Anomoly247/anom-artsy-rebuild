@@ -307,6 +307,9 @@ export async function addCoinTransaction(userId: number, type: "earn" | "spend",
     }
     const current = BigInt(Math.trunc(currentValue));
     const delta = BigInt(Math.trunc(Math.abs(amountValue)));
+    if (type === "spend" && delta > current) {
+      throw new Error("Insufficient Anom Coin balance");
+    }
     const newBalance = type === "earn" ? current + delta : current - delta;
     const normalizedAmount = delta.toString();
 
