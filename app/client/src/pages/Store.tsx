@@ -1,6 +1,7 @@
 import { ArrowLeft, ExternalLink, Heart, Sparkles, ShoppingBag, Star } from "lucide-react";
 import { Link } from "wouter";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
+import StoreCosmeticPreview from "@/components/StoreCosmeticPreview";
 
 const storeUrl = "https://anomartsy.lol/";
 
@@ -62,6 +63,10 @@ export default function Store() {
             </Link>
           </div>
         </section>
+
+        <div className="mt-20">
+          <StoreCosmeticPreview />
+        </div>
 
         <section className="mt-20 grid gap-5 md:grid-cols-3" aria-label="Store principles">
           {storeSignals.map(({ icon: Icon, title, text, accent }) => (

@@ -63,6 +63,76 @@ export type DecorationPackage = typeof decorationPackages.$inferSelect;
 export type InsertDecorationPackage = typeof decorationPackages.$inferInsert;
 
 /**
+ * Store Catalog — approved backgrounds, glow treatments, decorations, and digital items.
+ * Catalog approval is separate from payment and entitlement state.
+ */
+export const storeCatalogItems = mysqlTable("store_catalog_items", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 120 }).notNull().unique(),
+  name: varchar("name", { length: 120 }).notNull(),
+  description: text("description"),
+  category: mysqlEnum("category", ["background", "glow", "decoration", "digital", "membership"]).notNull(),
+  imageUrl: text("image_url"),
+  previewClass: varchar("preview_class", { length: 120 }),
+  priceAnom: decimal("price_anom", { precision: 10, scale: 2 }).default("0").notNull(),
+  priceReal: decimal("price_real", { precision: 10, scale: 2 }).default("0").notNull(),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  guardianStatus: mysqlEnum("guardian_status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  sourceRecordId: varchar("source_record_id", { length: 160 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type StoreCatalogItem = typeof storeCatalogItems.$inferSelect;
+export type InsertStoreCatalogItem = typeof storeCatalogItems.$inferInsert;
+
+/** Membership plans define access privileges; they do not replace Coin or Social Good. */
+export const membershipPlans = mysqlTable("membership_plans", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 80 }).notNull().unique(),
+  name: varchar("name", { length: 100 }).notNull(),
+  description: text("description"),
+  priceAnom: decimal("price_anom", { precision: 10, scale: 2 }).default("0").notNull(),
+  priceReal: decimal("price_real", { precision: 10, scale: 2 }).default("0").notNull(),
+  storageLimit: int("storage_limit").default(0).notNull(),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MembershipPlan = typeof membershipPlans.$inferSelect;
+export type InsertMembershipPlan = typeof membershipPlans.$inferInsert;
+
+/** Server-confirmed user access to a catalog item. */
+export const userEntitlements = mysqlTable("user_entitlements", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  catalogItemId: int("catalog_item_id").notNull(),
+  grantSource: mysqlEnum("grant_source", ["coin", "purchase", "membership", "admin"]).notNull(),
+  status: mysqlEnum("status", ["active", "revoked", "expired"]).default("active").notNull(),
+  grantedAt: timestamp("granted_at").defaultNow().notNull(),
+  expiresAt: timestamp("expires_at"),
+  sourceRef: varchar("source_ref", { length: 160 }),
+});
+
+export type UserEntitlement = typeof userEntitlements.$inferSelect;
+export type InsertUserEntitlement = typeof userEntitlements.$inferInsert;
+
+/** Current or historical membership access for a user. */
+export const userMemberships = mysqlTable("user_memberships", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  planId: int("plan_id").notNull(),
+  status: mysqlEnum("status", ["active", "cancelled", "expired"]).default("active").notNull(),
+  startedAt: timestamp("started_at").defaultNow().notNull(),
+  expiresAt: timestamp("expires_at"),
+  sourceRef: varchar("source_ref", { length: 160 }),
+});
+
+export type UserMembership = typeof userMemberships.$inferSelect;
+export type InsertUserMembership = typeof userMemberships.$inferInsert;
+
+/**
  * Anom Coin Transactions — track all coin earning and spending
  */
 export const coinTransactions = mysqlTable("coin_transactions", {

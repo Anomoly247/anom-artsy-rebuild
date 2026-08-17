@@ -6,7 +6,7 @@ import { membershipRouter } from "./membership.procedures";
 import { settingsRouter } from "./settings.procedures";
 import { gamesRouter } from "./games.procedures";
 import { adminProcedure, publicProcedure, router, protectedProcedure } from "./_core/trpc";
-import { getOrCreateUserProfile, getDecorationPackages, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, getSocialGoodScore, recordSocialGoodEvent, getGuardianReviewQueue, upsertGuardianReview, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress, getLiveActivityFeed, mintSouvenirBadge, getUserSouvenirBadges, getUserNotifications, markNotificationRead, getActiveSeasonalChallenges, getChallengeLeaderboard } from "./db";
+import { getOrCreateUserProfile, getDecorationPackages, getStoreCatalog, getMembershipPlans, getUserEntitlements, getUserMemberships, unlockStoreItemWithCoin, updateUserProfile, getCoinBalance, addCoinTransaction, getCoinTransactionHistory, getSocialGoodScore, recordSocialGoodEvent, getGuardianReviewQueue, upsertGuardianReview, addXP, getAchievements, getUserAchievements, unlockAchievement, createLounge, getUserLounges, getLounge, getLoungeMembersWithUsers, addLoungeMember, removeLoungeMember, addLoungeMessage, getLoungeMessages, getLoungeMessageReactions, toggleLoungeMessageReaction, getLoungeUnreadCounts, markLoungeRead, getLoungeSoundscape, updateLoungeSoundscape, updateLounge, getKidsContent, trackKidsProgress, getUserKidsProgress, getLiveActivityFeed, mintSouvenirBadge, getUserSouvenirBadges, getUserNotifications, markNotificationRead, getActiveSeasonalChallenges, getChallengeLeaderboard } from "./db";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
@@ -84,6 +84,16 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return await getDecorationPackages();
     }),
+  }),
+
+  store: router({
+    listCatalog: publicProcedure.query(async () => getStoreCatalog()),
+    listMembershipPlans: publicProcedure.query(async () => getMembershipPlans()),
+    getEntitlements: protectedProcedure.query(async ({ ctx }) => getUserEntitlements(ctx.user.id)),
+    getMemberships: protectedProcedure.query(async ({ ctx }) => getUserMemberships(ctx.user.id)),
+    unlockWithCoin: protectedProcedure
+      .input(z.object({ catalogItemId: z.number().int().positive() }))
+      .mutation(async ({ ctx, input }) => unlockStoreItemWithCoin(ctx.user.id, input.catalogItemId)),
   }),
 
   coin: router({

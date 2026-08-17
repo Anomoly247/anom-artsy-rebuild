@@ -1,7 +1,7 @@
 import { and, desc, eq, gt, gte, inArray, like, lte, or, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
-import { InsertUser, users, userProfiles, decorationPackages, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips, feedPosts, gameScores, socialGoodScores, socialGoodEvents, guardianReviews, userNotifications, userSouvenirBadges, seasonalChallenges, challengeParticipants } from "../drizzle/schema";
+import { InsertUser, users, userProfiles, decorationPackages, storeCatalogItems, membershipPlans, userEntitlements, userMemberships, coinTransactions, achievements, userAchievements, lounges, loungeMembers, loungeMessages, loungeMessageReactions, loungeReadStates, loungeSoundscapes, kidsProgress, collaborationProjects, collaborationMembers, collaborationTasks, collaborationUpdates, platformSettings, InsertPlatformSettings, auditLog, vipTiers, userVipSubscriptions, vipBenefitsLog, tips, feedPosts, gameScores, socialGoodScores, socialGoodEvents, guardianReviews, userNotifications, userSouvenirBadges, seasonalChallenges, challengeParticipants } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -177,6 +177,63 @@ export async function getDecorationPackages() {
     console.error("[Database] Failed to get decoration packages:", error);
     throw error;
   }
+}
+
+export async function getStoreCatalog() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(storeCatalogItems).where(and(eq(storeCatalogItems.status, "published"), eq(storeCatalogItems.guardianStatus, "approved")));
+}
+
+export async function getMembershipPlans() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(membershipPlans).where(eq(membershipPlans.status, "published"));
+}
+
+export async function getUserEntitlements(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.status, "active")));
+}
+
+export async function getUserMemberships(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(userMemberships).where(eq(userMemberships.userId, userId));
+}
+
+export async function unlockStoreItemWithCoin(userId: number, catalogItemId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database unavailable");
+
+  const itemRows = await db.select().from(storeCatalogItems).where(eq(storeCatalogItems.id, catalogItemId)).limit(1);
+  const item = itemRows[0];
+  if (!item || item.status !== "published" || item.guardianStatus !== "approved") {
+    throw new Error("Catalog item is not available");
+  }
+
+  const existing = await db.select().from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.catalogItemId, catalogItemId), eq(userEntitlements.status, "active"))).limit(1);
+  if (existing.length > 0) return { entitlement: existing[0], alreadyOwned: true };
+
+  const price = String(item.priceAnom ?? "0");
+  const numericPrice = Number(price);
+  if (!Number.isFinite(numericPrice) || numericPrice < 0) throw new Error("Invalid catalog price");
+
+  if (numericPrice > 0) {
+    await addCoinTransaction(userId, "spend", price, `store_unlock:${item.slug}`);
+  }
+
+  await db.insert(userEntitlements).values({
+    userId,
+    catalogItemId,
+    grantSource: "coin",
+    status: "active",
+    sourceRef: `coin:${item.slug}`,
+  });
+
+  const entitlement = await db.select().from(userEntitlements).where(and(eq(userEntitlements.userId, userId), eq(userEntitlements.catalogItemId, catalogItemId), eq(userEntitlements.status, "active"))).limit(1);
+  return { entitlement: entitlement[0], alreadyOwned: false };
 }
 
 export async function updateUserProfile(userId: number, updates: Partial<typeof userProfiles.$inferInsert>) {
