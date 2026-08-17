@@ -85,6 +85,13 @@
       "when": 1786972000000,
       "tag": "0011_store_membership_economy",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1786973000000,
+      "tag": "0012_store_cosmetic_seed",
+      "breakpoints": true
     }
   ]
 }
