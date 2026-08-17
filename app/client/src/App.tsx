@@ -28,6 +28,7 @@ import PixelAndDot from "./pages/PixelAndDot";
 import ColorCustomizer from "./components/ColorCustomizer";
 import YouTubeManager from "./pages/YouTubeManager";
 import PaymentMerchManagement from "./pages/PaymentMerchManagement";
+import Store from "./pages/Store";
 import BusinessControlCenter from "./pages/BusinessControlCenter";
 import ChatWidget from "./components/ChatWidget";
 import SocialGoodScoreBadge from "./components/SocialGoodScoreBadge";
@@ -49,11 +50,6 @@ const OpenUniverse = () => {
   const { linkConfig } = useOwnerView();
   return <ExternalRedirect destination={linkConfig.universe} label="Anom's Universe" />;
 };
-const OpenShop = () => {
-  const { linkConfig } = useOwnerView();
-  return <ExternalRedirect destination={linkConfig.store} label="the Anom Originals shop" />;
-};
-
 const AppRoutes = () => {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -66,8 +62,8 @@ const AppRoutes = () => {
       <Route path={"/broadcast"} component={Broadcast} />
       <Route path={"/neon-gallery"} component={NeonGallery} />
       <Route path={"/pixel-and-dot"} component={PixelAndDot} />
-      <Route path={"/shop"} component={OpenShop} />
-      <Route path={"/store"} component={OpenShop} />
+      <Route path={"/shop"} component={Store} />
+      <Route path={"/store"} component={Store} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/wallet"} component={Wallet} />
       <Route path={"/achievements"} component={Achievements} />
@@ -83,7 +79,7 @@ const AppRoutes = () => {
       <Route path={"/feed"} component={SocialFeed} />
       <Route path={"/district-b-arcade"} component={DistrictBArcade} />
       <Route path={"/games"} component={Games} />
-      <Route path={"/merch"} component={OpenShop} />
+      <Route path="/merch" component={Store} />
       {AUTH_ENTRY_ROUTES.map((path) => <Route key={path} path={path} component={Login} />)}
       <Route path="/admin" component={Admin} />
       <Route path="/collaboration" component={CollaborationStation} />

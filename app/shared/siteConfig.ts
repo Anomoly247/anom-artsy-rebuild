@@ -30,7 +30,7 @@ export type SiteLinkConfig = {
 
 export const DEFAULT_SITE_LINK_CONFIG: SiteLinkConfig = {
   universe: "https://universe.anomartsy.xyz/",
-  store: "https://anomoriginals.myspreadshop.com/",
+  store: "https://anomartsy.lol/",
   social: {
     youtube: "https://www.youtube.com/@anomoriginals",
     instagram: "https://www.instagram.com/anomoriginals/",
