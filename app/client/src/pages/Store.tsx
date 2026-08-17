@@ -2,6 +2,7 @@ import { ArrowLeft, ExternalLink, Heart, Sparkles, ShoppingBag, Star } from "luc
 import { Link } from "wouter";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import StoreCosmeticPreview from "@/components/StoreCosmeticPreview";
+import StoreMembershipSection from "@/components/StoreMembershipSection";
 
 const storeUrl = "https://anomartsy.lol/";
 
@@ -67,6 +68,8 @@ export default function Store() {
         <div className="mt-20">
           <StoreCosmeticPreview />
         </div>
+
+        <StoreMembershipSection />
 
         <section className="mt-20 grid gap-5 md:grid-cols-3" aria-label="Store principles">
           {storeSignals.map(({ icon: Icon, title, text, accent }) => (
