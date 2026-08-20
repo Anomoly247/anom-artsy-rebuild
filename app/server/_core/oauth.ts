@@ -170,7 +170,7 @@ export function registerOAuthRoutes(app: Express) {
       const userOpenId = normalizeUserOpenId(userInfo);
 
       if (!userOpenId) {
-        res.status(400).json({ error: "openId, id, sub, identifier, or nested profile identifier missing from user info" });
+        res.redirect(302, "/login?error=identifier");
         return;
       }
 
@@ -197,7 +197,11 @@ export function registerOAuthRoutes(app: Express) {
       res.redirect(302, isAdmin ? "/admin" : POST_LOGIN_REDIRECT);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
-      res.status(500).json({ error: "OAuth callback failed" });
+      const message = error instanceof Error ? error.message : "";
+      const errorCode = /database|table|connection|transport|upsert/i.test(message)
+        ? "database"
+        : "callback";
+      res.redirect(302, `/login?error=${errorCode}`);
     }
   });
 }
