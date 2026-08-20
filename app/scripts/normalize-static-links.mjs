@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDir, "../..");
-const shopUrl = "https://anomoriginals.myspreadshop.com/";
+const shopUrl = "https://anomartsy.lol/";
 const universeUrl = "https://universe.anomartsy.xyz/";
 
 const files = [

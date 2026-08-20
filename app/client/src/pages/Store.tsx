@@ -22,7 +22,7 @@ const storeSignals = [
   {
     icon: Star,
     title: "World-connected",
-    text: "Return to the Map whenever you want to move from merchandise back into stories, games, and communities.",
+    text: "Return to the Map whenever you want to move from digital goods back into stories, games, and communities.",
     accent: "text-ao-gold",
   },
 ];
@@ -43,7 +43,7 @@ export default function Store() {
             The store is another world inside the Universe.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-ao-copy-muted">
-            Shop the actual Anom Artsy collection at anomartsy.lol. This in-universe Store gate keeps the storefront connected to the AO Map instead of sending visitors through the old Spreadshop destination.
+            Open the AO digital Store at anomartsy.lol for Anom Coin, emotes, backgrounds, glow treatments, identity packs, and memberships. This in-universe Store gate keeps digital purchases connected to the AO Map and server-confirmed access.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
             <a
@@ -82,7 +82,7 @@ export default function Store() {
         </section>
 
         <p className="mt-16 border-t border-white/10 pt-6 text-sm text-ao-copy-subtle">
-          Store destination: <span className="font-ao-mono text-ao-cyan">anomartsy.lol</span> · No Spreadshop redirect is used by this route.
+          Digital Store destination: <span className="font-ao-mono text-ao-cyan">anomartsy.lol</span> · Purchases are digital and access is confirmed by the AO server.
         </p>
       </div>
     </main>

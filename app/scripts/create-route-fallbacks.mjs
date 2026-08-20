@@ -8,16 +8,16 @@ const repositoryRoot = path.resolve(scriptDir, "../..");
 const routes = [
   { file: "sanctuary.html", destination: "https://universe.anomartsy.xyz/", label: "Anom's Universe" },
   { file: "pages/sanctuary.html", destination: "https://universe.anomartsy.xyz/", label: "Anom's Universe" },
-  { file: "shop.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
-  { file: "store.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
-  { file: "merch.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
-  { file: "pages/store.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
+  { file: "shop.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
+  { file: "store.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
+  { file: "merch.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
+  { file: "pages/store.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
   { file: "kids-corner.html", destination: "/pages/kids-corner.html", label: "Kids Corner" },
   { file: "dashboard/index.html", destination: "https://universe.anomartsy.xyz/", label: "Anom's Universe" },
   { file: "sanctuary/index.html", destination: "https://universe.anomartsy.xyz/", label: "Anom's Universe" },
-  { file: "shop/index.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
-  { file: "store/index.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
-  { file: "merch/index.html", destination: "https://anomoriginals.myspreadshop.com/", label: "the Anom Originals shop" },
+  { file: "shop/index.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
+  { file: "store/index.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
+  { file: "merch/index.html", destination: "https://anomartsy.lol/", label: "the AO digital Store" },
 ];
 
 function renderRedirect(destination, label) {
