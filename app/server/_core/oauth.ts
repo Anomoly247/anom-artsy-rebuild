@@ -1,4 +1,6 @@
 import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState, encodeOAuthState } from "@shared/const";
+import { timingSafeEqual } from "node:crypto";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { parse as parseCookieHeader } from "cookie";
 import type { Express, Request, Response } from "express";
 import * as db from "../db";
@@ -26,7 +28,68 @@ function getRequestOrigin(req: Request) {
   return `${protocol === "https" ? "https" : "http"}://${host}`;
 }
 
+function adminLoginKeyMatches(req: Request): boolean {
+  const suppliedKey = (typeof req.query.key === "string"
+    ? req.query.key
+    : req.header("x-admin-login-key"))?.trim();
+  const configuredKey = ENV.adminLoginKey.trim();
+  if (!suppliedKey || !configuredKey) return false;
+
+  const supplied = Buffer.from(suppliedKey, "utf8");
+  const configured = Buffer.from(configuredKey, "utf8");
+  return supplied.length === configured.length && timingSafeEqual(supplied, configured);
+}
+
+const adminLoginRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: { error: "Too many admin login attempts. Try again later." },
+  keyGenerator: (req) => ipKeyGenerator(req.ip ?? req.socket.remoteAddress ?? "unknown"),
+});
+
+async function establishAdminSession(req: Request, res: Response) {
+  const openId = ENV.devAuthUserId;
+  const name = ENV.devAuthUserName;
+  const email = ENV.adminEmail;
+  await db.upsertUser({
+    openId,
+    name,
+    email,
+    loginMethod: "admin-key",
+    role: "admin",
+    lastSignedIn: new Date(),
+  });
+  const sessionToken = await sdk.createSessionToken(openId, {
+    name,
+    expiresInMs: ONE_YEAR_MS,
+  });
+  res.cookie(COOKIE_NAME, sessionToken, {
+    ...getSessionCookieOptions(req),
+    maxAge: ONE_YEAR_MS,
+  });
+  res.redirect(302, "/admin");
+}
+
 export function registerOAuthRoutes(app: Express) {
+  app.get("/api/admin-login", adminLoginRateLimit, async (req: Request, res: Response) => {
+    if (!ENV.adminLoginKey) {
+      res.status(503).json({ error: "Admin login is not configured" });
+      return;
+    }
+    if (!adminLoginKeyMatches(req)) {
+      res.status(401).json({ error: "Invalid admin login key" });
+      return;
+    }
+    try {
+      await establishAdminSession(req, res);
+    } catch (error) {
+      console.error("[Admin Auth] Login failed", error);
+      res.status(500).json({ error: "Admin login failed" });
+    }
+  });
+
   // The frontend sends users here for Google-backed platform OAuth. Register it
   // before the SPA fallback so an unavailable or misconfigured OAuth service
   // always returns a server response rather than index.html.
@@ -117,7 +180,7 @@ export function registerOAuthRoutes(app: Express) {
       const userOpenId = normalizeUserOpenId(userInfo);
 
       if (!userOpenId) {
-        res.status(400).json({ error: "openId, id, sub, identifier, or nested profile identifier missing from user info" });
+        res.redirect(302, "/login?error=identifier");
         return;
       }
 
@@ -144,7 +207,11 @@ export function registerOAuthRoutes(app: Express) {
       res.redirect(302, isAdmin ? "/admin" : POST_LOGIN_REDIRECT);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
-      res.status(500).json({ error: "OAuth callback failed" });
+      const message = error instanceof Error ? error.message : "";
+      const errorCode = /database|table|connection|transport|upsert/i.test(message)
+        ? "database"
+        : "callback";
+      res.redirect(302, `/login?error=${errorCode}`);
     }
   });
 }

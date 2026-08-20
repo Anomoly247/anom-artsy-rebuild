@@ -236,6 +236,19 @@ export default function AnomsCornerWorld() {
             Visit Pixel &amp; Dot
           </Button>
         </section>
+
+        <section
+          className="relative mt-12 overflow-hidden rounded-2xl border border-[#20cde2]/60 bg-[#07101c] p-6 shadow-[0_0_24px_rgba(32,205,226,0.12)] sm:p-8"
+          aria-labelledby="release-standard-title"
+        >
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#20cde2] via-[#e853dc] to-[#d8ae55] opacity-90" />
+          <div className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full border border-[#e853dc]/20" />
+          <p className="relative text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Release Standard</p>
+          <h2 id="release-standard-title" className="relative mt-3 text-2xl font-black text-white sm:text-3xl">Every story keeps its source.</h2>
+          <p className="relative mt-4 max-w-4xl text-sm leading-7 text-slate-100 sm:text-base">
+            Storybook art, animation, chapters, and trailers are added here only after their source lineage, SFW context, and final placement have been reviewed. Each release stays connected to the Pixel &amp; Dot world and the wider AO Universe.
+          </p>
+        </section>
       </main>
 
     </div>

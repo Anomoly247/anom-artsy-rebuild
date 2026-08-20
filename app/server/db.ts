@@ -14,7 +14,10 @@ export async function getDb() {
     try {
       console.log("[Database] Initializing database connection...");
       // Create a pool (not a single connection) for better connection management
-      _pool = mysql.createPool(ENV.databaseUrl);
+      _pool = mysql.createPool({
+        uri: ENV.databaseUrl,
+        ssl: { rejectUnauthorized: false },
+      });
       _db = drizzle(_pool) as unknown as ReturnType<typeof drizzle>;
       console.log("[Database] ✓ Database connection established");
     } catch (error) {
