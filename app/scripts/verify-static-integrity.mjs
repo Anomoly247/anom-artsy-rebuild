@@ -4,8 +4,12 @@ import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDir, "../..");
-const shopUrl = "https://anomoriginals.myspreadshop.com/";
+const shopUrl = "https://anomartsy.lol/";
 const universeUrl = "https://universe.anomartsy.xyz/";
+const retiredShopHosts = [
+  ["anomoriginals", "myspreadshop", "com"].join("."),
+  ["anomarsty", "lol"].join("."),
+];
 
 const publicFiles = [
   "index.html",
@@ -32,8 +36,8 @@ const publicFiles = [
 const checks = [];
 for (const relativePath of publicFiles) {
   const source = await readFile(path.join(repositoryRoot, relativePath), "utf8");
-  if (source.includes("https://anomarsty.lol") || source.includes("https://anomartsy.lol")) {
-    checks.push(`${relativePath}: contains a retired shop destination`);
+  if (retiredShopHosts.some((host) => source.includes(host))) {
+    checks.push(`${relativePath}: contains a retired or misspelled shop destination`);
   }
   if (/href="\/(?:dashboard|shop\.html|store\.html|merch\.html)"/.test(source)) {
     checks.push(`${relativePath}: contains a legacy internal commerce or Sanctuary link`);
@@ -66,7 +70,7 @@ for (const relativePath of reactPublicFiles) {
 
 const root = await readFile(path.join(repositoryRoot, "index.html"), "utf8");
 if (!root.includes(`href="${universeUrl}">Enter Sanctuary`)) checks.push("index.html: Enter Sanctuary is not a direct Universe destination");
-if (!root.includes(`href="${shopUrl}">SHOP`)) checks.push("index.html: primary SHOP navigation is not a direct storefront destination");
+if (!root.includes(`href="${shopUrl}">Digital Store`) && !root.includes(`href="${shopUrl}">SHOP`)) checks.push("index.html: primary digital Store navigation is not a direct storefront destination");
 if (!root.includes("radial-gradient")) checks.push("index.html: cyberpunk background glow is missing");
 
 if (checks.length > 0) {
