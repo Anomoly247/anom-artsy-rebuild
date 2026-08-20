@@ -1,0 +1,9 @@
+*
+!Dockerfile
+!.dockerignore
+!app/
+!app/**
+app/node_modules
+app/dist
+app/.manus-logs
+app/**/*.log
