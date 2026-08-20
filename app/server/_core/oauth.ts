@@ -28,10 +28,10 @@ function getRequestOrigin(req: Request) {
 }
 
 function adminLoginKeyMatches(req: Request): boolean {
-  const suppliedKey = typeof req.query.key === "string"
+  const suppliedKey = (typeof req.query.key === "string"
     ? req.query.key
-    : req.header("x-admin-login-key");
-  const configuredKey = ENV.adminLoginKey;
+    : req.header("x-admin-login-key"))?.trim();
+  const configuredKey = ENV.adminLoginKey.trim();
   if (!suppliedKey || !configuredKey) return false;
 
   const supplied = Buffer.from(suppliedKey, "utf8");
