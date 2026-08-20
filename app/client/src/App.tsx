@@ -45,6 +45,7 @@ import ExternalRedirect from "./components/ExternalRedirect";
 import { useOwnerView } from "./contexts/OwnerViewContext";
 import { OwnerViewProvider } from "./contexts/OwnerViewContext";
 import { OwnerPanel, OwnerViewToggle } from "./components/OwnerViewControls";
+import UniverseMapPage from "./pages/UniverseMapPage";
 
 const OpenUniverse = () => {
   const { linkConfig } = useOwnerView();
@@ -55,7 +56,7 @@ const AppRoutes = () => {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/dashboard"} component={OpenUniverse} />
+      <Route path={"/dashboard"} component={UniverseMapPage} />
       <Route path={"/sanctuary"} component={OpenUniverse} />
       <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
       <Route path={"/creator-worlds"} component={CreatorWorlds} />
