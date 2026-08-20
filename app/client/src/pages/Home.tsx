@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import SignUpConnectors from "@/components/SignUpConnectors";
 import HomepageIntegration from "@/components/HomepageIntegration";
-import UniverseMap from "@/components/UniverseMap";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import CustomBackgroundGallery, { type GalleryBackground } from "@/components/CustomBackgroundGallery";
 import {
@@ -145,9 +144,37 @@ export default function Home() {
 
       <PublicSiteContent config={linkConfig} />
 
-      <UniverseMap shopUrl={linkConfig.store} />
-
+      {/* Locked Welcome homepage: the living map is intentionally available at /dashboard. */}
+      <section className="mx-auto w-full max-w-7xl px-6 py-12">
+        <div className="mb-12 text-center">
+          <h1 className="mb-4 text-5xl font-extrabold neon-text-cyan">Welcome to the AO Universe</h1>
+          <p className="mx-auto max-w-2xl text-lg text-slate-300">
+            Explore our live neon worlds, interactive arcades, and family sanctuary. Select a world below to dive right in.
+          </p>
+        </div>
+        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="cursor-pointer rounded-xl border-2 border-[#20cde2] bg-[#0d1b2b]/80 p-6 shadow-[0_0_20px_rgba(32,205,226,0.2)] transition-all hover:border-[#e853dc]" onClick={() => navigate("/games")}>
+            <div className="mb-3 text-4xl">🎮</div>
+            <h3 className="mb-2 text-xl font-bold text-[#20cde2]">District B Arcade</h3>
+            <p className="mb-4 text-sm text-slate-400">Play Sky Navigator, Identity Grid, and high-score arcade challenges.</p>
+            <Button className="btn-neon-cyan w-full text-xs">Enter Arcade</Button>
+          </div>
+          <div className="cursor-pointer rounded-xl border-2 border-[#e853dc] bg-[#0d1b2b]/80 p-6 shadow-[0_0_20px_rgba(232,83,220,0.2)] transition-all hover:border-[#20cde2]" onClick={() => navigate("/anoms-corner")}>
+            <div className="mb-3 text-4xl">🌟</div>
+            <h3 className="mb-2 text-xl font-bold text-[#e853dc]">Anom&apos;s Corner &amp; Moonberry</h3>
+            <p className="mb-4 text-sm text-slate-400">Immersive Pixel &amp; Dot stories, Moonberry Farm, and family games.</p>
+            <Button className="btn-neon-magenta w-full text-xs">Visit Anom&apos;s Corner</Button>
+          </div>
+          <div className="cursor-pointer rounded-xl border-2 border-[#d8ae55] bg-[#0d1b2b]/80 p-6 shadow-[0_0_20px_rgba(216,174,85,0.2)] transition-all hover:border-[#20cde2]" onClick={() => window.location.assign(linkConfig.store)}>
+            <div className="mb-3 text-4xl">🛍️</div>
+            <h3 className="mb-2 text-xl font-bold text-[#d8ae55]">Anom Originals Shop</h3>
+            <p className="mb-4 text-sm text-slate-400">Discover bespoke artwork, apparel, and verified creator gear.</p>
+            <Button className="btn-neon-gold w-full text-xs">Browse Shop</Button>
+          </div>
+        </div>
+      </section>
       {/* Hero Section */}
+
       <section className="flex-1 px-6 py-10">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
