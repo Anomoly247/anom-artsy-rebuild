@@ -1,5 +1,6 @@
 import { COOKIE_NAME, ONE_YEAR_MS, OAUTH_STATE_COOKIE, decodeOAuthState, encodeOAuthState } from "@shared/const";
 import { timingSafeEqual } from "node:crypto";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { parse as parseCookieHeader } from "cookie";
 import type { Express, Request, Response } from "express";
 import * as db from "../db";
@@ -39,6 +40,15 @@ function adminLoginKeyMatches(req: Request): boolean {
   return supplied.length === configured.length && timingSafeEqual(supplied, configured);
 }
 
+const adminLoginRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: { error: "Too many admin login attempts. Try again later." },
+  keyGenerator: (req) => ipKeyGenerator(req.ip ?? req.socket.remoteAddress ?? "unknown"),
+});
+
 async function establishAdminSession(req: Request, res: Response) {
   const openId = ENV.devAuthUserId;
   const name = ENV.devAuthUserName;
@@ -63,7 +73,7 @@ async function establishAdminSession(req: Request, res: Response) {
 }
 
 export function registerOAuthRoutes(app: Express) {
-  app.get("/api/admin-login", async (req: Request, res: Response) => {
+  app.get("/api/admin-login", adminLoginRateLimit, async (req: Request, res: Response) => {
     if (!ENV.adminLoginKey) {
       res.status(503).json({ error: "Admin login is not configured" });
       return;
