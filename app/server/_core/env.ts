@@ -13,6 +13,7 @@ export const ENV = {
   devAuthUserId: process.env.DEV_AUTH_USER_ID ?? "dev-admin-bethmarieshanley6",
   devAuthUserName: process.env.DEV_AUTH_USER_NAME ?? "Eliza Wood",
   devAuthUserEmail: process.env.DEV_AUTH_USER_EMAIL ?? "bethmarieshanley6@gmail.com",
+  adminLoginKey: process.env.ADMIN_LOGIN_KEY ?? "",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
 };
