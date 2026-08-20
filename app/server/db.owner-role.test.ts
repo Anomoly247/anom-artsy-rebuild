@@ -1,11 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const mocks = vi.hoisted(() => ({
-  drizzle: vi.fn(),
-  insert: vi.fn(),
-  values: vi.fn(),
-  onDuplicateKeyUpdate: vi.fn(),
-}));
+const mocks = vi.hoisted(() => {
+  process.env.OWNER_OPEN_ID ??= "test-owner-open-id";
+  process.env.DATABASE_URL ??= "mysql://test:test@127.0.0.1:3306/test";
+
+  return {
+    drizzle: vi.fn(),
+    insert: vi.fn(),
+    values: vi.fn(),
+    onDuplicateKeyUpdate: vi.fn(),
+  };
+});
 
 vi.mock("drizzle-orm/mysql2", () => ({
   drizzle: mocks.drizzle,
