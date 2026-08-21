@@ -29,6 +29,7 @@ import ColorCustomizer from "./components/ColorCustomizer";
 import YouTubeManager from "./pages/YouTubeManager";
 import PaymentMerchManagement from "./pages/PaymentMerchManagement";
 import Store from "./pages/Store";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 import BusinessControlCenter from "./pages/BusinessControlCenter";
 import ChatWidget from "./components/ChatWidget";
 import SocialGoodScoreBadge from "./components/SocialGoodScoreBadge";
@@ -52,11 +53,18 @@ const OpenUniverse = () => {
   const { linkConfig } = useOwnerView();
   return <ExternalRedirect destination={linkConfig.universe} label="Anom's Universe" />;
 };
+const StoreHostRoot = () => {
+  if (typeof window !== "undefined" && ["anomartsy.lol", "www.anomartsy.lol"].includes(window.location.hostname)) {
+    return <Store />;
+  }
+  return <Home />;
+};
+
 const AppRoutes = () => {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={StoreHostRoot} />
       <Route path={"/dashboard"} component={UniverseMapPage} />
       <Route path={"/sanctuary"} component={SanctuaryWorldPage} />
       <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
@@ -66,6 +74,7 @@ const AppRoutes = () => {
       <Route path={"/pixel-and-dot"} component={PixelAndDot} />
       <Route path={"/shop"} component={Store} />
       <Route path={"/store"} component={Store} />
+      <Route path={"/checkout/success"} component={CheckoutSuccess} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/wallet"} component={Wallet} />
       <Route path={"/achievements"} component={Achievements} />

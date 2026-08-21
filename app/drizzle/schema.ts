@@ -135,6 +135,53 @@ export type UserMembership = typeof userMemberships.$inferSelect;
 export type InsertUserMembership = typeof userMemberships.$inferInsert;
 
 /**
+ * Digital Anom Coin packs. These are real-money products and remain unpublished
+ * until the owner/Guardian workflow approves the catalog record.
+ */
+export const storeCoinPacks = mysqlTable("store_coin_packs", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 120 }).notNull().unique(),
+  name: varchar("name", { length: 120 }).notNull(),
+  description: text("description"),
+  coinAmount: int("coin_amount").notNull(),
+  priceCents: int("price_cents").notNull(),
+  currency: varchar("currency", { length: 3 }).default("usd").notNull(),
+  status: mysqlEnum("status", ["draft", "published", "archived"]).default("draft").notNull(),
+  guardianStatus: mysqlEnum("guardian_status", ["pending", "approved", "rejected"]).default("pending").notNull(),
+  sourceRecordId: varchar("source_record_id", { length: 160 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type StoreCoinPack = typeof storeCoinPacks.$inferSelect;
+export type InsertStoreCoinPack = typeof storeCoinPacks.$inferInsert;
+
+/**
+ * Server-owned Stripe Checkout state. Stripe webhooks use the unique session
+ * identifier to make fulfillment idempotent and provenance-auditable.
+ */
+export const digitalCheckoutSessions = mysqlTable("digital_checkout_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("user_id").notNull(),
+  stripeSessionId: varchar("stripe_session_id", { length: 255 }).notNull().unique(),
+  requestKey: varchar("request_key", { length: 160 }).notNull().unique(),
+  checkoutUrl: text("checkout_url"),
+  paymentIntentId: varchar("payment_intent_id", { length: 255 }),
+  purchaseType: mysqlEnum("purchase_type", ["coin_pack", "catalog_item", "membership"]).notNull(),
+  referenceId: int("reference_id").notNull(),
+  amountCents: int("amount_cents").notNull(),
+  currency: varchar("currency", { length: 3 }).notNull(),
+  status: mysqlEnum("status", ["pending", "paid", "failed", "expired"]).default("pending").notNull(),
+  metadata: json("metadata").$type<Record<string, string>>(),
+  fulfilledAt: timestamp("fulfilled_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DigitalCheckoutSession = typeof digitalCheckoutSessions.$inferSelect;
+export type InsertDigitalCheckoutSession = typeof digitalCheckoutSessions.$inferInsert;
+
+/**
  * Anom Coin Transactions — track all coin earning and spending
  */
 export const coinTransactions = mysqlTable("coin_transactions", {

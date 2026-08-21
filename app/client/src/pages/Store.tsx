@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import StoreCosmeticPreview from "@/components/StoreCosmeticPreview";
 import StoreMembershipSection from "@/components/StoreMembershipSection";
+import DigitalCheckoutSection from "@/components/DigitalCheckoutSection";
 
 const storeUrl = "https://anomartsy.lol/";
 
@@ -64,6 +65,8 @@ export default function Store() {
             </Link>
           </div>
         </section>
+
+        <DigitalCheckoutSection />
 
         <div className="mt-20">
           <StoreCosmeticPreview />
