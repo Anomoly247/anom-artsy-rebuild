@@ -5,7 +5,8 @@ import { fileURLToPath } from "node:url";
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDir, "../..");
 const shopUrl = "https://anomartsy.lol/";
-const universeUrl = "https://universe.anomartsy.xyz/";
+const sanctuaryUrl = "https://universe.anomartsy.xyz/sanctuary";
+const universeMapUrl = "https://universe.anomartsy.xyz/dashboard";
 const retiredShopHosts = [
   ["anomoriginals", "myspreadshop", "com"].join("."),
   ["anomarsty", "lol"].join("."),
@@ -69,7 +70,8 @@ for (const relativePath of reactPublicFiles) {
 }
 
 const root = await readFile(path.join(repositoryRoot, "index.html"), "utf8");
-if (!root.includes(`href="${universeUrl}">Enter Sanctuary`)) checks.push("index.html: Enter Sanctuary is not a direct Universe destination");
+if (!root.includes(`href="${sanctuaryUrl}">Enter Sanctuary`)) checks.push("index.html: Enter Sanctuary is not a direct Sanctuary destination");
+if (!root.includes(`href="${universeMapUrl}">Universe Map`) && !root.includes(`href="${universeMapUrl}">Sanctuary Dashboard`)) checks.push("index.html: Universe Map is not a direct Map destination");
 if (!root.includes(`href="${shopUrl}">Digital Store`) && !root.includes(`href="${shopUrl}">SHOP`)) checks.push("index.html: primary digital Store navigation is not a direct storefront destination");
 if (!root.includes("radial-gradient")) checks.push("index.html: cyberpunk background glow is missing");
 

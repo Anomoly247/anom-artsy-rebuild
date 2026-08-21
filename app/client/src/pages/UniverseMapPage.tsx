@@ -4,6 +4,7 @@ import UniverseMap from "@/components/UniverseMap";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import { Button } from "@/components/ui/button";
 import { useOwnerView } from "@/contexts/OwnerViewContext";
+import { AOCityPulse } from "@/components/AOCitySanctuaryPulse";
 
 export default function UniverseMapPage() {
   const [, navigate] = useLocation();
@@ -30,6 +31,7 @@ export default function UniverseMapPage() {
       </header>
       <div className="relative z-10">
         <UniverseMap shopUrl={linkConfig.store} />
+        <AOCityPulse />
       </div>
     </main>
   );

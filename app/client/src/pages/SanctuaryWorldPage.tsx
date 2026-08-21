@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import SignUpConnectors from "@/components/SignUpConnectors";
 import HomepageIntegration from "@/components/HomepageIntegration";
+import { SanctuaryIdentityPulse } from "@/components/AOCitySanctuaryPulse";
 import CustomBackgroundGallery, { type GalleryBackground } from "@/components/CustomBackgroundGallery";
 import {
   BACKGROUND_STORAGE_KEY,
@@ -164,7 +165,7 @@ export default function SanctuaryWorldPage() {
           <div className="rounded-xl border-2 border-[#ffd700] bg-[#1a1f2e]/80 p-6 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:border-[#00eaff] transition-all cursor-pointer" onClick={() => window.location.href = "https://anomartsy.lol"}>
             <div className="text-4xl mb-3">🛍️</div>
             <h3 className="text-xl font-bold text-[#ffd700] mb-2">Anom Originals Shop</h3>
-            <p className="text-gray-400 text-sm mb-4">Explore Anom Coin, digital identity packs, emotes, backgrounds, glow treatments, and approved memberships.</p>
+            <p className="text-gray-400 text-sm mb-4">Discover bespoke artwork, apparel, and verified creator gear.</p>
             <Button className="w-full btn-neon-gold text-xs">Browse Shop</Button>
           </div>
         </div>
@@ -671,6 +672,8 @@ export default function SanctuaryWorldPage() {
             </div>
           </div>
         </div>
+
+        <SanctuaryIdentityPulse />
 
         {/* Homepage Integration */}
         <div className="mt-12">
