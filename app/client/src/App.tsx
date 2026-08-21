@@ -46,6 +46,7 @@ import { useOwnerView } from "./contexts/OwnerViewContext";
 import { OwnerViewProvider } from "./contexts/OwnerViewContext";
 import { OwnerPanel, OwnerViewToggle } from "./components/OwnerViewControls";
 import UniverseMapPage from "./pages/UniverseMapPage";
+import SanctuaryWorldPage from "./pages/SanctuaryWorldPage";
 
 const OpenUniverse = () => {
   const { linkConfig } = useOwnerView();
@@ -57,7 +58,7 @@ const AppRoutes = () => {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/dashboard"} component={UniverseMapPage} />
-      <Route path={"/sanctuary"} component={OpenUniverse} />
+      <Route path={"/sanctuary"} component={SanctuaryWorldPage} />
       <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
       <Route path={"/creator-worlds"} component={CreatorWorlds} />
       <Route path={"/broadcast"} component={Broadcast} />

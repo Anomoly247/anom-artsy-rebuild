@@ -15,6 +15,17 @@ export type GalleryBackground = BackgroundImageRecord & {
   previewUrl: string;
 };
 
+function getSafePreviewUrl(value: string): string | undefined {
+  try {
+    const parsed = new URL(value, window.location.origin);
+    if (parsed.protocol === "blob:") return parsed.href;
+    if (parsed.origin === window.location.origin && parsed.pathname.startsWith("/")) return parsed.href;
+  } catch {
+    return undefined;
+  }
+  return undefined;
+}
+
 type CustomBackgroundGalleryProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -60,6 +71,7 @@ export default function CustomBackgroundGallery({
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image) => {
             const isActive = image.id === activeId;
+            const safePreviewUrl = getSafePreviewUrl(image.previewUrl);
             return (
               <div
                 key={image.id}
@@ -76,11 +88,15 @@ export default function CustomBackgroundGallery({
                   aria-label={`Use ${image.name} as the background`}
                 >
                   <div className="relative aspect-video overflow-hidden bg-[#0b0e14]">
-                    <img
-                      src={image.previewUrl}
-                      alt={image.name}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
+                    {safePreviewUrl ? (
+                      <img
+                        src={safePreviewUrl}
+                        alt={image.name}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-xs text-[#7a7f8e]">Preview unavailable</div>
+                    )}
                     {isActive && (
                       <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-[#ff00ff] px-2 py-1 text-xs font-semibold text-white">
                         <Check className="h-3 w-3" /> Active

@@ -115,11 +115,11 @@ export default function UniverseMap({ shopUrl }: UniverseMapProps) {
       id: "market",
       eyebrow: "Market Gate / External",
       title: "Anom Originals Shop",
-      description: "Bespoke artwork, apparel, and verified creator gear from the physical realm.",
+      description: "Anom Coin, digital identity packs, emotes, backgrounds, glow treatments, and approved memberships.",
       signal: "Gate open",
       accent: "#e853dc",
       icon: ShoppingBag,
-      actionLabel: "Browse Shop",
+      actionLabel: "Open Digital Store",
       externalUrl: shopUrl,
     },
   ];
