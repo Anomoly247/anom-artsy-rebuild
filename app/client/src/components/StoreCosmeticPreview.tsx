@@ -1,4 +1,4 @@
-import { Check, LockKeyhole, Sparkles } from "lucide-react";
+import { Check, ExternalLink, LockKeyhole, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { toast } from "sonner";
@@ -15,6 +15,7 @@ type PreviewOption = {
   imageUrl?: string | null;
   previewClass: string;
   priceAnom: string;
+  priceReal: string;
   previewOnly?: boolean;
 };
 
@@ -28,6 +29,7 @@ const previewFallbacks: PreviewOption[] = [
     imageUrl: "/media/anoms-corner/moonberry-1920x1080.webp",
     previewClass: "bg-ao-midnight",
     priceAnom: "Preview",
+    priceReal: "0",
     previewOnly: true,
   },
   {
@@ -38,6 +40,7 @@ const previewFallbacks: PreviewOption[] = [
     category: "glow",
     previewClass: "shadow-ao-cyan",
     priceAnom: "Preview",
+    priceReal: "0",
     previewOnly: true,
   },
   {
@@ -48,6 +51,7 @@ const previewFallbacks: PreviewOption[] = [
     category: "glow",
     previewClass: "shadow-ao-gold",
     priceAnom: "Preview",
+    priceReal: "0",
     previewOnly: true,
   },
 ];
@@ -57,6 +61,9 @@ export default function StoreCosmeticPreview() {
   const { data: catalog = [] } = trpc.store.listCatalog.useQuery();
   const unlockMutation = trpc.store.unlockWithCoin.useMutation({
     onSuccess: () => toast.success("Cosmetic unlocked. It is now available in your entitlements."),
+    onError: (error) => toast.error(error.message),
+  });
+  const checkoutMutation = trpc.store.createCheckout.useMutation({
     onError: (error) => toast.error(error.message),
   });
   const [selectedSlug, setSelectedSlug] = useState(previewFallbacks[0].slug);
@@ -73,6 +80,7 @@ export default function StoreCosmeticPreview() {
         imageUrl: item.imageUrl,
         previewClass: item.previewClass ?? "bg-ao-midnight",
         priceAnom: String(item.priceAnom ?? "0"),
+        priceReal: String(item.priceReal ?? "0"),
       }));
     return published.length > 0 ? published : previewFallbacks;
   }, [catalog]);
@@ -127,10 +135,25 @@ export default function StoreCosmeticPreview() {
           {selected?.previewOnly ? (
             <p className="border border-ao-gold/30 bg-ao-gold/5 p-3 text-xs leading-5 text-ao-copy-muted">This is a safe preview record. A Guardian-approved catalog item will enable a server-confirmed unlock.</p>
           ) : isAuthenticated ? (
-            <Button className="w-full bg-ao-cyan text-ao-midnight hover:bg-ao-cyan/90" onClick={() => unlockMutation.mutate({ catalogItemId: selected.id })} disabled={unlockMutation.isPending}>
-              <LockKeyhole className="mr-2 h-4 w-4" aria-hidden="true" />
-              Unlock with Anom Coin
-            </Button>
+            <div className="space-y-2">
+              <Button className="w-full bg-ao-cyan text-ao-midnight hover:bg-ao-cyan/90" onClick={() => unlockMutation.mutate({ catalogItemId: selected.id })} disabled={unlockMutation.isPending || checkoutMutation.isPending}>
+                <LockKeyhole className="mr-2 h-4 w-4" aria-hidden="true" />
+                Unlock with Anom Coin
+              </Button>
+              {Number(selected.priceReal) > 0 ? (
+                <Button variant="outline" className="w-full border-ao-gold/60 text-ao-gold hover:bg-ao-gold/10" onClick={async () => {
+                  try {
+                    const result = await checkoutMutation.mutateAsync({ purchaseType: "catalog_item", referenceId: selected.id, requestKey: `catalog-item-${selected.id}-${crypto.randomUUID()}` });
+                    if (result.url) window.location.assign(result.url);
+                  } catch {
+                    // The mutation toast contains the server-confirmed error.
+                  }
+                }} disabled={unlockMutation.isPending || checkoutMutation.isPending}>
+                  <ExternalLink className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Buy digitally · ${Number(selected.priceReal).toFixed(2)}
+                </Button>
+              ) : null}
+            </div>
           ) : (
             <Link href="/login" className="block border border-ao-gold/60 p-3 text-center text-sm font-bold text-ao-gold hover:bg-ao-gold/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ao-focus">Sign in to unlock cosmetics</Link>
           )}

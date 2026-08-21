@@ -11,6 +11,7 @@ import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
 import { DEFAULT_SITE_LINK_CONFIG } from "../shared/siteConfig";
+import { createDigitalCheckoutSession, getDigitalCheckoutStatus, listPublishedCoinPacks } from "./digitalCheckout";
 
 export const appRouter = router({
   system: systemRouter,
@@ -89,11 +90,22 @@ export const appRouter = router({
   store: router({
     listCatalog: publicProcedure.query(async () => getStoreCatalog()),
     listMembershipPlans: publicProcedure.query(async () => getMembershipPlans()),
+    listCoinPacks: publicProcedure.query(async () => listPublishedCoinPacks()),
     getEntitlements: protectedProcedure.query(async ({ ctx }) => getUserEntitlements(ctx.user.id)),
     getMemberships: protectedProcedure.query(async ({ ctx }) => getUserMemberships(ctx.user.id)),
     unlockWithCoin: protectedProcedure
       .input(z.object({ catalogItemId: z.number().int().positive() }))
       .mutation(async ({ ctx, input }) => unlockStoreItemWithCoin(ctx.user.id, input.catalogItemId)),
+    createCheckout: protectedProcedure
+      .input(z.object({
+        purchaseType: z.enum(["coin_pack", "catalog_item", "membership"]),
+        referenceId: z.number().int().positive(),
+        requestKey: z.string().min(8).max(160),
+      }))
+      .mutation(async ({ ctx, input }) => createDigitalCheckoutSession(ctx.user.id, input)),
+    getCheckoutStatus: protectedProcedure
+      .input(z.object({ sessionId: z.string().min(1).max(255) }))
+      .query(async ({ ctx, input }) => getDigitalCheckoutStatus(ctx.user.id, input.sessionId)),
   }),
 
   coin: router({
