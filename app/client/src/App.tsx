@@ -67,6 +67,8 @@ const AppRoutes = () => {
       <Route path={"/"} component={StoreHostRoot} />
       <Route path={"/dashboard"} component={UniverseMapPage} />
       <Route path={"/sanctuary"} component={SanctuaryWorldPage} />
+      <Route path={"/sanctuary/"} component={SanctuaryWorldPage} />
+      <Route path={"/sanctuary.html"} component={SanctuaryWorldPage} />
       <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
       <Route path={"/creator-worlds"} component={CreatorWorlds} />
       <Route path={"/broadcast"} component={Broadcast} />
