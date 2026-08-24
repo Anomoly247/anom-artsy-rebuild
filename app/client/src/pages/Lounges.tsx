@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, Plus, Lock } from "lucide-react";
-import { useLocation } from "wouter";
+import { Users, Plus, Lock, ArrowLeft, MessageSquare, Sparkles } from "lucide-react";
+import { useLocation, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
+import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 
 export default function Lounges() {
   const { isAuthenticated, loading } = useAuth();
@@ -22,315 +23,241 @@ export default function Lounges() {
     neonTheme: "magenta" as "magenta" | "cyan" | "purple",
   });
 
+  const utils = trpc.useUtils();
+
   // Fetch user's lounges
   const { data: myLounges = [], isLoading: loungesLoading } = trpc.lounge.getMyLounges.useQuery(
     undefined,
     { enabled: isAuthenticated }
   );
+
   const loungeIds = useMemo(
     () => myLounges.filter((lounge): lounge is NonNullable<typeof lounge> => Boolean(lounge)).map((lounge) => lounge.id),
-    [myLounges],
+    [myLounges]
   );
+
   const { data: unreadCounts = [] } = trpc.lounge.getUnreadCounts.useQuery(
     { loungeIds },
     { enabled: isAuthenticated && loungeIds.length > 0, refetchInterval: 5000 }
   );
+
   const unreadByLounge = new Map(unreadCounts.map((entry) => [entry.loungeId, entry.unreadCount]));
 
   // Create lounge mutation
-  const createMutation = trpc.lounge.create.useMutation({
-    onSuccess: (lounge) => {
-      if (lounge) {
-        toast.success(`Lounge "${lounge.name}" created!`);
-      }
-      setFormData({ name: "", type: "family", description: "", neonTheme: "magenta" });
+  const createLoungeMutation = trpc.lounge.create.useMutation({
+    onSuccess: (newLounge) => {
+      toast.success("Lounge created successfully!");
       setIsCreateOpen(false);
+      setFormData({ name: "", type: "family", description: "", neonTheme: "magenta" });
+      utils.lounge.getMyLounges.invalidate();
+      if (newLounge?.id) navigate(`/lounge/${newLounge.id}`);
     },
-    onError: (error) => {
-      toast.error(`Failed to create lounge: ${error.message}`);
+    onError: (err) => {
+      toast.error(err.message || "Failed to create lounge");
     },
   });
 
-  const handleCreateLounge = () => {
+  const handleCreateLounge = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!formData.name.trim()) {
       toast.error("Please enter a lounge name");
       return;
     }
-
-    createMutation.mutate({
-      name: formData.name,
-      type: formData.type,
-      description: formData.description || undefined,
-      neonTheme: formData.neonTheme,
-    });
+    createLoungeMutation.mutate(formData);
   };
 
-  if (loading) {
+  if (loading || loungesLoading) {
     return (
-      <div className="min-h-screen bg-[#0b0e14] flex items-center justify-center">
-        <div className="text-[#00eaff] text-xl">Loading Lounges...</div>
+      <div className="min-h-screen bg-[#050914] flex items-center justify-center text-[#20cde2]">
+        Loading AO Lounges...
       </div>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-[#0b0e14] flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-[#00eaff] text-xl mb-4">Please sign in to access lounges</p>
-          <Button className="btn-neon-magenta" onClick={() => navigate("/")}>
-            Back to Home
-          </Button>
-        </div>
+      <div className="min-h-screen bg-[#050914] flex flex-col items-center justify-center p-6 text-center text-[#a0a8c0]">
+        <Lock className="h-12 w-12 text-[#e853dc] mb-4" />
+        <h1 className="text-2xl font-bold text-white mb-2">Sanctuary Authentication Required</h1>
+        <p className="text-sm max-w-md mb-6">Please sign in to access your private community lounges.</p>
+        <Button className="btn-neon-cyan" onClick={() => navigate("/")}>
+          Return to Homeworld
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0b0e14] text-[#00eaff]">
-      {/* Navigation */}
-      <nav className="border-b border-[#2a2f3e] px-6 py-4 sticky top-0 bg-[#0b0e14]/95 backdrop-blur">
-        <div className="max-w-7xl mx-auto flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex min-w-0 items-center gap-2 sm:gap-4">
-            <Button onClick={() => navigate("/")} className="shrink-0 bg-[#2a2f3e] hover:bg-[#3a3f4e] text-[#00eaff] gap-1">
-              🏠 Home
-            </Button>
-            <h1 className="whitespace-nowrap text-xl font-bold neon-text-magenta sm:text-2xl">Private Lounges</h1>
-          </div>
+    <main className="relative min-h-screen overflow-hidden bg-[#050914] text-[#a0a8c0]">
+      <LivingWorldWeb variant="magenta" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:px-10 lg:px-14">
+        {/* Navigation Bar */}
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#20cde2] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20cde2]"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Back to AO Homeworld
+          </Link>
+
           <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
             <DialogTrigger asChild>
-              <Button className="btn-neon-cyan w-full gap-2 sm:w-auto">
-                <Plus className="w-4 h-4" />
-                Create Lounge
+              <Button className="btn-neon-magenta text-xs font-bold">
+                <Plus className="mr-2 h-4 w-4" /> Create Lounge
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-[#1a1f2e] border border-[#2a2f3e]">
+            <DialogContent className="bg-[#0d1b2b] border border-[#e853dc] text-white">
               <DialogHeader>
-                <DialogTitle className="text-[#ff00cc]">Create a New Lounge</DialogTitle>
-                <DialogDescription className="text-[#7a7f8e]">
-                  Create a private space for family, friends, or coworkers to connect.
+                <DialogTitle className="text-xl font-bold text-[#e853dc]">Create a Sanctuary Lounge</DialogTitle>
+                <DialogDescription className="text-xs text-[#a0a8c0]">
+                  Set up a private room for family, friends, or collaborators with custom neon themes.
                 </DialogDescription>
               </DialogHeader>
-              <div className="space-y-4">
+
+              <form onSubmit={handleCreateLounge} className="space-y-4 mt-4">
                 <div>
-                  <label className="text-[#00eaff] text-sm font-medium">Lounge Name</label>
+                  <label className="text-xs font-bold text-[#20cde2]">Lounge Name</label>
                   <Input
-                    placeholder="e.g., The Family Hub"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff] placeholder-[#7a7f8e]"
+                    placeholder="e.g. AO Creative Circle"
+                    className="bg-[#050914] border-[#2a2f3e] text-white mt-1"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[#00eaff] text-sm font-medium">Lounge Type</label>
-                  <Select value={formData.type} onValueChange={(value: any) => setFormData({ ...formData, type: value })}>
-                    <SelectTrigger className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff]">
-                      <SelectValue />
+                  <label className="text-xs font-bold text-[#20cde2]">Category Type</label>
+                  <Select
+                    value={formData.type}
+                    onValueChange={(val: "family" | "friends" | "coworkers") => setFormData({ ...formData, type: val })}
+                  >
+                    <SelectTrigger className="bg-[#050914] border-[#2a2f3e] text-white mt-1">
+                      <SelectValue placeholder="Select type" />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#1a1f2e] border-[#2a2f3e]">
-                      <SelectItem value="family" className="text-[#00eaff]">
-                        👨‍👩‍👧‍👦 Family
-                      </SelectItem>
-                      <SelectItem value="friends" className="text-[#00eaff]">
-                        👫 Friends
-                      </SelectItem>
-                      <SelectItem value="coworkers" className="text-[#00eaff]">
-                        💼 Coworkers
-                      </SelectItem>
+                    <SelectContent className="bg-[#0d1b2b] border-[#2a2f3e] text-white">
+                      <SelectItem value="family">Family Sanctuary</SelectItem>
+                      <SelectItem value="friends">Friends Hub</SelectItem>
+                      <SelectItem value="coworkers">Collaborators Circle</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <label className="text-[#00eaff] text-sm font-medium">Description (Optional)</label>
+                  <label className="text-xs font-bold text-[#20cde2]">Neon Accent Theme</label>
+                  <Select
+                    value={formData.neonTheme}
+                    onValueChange={(val: "magenta" | "cyan" | "purple") => setFormData({ ...formData, neonTheme: val })}
+                  >
+                    <SelectTrigger className="bg-[#050914] border-[#2a2f3e] text-white mt-1">
+                      <SelectValue placeholder="Select theme" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#0d1b2b] border-[#2a2f3e] text-white">
+                      <SelectItem value="magenta">Hot Magenta</SelectItem>
+                      <SelectItem value="cyan">Electric Cyan</SelectItem>
+                      <SelectItem value="purple">Cyber Purple</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold text-[#20cde2]">Description</label>
                   <Textarea
-                    placeholder="What's this lounge about?"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff] placeholder-[#7a7f8e]"
+                    placeholder="What is this lounge about?"
+                    className="bg-[#050914] border-[#2a2f3e] text-white mt-1"
                   />
                 </div>
 
-                <div>
-                  <label className="text-[#00eaff] text-sm font-medium">Neon Theme</label>
-                  <Select value={formData.neonTheme} onValueChange={(value: any) => setFormData({ ...formData, neonTheme: value })}>
-                    <SelectTrigger className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff]">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#1a1f2e] border-[#2a2f3e]">
-                      <SelectItem value="magenta" className="text-[#ff00cc]">
-                        Magenta
-                      </SelectItem>
-                      <SelectItem value="cyan" className="text-[#00eaff]">
-                        Cyan
-                      </SelectItem>
-                      <SelectItem value="purple" className="text-[#9d4edd]">
-                        Purple
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <Button
-                  className="w-full btn-neon-magenta"
-                  onClick={handleCreateLounge}
-                  disabled={createMutation.isPending}
-                >
-                  {createMutation.isPending ? "Creating..." : "Create Lounge"}
+                <Button type="submit" disabled={createLoungeMutation.isPending} className="w-full btn-neon-magenta mt-2">
+                  {createLoungeMutation.isPending ? "Initializing..." : "Launch Lounge"}
                 </Button>
-              </div>
+              </form>
             </DialogContent>
           </Dialog>
         </div>
-      </nav>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        {loungesLoading ? (
-          <div className="text-center py-12">
-            <p className="text-[#7a7f8e]">Loading lounges...</p>
+        {/* Hero Banner */}
+        <section className="mt-12 max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#e853dc]/40 bg-[#e853dc]/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#e853dc]">
+            <Users className="h-3.5 w-3.5" />
+            Sanctuary Community Lounges
           </div>
-        ) : myLounges.length === 0 ? (
-          <div className="text-center py-12">
-            <Users className="w-16 h-16 mx-auto mb-4 text-[#ff00cc] opacity-50" />
-            <p className="text-[#7a7f8e] mb-6">No lounges yet. Create one to get started!</p>
-            <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-              <DialogTrigger asChild>
-                <Button className="btn-neon-cyan gap-2">
-                  <Plus className="w-4 h-4" />
-                  Create Your First Lounge
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="bg-[#1a1f2e] border border-[#2a2f3e]">
-                <DialogHeader>
-                  <DialogTitle className="text-[#ff00cc]">Create a New Lounge</DialogTitle>
-                  <DialogDescription className="text-[#7a7f8e]">
-                    Create a private space for family, friends, or coworkers to connect.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-[#00eaff] text-sm font-medium">Lounge Name</label>
-                    <Input
-                      placeholder="e.g., The Family Hub"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff] placeholder-[#7a7f8e]"
-                    />
-                  </div>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Private <span className="text-[#e853dc]">Lounges</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#7a7f8e]">
+            Gather with your inner circle, share custom updates, and stay connected inside themed rooms across the AO Living World.
+          </p>
+        </section>
 
-                  <div>
-                    <label className="text-[#00eaff] text-sm font-medium">Lounge Type</label>
-                    <Select value={formData.type} onValueChange={(value: any) => setFormData({ ...formData, type: value })}>
-                      <SelectTrigger className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="bg-[#1a1f2e] border-[#2a2f3e]">
-                        <SelectItem value="family" className="text-[#00eaff]">
-                          👨‍👩‍👧‍👦 Family
-                        </SelectItem>
-                        <SelectItem value="friends" className="text-[#00eaff]">
-                          👫 Friends
-                        </SelectItem>
-                        <SelectItem value="coworkers" className="text-[#00eaff]">
-                          💼 Coworkers
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+        {/* Lounge Grid */}
+        <section className="mt-14">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-white">Your Active Lounges</h2>
+            <span className="text-xs font-bold text-[#d8ae55] uppercase tracking-wider">
+              {myLounges.length} Sanctuary Rooms
+            </span>
+          </div>
 
-                  <div>
-                    <label className="text-[#00eaff] text-sm font-medium">Description (Optional)</label>
-                    <Textarea
-                      placeholder="What's this lounge about?"
-                      value={formData.description}
-                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff] placeholder-[#7a7f8e]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[#00eaff] text-sm font-medium">Neon Theme</label>
-                    <Select value={formData.neonTheme} onValueChange={(value: any) => setFormData({ ...formData, neonTheme: value })}>
-                      <SelectTrigger className="bg-[#0b0e14] border-[#2a2f3e] text-[#00eaff]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="bg-[#1a1f2e] border-[#2a2f3e]">
-                        <SelectItem value="magenta" className="text-[#ff00cc]">
-                          Magenta
-                        </SelectItem>
-                        <SelectItem value="cyan" className="text-[#00eaff]">
-                          Cyan
-                        </SelectItem>
-                        <SelectItem value="purple" className="text-[#9d4edd]">
-                          Purple
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <Button
-                    className="w-full btn-neon-magenta"
-                    onClick={handleCreateLounge}
-                    disabled={createMutation.isPending}
+          {myLounges.length === 0 ? (
+            <div className="rounded-2xl border border-[#2a2f3e] bg-[#0d1b2b]/50 p-12 text-center backdrop-blur">
+              <MessageSquare className="mx-auto h-12 w-12 text-[#20cde2] mb-3" />
+              <h3 className="text-xl font-bold text-white">No Lounges Joined Yet</h3>
+              <p className="text-sm text-[#7a7f8e] mt-2 mb-6 max-w-md mx-auto">
+                Create your first sanctuary room or join an invite link to start communicating with your team.
+              </p>
+              <Button onClick={() => setIsCreateOpen(true)} className="btn-neon-cyan text-xs font-bold">
+                <Plus className="mr-2 h-4 w-4" /> Create Your First Lounge
+              </Button>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {myLounges.map((lounge) => {
+                if (!lounge) return null;
+                const unread = unreadByLounge.get(lounge.id) || 0;
+                return (
+                  <div
+                    key={lounge.id}
+                    onClick={() => navigate(`/lounge/${lounge.id}`)}
+                    className="group relative cursor-pointer overflow-hidden rounded-2xl border border-[#2a2f3e] bg-[#0d1b2b]/80 p-6 backdrop-blur transition-all hover:border-[#e853dc]/50 hover:shadow-[0_0_25px_rgba(232,83,220,0.15)]"
                   >
-                    {createMutation.isPending ? "Creating..." : "Create Lounge"}
-                  </Button>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {myLounges.map((lounge) => {
-              if (!lounge) return null;
-              return (
-                <Card
-                  key={lounge.id}
-                  className="bg-[#1a1f2e] border border-[#2a2f3e] p-6 cursor-pointer hover:border-[#ff00cc] transition-colors"
-                  onClick={() => navigate(`/lounges/${lounge.id}`)}
-                  style={{
-                    boxShadow:
-                      lounge.neonTheme === "magenta"
-                        ? "0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)"
-                        : lounge.neonTheme === "cyan"
-                          ? "0 0 10px rgba(0, 234, 255, 0.5), 0 0 20px rgba(0, 234, 255, 0.3)"
-                          : "0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3)",
-                  }}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-[#00eaff] mb-1">{lounge.name}</h3>
-                      <p className="text-sm text-[#7a7f8e] capitalize">{lounge.type} Lounge</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {(unreadByLounge.get(lounge.id) || 0) > 0 && (
-                        <span
-                          className="rounded-full border border-[#ff00cc] bg-[#ff00cc]/20 px-2 py-1 text-xs font-bold text-[#ff00cc]"
-                          aria-label={`${unreadByLounge.get(lounge.id)} unread messages`}
-                        >
-                          {unreadByLounge.get(lounge.id)} new
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#d8ae55]">
+                        {lounge.type || "Sanctuary"}
+                      </span>
+                      {unread > 0 && (
+                        <span className="rounded-full bg-[#e853dc] px-2.5 py-0.5 text-[10px] font-black text-black">
+                          {unread} new
                         </span>
                       )}
-                      <Lock className="w-5 h-5 text-[#ff00cc]" />
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white mb-2">{lounge.name}</h3>
+                    <p className="text-sm text-[#7a7f8e] line-clamp-2 mb-6">
+                      {lounge.description || "Active community lounge in the AO Living World."}
+                    </p>
+
+                    <div className="flex items-center justify-between border-t border-[#2a2f3e] pt-4 text-xs font-semibold text-[#20cde2]">
+                      <span className="flex items-center gap-1">
+                        <Users className="h-3.5 w-3.5" /> Members
+                      </span>
+                      <span className="group-hover:translate-x-1 transition-transform">Enter Room &rarr;</span>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          )}
+        </section>
 
-                  {lounge.description && (
-                    <p className="text-[#7a7f8e] text-sm mb-4 line-clamp-2">{lounge.description}</p>
-                  )}
-
-                  <div className="flex items-center gap-2 text-[#00eaff] text-sm">
-                    <Users className="w-4 h-4" />
-                    <span>{(unreadByLounge.get(lounge.id) || 0) > 0 ? "Open unread messages" : "View & Join"}</span>
-                  </div>
-                </Card>
-              );
-            })}
-          </div>
-        )}
-      </main>
-    </div>
+        {/* Footer */}
+        <footer className="mt-20 border-t border-[#2a2f3e] pt-8 text-center text-xs text-[#7a7f8e]">
+          <p>&copy; 2026 Anom Artsy. Private lounges belong to the AO Creative Studio network.</p>
+        </footer>
+      </div>
+    </main>
   );
 }
