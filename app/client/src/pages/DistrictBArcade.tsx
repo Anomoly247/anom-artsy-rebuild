@@ -168,7 +168,11 @@ export default function DistrictBArcade() {
         </section>
 
         <section className="mt-16">
-          <HandoffArchiveSignals />
+          <HandoffArchiveSignals
+            route="/district-b-arcade"
+            title="Arcade Signals & High Scores"
+            intro="Interactive station records, game loops, and identity grid benchmarks for District B."
+          />
         </section>
 
         {/* Footer */}
