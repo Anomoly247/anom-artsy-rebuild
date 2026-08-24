@@ -1,29 +1,218 @@
-import { ArrowLeft, Brush, Image, Sparkles } from "lucide-react";
-import { useLocation } from "wouter";
+import { ArrowLeft, Eye, Filter, Layers, Palette, Shield, Sparkles, Trophy } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import HandoffArchiveSignals from "@/components/HandoffArchiveSignals";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 
-const gallerySignals = [
-  { title: "Identity Fragments", detail: "AO logo concepts / identity archive", text: "A protected gallery lane for approved marks, symbols, themes, and visual fragments that help the Universe recognize itself.", accent: "#20cde2", icon: Image },
-  { title: "Creator Signal Wall", detail: "Five archived records / creator lane", text: "A place to surface approved creator work, character identity, and the visual language of the worlds already in motion.", accent: "#e853dc", icon: Brush },
-  { title: "Background Relay", detail: "Neon environment / one background source", text: "A living backdrop lane for atmosphere, interface surfaces, and future world-card art that stays inside the AO palette.", accent: "#d8ae55", icon: Sparkles },
+const palette = {
+  base: "#050914",
+  cyan: "#20cde2",
+  magenta: "#e853dc",
+  gold: "#d8ae55",
+};
+
+const rarityTiers = [
+  {
+    name: "Novelty",
+    description: "Single e-idea pieces and preliminary concepts.",
+    color: "text-slate-300",
+    border: "border-slate-600",
+    bg: "bg-slate-900/40",
+  },
+  {
+    name: "Curiosity",
+    description: "Fuller sets and exploratory world artifacts.",
+    color: "text-[#20cde2]",
+    border: "border-[#20cde2]/50",
+    bg: "bg-[#20cde2]/10",
+  },
+  {
+    name: "Relic",
+    description: "Large collections and foundational series identity.",
+    color: "text-[#e853dc]",
+    border: "border-[#e853dc]/50",
+    bg: "bg-[#e853dc]/10",
+  },
+  {
+    name: "Anomoly",
+    description: "Top-tier bespoke art and ultra-rare vault unlocks.",
+    color: "text-[#d8ae55]",
+    border: "border-[#d8ae55]/50",
+    bg: "bg-[#d8ae55]/10",
+  },
+];
+
+const galleryItems = [
+  {
+    id: "cyber-punk-emblem",
+    title: "AO Cyberpunk Emblem",
+    tier: "Anomoly",
+    category: "Identity Piece",
+    image: "/assets/ao-emblem.png",
+    accent: palette.gold,
+    description: "High-contrast electric cyan and hot magenta neon signature overlay.",
+  },
+  {
+    id: "district-b-skyline",
+    title: "District B Skyline",
+    tier: "Relic",
+    category: "World Artifact",
+    image: "/assets/district-b-skyline.png",
+    accent: palette.magenta,
+    description: "Architectural study of the upper grid and moving light corridors.",
+  },
+  {
+    id: "pixel-dot-badge",
+    title: "Pixel & Dot Star Emblem",
+    tier: "Curiosity",
+    category: "Character Badge",
+    image: "/assets/pixel-dot-star.png",
+    accent: palette.cyan,
+    description: "Educational series identity mark featuring the dual star motif.",
+  },
+  {
+    id: "tater-security-patch",
+    title: "K9 Security Insignia",
+    tier: "Curiosity",
+    category: "Vault Badge",
+    image: "/assets/k9-patch.png",
+    accent: palette.cyan,
+    description: "Official perimeter patrol crest assigned to Tater's domain.",
+  },
 ];
 
 export default function NeonGallery() {
   const [, navigate] = useLocation();
+  const [selectedTier, setSelectedTier] = useState<string>("All");
+
+  const filteredItems = selectedTier === "All" 
+    ? galleryItems 
+    : galleryItems.filter((item) => item.tier === selectedTier);
+
   return (
-    <div className="ao-world-page min-h-screen text-white" style={{ backgroundColor: "#050914" }}>
-      <LivingWorldWeb variant="cyan" />
-      <nav className="sticky top-0 z-20 border-b border-[#20cde2]/30 bg-[#050914]/95 px-6 py-4 backdrop-blur"><div className="mx-auto flex max-w-7xl items-center justify-between gap-4"><Button variant="ghost" onClick={() => navigate("/")} className="gap-2 text-[#20cde2] hover:bg-[#20cde2]/10 hover:text-[#20cde2]"><ArrowLeft className="h-4 w-4" aria-hidden="true" />Back to Universe Map</Button><span className="hidden text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55] sm:inline">AO / Neon Gallery</span></div></nav>
-      <main className="mx-auto max-w-7xl px-6 py-10 sm:py-14"><section className="relative overflow-hidden rounded-2xl border border-[#20cde2]/60 bg-[radial-gradient(circle_at_15%_20%,rgba(0,240,255,0.16),transparent_32%),radial-gradient(circle_at_90%_10%,rgba(255,47,208,0.14),transparent_34%),#0f111b] p-7 shadow-[0_0_28px_rgba(0,240,255,0.16)] sm:p-12"><div className="relative max-w-3xl"><p className="mb-4 text-xs font-bold uppercase tracking-[0.35em] text-[#d8ae55]">Community Entry / Art & Identity</p><h1 className="text-4xl font-black tracking-tight text-[#20cde2] sm:text-6xl">// NEON GALLERY //</h1><p className="mt-4 text-xl font-semibold text-[#e853dc] sm:text-2xl">Art, identity, and the marks we leave behind.</p><p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">The Neon Gallery is the handoff’s art-and-identity community: a protected place for approved creator work, visual systems, logos, backgrounds, and identity fragments.</p></div></section><section className="mt-10 grid gap-5 lg:grid-cols-3" aria-label="Neon Gallery signals">{gallerySignals.map((signal) => { const Icon = signal.icon; return <article key={signal.title} className="relative flex min-h-[250px] flex-col rounded-xl border bg-[#0d1b2b] p-6" style={{ borderColor: `${signal.accent}99`, boxShadow: `0 0 22px ${signal.accent}22` }}><div className="flex items-center justify-between"><Icon className="h-8 w-8" style={{ color: signal.accent }} aria-hidden="true" /><span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: signal.accent }}>Approved lane</span></div><div className="mt-8 flex-1"><h2 className="text-2xl font-black" style={{ color: signal.accent }}>{signal.title}</h2><p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#d8ae55]">{signal.detail}</p><p className="mt-4 text-sm leading-6 text-slate-400">{signal.text}</p></div></article>; })}</section>
-          <HandoffArchiveSignals
-            route="/neon-gallery"
-            title="Source-Mapped Identity Archive"
-            intro="Creator identity, AO marks, and visual environment records are now attached to the Neon Gallery route. The gallery remains additive and review-gated while approved local media is prepared."
-            accent="cyan"
-          />
-        </main>
-    </div>
+    <main className="relative min-h-screen overflow-hidden bg-[#050914] text-[#a0a8c0]">
+      <LivingWorldWeb variant="magenta" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:px-10 lg:px-14">
+        {/* Top Navigation */}
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#20cde2] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20cde2]"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Back to AO Homeworld
+          </Link>
+
+          <Button
+            onClick={() => navigate("/store")}
+            className="btn-neon-magenta text-xs"
+          >
+            <Sparkles className="mr-2 h-4 w-4" />
+            Visit Store / Vault
+          </Button>
+        </div>
+
+        {/* Hero Banner */}
+        <section className="mt-12 max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#e853dc]/40 bg-[#e853dc]/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#e853dc]">
+            <Palette className="h-3.5 w-3.5" />
+            AO Creative Studio Archive
+          </div>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Neon <span className="text-[#e853dc]">Gallery</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#7a7f8e]">
+            Digital art, character identity pieces, and world artifacts across four distinct rarity tiers inside the AO studio.
+          </p>
+        </section>
+
+        {/* Rarity Tiers Breakdown */}
+        <section className="mt-14">
+          <h2 className="text-2xl font-bold text-white mb-6">Rarity Tiers</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {rarityTiers.map((tier) => (
+              <div
+                key={tier.name}
+                className={`rounded-xl border p-5 backdrop-blur ${tier.border} ${tier.bg}`}
+              >
+                <h3 className={`text-lg font-extrabold ${tier.color}`}>{tier.name}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-[#a0a8c0]">{tier.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Filter Controls */}
+        <section className="mt-16">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+            <div className="flex items-center gap-2 text-white font-bold text-xl">
+              <Filter className="h-5 w-5 text-[#20cde2]" />
+              <h3>Artwork Archive</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {["All", "Novelty", "Curiosity", "Relic", "Anomoly"].map((tier) => (
+                <button
+                  key={tier}
+                  onClick={() => setSelectedTier(tier)}
+                  className={`rounded-full px-4 py-1.5 text-xs font-bold transition ${
+                    selectedTier === tier
+                      ? "bg-[#20cde2] text-[#050914]"
+                      : "border border-[#2a2f3e] bg-[#0d1b2b] text-[#a0a8c0] hover:border-[#20cde2]"
+                  }`}
+                >
+                  {tier}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Gallery Items Grid */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+            {filteredItems.map((item) => (
+              <div
+                key={item.id}
+                className="group relative overflow-hidden rounded-2xl border border-[#2a2f3e] bg-[#0d1b2b]/80 p-6 backdrop-blur transition-all duration-300 hover:border-[#e853dc]/50 hover:shadow-[0_0_30px_rgba(232,83,220,0.15)]"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#7a7f8e]">
+                    {item.category}
+                  </span>
+                  <span
+                    className="rounded-full px-3 py-0.5 text-xs font-bold uppercase"
+                    style={{ backgroundColor: `${item.accent}20`, color: item.accent, border: `1px solid ${item.accent}50` }}
+                  >
+                    {item.tier}
+                  </span>
+                </div>
+
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-[#050914] border border-[#2a2f3e] flex items-center justify-center mb-4">
+                  <div className="text-center p-4">
+                    <Sparkles className="mx-auto h-8 w-8 mb-2" style={{ color: item.accent }} />
+                    <span className="text-xs font-semibold text-slate-400">[ Visual Preview: {item.title} ]</span>
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-sm text-[#a0a8c0] mb-6">{item.description}</p>
+
+                <Button
+                  onClick={() => navigate("/store")}
+                  className="w-full btn-neon-magenta gap-2 text-xs font-bold"
+                >
+                  <Eye className="h-4 w-4" />
+                  View Vault Specs
+                </Button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-20 border-t border-[#2a2f3e] pt-8 text-center text-xs text-[#7a7f8e]">
+          <p>&copy; 2026 Anom Artsy. All digital assets belong to AO Creative Studio.</p>
+        </footer>
+      </div>
+    </main>
   );
 }
