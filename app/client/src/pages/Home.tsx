@@ -128,27 +128,32 @@ export default function Home() {
   if (!isAuthenticated) {
     return (
       <div className="ao-world-page min-h-screen bg-[#050914] text-[#20cde2] flex flex-col">
-      <LivingWorldWeb variant="cyan" />
-      {/* Immersive Universe Header */}
-      <nav className="sticky top-0 z-40 border-b border-[#20cde2]/40 bg-[#050914]/95 px-6 py-4 backdrop-blur">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold neon-text-magenta flex items-center gap-2">
-            <span>🪐</span> AO Universe & Sanctuary
+        <LivingWorldWeb variant="cyan" />
+        
+        {/* Immersive Universe Header */}
+        <nav className="sticky top-0 z-40 border-b border-[#20cde2]/40 bg-[#050914]/95 px-6 py-4 backdrop-blur">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="text-2xl font-bold neon-text-magenta flex items-center gap-2">
+              <span>🪐</span> AO Universe & Sanctuary
+            </div>
+            <div className="flex items-center gap-4">
+              <Button onClick={() => navigate("/games")} className="btn-neon-cyan text-xs">District B Arcade</Button>
+              <Button onClick={() => navigate("/anoms-corner")} className="btn-neon-magenta text-xs">Anom's Corner</Button>
+              <Button onClick={startGoogleLogin} className="btn-neon-magenta text-sm font-bold">Sign In</Button>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Button onClick={() => navigate("/games")} className="btn-neon-cyan text-xs">District B Arcade</Button>
-            <Button onClick={() => navigate("/anoms-corner")} className="btn-neon-magenta text-xs">Anom's Corner</Button>
-            <Button onClick={startGoogleLogin} className="btn-neon-magenta text-sm font-bold">Sign In</Button>
-          </div>
+        </nav>
+
+        {/* 1. Interactive Living Node Map rendered at top */}
+        <div className="w-full relative min-h-[600px] py-6 z-10">
+          <UniverseMap shopUrl={linkConfig.store} />
         </div>
-      </nav>
 
-      <PublicSiteContent config={linkConfig} />
+        {/* 2. Public Site Banners & Partner Links */}
+        <PublicSiteContent config={linkConfig} />
 
-      <UniverseMap shopUrl={linkConfig.store} />
-
-      {/* Hero Section */}
-      <section className="flex-1 px-6 py-10">
+        {/* 3. Identity Hero Section */}
+        <section className="flex-1 px-6 py-10 z-10">
           <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="mb-6 inline-block bg-[#e853dc]/20 border border-[#e853dc] rounded-lg px-4 py-2">
@@ -177,7 +182,7 @@ export default function Home() {
         </section>
 
         {/* Mission Section */}
-        <section className="bg-gradient-to-r from-[#e853dc]/10 to-[#20cde2]/10 border-t border-[#e853dc] px-6 py-16">
+        <section className="bg-gradient-to-r from-[#e853dc]/10 to-[#20cde2]/10 border-t border-[#e853dc] px-6 py-16 z-10">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">
               <span className="neon-text-magenta">Social Good</span>
@@ -196,13 +201,12 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="bg-[#0d1b2b] border-t border-[#2a2f3e] px-6 py-20">
+        <section className="bg-[#0d1b2b] border-t border-[#2a2f3e] px-6 py-20 z-10">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-center mb-16 neon-text-magenta">
               What Awaits You
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Feature 1 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <Zap className="w-8 h-8 text-[#e853dc] mb-4" />
                 <h3 className="text-xl font-bold text-[#20cde2] mb-2">Anom Coin Economy</h3>
@@ -211,7 +215,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Feature 2 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <Users className="w-8 h-8 text-[#20cde2] mb-4" />
                 <h3 className="text-xl font-bold text-[#e853dc] mb-2">Private Lounges</h3>
@@ -220,7 +223,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Feature 3 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <Gamepad2 className="w-8 h-8 text-[#e853dc] mb-4" />
                 <h3 className="text-xl font-bold text-[#20cde2] mb-2">Mini-Games</h3>
@@ -229,7 +231,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Feature 4 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <Heart className="w-8 h-8 text-[#20cde2] mb-4" />
                 <h3 className="text-xl font-bold text-[#e853dc] mb-2">Anom's Corner</h3>
@@ -238,7 +239,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Feature 5 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <Sparkles className="w-8 h-8 text-[#e853dc] mb-4" />
                 <h3 className="text-xl font-bold text-[#20cde2] mb-2">Profile Customization</h3>
@@ -247,7 +247,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Feature 6 */}
               <div className="bg-[#0d1b2b] border border-[#2a2f3e] rounded-lg p-4" style={{boxShadow: '0 0 10px rgba(255, 0, 204, 0.5), 0 0 20px rgba(255, 0, 204, 0.3)'}}>
                 <ShoppingBag className="w-8 h-8 text-[#20cde2] mb-4" />
                 <h3 className="text-xl font-bold text-[#e853dc] mb-2">Custom Merch</h3>
@@ -260,7 +259,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="px-6 py-20">
+        <section className="px-6 py-20 z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6 text-[#20cde2]">
               Ready to join the Anom Universe?
@@ -272,7 +271,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-[#2a2f3e] px-6 py-8 text-center text-[#7a7f8e]">
+        <footer className="border-t border-[#2a2f3e] px-6 py-8 text-center text-[#7a7f8e] z-10">
           <p>&copy; 2026 Anom Artsy. Identity, Amplified.</p>
         </footer>
       </div>
@@ -302,7 +301,7 @@ export default function Home() {
       try {
         localStorage.removeItem(BACKGROUND_STORAGE_KEY);
       } catch {
-        // A restricted localStorage bucket should not block the preview.
+        // Restricted localStorage bucket fallback
       }
       setShowBgMenu(false);
       const uploadRevision = backgroundRevisionRef.current;
@@ -342,7 +341,7 @@ export default function Home() {
     try {
       localStorage.removeItem(BACKGROUND_STORAGE_KEY);
     } catch {
-      // A restricted localStorage bucket should not block selection.
+      // Restricted localStorage bucket fallback
     }
     void enqueueBackgroundPersistence(() => setActiveBackgroundId(id));
     toast.success(`${selected.name} is now active.`);
@@ -408,7 +407,7 @@ export default function Home() {
     setShowBgMenu(false);
   };
 
-  // Authenticated Dashboard
+  // Authenticated Dashboard View
   return (
     <div 
       className="ao-world-page min-h-screen bg-[#050914] text-[#20cde2]"
@@ -447,7 +446,8 @@ export default function Home() {
         onOpacityChange={setBackgroundOpacity}
         onBlurChange={setBackgroundBlur}
       />
-      {/* Navigation */}
+
+      {/* Navigation Bar */}
       <nav className="sticky top-0 z-40 border-b border-[#2a2f3e] bg-[#050914]/95 px-3 py-3 backdrop-blur sm:px-6 sm:py-4">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="shrink-0 text-xl font-bold neon-text-magenta sm:text-2xl">Anom Artsy</div>
@@ -539,10 +539,9 @@ export default function Home() {
 
       <PublicSiteContent config={linkConfig} />
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      {/* Main Authenticated Dashboard */}
+      <main className="max-w-7xl mx-auto px-6 py-12 z-10 relative">
         <div className="grid md:grid-cols-4 gap-6 mb-12">
-          {/* Glow Points */}
           <div className="relative rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.35), 0 0 28px rgba(0, 255, 255, 0.14)'}}>
             <GlowParticles triggerKey={user?.id || 1} type="earn" />
             <div className="flex items-center justify-between">
@@ -554,7 +553,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Level / progression */}
           <div className="rounded-lg border border-[#d8ae55]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.32), 0 0 28px rgba(255, 215, 0, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
@@ -568,7 +566,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Achievements */}
           <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
@@ -579,7 +576,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Lounges */}
           <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <div className="flex items-center justify-between">
               <div>
@@ -591,7 +587,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions & Pinned Trophy Room */}
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-lg border border-[#20cde2]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(0, 255, 255, 0.32), 0 0 28px rgba(0, 255, 255, 0.12)'}}>
             <h3 className="text-xl font-bold text-[#20cde2] mb-4">Quick Actions</h3>
@@ -631,7 +627,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Trophy Room Pinned Badges */}
             <div className="rounded-lg border border-[#d8ae55]/70 bg-[#0d1b2b] p-4" style={{boxShadow: '0 0 14px rgba(255, 215, 0, 0.3), 0 0 28px rgba(255, 215, 0, 0.1)'}}>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xl font-bold text-[#d8ae55] flex items-center gap-2">
@@ -652,7 +647,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Homepage Integration */}
         <div className="mt-12">
           <HomepageIntegration />
         </div>
@@ -660,7 +654,6 @@ export default function Home() {
     </div>
   );
 }
-
 
 function PublicSiteContent({ config }: { config: LinkConfig }) {
   const socialEntries = [
