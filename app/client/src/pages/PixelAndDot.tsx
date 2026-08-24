@@ -1,5 +1,5 @@
-import { ArrowLeft, BookOpen, Cat, Heart, Lightbulb, Shield, Sparkles, Star } from "lucide-react";
-import { useLocation } from "wouter";
+import { ArrowLeft, BookOpen, Cat, Heart, Lightbulb, Play, Shield, Sparkles, Star } from "lucide-react";
+import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 
@@ -14,8 +14,9 @@ const characterCards = [
   {
     name: "Pixel",
     role: "Older Brother / Gentle Guide",
-    identity: "Light blue hoodie with an A logo",
+    identity: "Light blue hoodie with an AO logo",
     detail: "Blue star shoes, a curious mind, and a steady instinct to make room for his little sister.",
+    image: "/assets/pixel-avatar.png",
     icon: Shield,
     accent: palette.cyan,
     symbol: "P",
@@ -25,9 +26,29 @@ const characterCards = [
     role: "Baby Sister / Bright Spark",
     identity: "Fuzzy pink hooded blanket with stars",
     detail: "Pink star shoes, wide-eyed wonder, and a tiny brave heart that turns every moment into a story.",
+    image: "/assets/dot-avatar.png",
     icon: Star,
     accent: palette.magenta,
     symbol: "D",
+  },
+];
+
+const episodes = [
+  {
+    id: "grandma-moves-in",
+    title: "Grandma Moves In",
+    series: "Pixel & Dot - Season 1",
+    description: "When Grandma joins the household, Pixel and Dot learn about sharing space, welcoming family, and finding extra love in everyday routines.",
+    youtubeId: "dQw4w9WgXcQ", // Replace with your YouTube Video ID or short link
+    badge: "Featured Episode",
+  },
+  {
+    id: "looking-closer",
+    title: "Look Closer",
+    series: "Pixel & Dot Shorts",
+    description: "Pixel shows Dot how the smallest details in nature and art can unlock huge imaginative adventures.",
+    youtubeId: "dQw4w9WgXcQ",
+    badge: "Short",
   },
 ];
 
@@ -40,157 +61,182 @@ const archiveSignals = [
     accent: palette.gold,
   },
   {
-    label: "02 / Learning",
-    title: "Ask Together",
-    text: "Every question is welcome here. Their story world turns curiosity, care, and discovery into shared adventures.",
-    icon: Lightbulb,
-    accent: palette.cyan,
-  },
-  {
-    label: "03 / Connection",
-    title: "Stay Close",
-    text: "A cozy sibling protector story where imagination is safer, brighter, and more joyful when it is shared.",
+    label: "02 / Heart",
+    title: "Kindness First",
+    text: "Gentle lessons about empathy, listening, and standing up for family when things feel unfamiliar.",
     icon: Heart,
     accent: palette.magenta,
   },
-];
-
-const storyLibrary = [
-  "The Star-Shoe Trail",
-  "Dot's First Big Question",
-  "Pixel's Pocket Guide to Wonder",
-  "The Blanket Fort Broadcast",
+  {
+    label: "03 / Spark",
+    title: "Creative Solutions",
+    text: "Turning household moments into bright, colorful discoveries with curiosity and team thinking.",
+    icon: Lightbulb,
+    accent: palette.cyan,
+  },
 ];
 
 export default function PixelAndDot() {
   const [, navigate] = useLocation();
 
   return (
-    <div className="ao-world-page min-h-screen text-white" style={{ backgroundColor: palette.base }}>
-      <LivingWorldWeb variant="cyan" />
-      <nav className="sticky top-0 z-20 border-b border-[#20cde2]/30 bg-[#050914]/95 px-6 py-4 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="gap-2 text-[#20cde2] hover:bg-[#20cde2]/10 hover:text-[#20cde2]"
+    <main className="relative min-h-screen overflow-hidden bg-[#050914] text-[#a0a8c0]">
+      <LivingWorldWeb variant="magenta" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:px-10 lg:px-14">
+        {/* Navigation Top Bar */}
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#20cde2] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20cde2]"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Back to Universe Map
+            Back to AO Homeworld
+          </Link>
+
+          <Button
+            onClick={() => navigate("/anoms-corner")}
+            className="btn-neon-magenta text-xs"
+          >
+            <Cat className="mr-2 h-4 w-4" />
+            Visit Anom's Corner
           </Button>
-          <span className="hidden text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55] sm:inline">
-            AO / Storybook Library
-          </span>
         </div>
-      </nav>
 
-      <main className="mx-auto max-w-7xl px-6 py-10 sm:py-14">
-        <section className="relative overflow-hidden rounded-2xl border border-[#20cde2]/60 bg-[radial-gradient(circle_at_15%_20%,rgba(0,240,255,0.14),transparent_32%),radial-gradient(circle_at_90%_10%,rgba(255,47,208,0.14),transparent_34%),#0f111b] p-7 shadow-[0_0_28px_rgba(0,240,255,0.16)] sm:p-12">
-          <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full border border-[#e853dc]/25" />
-          <div className="pointer-events-none absolute -right-10 -top-14 h-44 w-44 rounded-full border border-[#d8ae55]/20" />
-          <div className="relative max-w-3xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.35em] text-[#d8ae55]">World Entry / Story Archive 01</p>
-            <h1 className="text-4xl font-black tracking-tight text-[#20cde2] drop-shadow-[0_0_12px_rgba(0,240,255,0.35)] sm:text-6xl">
-              // PIXEL &amp; DOT //
-            </h1>
-            <p className="mt-4 text-xl font-semibold text-[#e853dc] sm:text-2xl">Stories, Wonder &amp; Imagination.</p>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-              The permanent story world for imagination, learning, and connection—where a cozy sibling bond makes every ordinary moment feel like an expedition.
-            </p>
-            <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-[#d8ae55]/60 bg-[#d8ae55]/10 px-5 py-3 text-sm font-bold text-[#d8ae55] shadow-[0_0_18px_rgba(255,210,63,0.16)]">
-              <BookOpen className="h-4 w-4" aria-hidden="true" />
-              A family-safe archive connected to Anom's Corner.
-            </div>
+        {/* Hero Banner */}
+        <section className="mt-12 max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#e853dc]/40 bg-[#e853dc]/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#e853dc]">
+            <BookOpen className="h-3.5 w-3.5" />
+            Educational & Family Series
           </div>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Pixel & <span className="text-[#e853dc]">Dot</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#7a7f8e]">
+            A curious light sprite and a sleepy, grounded force. Gentle stories about sharing, empathy, and figuring people out inside the AO Living World.
+          </p>
         </section>
 
-        <section className="mt-10" aria-labelledby="character-roster-title">
-          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Official Story Card / Resident Siblings</p>
-              <h2 id="character-roster-title" className="text-3xl font-bold text-[#20cde2]">The Cozy Core</h2>
-            </div>
-            <p className="max-w-xl text-sm leading-6 text-slate-400">Pixel and Dot are the heart of a storybook world built for gentle discovery, safe wonder, and staying connected.</p>
-          </div>
+        {/* Character Showcase Grid */}
+        <section className="mt-14 grid gap-8 md:grid-cols-2">
+          {characterCards.map((card) => {
+            const CardIcon = card.icon;
+            return (
+              <div
+                key={card.name}
+                className="group relative overflow-hidden rounded-2xl border border-[#2a2f3e] bg-[#0d1b2b]/80 p-8 backdrop-blur transition-all duration-300 hover:border-[#20cde2]/50 hover:shadow-[0_0_30px_rgba(32,205,226,0.15)]"
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-2xl font-black text-slate-950 shadow-md"
+                    style={{ backgroundColor: card.accent }}
+                  >
+                    {card.symbol}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white">{card.name}</h2>
+                    <p className="text-sm font-semibold" style={{ color: card.accent }}>
+                      {card.role}
+                    </p>
+                  </div>
+                </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {characterCards.map((character) => {
-              const Icon = character.icon;
-              return (
-                <article
-                  key={character.name}
-                  className="relative overflow-hidden rounded-xl border bg-[#102238] p-6 transition-transform duration-200 hover:-translate-y-1"
-                  style={{ borderColor: `${character.accent}99`, boxShadow: `0 0 22px ${character.accent}26` }}
-                >
-                  <div className="absolute -right-8 -top-8 flex h-28 w-28 items-center justify-center rounded-full border" style={{ borderColor: `${character.accent}44`, color: `${character.accent}55` }}>
-                    <span className="text-5xl font-black">{character.symbol}</span>
-                  </div>
-                  <div className="relative flex items-start justify-between gap-5">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#050914]" style={{ color: character.accent }}>
-                      <Icon className="h-8 w-8" aria-hidden="true" />
-                    </div>
-                    <span className="rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]" style={{ borderColor: `${character.accent}99`, color: character.accent }}>
-                      Story resident
-                    </span>
-                  </div>
-                  <h3 className="relative mt-6 text-3xl font-black" style={{ color: character.accent }}>{character.name}</h3>
-                  <p className="mt-2 text-sm font-bold uppercase tracking-[0.2em] text-[#d8ae55]">{character.role}</p>
-                  <p className="mt-5 text-lg font-semibold text-white">{character.identity}</p>
-                  <p className="mt-2 max-w-md text-sm leading-6 text-slate-400">{character.detail}</p>
-                </article>
-              );
-            })}
-          </div>
+                <div className="mt-6 space-y-3 text-sm text-[#a0a8c0]">
+                  <p className="flex items-center gap-2 font-medium text-slate-200">
+                    <CardIcon className="h-4 w-4" style={{ color: card.accent }} />
+                    {card.identity}
+                  </p>
+                  <p className="leading-relaxed">{card.detail}</p>
+                </div>
+              </div>
+            );
+          })}
         </section>
 
-        <section className="mt-12" aria-labelledby="archive-signals-title">
-          <div className="mb-6 flex items-end justify-between gap-4">
+        {/* Episode Archive & Video Shorts */}
+        <section className="mt-16">
+          <div className="flex items-center justify-between mb-8">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Family-Safe Narrative Archive</p>
-              <h2 id="archive-signals-title" className="text-3xl font-bold text-[#e853dc]">Story Signals</h2>
+              <h2 className="text-3xl font-extrabold text-white">Watch Shorts & Episodes</h2>
+              <p className="mt-1 text-sm text-[#7a7f8e]">Animated stories and lessons from the series.</p>
             </div>
-            <Sparkles className="hidden h-8 w-8 text-[#d8ae55] sm:block" aria-hidden="true" />
+            <Button onClick={() => navigate("/youtube-manager")} className="btn-neon-cyan text-xs">
+              <Play className="mr-2 h-4 w-4" />
+              All Broadcasts
+            </Button>
           </div>
-          <div className="grid gap-5 lg:grid-cols-3">
-            {archiveSignals.map((signal) => {
-              const Icon = signal.icon;
-              return (
-                <article key={signal.label} className="rounded-xl border border-[#20405c] bg-[#0d1b2b] p-5 shadow-[0_0_18px_rgba(0,0,0,0.24)]">
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: signal.accent }}>{signal.label}</span>
-                    <Icon className="h-5 w-5" style={{ color: signal.accent }} aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{signal.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-400">{signal.text}</p>
-                </article>
-              );
-            })}
-          </div>
-        </section>
 
-        <section className="mt-12 rounded-xl border border-[#d8ae55]/50 bg-[#d8ae55]/5 p-6 shadow-[0_0_22px_rgba(255,210,63,0.1)] sm:p-8" aria-labelledby="storybook-library-title">
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Anom's Corner Connection</p>
-              <h2 id="storybook-library-title" className="mt-3 text-2xl font-black text-white sm:text-3xl">The Storybook Library</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">This permanent archive is the story-world companion to Anom's Corner: a warm shelf for family-safe tales, learning moments, and the little connections that stay with us.</p>
-            </div>
-            <BookOpen className="h-10 w-10 shrink-0 text-[#d8ae55]" aria-hidden="true" />
-          </div>
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
-            {storyLibrary.map((story, index) => (
-              <div key={story} className="flex items-center gap-3 rounded-lg border border-[#20405c] bg-[#050914]/70 px-4 py-3">
-                <span className="text-xs font-bold text-[#e853dc]">0{index + 1}</span>
-                <span className="text-sm font-semibold text-[#20cde2]">{story}</span>
+          <div className="grid gap-6 md:grid-cols-2">
+            {episodes.map((ep) => (
+              <div
+                key={ep.id}
+                className="rounded-xl border border-[#2a2f3e] bg-[#0d1b2b] p-6 backdrop-blur transition-all hover:border-[#e853dc]/40"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#d8ae55]">
+                    {ep.series}
+                  </span>
+                  <span className="rounded-full bg-[#e853dc]/20 px-2.5 py-0.5 text-[10px] font-semibold text-[#e853dc]">
+                    {ep.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{ep.title}</h3>
+                <p className="text-sm text-[#7a7f8e] mb-4">{ep.description}</p>
+                <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black/60 border border-[#2a2f3e] flex items-center justify-center">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src={`https://www.youtube.com/embed/${ep.youtubeId}`}
+                    title={ep.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             ))}
           </div>
-          <Button variant="outline" className="mt-7 border-[#e853dc]/70 bg-transparent font-bold text-[#e853dc] hover:bg-[#e853dc]/10 hover:text-[#e853dc]" onClick={() => navigate("/anoms-corner")}>
-            <Cat className="mr-2 h-4 w-4" aria-hidden="true" />
-            Visit Anom's Corner
-          </Button>
         </section>
-      </main>
-    </div>
+
+        {/* Core Values / Archive Signals */}
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold text-white">Series Values</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+            {archiveSignals.map((signal) => {
+              const SignalIcon = signal.icon;
+              return (
+                <div
+                  key={signal.title}
+                  className="rounded-xl border border-[#2a2f3e] bg-[#050914]/60 p-6 backdrop-blur"
+                >
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#7a7f8e]">
+                    {signal.label}
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <SignalIcon className="h-5 w-5" style={{ color: signal.accent }} />
+                    <h3 className="text-lg font-bold text-white">{signal.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm text-[#a0a8c0]">{signal.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="mt-16 rounded-2xl border border-[#e853dc]/30 bg-gradient-to-r from-[#e853dc]/10 via-[#050914] to-[#20cde2]/10 p-8 text-center backdrop-blur">
+          <h3 className="text-2xl font-bold text-white">Want to explore more family activities?</h3>
+          <p className="mt-2 text-sm text-[#7a7f8e]">Head over to Anom's Corner for interactive games, coloring, and stories.</p>
+          <div className="mt-6 flex justify-center gap-4">
+            <Button onClick={() => navigate("/anoms-corner")} className="btn-neon-magenta px-6 py-3 font-bold">
+              Open Anom's Corner
+            </Button>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-20 border-t border-[#2a2f3e] pt-8 text-center text-xs text-[#7a7f8e]">
+          <p>&copy; 2026 Anom Artsy. Pixel & Dot is part of the AO Creative Studio.</p>
+        </footer>
+      </div>
+    </main>
   );
 }
