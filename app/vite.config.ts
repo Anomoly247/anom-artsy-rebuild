@@ -23,7 +23,7 @@ export default defineConfig({
           "vendor-ui": [
             "@radix-ui/react-dialog",
             "@radix-ui/react-tabs",
-            "@radix-ui/react-[#050914]ect",
+            "@radix-ui/react-select",
             "@radix-ui/react-slot",
           ],
         },
