@@ -3,14 +3,15 @@ import { Zap, Heart, Sparkles, ShoppingBag, Trophy, ArrowRight } from "lucide-re
 import { useLocation, Link } from "wouter";
 import { startGoogleLogin } from "@/authEntryRoutes";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { useState } from "react";
 import UniverseMap from "@/components/UniverseMap";
 import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import SignUpConnectors from "@/components/SignUpConnectors";
+import { useOwnerView } from "@/contexts/OwnerViewContext";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
   const [, navigate] = useLocation();
+  const { linkConfig } = useOwnerView();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050914] text-[#a0a8c0]">
@@ -69,7 +70,7 @@ export default function Home() {
           </div>
 
           <div className="relative min-h-[500px] w-full rounded-2xl border border-[#2a2f3e] bg-[#050914] overflow-hidden">
-            <UniverseMap />
+            <UniverseMap shopUrl={linkConfig.store} />
           </div>
         </section>
 
