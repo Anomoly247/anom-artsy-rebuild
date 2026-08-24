@@ -1,4 +1,4 @@
-import { ArrowLeft, BookOpen, Compass, Gamepad2, Grid3X3, Radar, Star, Trophy, Zap } from "lucide-react";
+import { ArrowLeft, BookOpen, Compass, Gamepad2, Grid3X3, Radar, Star, Trophy, Zap, Play } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import HandoffArchiveSignals from "@/components/HandoffArchiveSignals";
@@ -10,6 +10,36 @@ const palette = {
   magenta: "#e853dc",
   gold: "#d8ae55",
 };
+
+const arcadeGames = [
+  {
+    id: "trivia",
+    title: "AO Universe Trivia",
+    category: "Knowledge / Speed",
+    description: "Test your knowledge on District B lore, Pixel & Dot stories, and AO history to earn Glow Points.",
+    reward: "+50 GP / Win",
+    icon: Zap,
+    accent: palette.cyan,
+  },
+  {
+    id: "memory",
+    title: "Identity Grid Memory",
+    category: "Pattern / Focus",
+    description: "Match high-contrast neon badges and unlock hidden cosmetic previews for your profile.",
+    reward: "+75 GP / Win",
+    icon: Grid3X3,
+    accent: palette.magenta,
+  },
+  {
+    id: "snack-vault",
+    title: "Snack Vault Rush",
+    category: "Action / Reaction",
+    description: "Help Tater defend the vault against incoming snack heists before time runs out.",
+    reward: "+100 GP / Win",
+    icon: Trophy,
+    accent: palette.gold,
+  },
+];
 
 const stations = [
   {
@@ -39,77 +69,113 @@ export default function DistrictBArcade() {
   const [, navigate] = useLocation();
 
   return (
-    <div className="ao-world-page min-h-screen text-white" style={{ backgroundColor: palette.base }}>
-      <LivingWorldWeb variant="gold" />
-      <nav className="fixed inset-x-0 top-0 z-30 border-b border-[#20cde2]/30 bg-[#050914]/95 px-4 py-4 backdrop-blur sm:px-6">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <Button variant="ghost" onClick={() => navigate("/")} className="gap-2 text-[#20cde2] hover:bg-[#20cde2]/10 hover:text-[#20cde2]">
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Back to Universe Map
-          </Button>
-          <span className="hidden text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55] sm:inline">AO / District B Arcade</span>
-        </div>
-      </nav>
+    <main className="relative min-h-screen overflow-hidden bg-[#050914] text-[#a0a8c0]">
+      <LivingWorldWeb variant="cyan" />
 
-      <main className="mx-auto max-w-7xl px-6 pb-16 pt-28 sm:pt-32">
-        <section className="relative overflow-hidden rounded-2xl border border-[#20cde2]/60 bg-[radial-gradient(circle_at_12%_18%,rgba(0,240,255,0.16),transparent_30%),radial-gradient(circle_at_88%_8%,rgba(255,47,208,0.18),transparent_34%),#0f111b] p-7 shadow-[0_0_30px_rgba(0,240,255,0.18)] sm:p-12">
-          <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full border border-[#e853dc]/30" />
-          <div className="pointer-events-none absolute -bottom-24 -left-16 h-48 w-48 rounded-full border border-[#d8ae55]/20" />
-          <div className="relative max-w-4xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.35em] text-[#d8ae55]">World Entry / Arcade District 01</p>
-            <h1 className="text-4xl font-black tracking-tight text-[#20cde2] drop-shadow-[0_0_12px_rgba(0,240,255,0.35)] sm:text-6xl">// DISTRICT B ARCADE //</h1>
-            <p className="mt-4 text-xl font-semibold text-[#e853dc] sm:text-2xl">Play Fast. Think Bright. Leave a Signal.</p>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">A living arcade world where every station turns curiosity into a challenge. District B is the high-energy play loop of the AO universe: a place to test memory, explore patterns, and celebrate the next high score together.</p>
-            <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-[#d8ae55]/60 bg-[#d8ae55]/10 px-5 py-3 text-sm font-bold text-[#d8ae55] shadow-[0_0_18px_rgba(255,210,63,0.16)]"><Zap className="h-4 w-4" aria-hidden="true" />Arcade systems online / three stations ready.</div>
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-8 sm:px-10 lg:px-14">
+        {/* Navigation Top Bar */}
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#20cde2] transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20cde2]"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Back to AO Homeworld
+          </Link>
+
+          <Button
+            onClick={() => navigate("/achievements")}
+            className="btn-neon-gold text-xs"
+          >
+            <Trophy className="mr-2 h-4 w-4" />
+            Trophy Room
+          </Button>
+        </div>
+
+        {/* Hero Section */}
+        <section className="mt-12 max-w-4xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#20cde2]/40 bg-[#20cde2]/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#20cde2]">
+            <Gamepad2 className="h-3.5 w-3.5" />
+            District B Entertainment Sector
           </div>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            District B <span className="text-[#e853dc]">Arcade</span>
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-[#7a7f8e]">
+            High-contrast mini-games, leaderboard challenges, and Glow Point reward vaults. Play, earn, and customize your identity.
+          </p>
         </section>
 
-        <section className="mt-10 rounded-2xl border border-[#e853dc]/50 bg-[#050914]/70 p-6 shadow-[0_0_24px_rgba(255,47,208,0.12)] sm:p-8" aria-labelledby="district-b-stations-title">
-          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Living World Stations</p><h2 id="district-b-stations-title" className="mt-2 text-3xl font-black text-[#e853dc]">Choose Your Challenge</h2></div><p className="max-w-xl text-sm leading-6 text-slate-400">Every station is a different kind of focus. Enter the Games Hub to play, earn points, and keep your personal signal moving.</p></div>
-          <div className="grid gap-5 lg:grid-cols-3">
-            {stations.map((station) => {
-              const Icon = station.icon;
+        {/* Playable Arcade Games */}
+        <section className="mt-14">
+          <h2 className="text-3xl font-extrabold text-white mb-6">Play & Earn</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {arcadeGames.map((game) => {
+              const GameIcon = game.icon;
               return (
-                <Link key={station.title} href="/games" className="group relative flex min-h-[260px] flex-col overflow-hidden rounded-xl border bg-[#102238] p-6 transition-all duration-200 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8ae55]" style={{ borderColor: `${station.accent}99`, boxShadow: `0 0 22px ${station.accent}26` }}>
-                  <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full border transition-transform duration-300 group-hover:scale-110" style={{ borderColor: `${station.accent}44` }} />
-                  <div className="relative flex items-start justify-between gap-4"><div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[#050914]" style={{ color: station.accent }}><Icon className="h-8 w-8" aria-hidden="true" /></div><span className="rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ borderColor: `${station.accent}99`, color: station.accent }}>Enter station</span></div>
-                  <div className="relative mt-6 flex-1"><h3 className="text-2xl font-black" style={{ color: station.accent }}>{station.title}</h3><p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-[#d8ae55]">{station.detail}</p><p className="mt-4 text-sm leading-6 text-slate-400">{station.description}</p></div>
-                  <p className="relative mt-5 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Open Games Hub / play now</p>
-                </Link>
+                <div
+                  key={game.id}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#2a2f3e] bg-[#0d1b2b]/80 p-6 backdrop-blur transition-all hover:border-[#20cde2]/50 hover:shadow-[0_0_25px_rgba(32,205,226,0.15)]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#050914]" style={{ color: game.accent }}>
+                        <GameIcon className="h-6 w-6" />
+                      </div>
+                      <span className="rounded-full bg-[#d8ae55]/20 px-3 py-1 text-xs font-bold text-[#d8ae55]">
+                        {game.reward}
+                      </span>
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#7a7f8e]">{game.category}</span>
+                    <h3 className="text-xl font-bold text-white mt-1 mb-2">{game.title}</h3>
+                    <p className="text-sm text-[#a0a8c0] mb-6">{game.description}</p>
+                  </div>
+
+                  <Button
+                    onClick={() => navigate("/games")}
+                    className="w-full btn-neon-cyan gap-2 text-sm font-bold"
+                  >
+                    <Play className="h-4 w-4" />
+                    Launch Game
+                  </Button>
+                </div>
               );
             })}
           </div>
         </section>
 
-        <section className="mt-10 rounded-2xl border border-[#20cde2]/40 bg-[#050914]/70 p-6 shadow-[0_0_24px_rgba(0,240,255,0.1)] sm:p-8" aria-labelledby="arcade-handoff-title">
-          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Handoff Content / Financial District</p><h2 id="arcade-handoff-title" className="text-3xl font-black text-[#20cde2]">Archive Signals in the Arcade</h2></div><p className="max-w-xl text-sm leading-6 text-slate-400">Eleven handoff records extend the existing Games Hub with event history, game-build references, and play-loop context.</p></div>
-          <div className="grid gap-4 md:grid-cols-3">{[
-            ["Coin Hunt", "Economy loop / trailer reference", palette.cyan],
-            ["Mood Memes", "Game-build archive / identity lane", palette.magenta],
-            ["Fubar event history", "Authored source record / review before AO adaptation", palette.gold],
-          ].map(([title, detail, accent]) => <article key={title} className="rounded-xl border border-[#20405c] bg-[#0d1b2b] p-5" style={{ boxShadow: `0 0 18px ${accent}18` }}><p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: accent }}>{detail}</p><h3 className="mt-4 text-xl font-bold text-white">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">Additive archive content; preserve source attribution and review before public release.</p></article>)}</div>
+        {/* Station Overview Grid */}
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold text-white mb-6">Arcade Stations</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {stations.map((station) => {
+              const StationIcon = station.icon;
+              return (
+                <div
+                  key={station.title}
+                  className="rounded-xl border border-[#2a2f3e] bg-[#050914]/60 p-6 backdrop-blur"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <StationIcon className="h-6 w-6" style={{ color: station.accent }} />
+                    <h3 className="text-lg font-bold text-white">{station.title}</h3>
+                  </div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#7a7f8e] mb-2">{station.detail}</p>
+                  <p className="text-sm text-[#a0a8c0]">{station.description}</p>
+                </div>
+              );
+            })}
+          </div>
         </section>
 
-        <HandoffArchiveSignals
-          route="/district-b-arcade"
-          title="Source-Mapped Financial District Archive"
-          intro="The generated registry now connects verified handoff records to the existing Arcade destination without exposing unapproved external media."
-          accent="gold"
-        />
-
-        <section className="mt-10 grid gap-5 md:grid-cols-3" aria-label="Arcade world signals">
-          {[
-            { label: "01 / Focus", title: "Find the pattern", text: "Every round gives attention a new shape.", icon: Grid3X3, accent: palette.cyan },
-            { label: "02 / Motion", title: "Move through the lights", text: "A good play loop keeps the whole district awake.", icon: Gamepad2, accent: palette.magenta },
-            { label: "03 / Record", title: "Leave your signal", text: "Celebrate progress, not just the final number.", icon: Trophy, accent: palette.gold },
-          ].map((signal) => {
-            const Icon = signal.icon;
-            return <article key={signal.label} className="rounded-xl border border-[#20405c] bg-[#0d1b2b] p-5"><div className="flex items-center justify-between"><span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: signal.accent }}>{signal.label}</span><Icon className="h-5 w-5" style={{ color: signal.accent }} aria-hidden="true" /></div><h3 className="mt-6 text-xl font-bold text-white">{signal.title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{signal.text}</p></article>;
-          })}
+        <section className="mt-16">
+          <HandoffArchiveSignals />
         </section>
 
-        <section className="mt-10 flex flex-col items-start justify-between gap-5 rounded-xl border border-[#d8ae55]/50 bg-[#d8ae55]/5 p-6 shadow-[0_0_20px_rgba(255,210,63,0.1)] sm:flex-row sm:items-center sm:p-8"><div><p className="text-xs font-bold uppercase tracking-[0.3em] text-[#d8ae55]">Arcade Gate / Next Move</p><h2 className="mt-2 text-2xl font-black text-white">Ready to enter the play loop?</h2><p className="mt-2 text-sm leading-6 text-slate-400">The original Games Hub holds the playable stations and score loop.</p></div><div className="flex flex-wrap gap-3"><Link href="/games" className="inline-flex items-center gap-2 rounded-md border border-[#20cde2]/70 bg-[#20cde2]/10 px-5 py-3 text-sm font-bold text-[#20cde2] transition-colors hover:bg-[#20cde2]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8ae55]"><Star className="h-4 w-4" aria-hidden="true" />Launch Games Hub</Link><Link href="/archive" className="inline-flex items-center gap-2 rounded-md border border-[#e853dc]/70 bg-[#e853dc]/10 px-5 py-3 text-sm font-bold text-[#e853dc] transition-colors hover:bg-[#e853dc]/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d8ae55]"><BookOpen className="h-4 w-4" aria-hidden="true" />Open Story Archive</Link></div></section>
-      </main>
-    </div>
+        {/* Footer */}
+        <footer className="mt-20 border-t border-[#2a2f3e] pt-8 text-center text-xs text-[#7a7f8e]">
+          <p>&copy; 2026 Anom Artsy. District B Arcade is part of the AO Living World.</p>
+        </footer>
+      </div>
+    </main>
   );
 }
