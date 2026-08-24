@@ -209,7 +209,11 @@ export default function CliffordAndTater() {
         </section>
 
         <section className="mt-16">
-          <HandoffArchiveSignals />
+          <HandoffArchiveSignals
+            route="/clifford-and-tater"
+            title="The Pack Archive Signal"
+            intro="The Heartfield Commons and Snack Quarter records live inside the world they belong to. The source record stays visible while media releases remain review-gated."
+          />
         </section>
 
         {/* Footer */}
