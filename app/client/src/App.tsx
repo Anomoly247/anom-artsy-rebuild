@@ -6,7 +6,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import SanctuaryDashboard from "./pages/SanctuaryDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import Profile from "./pages/Profile";
 import Wallet from "./pages/Wallet";
 import Achievements from "./pages/Achievements";
@@ -56,8 +56,8 @@ const AppRoutes = () => {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/dashboard"} component={SanctuaryDashboard} />
-      <Route path={"/sanctuary"} component={SanctuaryDashboard} />
+      <Route path={"/dashboard"} component={AdminDashboard} />
+      <Route path={"/sanctuary"} component={AdminDashboard} />
       <Route path={"/clifford-and-tater"} component={CliffordAndTater} />
       <Route path={"/creator-worlds"} component={CreatorWorlds} />
       <Route path={"/broadcast"} component={Broadcast} />
