@@ -5,7 +5,7 @@ import { LivingWorldWeb } from "@/components/LivingWorldWeb";
 import StoreCosmeticPreview from "@/components/StoreCosmeticPreview";
 import StoreMembershipSection from "@/components/StoreMembershipSection";
 
-const storeUrl = "https://anomartsy.lol/";
+const storeUrl = "https://anomarsty.lol/";
 
 const storeSignals = [
   {

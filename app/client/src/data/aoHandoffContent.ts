@@ -2004,7 +2004,8 @@ export const aoHandoffRecords: HandoffRecord[] = [
     "sourceUrl": "https://www.facebook.com/anomoriginals/posts/pfbid034wCCTjNwERY7kJkkGZPV8BbFE9zdpubNjaRLRjcm3D6WojtcUMzeJ61fjdUuxgvnl",
     "mediaUrl": null,
     "created": "2026-07-08 04:20:29",
-    "snippet": "ww.anomartsy.lol/",
+    "snippet": "https://anomarsty.lol",
+
     "layer": "Unassigned",
     "route": null,
     "status": "pending-review"
