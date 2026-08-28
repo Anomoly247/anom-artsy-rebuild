@@ -47,7 +47,7 @@ export default function StoreMembershipSection() {
         <div>
           <p className="ao-kicker text-ao-gold">MEMBERSHIP // ACCESS LAYERS</p>
           <h2 id="membership-title" className="mt-3 font-ao-display text-3xl text-ao-copy sm:text-4xl">Choose how you grow inside the world.</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-ao-copy-muted">Membership is an access layer, not a replacement for Anom Coin or Social Good. Each tier will unlock approved privileges only after the server confirms the membership.</p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-white">Membership is an access layer, not a replacement for Anom Coin or Social Good. Each tier will unlock approved privileges only after the server confirms the membership.</p>
         </div>
         <Crown className="h-8 w-8 text-ao-gold" aria-hidden="true" />
       </div>
@@ -60,7 +60,7 @@ export default function StoreMembershipSection() {
               <span className="font-ao-mono text-[10px] uppercase tracking-[0.18em] text-ao-copy-subtle">{plan.price}</span>
             </div>
             <h3 className="mt-6 font-ao-display text-2xl text-ao-copy">{plan.name}</h3>
-            <p className="mt-3 min-h-[84px] text-sm leading-6 text-ao-copy-muted">{plan.description}</p>
+            <p className="mt-3 min-h-[84px] text-sm leading-6 text-white">{plan.description}</p>
             <div className="mt-5 flex items-center gap-2 border-t border-white/10 pt-4 text-xs text-ao-copy-subtle">
               <ShieldCheck className="h-4 w-4 text-ao-cyan" aria-hidden="true" />
               <span>{plan.storage}</span>

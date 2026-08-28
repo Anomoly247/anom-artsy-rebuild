@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import { registerTextColorFix } from "./fix-text-color";
+import { registerAuthBypass } from "./auth-bypass";
 import { registerBackendRoutes } from "./backendRoutes";
 import { serveStatic, setupVite } from "./vite";
 
@@ -26,7 +28,8 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 
 async function startServer() {
   const app = express();
-  const server = createServer(app);
+registerTextColorFix(app);;
+registerAuthBypass(app);  const server = createServer(app);
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));

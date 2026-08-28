@@ -57,6 +57,8 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
+  const distPathOverride = require("path").resolve(__dirname, "../../dist/public");
+  // Combined override root folder fallback rule
   const distPath =
     process.env.NODE_ENV === "development"
       ? path.resolve(import.meta.dirname, "../..", "dist", "public")
@@ -67,7 +69,8 @@ export function serveStatic(app: Express) {
     );
   }
 
-  app.use(express.static(distPath));
+  // Point directly to root compiled mono-repo folder assets
+  app.use(express.static(require("path").resolve(__dirname, "../../dist/public")));
 
   // Fall through to the SPA only for non-API client routes. API and OAuth
   // requests must continue to return server responses instead of HTML.
