@@ -39,7 +39,7 @@ Pulled from Anoms-Hub/anom-artsy - this is where your whole economy lives:
 ## Brand
 Anom Originals • Identity in Every Pixel
 Colors: neon on black, your brand kit
-Emails: anom@anomartsy.xyz (public), eliza@ (owner), loved@ (moderator)
+Emails: eliza@anomoriginals.lol
 
 ## How this wires
 GitHub: Make this the primary: Anomoly247/anom-artsy-rebuild -> push this folder there
